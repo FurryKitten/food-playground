@@ -1,11 +1,29 @@
+using System.Collections.Generic;
 using UnityEngine;
+
 
 public struct Grid
 {
-    int width, height;
+    public int width, height;
+
+    
 }
 
 public class Tetris : MonoBehaviour
 {
-    private Grid grid;
+    [SerializeField] private FigureSO[] _figurePrefabs;
+
+
+    private Queue<Figure> figureQueue;
+    private Figure currentFigure;
+
+    private void Start()
+    {
+        
+    }
+
+    private void Update()
+    {
+        
+    }
 }
