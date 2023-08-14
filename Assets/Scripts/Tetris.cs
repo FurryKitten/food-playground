@@ -65,7 +65,7 @@ public class Tetris : MonoBehaviour
             else
             {
                 //stop tetris
-                _playerController.Tetris.Move.started -= HorizontalMove;
+                //_playerController.Tetris.Move.started -= HorizontalMove;
             }
         }
         else
@@ -143,6 +143,9 @@ public class Tetris : MonoBehaviour
 
     private void HorizontalMove(InputAction.CallbackContext context)
     {
+        if (_flyingFigure == null)
+            return;
+
         float inpDir = _playerController.Tetris.Move.ReadValue<float>();
 
         int dir = 0;
