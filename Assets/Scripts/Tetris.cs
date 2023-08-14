@@ -28,13 +28,14 @@ public class Tetris : MonoBehaviour
     private void Awake()
     {
         _playerController = new PlayerController();
+        _playerController.Tetris.Move.started += HorizontalMove;
     }
 
     private void Start()
     {
         _figureSOIdQueue = new Queue<int>();
-        _figureSOIdQueue.Enqueue(0);
-        _figureSOIdQueue.Enqueue(0);
+        _figureSOIdQueue.Enqueue(0); // TODO: generate or premade queue SO
+        _figureSOIdQueue.Enqueue(0); // TODO: generate or premade queue SO
         _gameSpace.width = 15;
         _gameSpace.height = 10;
         _gameSpace.cellsStatus = new bool[_gameSpace.width, _gameSpace.height];
@@ -64,21 +65,18 @@ public class Tetris : MonoBehaviour
             else
             {
                 //stop tetris
+                _playerController.Tetris.Move.started -= HorizontalMove;
             }
         }
         else
         {
-           
             _movementTimer += Time.deltaTime;
-            if(_movementTimer >= _movementTime)
+            if (_movementTimer >= _movementTime)
             {
-                HorizontalMove();
                 MoveFlyingFigure();
                 _movementTimer = 0;
             }
-            
         }
-
     }
 
     private void ControlsOnEnable()
@@ -143,7 +141,7 @@ public class Tetris : MonoBehaviour
         return false;
     }
 
-    private void HorizontalMove()
+    private void HorizontalMove(InputAction.CallbackContext context)
     {
         float inpDir = _playerController.Tetris.Move.ReadValue<float>();
 
@@ -160,4 +158,14 @@ public class Tetris : MonoBehaviour
         }
         
     }
+
+
+    #region DEBUG
+
+    private void OnDrawGizmos()
+    {
+        
+    }
+
+    #endregion
 }
