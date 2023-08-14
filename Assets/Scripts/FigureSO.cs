@@ -16,4 +16,7 @@ public class FigureSO : ScriptableObject
     [SerializeField] float _mass;
     [SerializeField] Sprite _sprite;
     [SerializeField] Rotation _rotation;
+
+    public Sprite sprite
+    { get { return _sprite; } }
 }
