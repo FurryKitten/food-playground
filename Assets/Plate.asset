@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 3
   _height: 1
-  _figure:
+  _form:
+  - {x: -1, y: 0}
   - {x: 0, y: 0}
   - {x: 1, y: 0}
-  - {x: 2, y: 0}
+  - {x: 1, y: -1}
   _mass: 3
   _sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
   _rotation: 0

@@ -11,12 +11,20 @@ public class Figure : MonoBehaviour
     
     private Transform _transform;
     private Vector2 _centerPos;
+    private Vector2Int[] _form;
+    private Rotation _rotation;
+    private int _width;
+    private int _height;
     public void Init(FigureSO figure)
     {
         // задаем коллайдер из данных фигуры
         _transform = GetComponent<Transform>();
         gameObject.AddComponent<SpriteRenderer>();
         gameObject.GetComponent<SpriteRenderer>().sprite = figure.sprite;
+        _form = figure.form;
+        _rotation = figure.rotation;
+        _width = figure.width;
+        _height = figure.height;
     }
 
     public void SetPosition(int x, int y)
@@ -34,5 +42,16 @@ public class Figure : MonoBehaviour
     public Vector2 GetPosition()
     {
         return _centerPos;
+    }
+
+    public Vector2Int[] GetForm()
+    {
+        return _form;
+    }
+
+    public void HorizontalMove(int dir)
+    {
+        _centerPos.x += dir;
+        _transform.position = _centerPos;
     }
 }
