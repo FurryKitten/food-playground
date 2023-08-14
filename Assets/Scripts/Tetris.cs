@@ -35,7 +35,7 @@ public class Tetris : MonoBehaviour
     {
         _figureSOIdQueue = new Queue<int>();
         _figureSOIdQueue.Enqueue(0); // TODO: generate or premade queue SO
-        _figureSOIdQueue.Enqueue(0); // TODO: generate or premade queue SO
+        _figureSOIdQueue.Enqueue(1); // TODO: generate or premade queue SO
         _gameSpace.width = 15;
         _gameSpace.height = 10;
         _gameSpace.cellsStatus = new bool[_gameSpace.width, _gameSpace.height];

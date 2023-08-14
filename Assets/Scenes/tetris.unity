@@ -246,7 +246,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _figureStartPos: {x: 5, y: 9}
   _figureSOPrefabs:
-  - {fileID: 11400000, guid: 7a512e058d8d8514f88531413ba5ae99, type: 2}
+  - {fileID: 11400000, guid: a457db9a7e78ec641a22365f007f9a20, type: 2}
+  - {fileID: 11400000, guid: e89e862dc3583614f8e3bf2a455c4587, type: 2}
   _defaultFigure: {fileID: -5098583264592464667, guid: 8219b0ec5da4a0f4facdc4eacac83648, type: 3}
   _movementTime: 0.75
 --- !u!4 &2128700822
@@ -258,7 +259,7 @@ Transform:
   m_GameObject: {fileID: 2128700820}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.7832623, y: -0.50948685, z: 0.04259209}
+  m_LocalPosition: {x: -4.7832623, y: 0.29, z: 0.04259209}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
