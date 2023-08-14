@@ -10,7 +10,7 @@ public class Figure : MonoBehaviour
     [SerializeField] Vector2 _centerMass;
     
     private Transform _transform;
-    private Vector2 _centerPos;
+    private Vector2 _centerPos; // TODO: pivot to top left corner
     private Vector2Int[] _form;
     private Rotation _rotation;
     private int _width;

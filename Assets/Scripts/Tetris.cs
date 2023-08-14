@@ -165,10 +165,19 @@ public class Tetris : MonoBehaviour
 
     #region DEBUG
 
-    private void OnDrawGizmos()
+   /* private void OnDrawGizmos()
     {
-        
-    }
+        Vector2 pos = this.transform.position;
+        for (int i = 0; i < _gameSpace.width; ++i)
+        {
+            Vector2 offset = new Vector2(i, 0);
+            Gizmos.DrawLine(pos + offset, pos + offset + new Vector2(0, _gameSpace.height));
+        }
+        for (int j = 0; j < _gameSpace.height; ++j)
+        {
+            
+        }
+    }*/
 
     #endregion
 }
