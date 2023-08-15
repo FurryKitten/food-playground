@@ -25,10 +25,15 @@ public class Tetris : MonoBehaviour
     private float _movementTimer = 0;
     private PlayerController _playerController;
 
+    private GameState _gameState;
+
     private void Awake()
     {
         _playerController = new PlayerController();
         _playerController.Tetris.Move.started += HorizontalMove;
+        _playerController.Enable();
+
+        _gameState = ServiceLocator.Current.Get<GameState>();
     }
 
     private void Start()
@@ -45,12 +50,12 @@ public class Tetris : MonoBehaviour
             for (int j = 0; j < _gameSpace.height; ++j)
                 _gameSpace.cellsStatus[i, j] = false;
         }
-
-        ControlsOnEnable();
     }
 
     private void Update()
     {
+        if (_gameState.State != State.TETRIS)
+            return;
 
         if (_flyingFigure == null)
         {
@@ -81,15 +86,6 @@ public class Tetris : MonoBehaviour
         }
     }
 
-    private void ControlsOnEnable()
-    {
-        _playerController.Enable();
-    }
-
-    private void ControlsOnDisable()
-    {
-        _playerController.Disable();
-    }
     private void MoveFlyingFigure()
     {
         Vector2Int _flyingFigurePos = _flyingFigure.GetPosition();
