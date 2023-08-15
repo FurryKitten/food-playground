@@ -36,8 +36,9 @@ public class Tetris : MonoBehaviour
         _figureSOIdQueue = new Queue<int>();
         _figureSOIdQueue.Enqueue(0); // TODO: generate or premade queue SO
         _figureSOIdQueue.Enqueue(1); // TODO: generate or premade queue SO
+        _figureSOIdQueue.Enqueue(0);
         _gameSpace.width = 15;
-        _gameSpace.height = 10;
+        _gameSpace.height = 15;
         _gameSpace.cellsStatus = new bool[_gameSpace.width, _gameSpace.height];
         for (int i = 0; i < _gameSpace.width; ++i)
         {
@@ -130,7 +131,7 @@ public class Tetris : MonoBehaviour
         int gridY = Mathf.RoundToInt(_flyingFigurePos.y);
 
         foreach (Vector2Int pos in _flyingFigure.GetForm())
-            if ((gridX + pos.x ) > 0 && (gridX + pos.x ) < _gameSpace.width)
+            if ((gridX + pos.x ) > 0 && (gridX + pos.x ) < _gameSpace.width && gridY + pos.y > 0)
             {
                 if (_gameSpace.cellsStatus[gridX + pos.x, gridY + pos.y])
                     return true;
