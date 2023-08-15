@@ -74,6 +74,10 @@ public class Tetris : MonoBehaviour
         {
             if (_figureSOIdQueue.TryPeek(out int figureSOId))
             {
+                if (_gameSpace.cellsStatus[_figureStartPos.x, _figureStartPos.y])
+                {
+                    //TO DO: tetris lose
+                }
                 Vector2 pos = this.transform.position;
                 _flyingFigure = Instantiate(_defaultFigure);
                 _flyingFigure.Init(_figureSOPrefabs[figureSOId]);
