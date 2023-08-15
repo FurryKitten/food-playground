@@ -186,7 +186,7 @@ public class Tetris : MonoBehaviour
         int gridY = Mathf.RoundToInt(_flyingFigurePos.y);
 
         foreach (Vector2Int pos in _flyingFigure.GetForm())
-            if ((gridX + pos.x ) > 0 && (gridX + pos.x ) < _gameSpace.width && gridY - pos.y > 0)
+            if ((gridX + pos.x ) > 0 && (gridX + pos.x ) < _gameSpace.width && gridY - pos.y >= 0)
             {
                 if (_gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y])
                     return true;
