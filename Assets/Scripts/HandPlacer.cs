@@ -36,9 +36,9 @@ public class HandPlacer : MonoBehaviour
             Vector2 mousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
 
             int x = Mathf.RoundToInt(mousePos.x);
-            int y = Mathf.RoundToInt(mousePos.y);
 
-            _hand.transform.position = new Vector2(x, y);
+            if (x > -3 && x < _places4Hand.width-2)
+                _hand.transform.position = new Vector2(x, _hand.transform.position.y);
         }
     }
 
