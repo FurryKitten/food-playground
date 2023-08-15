@@ -12,8 +12,7 @@ public class ServiceLocator
 
     public static void Initialize()
     {
-        if (Current == null)
-            Current = new ServiceLocator();
+        Current = new ServiceLocator();
     }
 
     public T Get<T>() where T : IService
@@ -22,7 +21,7 @@ public class ServiceLocator
 
         if (!_services.ContainsKey(key))
         {
-            Debug.Log($"{key} is not registered with {GetType().Name}");
+            Debug.LogError($"{key} is not registered with {GetType().Name}");
             throw new InvalidOperationException();
         }
 
@@ -33,8 +32,8 @@ public class ServiceLocator
     {
         string key = typeof(T).Name;
 
-        if (!_services.ContainsKey(key)) {
-            Debug.LogError($"{key} is not registered with {GetType().Name}");
+        if (_services.ContainsKey(key)) {
+            Debug.LogError($"{key} is registered with {GetType().Name}");
             return;
         }
 

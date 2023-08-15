@@ -60,4 +60,5 @@ public class Figure : MonoBehaviour
         pos.x += dir;
         _transform.position = pos;
     }
+
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using Random = UnityEngine.Random;
 
 public struct Grid
 {
@@ -17,6 +17,7 @@ public class Tetris : MonoBehaviour
     [SerializeField] private FigureSO[] _figureSOPrefabs;
     [SerializeField] private Figure _defaultFigure;
     [SerializeField] private float _movementTime;
+    [SerializeField] private int _queueSize;
 
 
     private Queue<int> _figureSOIdQueue;
@@ -33,16 +34,16 @@ public class Tetris : MonoBehaviour
         _playerController.Tetris.Move.started += HorizontalMove;
         _playerController.Enable();
 
-        _gameState = ServiceLocator.Current.Get<GameState>();
     }
 
     private void Start()
     {
         _figureSOIdQueue = new Queue<int>();
-        _figureSOIdQueue.Enqueue(0); // TODO: generate or premade queue SO
-        _figureSOIdQueue.Enqueue(1); // TODO: generate or premade queue SO
-        _figureSOIdQueue.Enqueue(0);
-        _gameSpace.width = 15;
+        //_figureSOIdQueue.Enqueue(0); // TODO: generate or premade queue SO
+        //_figureSOIdQueue.Enqueue(1); // TODO: generate or premade queue SO
+        //_figureSOIdQueue.Enqueue(0);
+        GenerateQueue();
+        _gameSpace.width = 16;
         _gameSpace.height = 15;
         _gameSpace.cellsStatus = new bool[_gameSpace.width, _gameSpace.height];
         for (int i = 0; i < _gameSpace.width; ++i)
@@ -50,8 +51,9 @@ public class Tetris : MonoBehaviour
             for (int j = 0; j < _gameSpace.height; ++j)
                 _gameSpace.cellsStatus[i, j] = false;
         }
+       
+        _gameState = ServiceLocator.Current.Get<GameState>();
     }
-
     private void Update()
     {
         if (_gameState.State != State.TETRIS)
@@ -160,6 +162,11 @@ public class Tetris : MonoBehaviour
         
     }
 
+    private void GenerateQueue()
+    {
+        for(int i = 0; i < _queueSize; i++)
+            _figureSOIdQueue.Enqueue(Random.Range(0, _figureSOPrefabs.Length));
+    }
 
     #region DEBUG
 
@@ -188,7 +195,7 @@ public class Tetris : MonoBehaviour
             }
         }
         Gizmos.color = Color.red;
-        Gizmos.DrawCube(pos + new Vector2(5 + 0.5f, 9 + 0.5f), Vector2.one * 0.3f);
+        Gizmos.DrawCube(pos + new Vector2(_figureStartPos.x + 0.5f, _figureStartPos.y + 0.5f), Vector2.one * 0.3f);
     }
 
     #endregion

@@ -23,4 +23,5 @@ public class FigureSO : ScriptableObject
     { get { return _mass; } }
     public Sprite sprite
     { get { return _sprite; } }
+
 }
