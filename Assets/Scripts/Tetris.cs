@@ -30,10 +30,14 @@ public class Tetris : MonoBehaviour
     private float _dashTime;
     private bool _dashMode = false;
 
+    private GameState _gameState;
+
     private void Awake()
     {
         _playerController = new PlayerController();
         _playerController.Tetris.Move.started += HorizontalMove;
+        _playerController.Enable();
+
         _playerController.Tetris.Dash.started += DashMode;
     }
 
@@ -56,9 +60,13 @@ public class Tetris : MonoBehaviour
         ControlsOnEnable();
 
         _dashTime = 0.1f * _movementTime;
+       
+        _gameState = ServiceLocator.Current.Get<GameState>();
     }
     private void Update()
     {
+        if (_gameState.State != State.TETRIS)
+            return;
 
         if (_flyingFigure == null)
         {
@@ -103,15 +111,6 @@ public class Tetris : MonoBehaviour
         }
     }
 
-    private void ControlsOnEnable()
-    {
-        _playerController.Enable();
-    }
-
-    private void ControlsOnDisable()
-    {
-        _playerController.Disable();
-    }
     private void MoveFlyingFigure()
     {
         Vector2Int _flyingFigurePos = _flyingFigure.GetPosition();
