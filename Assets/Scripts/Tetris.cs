@@ -28,7 +28,9 @@ public class Tetris : MonoBehaviour
     private PlayerController _playerController;
     private List<Figure> _figureList = new List<Figure>();
     private float _dashTime;
+    private float _lastMoveTime;
     private bool _dashMode = false;
+    private bool _lastMove = false;
 
     private GameState _gameState;
 
@@ -57,10 +59,10 @@ public class Tetris : MonoBehaviour
                 _gameSpace.cellsStatus[i, j] = false;
         }
 
-        ControlsOnEnable();
 
         _dashTime = 0.1f * _movementTime;
-       
+        _lastMoveTime = _dashTime;
+
         _gameState = ServiceLocator.Current.Get<GameState>();
     }
     private void Update()
@@ -94,18 +96,40 @@ public class Tetris : MonoBehaviour
             _movementTimer += Time.deltaTime;
             if (!_dashMode)
             {
-                if (_movementTimer >= _movementTime)
+                if (!_lastMove)
                 {
-                    MoveFlyingFigure();
-                    _movementTimer = 0;
+                    if (_movementTimer >= _movementTime)
+                    {
+                        MoveFlyingFigure();
+                        _movementTimer = 0;
+                    }
+                }
+                else 
+                {
+                    if (_movementTimer >= _lastMoveTime)
+                    {
+                        MoveFlyingFigure();
+                        _movementTimer = 0;
+                    }
                 }
             }
             else 
             {
-                if (_movementTimer >= _dashTime)
+                if (!_lastMove)
                 {
-                    MoveFlyingFigure();
-                    _movementTimer = 0;
+                    if (_movementTimer >= _dashTime)
+                    {
+                        MoveFlyingFigure();
+                        _movementTimer = 0;
+                    }
+                }
+                else
+                {
+                    if (_movementTimer >= _lastMoveTime)
+                    {
+                        MoveFlyingFigure();
+                        _movementTimer = 0;
+                    }
                 }
             }
         }
@@ -139,11 +163,19 @@ public class Tetris : MonoBehaviour
         }
         else
         {
-            foreach (Vector2Int pos in _flyingFigure.GetForm())
-                _gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y] = true;
+            if (_lastMove)
+            {
+                foreach (Vector2Int pos in _flyingFigure.GetForm())
+                    _gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y] = true;
 
-            _flyingFigure = null;
-            _dashMode = false;
+                _flyingFigure = null;
+                _dashMode = false;
+                _lastMove = false;
+            }
+            else 
+            {
+                _lastMove = true;
+            }
         }
     }
 

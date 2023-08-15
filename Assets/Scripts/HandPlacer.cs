@@ -37,8 +37,8 @@ public class HandPlacer : MonoBehaviour
 
             int x = Mathf.RoundToInt(mousePos.x);
 
-            if (x > -3 && x < _places4Hand.width-2)
-                _hand.transform.position = new Vector2(x, _hand.transform.position.y);
+            x = Mathf.Clamp(x, 3, 13);
+            _hand.transform.position = new Vector2(x, _hand.transform.position.y);
         }
     }
 
