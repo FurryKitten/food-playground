@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using Random = UnityEngine.Random;
 
 public struct Grid
 {
@@ -17,6 +17,7 @@ public class Tetris : MonoBehaviour
     [SerializeField] private FigureSO[] _figureSOPrefabs;
     [SerializeField] private Figure _defaultFigure;
     [SerializeField] private float _movementTime;
+    [SerializeField] private int _queueSize;
 
 
     private Queue<int> _figureSOIdQueue;
@@ -34,9 +35,10 @@ public class Tetris : MonoBehaviour
     private void Start()
     {
         _figureSOIdQueue = new Queue<int>();
-        _figureSOIdQueue.Enqueue(0); // TODO: generate or premade queue SO
-        _figureSOIdQueue.Enqueue(1); // TODO: generate or premade queue SO
-        _figureSOIdQueue.Enqueue(0);
+        //_figureSOIdQueue.Enqueue(0); // TODO: generate or premade queue SO
+        //_figureSOIdQueue.Enqueue(1); // TODO: generate or premade queue SO
+        //_figureSOIdQueue.Enqueue(0);
+        GenerateQueue();
         _gameSpace.width = 16;
         _gameSpace.height = 15;
         _gameSpace.cellsStatus = new bool[_gameSpace.width, _gameSpace.height];
@@ -48,7 +50,6 @@ public class Tetris : MonoBehaviour
 
         ControlsOnEnable();
     }
-
     private void Update()
     {
 
@@ -164,6 +165,11 @@ public class Tetris : MonoBehaviour
         
     }
 
+    private void GenerateQueue()
+    {
+        for(int i = 0; i < _queueSize; i++)
+            _figureSOIdQueue.Enqueue(Random.Range(0, _figureSOPrefabs.Length));
+    }
 
     #region DEBUG
 
@@ -192,7 +198,7 @@ public class Tetris : MonoBehaviour
             }
         }
         Gizmos.color = Color.red;
-        Gizmos.DrawCube(pos + new Vector2(5 + 0.5f, 9 + 0.5f), Vector2.one * 0.3f);
+        Gizmos.DrawCube(pos + new Vector2(_figureStartPos.x + 0.5f, _figureStartPos.y + 0.5f), Vector2.one * 0.3f);
     }
 
     #endregion

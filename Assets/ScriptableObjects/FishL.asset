@@ -15,9 +15,9 @@ MonoBehaviour:
   _width: 3
   _height: 2
   _form:
-  - {x: 2, y: 0}
   - {x: 0, y: 1}
   - {x: 1, y: 1}
   - {x: 2, y: 1}
+  - {x: 2, y: 0}
   _mass: 1
   _sprite: {fileID: 1106257650, guid: 9218bc321bc706247a2a865b7d41e513, type: 3}

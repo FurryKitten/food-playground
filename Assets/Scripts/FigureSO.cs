@@ -23,6 +23,5 @@ public class FigureSO : ScriptableObject
     { get { return _mass; } }
     public Sprite sprite
     { get { return _sprite; } }
-    public Rotation rotation
-    { get { return _rotation; } }
+
 }
