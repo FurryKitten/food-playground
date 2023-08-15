@@ -22,7 +22,6 @@ public class Figure : MonoBehaviour
         gameObject.AddComponent<SpriteRenderer>();
         gameObject.GetComponent<SpriteRenderer>().sprite = figure.sprite;
         _form = figure.form;
-        _rotation = figure.rotation;
         _width = figure.width;
         _height = figure.height;
     }

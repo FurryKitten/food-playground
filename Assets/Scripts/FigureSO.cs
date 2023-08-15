@@ -31,6 +31,4 @@ public class FigureSO : ScriptableObject
     public Sprite sprite
     { get { return _sprite; } }
 
-    public Rotation rotation
-    { get { return _rotation; } }
 }
