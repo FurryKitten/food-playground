@@ -12,7 +12,6 @@ public class Figure : MonoBehaviour
     private Transform _transform;
     private Vector2Int _centerPos; // TODO: pivot to top left corner
     private Vector2Int[] _form;
-    private Rotation _rotation;
     private int _width;
     private int _height;
     public void Init(FigureSO figure)
@@ -22,7 +21,6 @@ public class Figure : MonoBehaviour
         gameObject.AddComponent<SpriteRenderer>();
         gameObject.GetComponent<SpriteRenderer>().sprite = figure.sprite;
         _form = figure.form;
-        _rotation = figure.rotation;
         _width = figure.width;
         _height = figure.height;
     }
