@@ -10,7 +10,7 @@ public class Figure : MonoBehaviour
     [SerializeField] Vector2 _centerMass;
     
     private Transform _transform;
-    private Vector2 _centerPos; // TODO: pivot to top left corner
+    private Vector2Int _centerPos; // TODO: pivot to top left corner
     private Vector2Int[] _form;
     private Rotation _rotation;
     private int _width;
@@ -30,16 +30,22 @@ public class Figure : MonoBehaviour
     public void SetPosition(int x, int y)
     {
         _centerPos = new Vector2Int(x, y);
-        _transform.position = _centerPos;
+    }
+
+    public void SetWorldPosition(Vector2 pos)
+    {
+        _transform.position = pos;
     }
 
     public void Fall()
     {
         _centerPos.y -= 1;
-        _transform.position = _centerPos;
+        Vector3 pos = _transform.position;
+        pos.y -= 1;
+        _transform.position = pos;
     }
 
-    public Vector2 GetPosition()
+    public Vector2Int GetPosition()
     {
         return _centerPos;
     }
@@ -52,6 +58,8 @@ public class Figure : MonoBehaviour
     public void HorizontalMove(int dir)
     {
         _centerPos.x += dir;
-        _transform.position = _centerPos;
+        Vector3 pos = _transform.position;
+        pos.x += dir;
+        _transform.position = pos;
     }
 }

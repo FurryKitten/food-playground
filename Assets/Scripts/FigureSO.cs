@@ -15,7 +15,6 @@ public class FigureSO : ScriptableObject
     [SerializeField] Vector2Int[] _form;
     [SerializeField] float _mass;
     [SerializeField] Sprite _sprite;
-    [SerializeField] Rotation _rotation;
 
     
     public int width

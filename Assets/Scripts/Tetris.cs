@@ -56,12 +56,13 @@ public class Tetris : MonoBehaviour
         {
             if (_figureSOIdQueue.TryPeek(out int figureSOId))
             {
+                Vector2 pos = this.transform.position;
                 _flyingFigure = Instantiate(_defaultFigure);
                 _flyingFigure.Init(_figureSOPrefabs[figureSOId]);
                 _figureSOIdQueue.Dequeue();
 
                 _flyingFigure.SetPosition(_figureStartPos.x, _figureStartPos.y);
-
+                _flyingFigure.SetWorldPosition(pos + _figureStartPos);
             }
             else
             {
@@ -91,15 +92,15 @@ public class Tetris : MonoBehaviour
     }
     private void MoveFlyingFigure()
     {
-        Vector2 _flyingFigurePos = _flyingFigure.GetPosition();
-        int gridX = Mathf.RoundToInt(_flyingFigurePos.x);
-        int gridY = Mathf.RoundToInt(_flyingFigurePos.y);
+        Vector2Int _flyingFigurePos = _flyingFigure.GetPosition();
+        int gridX = _flyingFigurePos.x;
+        int gridY = _flyingFigurePos.y;
 
         bool checkGridSpace = false;
         foreach (Vector2Int pos in _flyingFigure.GetForm())
-            if ((gridY + pos.y - 1) > 0)
+            if ((gridY - pos.y - 1) >= 0)
             {
-                if (_gameSpace.cellsStatus[gridX + pos.x, gridY + pos.y - 1])
+                if (_gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y - 1])
                 {
                     checkGridSpace = true;
                     break;
@@ -118,7 +119,7 @@ public class Tetris : MonoBehaviour
         else
         {
             foreach (Vector2Int pos in _flyingFigure.GetForm())
-                _gameSpace.cellsStatus[gridX + pos.x, gridY + pos.y] = true;
+                _gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y] = true;
 
             _flyingFigure = null;
         }
@@ -131,9 +132,9 @@ public class Tetris : MonoBehaviour
         int gridY = Mathf.RoundToInt(_flyingFigurePos.y);
 
         foreach (Vector2Int pos in _flyingFigure.GetForm())
-            if ((gridX + pos.x ) > 0 && (gridX + pos.x ) < _gameSpace.width && gridY + pos.y > 0)
+            if ((gridX + pos.x ) > 0 && (gridX + pos.x ) < _gameSpace.width && gridY - pos.y > 0)
             {
-                if (_gameSpace.cellsStatus[gridX + pos.x, gridY + pos.y])
+                if (_gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y])
                     return true;
             }
             else
@@ -166,19 +167,33 @@ public class Tetris : MonoBehaviour
 
     #region DEBUG
 
-   /* private void OnDrawGizmos()
+    private void OnDrawGizmos()
     {
         Vector2 pos = this.transform.position;
-        for (int i = 0; i < _gameSpace.width; ++i)
+        for (int i = 0; i <= _gameSpace.width; ++i)
         {
             Vector2 offset = new Vector2(i, 0);
             Gizmos.DrawLine(pos + offset, pos + offset + new Vector2(0, _gameSpace.height));
         }
-        for (int j = 0; j < _gameSpace.height; ++j)
+        for (int j = 0; j <= _gameSpace.height; ++j)
         {
-            
+            Vector2 offset = new Vector2(0, j);
+            Gizmos.DrawLine(pos + offset + new Vector2(_gameSpace.width, 0), pos + offset );
         }
-    }*/
+
+        for (int i = 0; i < _gameSpace.width; ++i)
+        {
+            for (int j = 0; j < _gameSpace.height; ++j)
+            {
+                Gizmos.color = Color.gray;
+                if (_gameSpace.cellsStatus[i, j])
+                    Gizmos.color = Color.yellow;
+                Gizmos.DrawCube(pos + new Vector2(i + 0.5f, j + 0.5f), Vector2.one * 0.3f);
+            }
+        }
+        Gizmos.color = Color.red;
+        Gizmos.DrawCube(pos + new Vector2(5 + 0.5f, 9 + 0.5f), Vector2.one * 0.3f);
+    }
 
     #endregion
 }
