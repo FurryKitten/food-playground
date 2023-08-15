@@ -1,11 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-public enum Rotation
-{
-    UP, DOWN, LEFT, RIGHT
-}
 
 [CreateAssetMenu(fileName = "Figure", menuName = "ScriptableObjects/Figures", order = 1)]
 public class FigureSO : ScriptableObject
@@ -30,5 +23,6 @@ public class FigureSO : ScriptableObject
     { get { return _mass; } }
     public Sprite sprite
     { get { return _sprite; } }
-
+    public Rotation rotation
+    { get { return _rotation; } }
 }

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 18d29fee866580146848b5298f36a8d1, type: 3}
-  m_Name: Cruissant
+  m_Name: Wok
   m_EditorClassIdentifier: 
   _width: 2
   _height: 2
@@ -18,5 +18,6 @@ MonoBehaviour:
   - {x: 0, y: 0}
   - {x: 1, y: 0}
   - {x: 0, y: 1}
-  _mass: 1
-  _sprite: {fileID: 1837510310, guid: 9218bc321bc706247a2a865b7d41e513, type: 3}
+  - {x: 1, y: 1}
+  _mass: 2
+  _sprite: {fileID: 1551815581, guid: 9218bc321bc706247a2a865b7d41e513, type: 3}
