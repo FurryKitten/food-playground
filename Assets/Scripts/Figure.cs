@@ -48,6 +48,10 @@ public class Figure : MonoBehaviour
         return _centerPos;
     }
 
+    public Vector3 GetWorldPosition()
+    {
+        return _transform.position;
+    }
     public Vector2Int[] GetForm()
     {
         return _form;

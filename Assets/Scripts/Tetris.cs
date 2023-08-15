@@ -18,6 +18,7 @@ public class Tetris : MonoBehaviour
     [SerializeField] private Figure _defaultFigure;
     [SerializeField] private float _movementTime;
     [SerializeField] private int _queueSize;
+    [SerializeField] private HandControls _handControls; //TO DO: use UnityEvents
 
 
     private Queue<int> _figureSOIdQueue;
@@ -25,11 +26,15 @@ public class Tetris : MonoBehaviour
     private Grid _gameSpace;
     private float _movementTimer = 0;
     private PlayerController _playerController;
+    private List<Figure> _figureList = new List<Figure>();
+    private float _dashTime;
+    private bool _dashMode = false;
 
     private void Awake()
     {
         _playerController = new PlayerController();
         _playerController.Tetris.Move.started += HorizontalMove;
+        _playerController.Tetris.Dash.started += DashMode;
     }
 
     private void Start()
@@ -49,6 +54,8 @@ public class Tetris : MonoBehaviour
         }
 
         ControlsOnEnable();
+
+        _dashTime = 0.1f * _movementTime;
     }
     private void Update()
     {
@@ -64,20 +71,34 @@ public class Tetris : MonoBehaviour
 
                 _flyingFigure.SetPosition(_figureStartPos.x, _figureStartPos.y);
                 _flyingFigure.SetWorldPosition(pos + _figureStartPos);
+
+                _figureList.Add(_flyingFigure);
             }
             else
             {
                 //stop tetris
                 //_playerController.Tetris.Move.started -= HorizontalMove;
+                // _handControls.AddFigures(_figureList); //TO DO: use UnityEvents
             }
         }
         else
         {
             _movementTimer += Time.deltaTime;
-            if (_movementTimer >= _movementTime)
+            if (!_dashMode)
             {
-                MoveFlyingFigure();
-                _movementTimer = 0;
+                if (_movementTimer >= _movementTime)
+                {
+                    MoveFlyingFigure();
+                    _movementTimer = 0;
+                }
+            }
+            else 
+            {
+                if (_movementTimer >= _dashTime)
+                {
+                    MoveFlyingFigure();
+                    _movementTimer = 0;
+                }
             }
         }
     }
@@ -123,6 +144,7 @@ public class Tetris : MonoBehaviour
                 _gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y] = true;
 
             _flyingFigure = null;
+            _dashMode = false;
         }
     }
 
@@ -163,6 +185,11 @@ public class Tetris : MonoBehaviour
             _flyingFigure.HorizontalMove(dir);
         }
         
+    }
+
+    private void DashMode(InputAction.CallbackContext context)
+    {
+        _dashMode = true;
     }
 
     private void GenerateQueue()

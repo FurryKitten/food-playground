@@ -53,6 +53,15 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""a8d482c5-ef51-43b6-bd13-532ae71d012c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -110,6 +119,17 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""action"": ""PlaceHand"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a6cbb9d5-7be6-4ecc-9148-81ffbae9ae43"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""keyboard + mouse"",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -138,6 +158,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         m_Tetris_Move = m_Tetris.FindAction("Move", throwIfNotFound: true);
         m_Tetris_Flip = m_Tetris.FindAction("Flip", throwIfNotFound: true);
         m_Tetris_PlaceHand = m_Tetris.FindAction("PlaceHand", throwIfNotFound: true);
+        m_Tetris_Dash = m_Tetris.FindAction("Dash", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -202,6 +223,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
     private readonly InputAction m_Tetris_Move;
     private readonly InputAction m_Tetris_Flip;
     private readonly InputAction m_Tetris_PlaceHand;
+    private readonly InputAction m_Tetris_Dash;
     public struct TetrisActions
     {
         private @PlayerController m_Wrapper;
@@ -209,6 +231,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Tetris_Move;
         public InputAction @Flip => m_Wrapper.m_Tetris_Flip;
         public InputAction @PlaceHand => m_Wrapper.m_Tetris_PlaceHand;
+        public InputAction @Dash => m_Wrapper.m_Tetris_Dash;
         public InputActionMap Get() { return m_Wrapper.m_Tetris; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -227,6 +250,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @PlaceHand.started += instance.OnPlaceHand;
             @PlaceHand.performed += instance.OnPlaceHand;
             @PlaceHand.canceled += instance.OnPlaceHand;
+            @Dash.started += instance.OnDash;
+            @Dash.performed += instance.OnDash;
+            @Dash.canceled += instance.OnDash;
         }
 
         private void UnregisterCallbacks(ITetrisActions instance)
@@ -240,6 +266,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @PlaceHand.started -= instance.OnPlaceHand;
             @PlaceHand.performed -= instance.OnPlaceHand;
             @PlaceHand.canceled -= instance.OnPlaceHand;
+            @Dash.started -= instance.OnDash;
+            @Dash.performed -= instance.OnDash;
+            @Dash.canceled -= instance.OnDash;
         }
 
         public void RemoveCallbacks(ITetrisActions instance)
@@ -271,5 +300,6 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnFlip(InputAction.CallbackContext context);
         void OnPlaceHand(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
     }
 }
