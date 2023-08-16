@@ -2,45 +2,56 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum BalaceState
+{
+    OK,
+    Left,
+    Right,
+}
 public class HandControls : MonoBehaviour
 {
-    
-   private List<Figure> _figures;
+
+   private List<Figure> _figures = new List<Figure>();
+   private int _handWidth = 2;
 
    public void AddFigures(List<Figure> figures)
     {
         _figures = figures;
     }
 
-    public bool CheckBalance()
+    public float CheckBalance()
     {
-        int balanceX = Mathf.RoundToInt(transform.position.x);
 
-        float leftSideWeight = 0, rightSideWeight = 0;
-
-        foreach(Figure f in _figures)
+        if (_figures.Count > 0)
         {
-            Vector3 pos = f.GetWorldPosition();
-            Vector2Int[] form = f.GetForm();
+            int leftBalanceX = Mathf.RoundToInt(transform.localPosition.x) - _handWidth;
+            int rightBalanceX = Mathf.RoundToInt(transform.localPosition.x) + _handWidth;
 
-            foreach(Vector2Int piece in form)
+            float leftSideWeight = 0, rightSideWeight = 0;
+
+            foreach (Figure f in _figures)
             {
-                float pieceWorldX = piece.x + pos.x;
-                if (pieceWorldX != balanceX)
-                { 
-                    if (pieceWorldX > balanceX)
+                Vector3 pos = f.GetWorldPosition();
+                Vector2Int[] form = f.GetForm();
+
+                foreach (Vector2Int piece in form)
+                {
+                    float pieceWorldX = piece.x + pos.x;
+
+                    if (pieceWorldX > rightBalanceX)
                     {
-                        rightSideWeight += (pieceWorldX - balanceX); //TO DO: use density instead of mass
+                        rightSideWeight += (pieceWorldX - rightBalanceX); //TO DO: use density instead of mass
                     }
-                    else
-                        leftSideWeight += (balanceX - pieceWorldX); //TO DO: use density instead of mass
+                    else if (pieceWorldX < leftBalanceX)
+                        leftSideWeight += (leftBalanceX - pieceWorldX); //TO DO: use density instead of mass
                 }
             }
-        }
 
-        if (Mathf.Abs(leftSideWeight - rightSideWeight) > 5f)
-            return false; 
+            if (Mathf.Abs(leftSideWeight - rightSideWeight) > 5f)
+                return leftSideWeight - rightSideWeight;
+        }
         
-        return true;
+        return 0f;
     }
 }

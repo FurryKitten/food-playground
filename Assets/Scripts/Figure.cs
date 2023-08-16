@@ -65,4 +65,10 @@ public class Figure : MonoBehaviour
         _transform.localPosition = pos;
     }
 
+    public void FlyAway(int dir)
+    {
+        GetComponent<Rigidbody2D>().simulated = true;
+        GetComponent<Rigidbody2D>().AddForce(new Vector2(dir * 20, 2));
+    }
+
 }

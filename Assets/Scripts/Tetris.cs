@@ -18,7 +18,9 @@ public class Tetris : MonoBehaviour
     [SerializeField] private Figure _defaultFigure;
     [SerializeField] private float _movementTime;
     [SerializeField] private int _queueSize;
-    [SerializeField] private HandControls _handControls; //TO DO: use UnityEvents
+    [SerializeField] private HandControls _handControls;
+    [SerializeField] private float _trayAngle;
+
 
 
     private Queue<int> _figureSOIdQueue;
@@ -29,10 +31,14 @@ public class Tetris : MonoBehaviour
     private List<Figure> _figureList = new List<Figure>();
     private float _dashTime;
     private float _lastMoveTime;
+    private float _figureListTimer = 0;
     private bool _dashMode = false;
     private bool _lastMove = false;
 
     private GameState _gameState;
+
+    private float _balaceState = 0;
+    private float balaceStateNew = 0;
 
     private void Awake()
     {
@@ -70,6 +76,31 @@ public class Tetris : MonoBehaviour
         if (_gameState.State != State.TETRIS)
             return;
 
+        _balaceState = _handControls.CheckBalance();
+
+        int rotationDir = 0;
+
+        if (_balaceState != 0)
+        {
+            rotationDir = (_balaceState > 0) ? 1 : -1;
+        }
+        else
+        {
+            if (transform.parent.rotation.eulerAngles.z > 0.1)
+            {
+                rotationDir = -1;
+            }
+            else if (transform.parent.rotation.eulerAngles.z < -0.1)
+            {
+                rotationDir = 1;
+            }
+        }
+
+
+        transform.parent.Rotate(0, 0, rotationDir * _trayAngle * Time.deltaTime);
+        transform.parent.rotation = Quaternion.Euler(0, 0, Mathf.Clamp(transform.parent.rotation.eulerAngles.z, -20, 20));
+
+
         if (_flyingFigure == null)
         {
             if (_figureSOIdQueue.TryPeek(out int figureSOId))
@@ -86,13 +117,13 @@ public class Tetris : MonoBehaviour
                 _flyingFigure.SetPosition(_figureStartPos.x, _figureStartPos.y);
                 _flyingFigure.SetWorldPosition(_figureStartPos - pos);
 
-                _figureList.Add(_flyingFigure);
+
             }
             else
             {
                 //stop tetris
                 //_playerController.Tetris.Move.started -= HorizontalMove;
-                // _handControls.AddFigures(_figureList); //TO DO: use UnityEvents
+
             }
         }
         else
@@ -108,7 +139,7 @@ public class Tetris : MonoBehaviour
                         _movementTimer = 0;
                     }
                 }
-                else 
+                else
                 {
                     if (_movementTimer >= _lastMoveTime)
                     {
@@ -117,7 +148,7 @@ public class Tetris : MonoBehaviour
                     }
                 }
             }
-            else 
+            else
             {
                 if (!_lastMove)
                 {
@@ -137,6 +168,28 @@ public class Tetris : MonoBehaviour
                 }
             }
         }
+
+        _figureListTimer += Time.deltaTime;
+        if (_figureListTimer > _movementTime)
+        {
+            _figureListTimer = 0;
+            if (_figureList.Count != 0)
+            {
+                VerticalMoveFigureList();
+                if (Mathf.Abs(transform.parent.rotation.eulerAngles.z) > 10)
+                {
+                    if (transform.parent.rotation.eulerAngles.z > 10)
+                    {
+                        HorizontalMoveFigureList(-1);
+                    }
+                    else
+                    {
+                        HorizontalMoveFigureList(1);
+                    }
+                }
+            }
+        }
+    
     }
 
     private void MoveFlyingFigure()
@@ -171,6 +224,9 @@ public class Tetris : MonoBehaviour
             {
                 foreach (Vector2Int pos in _flyingFigure.GetForm())
                     _gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y] = true;
+
+                _figureList.Add(_flyingFigure);
+                _handControls.AddFigures(_figureList);
 
                 _flyingFigure = null;
                 _dashMode = false;
@@ -220,6 +276,104 @@ public class Tetris : MonoBehaviour
             _flyingFigure.HorizontalMove(dir);
         }
         
+    }
+
+    private void HorizontalMoveFigureList(int dir)
+    {
+        for (int i = 0; i < _gameSpace.width; ++i)
+        {
+            for (int j = 0; j < _gameSpace.height; ++j)
+                _gameSpace.cellsStatus[i, j] = false;
+        }
+
+        int gridXFlying = -1;
+        int gridYFlying = -1;
+        if (_flyingFigure != null)
+        {
+            Vector2 _flyingFigurePos = _flyingFigure.GetPosition();
+            gridXFlying = Mathf.RoundToInt(_flyingFigurePos.x);
+            gridYFlying = Mathf.RoundToInt(_flyingFigurePos.y);
+        }
+
+        List<int> lostFigureIndexes = new List<int>();
+        for(int i = 0; i < _figureList.Count; i++)
+        {
+            Vector2 _fPos = _figureList[i].GetPosition();
+            int gridX = Mathf.RoundToInt(_fPos.x) + dir;
+            int gridY = Mathf.RoundToInt(_fPos.y);
+
+            bool boundaryCheck = false;
+
+            foreach (Vector2Int pos in _figureList[i].GetForm())
+            {
+                if ((gridX + pos.x) < 0 || (gridX + pos.x) == _gameSpace.width)
+                {
+                    boundaryCheck = true;
+                    break;
+                }
+                else
+                {
+                    _gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y] = true;
+                }
+
+                if((gridX + pos.x) == gridXFlying && (gridY - pos.y) == gridYFlying)
+                {
+                    boundaryCheck = true;
+                    break;
+                }
+            }
+
+            _figureList[i].HorizontalMove(dir);
+
+
+            if(boundaryCheck)
+            {
+                _figureList[i].FlyAway(dir);
+                lostFigureIndexes.Add(i);
+            }
+
+        }
+
+        if(lostFigureIndexes.Count > 0)
+            foreach(int i in lostFigureIndexes)
+            {
+                _figureList.RemoveAt(i);
+            }
+        
+    }
+
+    private void VerticalMoveFigureList()
+    {
+        foreach(Figure f in _figureList)
+        {
+            Vector2 _fPos = f.GetPosition();
+            int gridX = Mathf.RoundToInt(_fPos.x);
+            int gridY = Mathf.RoundToInt(_fPos.y);
+
+            bool checkGridSpace = false;
+
+            foreach (Vector2Int pos in f.GetForm())
+                if ((gridY - pos.y - 1) >= 0)
+                {
+                    if (_gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y - 1])
+                    {
+                        checkGridSpace = true;
+                        break;
+                    }
+                }
+                else
+                {
+                    checkGridSpace = true;
+                    break;
+                }
+
+            if(!checkGridSpace)
+            {
+                f.Fall();
+                foreach (Vector2Int pos in f.GetForm())
+                    _gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y - 1] = true;
+            }
+        }
     }
 
     private void DashMode(InputAction.CallbackContext context)

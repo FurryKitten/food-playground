@@ -33,7 +33,7 @@ public class HandPlacer : MonoBehaviour
     {
         if(_hand != null)
         {
-            Vector2 mousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 mousePos = _camera.ScreenToWorldPoint(Input.mousePosition) - transform.parent.position;
 
             //int x = Mathf.RoundToInt(mousePos.x);
 
