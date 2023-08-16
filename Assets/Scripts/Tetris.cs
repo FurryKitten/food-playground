@@ -78,13 +78,13 @@ public class Tetris : MonoBehaviour
                 {
                     //TO DO: tetris lose
                 }
-                Vector2 pos = this.transform.position;
-                _flyingFigure = Instantiate(_defaultFigure);
+                Vector2 pos = transform.parent.position;
+                _flyingFigure = Instantiate(_defaultFigure, transform.parent);
                 _flyingFigure.Init(_figureSOPrefabs[figureSOId]);
                 _figureSOIdQueue.Dequeue();
 
                 _flyingFigure.SetPosition(_figureStartPos.x, _figureStartPos.y);
-                _flyingFigure.SetWorldPosition(pos + _figureStartPos);
+                _flyingFigure.SetWorldPosition(_figureStartPos - pos);
 
                 _figureList.Add(_flyingFigure);
             }
@@ -190,7 +190,7 @@ public class Tetris : MonoBehaviour
         int gridY = Mathf.RoundToInt(_flyingFigurePos.y);
 
         foreach (Vector2Int pos in _flyingFigure.GetForm())
-            if ((gridX + pos.x ) > 0 && (gridX + pos.x ) < _gameSpace.width && gridY - pos.y >= 0)
+            if ((gridX + pos.x ) >= 0 && (gridX + pos.x ) < _gameSpace.width && gridY - pos.y >= 0)
             {
                 if (_gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y])
                     return true;
@@ -237,7 +237,7 @@ public class Tetris : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Vector2 pos = this.transform.position;
+        Vector2 pos = this.transform.localPosition;
         for (int i = 0; i <= _gameSpace.width; ++i)
         {
             Vector2 offset = new Vector2(i, 0);

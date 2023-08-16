@@ -35,10 +35,10 @@ public class HandPlacer : MonoBehaviour
         {
             Vector2 mousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
 
-            int x = Mathf.RoundToInt(mousePos.x);
+            //int x = Mathf.RoundToInt(mousePos.x);
 
-            x = Mathf.Clamp(x, 3, 13);
-            _hand.transform.position = new Vector2(x, _hand.transform.position.y);
+            float x = Mathf.Clamp(mousePos.x, -(_places4Hand.width/2), (_places4Hand.width / 2)+1);
+            _hand.transform.localPosition = new Vector2(x, _hand.transform.localPosition.y);
         }
     }
 

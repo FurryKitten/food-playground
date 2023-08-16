@@ -32,15 +32,15 @@ public class Figure : MonoBehaviour
 
     public void SetWorldPosition(Vector2 pos)
     {
-        _transform.position = pos;
+        _transform.localPosition = pos;
     }
 
     public void Fall()
     {
         _centerPos.y -= 1;
-        Vector3 pos = _transform.position;
+        Vector3 pos = _transform.localPosition;
         pos.y -= 1;
-        _transform.position = pos;
+        _transform.localPosition = pos;
     }
 
     public Vector2Int GetPosition()
@@ -50,7 +50,7 @@ public class Figure : MonoBehaviour
 
     public Vector3 GetWorldPosition()
     {
-        return _transform.position;
+        return _transform.localPosition;
     }
     public Vector2Int[] GetForm()
     {
@@ -60,9 +60,9 @@ public class Figure : MonoBehaviour
     public void HorizontalMove(int dir)
     {
         _centerPos.x += dir;
-        Vector3 pos = _transform.position;
+        Vector3 pos = _transform.localPosition;
         pos.x += dir;
-        _transform.position = pos;
+        _transform.localPosition = pos;
     }
 
 }
