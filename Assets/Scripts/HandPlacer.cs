@@ -37,7 +37,7 @@ public class HandPlacer : MonoBehaviour
 
             //int x = Mathf.RoundToInt(mousePos.x);
 
-            float x = Mathf.Clamp(mousePos.x, -(_places4Hand.width/2), (_places4Hand.width / 2)+1);
+            float x = Mathf.Clamp(mousePos.x, -(_places4Hand.width * 0.5f), (_places4Hand.width * 0.5f) + 1);
             _hand.transform.localPosition = new Vector2(x, _hand.transform.localPosition.y);
         }
     }

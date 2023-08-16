@@ -12,8 +12,9 @@ public enum BalaceState
 public class HandControls : MonoBehaviour
 {
 
-   private List<Figure> _figures = new List<Figure>();
-   private int _handWidth = 2;
+    private List<Figure> _figures = new List<Figure>();
+    private int _handWidth = 2;
+    private int _trayLehgth = 16;
 
    public void AddFigures(List<Figure> figures)
     {
@@ -22,13 +23,13 @@ public class HandControls : MonoBehaviour
 
     public float CheckBalance()
     {
+        int leftBalanceX = Mathf.RoundToInt(transform.localPosition.x) - _handWidth;
+        int rightBalanceX = Mathf.RoundToInt(transform.localPosition.x) + _handWidth;
+
+        float leftSideWeight = 0, rightSideWeight = 0;
 
         if (_figures.Count > 0)
         {
-            int leftBalanceX = Mathf.RoundToInt(transform.localPosition.x) - _handWidth;
-            int rightBalanceX = Mathf.RoundToInt(transform.localPosition.x) + _handWidth;
-
-            float leftSideWeight = 0, rightSideWeight = 0;
 
             foreach (Figure f in _figures)
             {
@@ -48,10 +49,15 @@ public class HandControls : MonoBehaviour
                 }
             }
 
-            if (Mathf.Abs(leftSideWeight - rightSideWeight) > 5f)
-                return leftSideWeight - rightSideWeight;
+            
         }
-        
+
+        leftSideWeight += (leftBalanceX + _trayLehgth * 0.5f) * (leftBalanceX + _trayLehgth * 0.5f) * 0.1f;
+        rightSideWeight += (_trayLehgth * 0.5f - rightBalanceX) * (_trayLehgth * 0.5f - rightBalanceX) * 0.1f;  
+
+        if (Mathf.Abs(leftSideWeight - rightSideWeight) > 5f)
+            return leftSideWeight - rightSideWeight;
+
         return 0f;
     }
 }
