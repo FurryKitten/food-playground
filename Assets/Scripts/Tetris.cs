@@ -30,15 +30,14 @@ public class Tetris : MonoBehaviour
     private PlayerController _playerController;
     private List<Figure> _figureList = new List<Figure>();
     private float _dashTime;
-    private float _lastMoveTime;
     private float _figureListTimer = 0;
     private bool _dashMode = false;
-    private bool _lastMove = false;
 
     private GameState _gameState;
 
-    private float _balaceState = 0;
+    private float _balaceValue = 0;
     private float balaceStateNew = 0;
+    private BalaceState _balaceState;
 
     private void Awake()
     {
@@ -67,7 +66,6 @@ public class Tetris : MonoBehaviour
 
 
         _dashTime = 0.1f * _movementTime;
-        _lastMoveTime = _dashTime;
 
         _gameState = ServiceLocator.Current.Get<GameState>();
     }
@@ -76,30 +74,40 @@ public class Tetris : MonoBehaviour
         if (_gameState.State != State.TETRIS)
             return;
 
-        _balaceState = _handControls.CheckBalance();
+        _balaceValue = _handControls.CheckBalance();
 
         int rotationDir = 0;
 
-        if (_balaceState != 0)
+        if (_balaceValue != 0)
         {
-            rotationDir = (_balaceState > 0) ? 1 : -1;
+            if (_balaceValue > 0)
+            {
+                rotationDir = 1;
+                _balaceState = BalaceState.Left;
+            }
+            else
+            {
+                rotationDir = -1;
+                _balaceState = BalaceState.Right;
+            }
         }
         else
         {
+            _balaceState = BalaceState.OK;
             if (transform.parent.rotation.eulerAngles.z > 0.1)
             {
                 rotationDir = -1;
             }
-            else if (transform.parent.rotation.eulerAngles.z < -0.1)
+            else if (transform.parent.rotation.eulerAngles.z > 340 && transform.parent.rotation.eulerAngles.z < 360f)
             {
                 rotationDir = 1;
             }
         }
 
-
         transform.parent.Rotate(0, 0, rotationDir * _trayAngle * Time.deltaTime);
-        transform.parent.rotation = Quaternion.Euler(0, 0, Mathf.Clamp(transform.parent.rotation.eulerAngles.z, -20, 20));
-
+        
+        transform.parent.rotation = Quaternion.Euler(0, 0, RotationClamp(transform.parent.rotation.eulerAngles.z));
+        
 
         if (_flyingFigure == null)
         {
@@ -131,44 +139,25 @@ public class Tetris : MonoBehaviour
             _movementTimer += Time.deltaTime;
             if (!_dashMode)
             {
-                if (!_lastMove)
+
+                if (_movementTimer >= _movementTime)
                 {
-                    if (_movementTimer >= _movementTime)
-                    {
-                        MoveFlyingFigure();
-                        _movementTimer = 0;
-                    }
-                }
-                else
-                {
-                    if (_movementTimer >= _lastMoveTime)
-                    {
-                        MoveFlyingFigure();
-                        _movementTimer = 0;
-                    }
+                    MoveFlyingFigure();
+                    _movementTimer = 0;
+
                 }
             }
             else
             {
-                if (!_lastMove)
+                if (_movementTimer >= _dashTime)
                 {
-                    if (_movementTimer >= _dashTime)
-                    {
-                        MoveFlyingFigure();
-                        _movementTimer = 0;
-                    }
-                }
-                else
-                {
-                    if (_movementTimer >= _lastMoveTime)
-                    {
-                        MoveFlyingFigure();
-                        _movementTimer = 0;
-                    }
+                    MoveFlyingFigure();
+                    _movementTimer = 0;
                 }
             }
         }
 
+        
         _figureListTimer += Time.deltaTime;
         if (_figureListTimer > _movementTime)
         {
@@ -176,17 +165,12 @@ public class Tetris : MonoBehaviour
             if (_figureList.Count != 0)
             {
                 VerticalMoveFigureList();
-                if (Mathf.Abs(transform.parent.rotation.eulerAngles.z) > 10)
+                if (transform.parent.rotation.eulerAngles.z > 10 && transform.parent.rotation.eulerAngles.z <= 20)
                 {
-                    if (transform.parent.rotation.eulerAngles.z > 10)
-                    {
-                        HorizontalMoveFigureList(-1);
-                    }
-                    else
-                    {
-                        HorizontalMoveFigureList(1);
-                    }
+                    HorizontalMoveFigureList(-1);
                 }
+                else if(transform.parent.rotation.eulerAngles.z < 350 && transform.parent.rotation.eulerAngles.z >= 340)
+                    HorizontalMoveFigureList(1);
             }
         }
     
@@ -220,25 +204,33 @@ public class Tetris : MonoBehaviour
         }
         else
         {
-            if (_lastMove)
-            {
-                foreach (Vector2Int pos in _flyingFigure.GetForm())
-                    _gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y] = true;
+            foreach (Vector2Int pos in _flyingFigure.GetForm())
+                _gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y] = true;
 
-                _figureList.Add(_flyingFigure);
-                _handControls.AddFigures(_figureList);
+            _figureList.Add(_flyingFigure);
+            _handControls.AddFigures(_figureList);
 
-                _flyingFigure = null;
-                _dashMode = false;
-                _lastMove = false;
-            }
-            else 
-            {
-                _lastMove = true;
-            }
+            _flyingFigure = null;
+            _dashMode = false;
         }
     }
 
+    private float RotationClamp(float angle)
+    {
+        if(angle > 20 && angle < 30)
+        {
+            return Mathf.Clamp(angle, 0, 20);
+        }
+        else
+        {
+            if(angle > 20)
+            {
+                return Mathf.Clamp(angle, 340, 360);
+            }
+        }
+
+        return angle;
+    }
     private bool checkHorizontalMove(int dir)
     {
         Vector2 _flyingFigurePos = _flyingFigure.GetPosition();
@@ -286,8 +278,8 @@ public class Tetris : MonoBehaviour
                 _gameSpace.cellsStatus[i, j] = false;
         }
 
-        int gridXFlying = -1;
-        int gridYFlying = -1;
+        int gridXFlying = -100;
+        int gridYFlying = -100;
         if (_flyingFigure != null)
         {
             Vector2 _flyingFigurePos = _flyingFigure.GetPosition();
@@ -334,17 +326,23 @@ public class Tetris : MonoBehaviour
 
         }
 
-        if(lostFigureIndexes.Count > 0)
-            foreach(int i in lostFigureIndexes)
+        if (lostFigureIndexes.Count > 0)
+        {
+            int offset = 0;
+            foreach (int i in lostFigureIndexes)
             {
-                _figureList.RemoveAt(i);
+                _figureList.RemoveAt(i - offset);
+                offset++;
             }
-        
+
+            _handControls.AddFigures(_figureList);
+            
+        }
     }
 
     private void VerticalMoveFigureList()
     {
-        foreach(Figure f in _figureList)
+        foreach (Figure f in _figureList)
         {
             Vector2 _fPos = f.GetPosition();
             int gridX = Mathf.RoundToInt(_fPos.x);
@@ -371,7 +369,10 @@ public class Tetris : MonoBehaviour
             {
                 f.Fall();
                 foreach (Vector2Int pos in f.GetForm())
+                {
+                    _gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y] = false;
                     _gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y - 1] = true;
+                }
             }
         }
     }
