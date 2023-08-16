@@ -614,10 +614,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 94245f260cae5be40a8d5f612f46e5c0, type: 2}
   - {fileID: 11400000, guid: 1108b822ba91e0f40bf04b706088964c, type: 2}
   _defaultFigure: {fileID: -5098583264592464667, guid: 8219b0ec5da4a0f4facdc4eacac83648, type: 3}
-  _movementTime: 1
-  _queueSize: 5
+  _movementTime: 0.5
+  _queueSize: 20
   _handControls: {fileID: 623131006}
-  _trayAngle: 1
+  _trayAngle: 5
 --- !u!4 &2128700822
 Transform:
   m_ObjectHideFlags: 0
