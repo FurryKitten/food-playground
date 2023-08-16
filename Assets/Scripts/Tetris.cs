@@ -32,6 +32,7 @@ public class Tetris : MonoBehaviour
     private float _dashTime;
     private float _figureListTimer = 0;
     private bool _dashMode = false;
+    private float _spawnTimer = 0;
 
     private GameState _gameState;
 
@@ -110,27 +111,38 @@ public class Tetris : MonoBehaviour
 
         if (_flyingFigure == null)
         {
-            if (_figureSOIdQueue.TryPeek(out int figureSOId))
+            _spawnTimer += Time.deltaTime;
+
+            if (_spawnTimer > _movementTime)
             {
-                if (_gameSpace.cellsStatus[_figureStartPos.x, _figureStartPos.y])
+                _spawnTimer = 0;
+                if (_figureSOIdQueue.TryPeek(out int figureSOId))
                 {
-                    //TO DO: tetris lose
+
+                    Vector2 pos = transform.parent.position;
+                    _flyingFigure = Instantiate(_defaultFigure, transform.parent);
+                    _flyingFigure.Init(_figureSOPrefabs[figureSOId]);
+                    _figureSOIdQueue.Dequeue();
+
+                    _flyingFigure.SetPosition(_figureStartPos.x, _figureStartPos.y);
+                    _flyingFigure.SetWorldPosition(_figureStartPos - pos);
+
+                    foreach (Vector2Int p in _flyingFigure.GetForm())
+                        if (_gameSpace.cellsStatus[_figureStartPos.x + p.x, _figureStartPos.y - p.y])
+                        {
+                            _flyingFigure.FlyAway(1);
+                            _flyingFigure = null;
+                            _spawnTimer = 0;
+                            break;
+                        }
+
                 }
-                Vector2 pos = transform.parent.position;
-                _flyingFigure = Instantiate(_defaultFigure, transform.parent);
-                _flyingFigure.Init(_figureSOPrefabs[figureSOId]);
-                _figureSOIdQueue.Dequeue();
+                else
+                {
+                    //stop tetris
+                    //_playerController.Tetris.Move.started -= HorizontalMove;
 
-                _flyingFigure.SetPosition(_figureStartPos.x, _figureStartPos.y);
-                _flyingFigure.SetWorldPosition(_figureStartPos - pos);
-
-
-            }
-            else
-            {
-                //stop tetris
-                //_playerController.Tetris.Move.started -= HorizontalMove;
-
+                }
             }
         }
         else
@@ -211,6 +223,7 @@ public class Tetris : MonoBehaviour
 
             _flyingFigure = null;
             _dashMode = false;
+            _spawnTimer = _movementTime;
         }
     }
 
