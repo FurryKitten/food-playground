@@ -36,7 +36,6 @@ public class Tetris : MonoBehaviour
     private GameState _gameState;
 
     private float _balaceValue = 0;
-    private float balaceStateNew = 0;
     private BalaceState _balaceState;
 
     private void Awake()
@@ -165,11 +164,11 @@ public class Tetris : MonoBehaviour
             if (_figureList.Count != 0)
             {
                 VerticalMoveFigureList();
-                if (transform.parent.rotation.eulerAngles.z > 10 && transform.parent.rotation.eulerAngles.z <= 20)
+                if (transform.parent.rotation.eulerAngles.z > 10 && transform.parent.rotation.eulerAngles.z < 21)
                 {
                     HorizontalMoveFigureList(-1);
                 }
-                else if(transform.parent.rotation.eulerAngles.z < 350 && transform.parent.rotation.eulerAngles.z >= 340)
+                else if(transform.parent.rotation.eulerAngles.z < 350 && transform.parent.rotation.eulerAngles.z > 339)
                     HorizontalMoveFigureList(1);
             }
         }
@@ -351,6 +350,51 @@ public class Tetris : MonoBehaviour
             bool checkGridSpace = false;
 
             foreach (Vector2Int pos in f.GetForm())
+            {
+                _gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y] = false;
+            }
+
+            foreach (Vector2Int pos in f.GetForm())
+                if ((gridY - pos.y - 1) >= 0)
+                {
+                    if (_gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y - 1])
+                    {
+                        checkGridSpace = true;
+                        break;
+                    }
+                }
+                else
+                {
+                    checkGridSpace = true;
+                    break;
+                }
+
+            if (!checkGridSpace)
+            {
+                foreach (Vector2Int pos in f.GetForm())
+                {
+                    _gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y] = false;
+                }
+            }
+            else
+            {
+                foreach (Vector2Int pos in f.GetForm())
+                {
+                    _gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y] = true;
+                }
+            }
+
+        }
+
+        foreach (Figure f in _figureList)
+        {
+            Vector2 _fPos = f.GetPosition();
+            int gridX = Mathf.RoundToInt(_fPos.x);
+            int gridY = Mathf.RoundToInt(_fPos.y);
+
+            bool checkGridSpace = false;
+
+            foreach (Vector2Int pos in f.GetForm())
                 if ((gridY - pos.y - 1) >= 0)
                 {
                     if (_gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y - 1])
@@ -370,10 +414,10 @@ public class Tetris : MonoBehaviour
                 f.Fall();
                 foreach (Vector2Int pos in f.GetForm())
                 {
-                    _gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y] = false;
                     _gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y - 1] = true;
                 }
             }
+
         }
     }
 
