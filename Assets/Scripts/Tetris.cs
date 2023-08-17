@@ -40,9 +40,10 @@ public class Tetris : MonoBehaviour
     private BalaceState _balaceState;
 
     private bool _doubleCost = false;
-    private bool _trayBorders = false;
-    private int _leftGridConstrain = 3;
-    private int _rightGridConstrain = 13;
+    private bool _trayBorders = true;
+    private int _leftGridConstrain = 4;
+    private int _rightGridConstrain = 14;
+    private int _gridXOffsetFromWorld = 0;
 
     private void Awake()
     {
@@ -56,11 +57,12 @@ public class Tetris : MonoBehaviour
     private void Start()
     {
         _figureSOIdQueue = new Queue<int>();
-        //_figureSOIdQueue.Enqueue(0); // TODO: generate or premade queue SO
+        _figureSOIdQueue.Enqueue(0); // TODO: generate or premade queue SO
         //_figureSOIdQueue.Enqueue(1); // TODO: generate or premade queue SO
-        //_figureSOIdQueue.Enqueue(0);
-        GenerateQueue();
-        _gameSpace.width = 16;
+        _figureSOIdQueue.Enqueue(0);
+        //GenerateQueue();
+        _gameSpace.width = 18;
+        _gridXOffsetFromWorld = (_gameSpace.width - 16) / 2;
         _gameSpace.height = 15;
         _gameSpace.cellsStatus = new bool[_gameSpace.width, _gameSpace.height];
         for (int i = 0; i < _gameSpace.width; ++i)
@@ -76,8 +78,8 @@ public class Tetris : MonoBehaviour
     }
     private void Update()
     {
-        if (_gameState.State != State.TETRIS)
-            return;
+       // if (_gameState.State != State.TETRIS)
+        //    return;
 
         _balaceValue = _handControls.CheckBalance();
 
@@ -139,7 +141,7 @@ public class Tetris : MonoBehaviour
                     }
 
                     foreach (Vector2Int p in _flyingFigure.GetForm())
-                        if (_gameSpace.cellsStatus[_figureStartPos.x + p.x, _figureStartPos.y - p.y])
+                        if (_gameSpace.cellsStatus[_figureStartPos.x + _gridXOffsetFromWorld + p.x, _figureStartPos.y - p.y])
                         {
                             _flyingFigure.FlyAway(1);
                             _flyingFigure = null;
@@ -201,7 +203,7 @@ public class Tetris : MonoBehaviour
     private void MoveFlyingFigure()
     {
         Vector2Int _flyingFigurePos = _flyingFigure.GetPosition();
-        int gridX = _flyingFigurePos.x;
+        int gridX = _flyingFigurePos.x + _gridXOffsetFromWorld;
         int gridY = _flyingFigurePos.y;
 
         bool checkGridSpace = false;
@@ -256,9 +258,9 @@ public class Tetris : MonoBehaviour
     }
     private bool checkHorizontalMove(int dir)
     {
-        Vector2 _flyingFigurePos = _flyingFigure.GetPosition();
-        int gridX = Mathf.RoundToInt(_flyingFigurePos.x) + dir;
-        int gridY = Mathf.RoundToInt(_flyingFigurePos.y);
+        Vector2Int _flyingFigurePos = _flyingFigure.GetPosition();
+        int gridX = (_flyingFigurePos.x) + dir + _gridXOffsetFromWorld;
+        int gridY = (_flyingFigurePos.y);
 
         foreach (Vector2Int pos in _flyingFigure.GetForm())
             if ((gridX + pos.x ) >= _leftGridConstrain && (gridX + pos.x ) < _rightGridConstrain && gridY - pos.y >= 0)
@@ -295,40 +297,83 @@ public class Tetris : MonoBehaviour
 
     private void HorizontalMoveFigureList(int dir)
     {
-        for (int i = 0; i < _gameSpace.width; ++i)
+        for (int i = 0; i < _figureList.Count; i++)
         {
-            for (int j = 0; j < _gameSpace.height; ++j)
-                _gameSpace.cellsStatus[i, j] = false;
-        }
+            Vector2Int _fPos = _figureList[i].GetPosition();
+            int gridX = (_fPos.x) + _gridXOffsetFromWorld;
+            int gridY = (_fPos.y);
 
+            bool moveCheck = true;
+
+            if (_trayBorders)
+            {
+                foreach (Vector2Int pos in _figureList[i].GetForm())
+                {
+                    if (gridY - pos.y == 0 && 
+                        (gridX + pos.x + dir == _rightGridConstrain || gridX + pos.x + dir < _leftGridConstrain))
+                    {
+                        moveCheck = false;
+                        break;
+                    }
+                }
+            }
+
+            if(moveCheck)
+            {
+                foreach (Vector2Int pos in _figureList[i].GetForm())
+                {
+                    _gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y] = false;
+                }
+            }
+        
+        }
+        
         int gridXFlying = -100;
         int gridYFlying = -100;
         if (_flyingFigure != null)
         {
-            Vector2 _flyingFigurePos = _flyingFigure.GetPosition();
-            gridXFlying = Mathf.RoundToInt(_flyingFigurePos.x);
-            gridYFlying = Mathf.RoundToInt(_flyingFigurePos.y);
+            Vector2Int _flyingFigurePos = _flyingFigure.GetPosition();
+            gridXFlying = (_flyingFigurePos.x) + _gridXOffsetFromWorld;
+            gridYFlying = (_flyingFigurePos.y);
         }
 
         List<int> lostFigureIndexes = new List<int>();
         for(int i = 0; i < _figureList.Count; i++)
         {
-            Vector2 _fPos = _figureList[i].GetPosition();
-            int gridX = Mathf.RoundToInt(_fPos.x) + dir;
-            int gridY = Mathf.RoundToInt(_fPos.y);
+            Vector2Int _fPos = _figureList[i].GetPosition();
+            int gridX = (_fPos.x) + dir + _gridXOffsetFromWorld;
+            int gridY = (_fPos.y);
 
             bool boundaryCheck = false;
+            bool bordured = false;
 
             foreach (Vector2Int pos in _figureList[i].GetForm())
             {
-                if ((gridX + pos.x) < _leftGridConstrain || (gridX + pos.x) == _rightGridConstrain)
+                if (((gridX + pos.x) < _leftGridConstrain || (gridX + pos.x) == _rightGridConstrain))
                 {
-                    boundaryCheck = true;
-                    break;
+                    if (!_trayBorders)
+                    {
+                        boundaryCheck = true;
+                        break;
+                    }
+
+                    if (gridY - pos.y == 0)
+                    { 
+                        bordured = true;
+                    }
+                    else
+                    {
+                        boundaryCheck = true;
+                    }
                 }
                 else
                 {
-                    _gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y] = true;
+                    if(_gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y])
+                    {
+                        bordured = true;
+                    }
+                    else
+                        _gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y] = true;
                 }
 
                 if((gridX + pos.x) == gridXFlying && (gridY - pos.y) == gridYFlying)
@@ -338,20 +383,34 @@ public class Tetris : MonoBehaviour
                 }
             }
 
-            _figureList[i].HorizontalMove(dir);
+            if (!bordured)
+                _figureList[i].HorizontalMove(dir);
 
 
-            if(boundaryCheck)
+            if(boundaryCheck && !bordured)
             {
                 foreach (Vector2Int pos in _figureList[i].GetForm())
                 {
                     if ((gridX + pos.x) < _leftGridConstrain || (gridX + pos.x) == _rightGridConstrain ||
                         (gridX + pos.x) == gridXFlying && (gridY - pos.y) == gridYFlying)
-                        break;
+                        continue;
                     _gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y] = false;
                 }
-                    _figureList[i].FlyAway(dir);
+                _figureList[i].FlyAway(dir);
                 lostFigureIndexes.Add(i);
+            }
+
+            if(bordured)
+            {
+                foreach (Vector2Int pos in _figureList[i].GetForm())
+                {
+                    _gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y] = false;
+                }
+
+                foreach (Vector2Int pos in _figureList[i].GetForm())
+                {
+                    _gameSpace.cellsStatus[gridX + pos.x - dir, gridY - pos.y] = true;
+                }
             }
 
         }
@@ -368,15 +427,16 @@ public class Tetris : MonoBehaviour
             _handControls.AddFigures(_figureList);
             
         }
+        
     }
 
     private void VerticalMoveFigureList()
     {
         foreach (Figure f in _figureList)
         {
-            Vector2 _fPos = f.GetPosition();
-            int gridX = Mathf.RoundToInt(_fPos.x);
-            int gridY = Mathf.RoundToInt(_fPos.y);
+            Vector2Int _fPos = f.GetPosition();
+            int gridX = (_fPos.x) + _gridXOffsetFromWorld;
+            int gridY = (_fPos.y);
 
             bool checkGridSpace = false;
 
@@ -419,9 +479,9 @@ public class Tetris : MonoBehaviour
 
         foreach (Figure f in _figureList)
         {
-            Vector2 _fPos = f.GetPosition();
-            int gridX = Mathf.RoundToInt(_fPos.x);
-            int gridY = Mathf.RoundToInt(_fPos.y);
+            Vector2Int _fPos = f.GetPosition();
+            int gridX = (_fPos.x) + _gridXOffsetFromWorld;
+            int gridY =  (_fPos.y);
 
             bool checkGridSpace = false;
 
@@ -485,6 +545,7 @@ public class Tetris : MonoBehaviour
     private void OnDrawGizmos()
     {
         Vector2 pos = this.transform.localPosition;
+        pos.x -= _gridXOffsetFromWorld;
         for (int i = 0; i <= _gameSpace.width; ++i)
         {
             Vector2 offset = new Vector2(i, 0);
