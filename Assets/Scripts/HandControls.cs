@@ -11,10 +11,11 @@ public enum BalaceState
 }
 public class HandControls : MonoBehaviour
 {
+    [SerializeField] Sprite _tentacleSprite;
 
     private List<Figure> _figures = new List<Figure>();
     private int _handWidth = 2;
-    private int _trayLehgth = 16;
+    private int _trayLehgth = 10;
 
    public void AddFigures(List<Figure> figures)
     {
@@ -59,5 +60,16 @@ public class HandControls : MonoBehaviour
             return leftSideWeight - rightSideWeight;
 
         return 0f;
+    }
+
+    public void SetTentacle() //TO DO: use Unity Event
+    {
+        GetComponent<SpriteRenderer>().sprite = _tentacleSprite;
+        _handWidth *= 2;
+    }
+
+    public int GetHandWidth()
+    {
+        return _handWidth;
     }
 }

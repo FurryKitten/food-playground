@@ -39,6 +39,11 @@ public class Tetris : MonoBehaviour
     private float _balaceValue = 0;
     private BalaceState _balaceState;
 
+    private bool _doubleCost = false;
+    private bool _trayBorders = false;
+    private int _leftGridConstrain = 3;
+    private int _rightGridConstrain = 13;
+
     private void Awake()
     {
         _playerController = new PlayerController();
@@ -250,7 +255,7 @@ public class Tetris : MonoBehaviour
         int gridY = Mathf.RoundToInt(_flyingFigurePos.y);
 
         foreach (Vector2Int pos in _flyingFigure.GetForm())
-            if ((gridX + pos.x ) >= 0 && (gridX + pos.x ) < _gameSpace.width && gridY - pos.y >= 0)
+            if ((gridX + pos.x ) >= _leftGridConstrain && (gridX + pos.x ) < _rightGridConstrain && gridY - pos.y >= 0)
             {
                 if (_gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y])
                     return true;
@@ -310,7 +315,7 @@ public class Tetris : MonoBehaviour
 
             foreach (Vector2Int pos in _figureList[i].GetForm())
             {
-                if ((gridX + pos.x) < 0 || (gridX + pos.x) == _gameSpace.width)
+                if ((gridX + pos.x) < _leftGridConstrain || (gridX + pos.x) == _rightGridConstrain)
                 {
                     boundaryCheck = true;
                     break;
@@ -334,7 +339,7 @@ public class Tetris : MonoBehaviour
             {
                 foreach (Vector2Int pos in _figureList[i].GetForm())
                 {
-                    if ((gridX + pos.x) < 0 || (gridX + pos.x) == _gameSpace.width ||
+                    if ((gridX + pos.x) < _leftGridConstrain || (gridX + pos.x) == _rightGridConstrain ||
                         (gridX + pos.x) == gridXFlying && (gridY - pos.y) == gridYFlying)
                         break;
                     _gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y] = false;
@@ -452,6 +457,23 @@ public class Tetris : MonoBehaviour
             _figureSOIdQueue.Enqueue(Random.Range(0, _figureSOPrefabs.Length));
     }
 
+    public void SetDoubleCost()
+    {
+        _doubleCost = true;
+    }
+
+    public void SetTrayBorders()
+    {
+        _trayBorders = true;
+    }
+
+    public void SetGridWidth(int trayWidth)
+    {
+        int offset = Mathf.RoundToInt((_gameSpace.width - trayWidth) * 0.5f);
+        _leftGridConstrain -= offset;
+        _rightGridConstrain += offset;
+    }
+    
     #region DEBUG
 
     private void OnDrawGizmos()
