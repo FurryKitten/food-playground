@@ -9,18 +9,18 @@ public class HandPlacer : MonoBehaviour
     [SerializeField] private HandControls _hand;
     [SerializeField] private Camera _camera;
 
-    private Grid _places4Hand; //TO DO: movement on grid
+    private Grid _places4Hand; 
     private PlayerController _playerController;
 
     private void Awake()
     {
         _playerController = new PlayerController();
-        _playerController.Tetris.PlaceHand.started += PlaceHand;
+        //_playerController.Tetris.PlaceHand.started += PlaceHand; // TO DO: decide about this feature
     }
 
     void Start()
     {
-        _places4Hand.width = 12;
+        _places4Hand.width = 6;
         _places4Hand.height = 1;
         _places4Hand.cellsStatus = new bool[_places4Hand.width, _places4Hand.height];
         for(int i = 0; i < _places4Hand.width; i++)
@@ -35,8 +35,6 @@ public class HandPlacer : MonoBehaviour
         {
             Vector2 mousePos = _camera.ScreenToWorldPoint(Input.mousePosition) - transform.parent.position;
 
-            //int x = Mathf.RoundToInt(mousePos.x);
-
             float x = Mathf.Clamp(mousePos.x, -(_places4Hand.width * 0.5f), (_places4Hand.width * 0.5f) + 1);
             _hand.transform.localPosition = new Vector2(x, _hand.transform.localPosition.y);
         }
@@ -45,6 +43,11 @@ public class HandPlacer : MonoBehaviour
     private void PlaceHand(InputAction.CallbackContext context)
     {
         _hand = null;
+    }
+
+    public void SetGridWidth(int trayWidth) // TO DO: use Unity Event
+    {
+        _places4Hand.width = trayWidth - (2 * _hand.GetHandWidth());
     }
 
     private void ControlsOnEnable()

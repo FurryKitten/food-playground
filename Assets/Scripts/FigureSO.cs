@@ -7,6 +7,7 @@ public class FigureSO : ScriptableObject
     [SerializeField] int _height;
     [SerializeField] Vector2Int[] _form;
     [SerializeField] float _mass;
+    [SerializeField] int _cost;
     [SerializeField] Sprite _sprite;
 
     
@@ -21,6 +22,10 @@ public class FigureSO : ScriptableObject
 
     public float mass
     { get { return _mass; } }
+
+    public int cost 
+    { get { return _cost; } }
+
     public Sprite sprite
     { get { return _sprite; } }
 
