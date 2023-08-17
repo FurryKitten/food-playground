@@ -132,6 +132,12 @@ public class Tetris : MonoBehaviour
                     _flyingFigure.SetPosition(_figureStartPos.x, _figureStartPos.y);
                     _flyingFigure.SetWorldPosition(_figureStartPos - pos);
 
+                    if(_doubleCost)
+                    {
+                        if ((Random.Range(0f, 1f) < 0.3f))
+                            _flyingFigure.SetDoubleCost();
+                    }
+
                     foreach (Vector2Int p in _flyingFigure.GetForm())
                         if (_gameSpace.cellsStatus[_figureStartPos.x + p.x, _figureStartPos.y - p.y])
                         {
