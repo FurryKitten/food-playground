@@ -1068,7 +1068,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5735098258328748341, guid: 83e3633a3e48bb948be84a92a6ce92d1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5
+      value: -0.435
       objectReference: {fileID: 0}
     - target: {fileID: 5735098258328748341, guid: 83e3633a3e48bb948be84a92a6ce92d1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1102,6 +1102,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6781948903205672573, guid: 83e3633a3e48bb948be84a92a6ce92d1, type: 3}
+      propertyPath: _tentacleSprite
+      value: 
+      objectReference: {fileID: -1203321052, guid: 4152b01c41786fe4d8fab4a542d4a475, type: 3}
     - target: {fileID: 7992461162128631561, guid: 83e3633a3e48bb948be84a92a6ce92d1, type: 3}
       propertyPath: m_Icon
       value: 
