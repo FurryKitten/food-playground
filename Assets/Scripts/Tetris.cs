@@ -332,7 +332,14 @@ public class Tetris : MonoBehaviour
 
             if(boundaryCheck)
             {
-                _figureList[i].FlyAway(dir);
+                foreach (Vector2Int pos in _figureList[i].GetForm())
+                {
+                    if ((gridX + pos.x) < 0 || (gridX + pos.x) == _gameSpace.width ||
+                        (gridX + pos.x) == gridXFlying && (gridY - pos.y) == gridYFlying)
+                        break;
+                    _gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y] = false;
+                }
+                    _figureList[i].FlyAway(dir);
                 lostFigureIndexes.Add(i);
             }
 
