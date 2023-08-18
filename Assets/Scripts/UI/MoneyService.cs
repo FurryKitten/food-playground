@@ -6,6 +6,7 @@ using UnityEngine;
 public class MoneyService : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI _moneyText;
+    [SerializeField] TextMeshProUGUI _moneyAllText;
 
     private void Awake()
     {
@@ -15,8 +16,16 @@ public class MoneyService : MonoBehaviour
     public void SetMoneyText()
     {
         int money = ServiceLocator.Current.Get<GameState>().Money;
+        //int trayMoney = ServiceLocator.Current.Get<GameState>().MoneyOnTray;
+
+        _moneyAllText.text = $"{money}";
+    }
+
+    public void SetTrayMoneyText()
+    {
+        //int money = ServiceLocator.Current.Get<GameState>().Money;
         int trayMoney = ServiceLocator.Current.Get<GameState>().MoneyOnTray;
 
-        _moneyText.text = $"{money}";
+        _moneyText.text = $"{trayMoney}";
     }
 }

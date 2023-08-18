@@ -56,7 +56,9 @@ public class GameState : MonoBehaviour, IService
         Money += money;
         Money = Money < 0 ? 0 : Money;
         Debug.Log($"Money: {Money}");
+        MoneyOnTray = 0;
         _onMoneyChange?.Invoke();
+        _onTrayMoneyChange?.Invoke();
     }
 
     public void AddTrayMoney(int money)
