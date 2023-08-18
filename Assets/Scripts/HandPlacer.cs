@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-public class HandPlacer : MonoBehaviour
+public class HandPlacer : MonoBehaviour, IService
 {
     [SerializeField] private HandControls _hand;
     [SerializeField] private Camera _camera;

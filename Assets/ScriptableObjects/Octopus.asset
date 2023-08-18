@@ -20,5 +20,5 @@ MonoBehaviour:
   - {x: 2, y: 1}
   - {x: 1, y: 0}
   _mass: 4
-  _cost: 4
+  _cost: 1000
   _sprite: {fileID: -847920884, guid: 4152b01c41786fe4d8fab4a542d4a475, type: 3}

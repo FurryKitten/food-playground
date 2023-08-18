@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrayControl : MonoBehaviour
+public class TrayControl : MonoBehaviour, IService
 {
     [SerializeField] private List<GameObject> _trayLeftParts;
     [SerializeField] private List<GameObject> _trayRightParts;
@@ -17,7 +17,7 @@ public class TrayControl : MonoBehaviour
     private int _trayLVL = 0;
     private int _trayWidth = 10;
 
-    public void SetTrayWidht(int width) //TO DO: use Unity Events
+    public void SetTrayWidth(int width) //TO DO: use Unity Events
     {
         Vector3 difference = new Vector3 ((width - _trayWidth)/2, 0, 0);
 
@@ -30,22 +30,34 @@ public class TrayControl : MonoBehaviour
                 part.transform.localPosition += -difference;
             }
 
-        _trayLeftParts.Add(Instantiate(_trayBody, 
+        var trayPart = Instantiate(_trayBody, transform);
+        trayPart.transform.localPosition = new Vector3(_trayCenter.transform.localPosition.x - 1.5f,
+            _trayCenter.transform.localPosition.y, _trayCenter.transform.localPosition.z);
+        trayPart.transform.rotation = transform.rotation;
+        _trayLeftParts.Add(trayPart);
+        /*_trayLeftParts.Add(Instantiate(_trayBody, 
             new Vector3(_trayCenter.transform.position.x - 1.5f, 
-            _trayCenter.transform.position.y, _trayCenter.transform.position.z),
-            transform.rotation, transform));
-        
+            _trayCenter.transform.localPosition.y, _trayCenter.transform.position.z),
+            transform.rotation, transform));*/
 
-        if(_trayRightParts.Count > 0)
+
+        if (_trayRightParts.Count > 0)
             foreach (var part in _trayRightParts)
             {
                 part.transform.localPosition += difference;
             }
 
-        _trayRightParts.Add(Instantiate(_trayBody, 
+        trayPart = Instantiate(_trayBody, transform);
+        trayPart.transform.localPosition = new Vector3(_trayCenter.transform.localPosition.x + 1.5f,
+            _trayCenter.transform.localPosition.y, _trayCenter.transform.localPosition.z);
+        trayPart.transform.rotation = transform.rotation;
+        _trayRightParts.Add(trayPart);
+        /*_trayRightParts.Add(Instantiate(_trayBody, 
             new Vector3(_trayCenter.transform.position.x + 1.5f, 
-            _trayCenter.transform.position.y, _trayCenter.transform.position.z), 
-            transform.rotation, transform));
+            _trayCenter.transform.localPosition.y, _trayCenter.transform.position.z), 
+            transform.rotation, transform));*/
+
+        _trayWidth = width;
     }
 
     public void SetTrayBorders()

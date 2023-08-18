@@ -9,7 +9,7 @@ public enum BalaceState
     Left,
     Right,
 }
-public class HandControls : MonoBehaviour
+public class HandControls : MonoBehaviour, IService
 {
     [SerializeField] Sprite _tentacleSprite;
 
@@ -64,7 +64,7 @@ public class HandControls : MonoBehaviour
 
     public void SetTentacle() //TO DO: use Unity Event
     {
-        GetComponent<SpriteRenderer>().sprite = _tentacleSprite;
+        GetComponentInChildren<SpriteRenderer>().sprite = _tentacleSprite;
         _handWidth *= 2;
     }
 

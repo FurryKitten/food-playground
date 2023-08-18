@@ -12,7 +12,7 @@ public struct Grid
     public bool[,] cellsStatus;
 }
 
-public class Tetris : MonoBehaviour
+public class Tetris : MonoBehaviour, IService
 {
     [SerializeField] private Vector2Int _figureStartPos;
     [SerializeField] private FigureSO[] _figureSOPrefabs;
@@ -665,9 +665,12 @@ public class Tetris : MonoBehaviour
 
     public void SetGridWidth(int trayWidth) // TO DO: use Unity Event
     {
-        int offset = Mathf.RoundToInt((_gameSpace.width - trayWidth) * 0.5f);
+        /*int offset = Mathf.RoundToInt((_gameSpace.width - trayWidth) * 0.5f);
         _leftGridConstrain -= offset;
-        _rightGridConstrain += offset;
+        _rightGridConstrain += offset;*/
+        //int offset = Mathf.RoundToInt((_gameSpace.width - trayWidth) * 0.5f);
+        _leftGridConstrain -= 1;
+        _rightGridConstrain += 1;
         _trayNumber = Mathf.RoundToInt((trayWidth - 10) * 0.5f);
     }
     

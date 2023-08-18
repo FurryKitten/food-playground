@@ -56,6 +56,7 @@ public class UpgradeService : MonoBehaviour
 
         _gameState.AddMoney(-_upgradeInfo.getTierCosts()[_currentTier][col]);
 
+        applyUpgrade(col);
         isUpgradeBought[col] = true;
         _upgradeButtons[col].interactable = false;
 
@@ -119,6 +120,47 @@ public class UpgradeService : MonoBehaviour
         for (int col = 0; col < _buttonTexts.Length; col++)
         {
             _buttonTexts[col].text = $"{prices[_currentTier][col]}¥";
+        }
+    }
+
+    private void applyUpgrade(int col)
+    {
+        switch(_currentTier)
+        {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+        }
+
+        switch(col)
+        {
+            case 0: // podnos length
+                int width = 12 + 2 * _currentTier;
+                ServiceLocator.Current.Get<Tetris>().SetGridWidth(width);
+                ServiceLocator.Current.Get<TrayControl>().SetTrayWidth(width);
+                ServiceLocator.Current.Get<HandPlacer>().SetGridWidth(width);
+                break;
+            case 1: // бортики, тентакля, цена
+                switch(_currentTier)
+                {
+                    case 0:
+                        ServiceLocator.Current.Get<Tetris>().SetTrayBorders();
+                        ServiceLocator.Current.Get<TrayControl>().SetTrayBorders();
+                        break;
+                    case 1:
+                        ServiceLocator.Current.Get<HandControls>().SetTentacle();
+                        break;
+                    case 2:
+                        ServiceLocator.Current.Get<Tetris>().SetDoubleCost();
+                        break;
+                }
+                break;
+            case 2:
+                ServiceLocator.Current.Get<TrayControl>().UpTrayLVL();
+                break;
         }
     }
 }
