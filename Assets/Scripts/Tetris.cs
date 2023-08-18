@@ -114,13 +114,13 @@ public class Tetris : MonoBehaviour, IService
         else
         {
             _balaceState = BalaceState.OK;
-            if (transform.parent.rotation.eulerAngles.z > 0.1)
-            {
-                rotationDir = -1;
-            }
-            else if (transform.parent.rotation.eulerAngles.z > 340 && transform.parent.rotation.eulerAngles.z < 360f)
+            if (transform.parent.rotation.eulerAngles.z >= 340 && transform.parent.rotation.eulerAngles.z < 360f)
             {
                 rotationDir = 1;
+            }
+            else if (transform.parent.rotation.eulerAngles.z > 0.1)
+            {
+                rotationDir = -1;
             }
         }
 
