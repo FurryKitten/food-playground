@@ -47,6 +47,13 @@ public class Tetris : MonoBehaviour
     private int _gridXOffsetFromWorld = 0;
     private Figure[,] _figureGrid;
 
+    private int _stageNumber = 0;
+    private int _trayNumber = 0;
+    private int[,] _queueSizes = {  { 5, 6, 8, 10 }, 
+                                    { 6, 8, 10, 12 }, 
+                                    { 7, 9, 11, 14 },
+                                    { 8, 10, 12, 15 }};
+
     private void Awake()
     {
         _playerController = new PlayerController();
@@ -62,7 +69,8 @@ public class Tetris : MonoBehaviour
         //_figureSOIdQueue.Enqueue(0); // TODO: generate or premade queue SO
         //_figureSOIdQueue.Enqueue(1); // TODO: generate or premade queue SO
         //_figureSOIdQueue.Enqueue(0);
-        GenerateQueue();
+        //GenerateQueue();
+        GenerateQueue(_queueSizes[0, 0]);
         _gameSpace.width = 18;
         _gridXOffsetFromWorld = (_gameSpace.width - 16) / 2;
         _gameSpace.height = 15;
@@ -77,15 +85,14 @@ public class Tetris : MonoBehaviour
             }
         }
 
-
         _dashTime = 0.1f * _movementTime;
 
         _gameState = ServiceLocator.Current.Get<GameState>();
     }
     private void Update()
     {
-       // if (_gameState.State != State.TETRIS)
-        //    return;
+        if (_gameState.State == State.PAUSED)
+            return;
 
         _balaceValue = _handControls.CheckBalance();
 
@@ -122,7 +129,7 @@ public class Tetris : MonoBehaviour
         transform.parent.rotation = Quaternion.Euler(0, 0, RotationClamp(transform.parent.rotation.eulerAngles.z));
         
 
-        if (_flyingFigure == null)
+        if (_flyingFigure == null && _gameState.State == State.TETRIS)
         {
             _spawnTimer += Time.deltaTime;
 
@@ -164,7 +171,12 @@ public class Tetris : MonoBehaviour
                     _gameState.AddStage();
 
                     _figureSOIdQueue.Clear();
-                    GenerateQueue();
+                    if (_stageNumber != 3)
+                        _stageNumber++;
+                    else
+                        _stageNumber = 0;
+
+                    GenerateQueue(_queueSizes[_trayNumber, _stageNumber]);
                 }
             }
         }
@@ -634,6 +646,12 @@ public class Tetris : MonoBehaviour
             _figureSOIdQueue.Enqueue(Random.Range(0, _figureSOPrefabs.Length));
     }
 
+    private void GenerateQueue(int queueSize)
+    {
+        for (int i = 0; i < queueSize; i++)
+            _figureSOIdQueue.Enqueue(Random.Range(0, _figureSOPrefabs.Length));
+    }
+
     public void SetDoubleCost()
     {
         _doubleCost = true;
@@ -644,11 +662,12 @@ public class Tetris : MonoBehaviour
         _trayBorders = true;
     }
 
-    public void SetGridWidth(int trayWidth)
+    public void SetGridWidth(int trayWidth) // TO DO: use Unity Event
     {
         int offset = Mathf.RoundToInt((_gameSpace.width - trayWidth) * 0.5f);
         _leftGridConstrain -= offset;
         _rightGridConstrain += offset;
+        _trayNumber = Mathf.RoundToInt((trayWidth - 10) * 0.5f);
     }
     
     public void ResetTetris()
@@ -673,6 +692,7 @@ public class Tetris : MonoBehaviour
         _figureList.Clear();
         _flyingFigure = null;
         _movementTimer = 0;
+        _figureListTimer = 0;
     }
 
     #region DEBUG
