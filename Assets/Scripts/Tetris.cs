@@ -127,82 +127,83 @@ public class Tetris : MonoBehaviour
         transform.parent.Rotate(0, 0, rotationDir * _trayAngle * Time.deltaTime);
         
         transform.parent.rotation = Quaternion.Euler(0, 0, RotationClamp(transform.parent.rotation.eulerAngles.z));
-        
 
-        if (_flyingFigure == null && _gameState.State == State.TETRIS)
+        if (_gameState.State == State.TETRIS)
         {
-            _spawnTimer += Time.deltaTime;
-
-            if (_spawnTimer > _movementTime)
+            if (_flyingFigure == null)
             {
-                _spawnTimer = 0;
-                if (_figureSOIdQueue.TryPeek(out int figureSOId))
+                _spawnTimer += Time.deltaTime;
+
+                if (_spawnTimer > _movementTime)
                 {
-
-                    Vector2 pos = transform.parent.position;
-                    _flyingFigure = Instantiate(_defaultFigure, transform.parent);
-                    _flyingFigure.Init(_figureSOPrefabs[figureSOId]);
-                    _flyingFigure.name = "FlyingFigure";
-                    _figureSOIdQueue.Dequeue();
-
-                    _flyingFigure.SetPosition(_figureStartPos.x, _figureStartPos.y);
-                    _flyingFigure.SetWorldPosition(_figureStartPos - pos);
-
-                    if(_doubleCost)
+                    _spawnTimer = 0;
+                    if (_figureSOIdQueue.TryPeek(out int figureSOId))
                     {
-                        if ((Random.Range(0f, 1f) < 0.3f))
-                            _flyingFigure.SetDoubleCost();
-                    }
 
-                    foreach (Vector2Int p in _flyingFigure.GetForm())
-                        if (_gameSpace.cellsStatus[_figureStartPos.x + _gridXOffsetFromWorld + p.x, _figureStartPos.y - p.y])
+                        Vector2 pos = transform.parent.position;
+                        _flyingFigure = Instantiate(_defaultFigure, transform.parent);
+                        _flyingFigure.Init(_figureSOPrefabs[figureSOId]);
+                        _flyingFigure.name = "FlyingFigure";
+                        _figureSOIdQueue.Dequeue();
+
+                        _flyingFigure.SetPosition(_figureStartPos.x, _figureStartPos.y);
+                        _flyingFigure.SetWorldPosition(_figureStartPos - pos);
+
+                        if (_doubleCost)
                         {
-                            _flyingFigure.FlyAway(1);
-                            _flyingFigure = null;
-                            _spawnTimer = 0;
-                            break;
+                            if ((Random.Range(0f, 1f) < 0.3f))
+                                _flyingFigure.SetDoubleCost();
                         }
 
-                }
-                else
-                {
-                    //stop tetris, walk, reset queue
-                    _gameState.SetState(State.WALK);
-                    _gameState.AddStage();
+                        foreach (Vector2Int p in _flyingFigure.GetForm())
+                            if (_gameSpace.cellsStatus[_figureStartPos.x + _gridXOffsetFromWorld + p.x, _figureStartPos.y - p.y])
+                            {
+                                _flyingFigure.FlyAway(1);
+                                _flyingFigure = null;
+                                _spawnTimer = 0;
+                                break;
+                            }
 
-                    _figureSOIdQueue.Clear();
-                    if (_stageNumber != 3)
-                        _stageNumber++;
+                    }
                     else
-                        _stageNumber = 0;
+                    {
+                        //stop tetris, walk, reset queue
+                        _gameState.SetState(State.WALK);
+                        _gameState.AddStage();
 
-                    GenerateQueue(_queueSizes[_trayNumber, _stageNumber]);
-                }
-            }
-        }
-        else
-        {
-            _movementTimer += Time.deltaTime;
-            if (!_dashMode)
-            {
+                        _figureSOIdQueue.Clear();
+                        if (_stageNumber != 3)
+                            _stageNumber++;
+                        else
+                            _stageNumber = 0;
 
-                if (_movementTimer >= _movementTime)
-                {
-                    MoveFlyingFigure();
-                    _movementTimer = 0;
-
+                        GenerateQueue(_queueSizes[_trayNumber, _stageNumber]);
+                    }
                 }
             }
             else
             {
-                if (_movementTimer >= _dashTime)
+                _movementTimer += Time.deltaTime;
+                if (!_dashMode)
                 {
-                    MoveFlyingFigure();
-                    _movementTimer = 0;
+
+                    if (_movementTimer >= _movementTime)
+                    {
+                        MoveFlyingFigure();
+                        _movementTimer = 0;
+
+                    }
+                }
+                else
+                {
+                    if (_movementTimer >= _dashTime)
+                    {
+                        MoveFlyingFigure();
+                        _movementTimer = 0;
+                    }
                 }
             }
         }
-
         
         _figureListTimer += Time.deltaTime;
         if (_figureListTimer > _movementTime)
