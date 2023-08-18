@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Figure : MonoBehaviour
 {
@@ -73,6 +70,8 @@ public class Figure : MonoBehaviour
     {
         GetComponent<Rigidbody2D>().simulated = true;
         GetComponent<Rigidbody2D>().AddForce(new Vector2(dir * 20, 2));
+
+        ServiceLocator.Current.Get<GameState>().AddTrayMoney(GetFine());
     }
 
     public int GetProfit() // TO DO: Use Unity Event

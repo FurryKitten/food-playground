@@ -20,12 +20,24 @@ public class GameState : MonoBehaviour, IService
     [SerializeField, Range(2, 5)] private int _stages = 5;
     [SerializeField] private UnityEvent _onStageChange;
     [SerializeField] private UnityEvent _onMoneyChange;
+    [SerializeField] private UnityEvent _onTrayMoneyChange;
+    [SerializeField] private UnityEvent _onFinish;
 
     [ContextMenu("Add stage")]
     public void AddStage()
     {
         CurrentStage++;
-        _onStageChange.Invoke();
+        _onStageChange?.Invoke();
+
+        /// последний этап, начисляем деньги, показываем апгрейды
+        if (CurrentStage == _stages - 1) 
+        {
+            State = State.PAUSED;
+            AddMoney(MoneyOnTray);
+            MoneyOnTray = 0;
+
+            _onFinish?.Invoke();
+        }
     }
 
     public void SetState(State state)
@@ -39,6 +51,21 @@ public class GameState : MonoBehaviour, IService
     {
         Money += money;
         Money = Money < 0 ? 0 : Money;
-        _onMoneyChange.Invoke();
+        Debug.Log($"Money: {Money}");
+        _onMoneyChange?.Invoke();
+    }
+
+    public void AddTrayMoney(int money)
+    {
+        MoneyOnTray += money;
+        MoneyOnTray = MoneyOnTray < 0 ? 0 : MoneyOnTray;
+        Debug.Log($"MoneyOnTray: {MoneyOnTray}");
+        _onTrayMoneyChange?.Invoke();
+    }
+
+    public void RestartRun()
+    {
+        CurrentStage = 0;
+        State = State.TETRIS;
     }
 }

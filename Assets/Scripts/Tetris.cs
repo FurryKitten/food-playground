@@ -1,8 +1,9 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 using Random = UnityEngine.Random;
 
 public struct Grid
@@ -127,6 +128,7 @@ public class Tetris : MonoBehaviour
                     Vector2 pos = transform.parent.position;
                     _flyingFigure = Instantiate(_defaultFigure, transform.parent);
                     _flyingFigure.Init(_figureSOPrefabs[figureSOId]);
+                    _flyingFigure.name = "FlyingFigure";
                     _figureSOIdQueue.Dequeue();
 
                     _flyingFigure.SetPosition(_figureStartPos.x, _figureStartPos.y);
@@ -144,9 +146,12 @@ public class Tetris : MonoBehaviour
                 }
                 else
                 {
-                    //stop tetris
-                    //_playerController.Tetris.Move.started -= HorizontalMove;
+                    //stop tetris, walk, reset queue
+                    _gameState.SetState(State.WALK);
+                    _gameState.AddStage();
 
+                    _figureSOIdQueue.Clear();
+                    GenerateQueue();
                 }
             }
         }
@@ -218,13 +223,15 @@ public class Tetris : MonoBehaviour
         { 
             _flyingFigure.Fall(); 
         }
-        else
+        else // Ставим на доску
         {
             foreach (Vector2Int pos in _flyingFigure.GetForm())
                 _gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y] = true;
 
             _figureList.Add(_flyingFigure);
             _handControls.AddFigures(_figureList);
+
+            _gameState.AddTrayMoney(_flyingFigure.GetProfit());
 
             _flyingFigure = null;
             _dashMode = false;
@@ -474,6 +481,30 @@ public class Tetris : MonoBehaviour
         _rightGridConstrain += offset;
     }
     
+    public void ResetTetris()
+    {
+        for (int i = 0; i < _gameSpace.width; ++i)
+            for (int j = 0; j < _gameSpace.height; ++j)
+                _gameSpace.cellsStatus[i, j] = false;
+
+        foreach (var figure in _figureList)
+        {
+            Destroy(figure.gameObject);
+        }
+
+        //костыль для удаления физичных фигур
+        foreach (var figure in FindObjectsOfType<Figure>())
+        {
+            Destroy(figure.gameObject);
+        }
+
+        transform.parent.rotation = Quaternion.identity;
+
+        _figureList.Clear();
+        _flyingFigure = null;
+        _movementTimer = 0;
+    }
+
     #region DEBUG
 
     private void OnDrawGizmos()
