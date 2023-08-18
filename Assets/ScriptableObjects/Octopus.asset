@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 18d29fee866580146848b5298f36a8d1, type: 3}
-  m_Name: Cruissant
+  m_Name: Octopus
   m_EditorClassIdentifier: 
-  _width: 2
-  _height: 2
+  _width: 0
+  _height: 0
   _form:
-  - {x: 0, y: 0}
-  - {x: 1, y: 0}
   - {x: 0, y: 1}
-  _mass: 1
-  _cost: 1
-  _sprite: {fileID: 956427307, guid: 4152b01c41786fe4d8fab4a542d4a475, type: 3}
+  - {x: 1, y: 1}
+  - {x: 2, y: 1}
+  - {x: 1, y: 0}
+  _mass: 4
+  _cost: 4
+  _sprite: {fileID: -847920884, guid: 4152b01c41786fe4d8fab4a542d4a475, type: 3}
