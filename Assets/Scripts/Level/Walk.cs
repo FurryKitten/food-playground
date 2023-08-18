@@ -25,6 +25,11 @@ public class Walk : MonoBehaviour
         {
             _timer = _walkTime;
             _gameState.SetState(State.TETRIS);
+            if (_gameState.CurrentStage == _gameState.MaxStage - 1)
+            {
+                _gameState.SetState(State.PAUSED);
+                _gameState._onFinish?.Invoke();
+            }
             return;
         }
 

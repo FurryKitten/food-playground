@@ -13,6 +13,7 @@ public class GameState : MonoBehaviour, IService
 
     public State State { get; private set; }
     public int CurrentStage { get; private set; } = 0;
+    public int MaxStage => _stages;
 
     public int Money { get; private set; } = 0;
     public int MoneyOnTray { get; private set; } = 0;
@@ -21,7 +22,7 @@ public class GameState : MonoBehaviour, IService
     [SerializeField] private UnityEvent _onStageChange;
     [SerializeField] private UnityEvent _onMoneyChange;
     [SerializeField] private UnityEvent _onTrayMoneyChange;
-    [SerializeField] private UnityEvent _onFinish;
+    [SerializeField] public UnityEvent _onFinish;
 
     [ContextMenu("Add stage")]
     public void AddStage()
@@ -32,11 +33,12 @@ public class GameState : MonoBehaviour, IService
         /// последний этап, начисляем деньги, показываем апгрейды
         if (CurrentStage == _stages - 1) 
         {
-            State = State.PAUSED;
+            //State = State.PAUSED;
+            // переходим в Walk.cs, там идем, потом включаем апгрейды
             AddMoney(MoneyOnTray);
             MoneyOnTray = 0;
 
-            _onFinish?.Invoke();
+            //_onFinish?.Invoke();
         }
     }
 
