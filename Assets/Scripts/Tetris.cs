@@ -40,7 +40,7 @@ public class Tetris : MonoBehaviour
     private BalaceState _balaceState;
 
     private bool _doubleCost = false;
-    private bool _trayBorders = true;
+    private bool _trayBorders = false;
     private int _leftGridConstrain = 4;
     private int _rightGridConstrain = 14;
     private int _gridXOffsetFromWorld = 0;

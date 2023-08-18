@@ -27,7 +27,10 @@ public class TrayControl : MonoBehaviour
                 part.transform.localPosition += -difference;
             }
 
-        _trayLeftParts.Add(Instantiate(_trayBody, new Vector3(-1.5f, 0, 0), transform.rotation, transform));
+        _trayLeftParts.Add(Instantiate(_trayBody, 
+            new Vector3(_trayCenter.transform.position.x - 1.5f, 
+            _trayCenter.transform.position.y, _trayCenter.transform.position.z),
+            transform.rotation, transform));
         
 
         if(_trayRightParts.Count > 0)
@@ -36,7 +39,10 @@ public class TrayControl : MonoBehaviour
                 part.transform.localPosition += difference;
             }
 
-        _trayRightParts.Add(Instantiate(_trayBody, new Vector3(1.5f, 0, 0), transform.rotation, transform));
+        _trayRightParts.Add(Instantiate(_trayBody, 
+            new Vector3(_trayCenter.transform.position.x + 1.5f, 
+            _trayCenter.transform.position.y, _trayCenter.transform.position.z), 
+            transform.rotation, transform));
     }
 
     public void SetTrayBorders()
