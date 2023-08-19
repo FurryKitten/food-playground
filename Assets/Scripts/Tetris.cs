@@ -57,7 +57,7 @@ public class Tetris : MonoBehaviour, IService
     private void Awake()
     {
         _playerController = new PlayerController();
-        //_playerController.Tetris.Move.started += HorizontalMove;
+        _playerController.Tetris.Move.started += HorizontalMove;
         _playerController.Enable();
 
         _playerController.Tetris.Dash.started += DashMode;
@@ -191,7 +191,7 @@ public class Tetris : MonoBehaviour, IService
                     {
                         MoveFlyingFigure();
                         _movementTimer = 0;
-                        HorizontalMove(_playerController.Tetris.Move.ReadValue<float>());
+
                     }
                 }
                 else
@@ -200,7 +200,6 @@ public class Tetris : MonoBehaviour, IService
                     {
                         MoveFlyingFigure();
                         _movementTimer = 0;
-                        HorizontalMove(_playerController.Tetris.Move.ReadValue<float>());
                     }
                 }
             }
@@ -322,27 +321,6 @@ public class Tetris : MonoBehaviour, IService
             _flyingFigure.HorizontalMove(dir);
         }
         
-    }
-
-    private void HorizontalMove(float inpDir)
-    {
-        if (_flyingFigure == null)
-            return;
-
-        //float inpDir = 
-
-        int dir = 0;
-
-        if (inpDir > 0)
-            dir = 1;
-        else if (inpDir < 0)
-            dir = -1;
-
-        if (!checkHorizontalMove(dir))
-        {
-            _flyingFigure.HorizontalMove(dir);
-        }
-
     }
 
     private void HorizontalMoveFigureList(int dir)
