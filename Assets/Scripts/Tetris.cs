@@ -673,6 +673,15 @@ public class Tetris : MonoBehaviour, IService
         _rightGridConstrain += 1;
         _trayNumber = Mathf.RoundToInt((trayWidth - 10) * 0.5f);
     }
+
+    public void DropAllFigures()
+    {
+        foreach(Figure figure in _figureList)
+        {
+            figure.FlyAway(Random.Range(-20, 20));
+        }
+        _figureList.Clear();
+    }
     
     public void ResetTetris()
     {
