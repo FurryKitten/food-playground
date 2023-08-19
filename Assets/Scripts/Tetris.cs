@@ -552,54 +552,81 @@ public class Tetris : MonoBehaviour, IService
 
     private void VerticalMoveFigureList()
     {
+
+        List<Figure> checkedFigures = new List<Figure>();
+        for (int i = 0; i < _gameSpace.width; i++)
+            for (int j = 1; j < _gameSpace.height; j++)
+            {
+                if (!checkedFigures.Contains(_figureGrid[i, j]) && _figureGrid[i, j] != null)
+                {
+                    checkedFigures.Add(_figureGrid[i, j]);
+                    Figure lastFigure = _figureGrid[i, j];
+
+                    Vector2Int _fPos = lastFigure.GetPosition();
+                    int gridX = (_fPos.x) + _gridXOffsetFromWorld;
+                    int gridY = (_fPos.y);
+
+                    bool moveCheck = true;
+
+                    
+                    foreach (Vector2Int pos in lastFigure.GetForm())
+                    {
+                        if (gridY - pos.y == 0)
+                        {
+                            moveCheck = false;
+                            break;
+                        }
+                        if (_figureGrid[gridX + pos.x, gridY - pos.y - 1] != lastFigure &&
+                            _figureGrid[gridX + pos.x, gridY - pos.y - 1] != null)
+                        {
+                            moveCheck = false;
+                            break;
+                        }
+                    }
+                   
+
+                    if (moveCheck)
+                    {
+                        foreach (Vector2Int pos in lastFigure.GetForm())
+                        {
+                            _gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y] = false;
+                            _figureGrid[gridX + pos.x, gridY - pos.y] = null;
+                        }
+                    }
+                }
+            }
+
         foreach (Figure f in _figureList)
         {
             Vector2Int _fPos = f.GetPosition();
             int gridX = (_fPos.x) + _gridXOffsetFromWorld;
             int gridY = (_fPos.y);
-
+            
             bool checkGridSpace = false;
+
 
             foreach (Vector2Int pos in f.GetForm())
             {
-                _gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y] = false;
-                _figureGrid[gridX + pos.x, gridY - pos.y] = null;
-            }
-
-            foreach (Vector2Int pos in f.GetForm())
-                if ((gridY - pos.y - 1) >= 0)
-                {
-                    if (_gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y - 1])
-                    {
-                        checkGridSpace = true;
-                        break;
-                    }
-                }
-                else
+                if (_gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y])
                 {
                     checkGridSpace = true;
                     break;
                 }
+            }
 
             if (!checkGridSpace)
             {
+                f.Fall();
                 foreach (Vector2Int pos in f.GetForm())
                 {
-                    _gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y] = false;
-                    _figureGrid[gridX + pos.x, gridY - pos.y] = null;
-                }
-            }
-            else
-            {
-                foreach (Vector2Int pos in f.GetForm())
-                {
-                    _gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y] = true;
-                    _figureGrid[gridX + pos.x, gridY - pos.y] = f;
+                    _gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y - 1] = true;
+                    _figureGrid[gridX + pos.x, gridY - pos.y - 1] = f;
                 }
             }
 
         }
 
+        /*
         foreach (Figure f in _figureList)
         {
             Vector2Int _fPos = f.GetPosition();
@@ -634,6 +661,7 @@ public class Tetris : MonoBehaviour, IService
             }
 
         }
+        */
     }
 
     private void DashMode(InputAction.CallbackContext context)
