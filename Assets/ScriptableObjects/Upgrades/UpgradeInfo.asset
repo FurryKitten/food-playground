@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 550259b4db556ea4c8bd219a7f079d59, type: 3}
   m_Name: UpgradeInfo
   m_EditorClassIdentifier: 
-  _tier1Costs: 2800000032000000c8000000
-  _tier2Costs: 5a0000006900000090010000
-  _tier3Costs: c8000000f000000020030000
+  _tier1Costs: 280000003200000050000000
+  _tier2Costs: 5a0000006900000078000000
+  _tier3Costs: c8000000f00000002c010000

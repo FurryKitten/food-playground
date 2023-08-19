@@ -74,6 +74,12 @@ public class Figure : MonoBehaviour
         ServiceLocator.Current.Get<GameState>().AddTrayMoney(GetFine());
     }
 
+    public void FlyAway()
+    {
+        GetComponent<Rigidbody2D>().simulated = true;
+        GetComponent<Rigidbody2D>().AddForce(new Vector2((Random.Range(-1, 1) + 2) * 20, 2));
+    }
+
     public int GetProfit() // TO DO: Use Unity Event
     {
         return (_doubleCost) ? 2 * _cost : _cost;

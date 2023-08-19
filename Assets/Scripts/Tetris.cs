@@ -158,7 +158,7 @@ public class Tetris : MonoBehaviour, IService
                         foreach (Vector2Int p in _flyingFigure.GetForm())
                             if (_gameSpace.cellsStatus[_figureStartPos.x + _gridXOffsetFromWorld + p.x, _figureStartPos.y - p.y])
                             {
-                                _flyingFigure.FlyAway(1);
+                                _flyingFigure.FlyAway();
                                 _flyingFigure = null;
                                 _spawnTimer = 0;
                                 break;
