@@ -3541,7 +3541,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a814ea49bfe454bb9acf1e1f2cf1b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _walkTime: 1
+  _walkTime: 5
 --- !u!4 &1375374494
 Transform:
   m_ObjectHideFlags: 0
@@ -5270,7 +5270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _backgroundObject: {fileID: 3473159361415813668, guid: 29af33bbe6792fc40b0f572c62f15148, type: 3}
-  _speed: 15
+  _speed: 20
   _count: 2
   _offsetBetween: 30
 --- !u!1 &1949220568
@@ -6282,7 +6282,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 32938bc60c8ebdd468b7b10576988063, type: 2}
   - {fileID: 11400000, guid: d76449a4d123ea64685138c9525b043b, type: 2}
   _defaultFigure: {fileID: -5098583264592464667, guid: 8219b0ec5da4a0f4facdc4eacac83648, type: 3}
-  _movementTime: 0.25
+  _movementTime: 0.75
   _queueSize: 2
   _handControls: {fileID: 623131006}
   _trayAngle: 10
@@ -6353,6 +6353,10 @@ PrefabInstance:
       propertyPath: _tentacleSprite
       value: 
       objectReference: {fileID: 1533874417, guid: c1396a468ee6a0d4da196c9069d4fc92, type: 3}
+    - target: {fileID: 7708684015312716461, guid: 83e3633a3e48bb948be84a92a6ce92d1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 7992461162128631561, guid: 83e3633a3e48bb948be84a92a6ce92d1, type: 3}
       propertyPath: m_Icon
       value: 
