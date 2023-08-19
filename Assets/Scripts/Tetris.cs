@@ -212,11 +212,11 @@ public class Tetris : MonoBehaviour, IService
             if (_figureList.Count != 0)
             {
                 VerticalMoveFigureList();
-                if (transform.parent.rotation.eulerAngles.z > 10 && transform.parent.rotation.eulerAngles.z <= 20)
+                if (transform.parent.rotation.eulerAngles.z > 10 && transform.parent.rotation.eulerAngles.z <= 30)
                 {
                     HorizontalMoveFigureList(-1);
                 }
-                else if(transform.parent.rotation.eulerAngles.z < 350 && transform.parent.rotation.eulerAngles.z >= 340)
+                else if(transform.parent.rotation.eulerAngles.z < 350 && transform.parent.rotation.eulerAngles.z >= 330)
                     HorizontalMoveFigureList(1);
             }
         }
