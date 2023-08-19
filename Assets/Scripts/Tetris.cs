@@ -212,11 +212,11 @@ public class Tetris : MonoBehaviour, IService
             if (_figureList.Count != 0)
             {
                 VerticalMoveFigureList();
-                if (transform.parent.rotation.eulerAngles.z > 10 && transform.parent.rotation.eulerAngles.z < 21)
+                if (transform.parent.rotation.eulerAngles.z > 10 && transform.parent.rotation.eulerAngles.z <= 20)
                 {
                     HorizontalMoveFigureList(-1);
                 }
-                else if(transform.parent.rotation.eulerAngles.z < 350 && transform.parent.rotation.eulerAngles.z > 339)
+                else if(transform.parent.rotation.eulerAngles.z < 350 && transform.parent.rotation.eulerAngles.z >= 340)
                     HorizontalMoveFigureList(1);
             }
         }
@@ -378,7 +378,7 @@ public class Tetris : MonoBehaviour, IService
                         if (_trayBorders)
                         {
                             if(gridY - pos.y == 0 && 
-                                (gridX + pos.x == _leftGridConstrain || gridX + pos.x == _rightGridConstrain-1 ))
+                                (gridX + pos.x == _leftGridConstrain || gridX + pos.x == _rightGridConstrain-1))
                                 migthBordured = true;
                         }
                     }
