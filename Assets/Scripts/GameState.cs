@@ -37,8 +37,7 @@ public class GameState : MonoBehaviour, IService
         {
             //State = State.PAUSED;
             // переходим в Walk.cs, там идем, потом включаем апгрейды
-            AddMoney(MoneyOnTray);
-            MoneyOnTray = 0;
+            
 
             //_onFinish?.Invoke();
         }
@@ -76,6 +75,7 @@ public class GameState : MonoBehaviour, IService
     public void RestartRun()
     {
         CurrentStage = 0;
+        MoneyOnTray = 0;
         State = State.TETRIS;
     }
 }

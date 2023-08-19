@@ -28,6 +28,7 @@ public class Walk : MonoBehaviour
             if (_gameState.CurrentStage == _gameState.MaxStage - 1)
             {
                 _gameState.SetState(State.PAUSED);
+                _gameState.AddMoney(_gameState.MoneyOnTray);
                 _gameState._onFinish?.Invoke();
             }
             return;

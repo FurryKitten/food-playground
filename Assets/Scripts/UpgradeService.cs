@@ -94,7 +94,7 @@ public class UpgradeService : MonoBehaviour
         int[][] prices = _upgradeInfo.getTierCosts();
         for (int col = 0; col < _upgradeButtons.Length; col++)
         {
-            bool isInteractable = !isUpgradeBought[col] && _gameState.Money > prices[_currentTier][col];
+            bool isInteractable = !isUpgradeBought[col] && _gameState.Money >= prices[_currentTier][col];
             _upgradeButtons[col].interactable = isInteractable;
         }
         
