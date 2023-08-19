@@ -127,6 +127,22 @@ public class Tetris : MonoBehaviour, IService
         transform.parent.Rotate(0, 0, rotationDir * _trayAngle * Time.deltaTime);
         
         transform.parent.rotation = Quaternion.Euler(0, 0, RotationClamp(transform.parent.rotation.eulerAngles.z));
+                
+        _figureListTimer += Time.deltaTime;
+        if (_figureListTimer > _movementTime)
+        {
+            _figureListTimer = 0;
+            if (_figureList.Count != 0)
+            {
+                VerticalMoveFigureList();
+                if (transform.parent.rotation.eulerAngles.z > 10 && transform.parent.rotation.eulerAngles.z <= 30)
+                {
+                    HorizontalMoveFigureList(-1);
+                }
+                else if(transform.parent.rotation.eulerAngles.z < 350 && transform.parent.rotation.eulerAngles.z >= 330)
+                    HorizontalMoveFigureList(1);
+            }
+        }
 
         if (_gameState.State == State.TETRIS)
         {
@@ -204,23 +220,7 @@ public class Tetris : MonoBehaviour, IService
                 }
             }
         }
-        
-        _figureListTimer += Time.deltaTime;
-        if (_figureListTimer > _movementTime)
-        {
-            _figureListTimer = 0;
-            if (_figureList.Count != 0)
-            {
-                VerticalMoveFigureList();
-                if (transform.parent.rotation.eulerAngles.z > 10 && transform.parent.rotation.eulerAngles.z <= 30)
-                {
-                    HorizontalMoveFigureList(-1);
-                }
-                else if(transform.parent.rotation.eulerAngles.z < 350 && transform.parent.rotation.eulerAngles.z >= 330)
-                    HorizontalMoveFigureList(1);
-            }
-        }
-    
+
     }
 
     private void MoveFlyingFigure()
@@ -706,7 +706,7 @@ public class Tetris : MonoBehaviour, IService
     {
         foreach(Figure figure in _figureList)
         {
-            figure.FlyAway(Random.Range(-20, 20));
+            figure.FlyAway(); ;
         }
         _figureList.Clear();
     }
