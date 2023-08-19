@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEditor;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 using Random = UnityEngine.Random;
 
 public struct Grid
@@ -22,6 +20,7 @@ public class Tetris : MonoBehaviour, IService
     [SerializeField] private HandControls _handControls;
     [SerializeField] private float _trayAngle;
 
+    [SerializeField] private UnityEvent _onFigureFall;
 
 
     private Queue<int> _figureSOIdQueue;
@@ -408,6 +407,7 @@ public class Tetris : MonoBehaviour, IService
                     _figureGrid[gridX + pos.x, gridY - pos.y] = null;
                 }
                 _figureList[i].FlyAway(dir);
+                _onFigureFall?.Invoke();
                 lostFigureIndexes.Add(i);
             }
 

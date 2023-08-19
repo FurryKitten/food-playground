@@ -6405,6 +6405,7 @@ GameObject:
   - component: {fileID: 2124904689}
   - component: {fileID: 2124904691}
   - component: {fileID: 2124904690}
+  - component: {fileID: 2124904692}
   m_Layer: 5
   m_Name: Waiter
   m_TagString: Untagged
@@ -6455,7 +6456,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 98395622, guid: ea3dfa6af12a2e345909210975ce447d, type: 3}
+  m_Sprite: {fileID: 973606700, guid: aa945467f1e73c641aeefc601b9f2321, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -6473,6 +6474,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2124904688}
   m_CullTransparentMesh: 1
+--- !u!114 &2124904692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2124904688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e6321ace6db3f440a7e03ec4af69725, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _defaultFace: {fileID: 973606700, guid: aa945467f1e73c641aeefc601b9f2321, type: 3}
+  _worriedFace: {fileID: -1913346166, guid: aa945467f1e73c641aeefc601b9f2321, type: 3}
 --- !u!1 &2128700820
 GameObject:
   m_ObjectHideFlags: 0
@@ -6524,6 +6539,21 @@ MonoBehaviour:
   _queueSize: 2
   _handControls: {fileID: 623131006}
   _trayAngle: 10
+  _onFigureFall:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2124904692}
+        m_TargetAssemblyTypeName: WaiterSpriteAnimation, Assembly-CSharp
+        m_MethodName: ChangeFace
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &2128700822
 Transform:
   m_ObjectHideFlags: 0
