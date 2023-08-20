@@ -477,8 +477,14 @@ public class Tetris : MonoBehaviour, IService
                                     moveCheck = false;
                                     break;
                                 }
+                                if(gridX + pos.x + dir < _gameSpace.width)
+                                {
+                                    moveCheck = false;
+                                    break;
+                                }
+
                                 if (_figureGrid[gridX + pos.x + dir, gridY - pos.y] != lastFigure &&
-                                    _figureGrid[gridX + pos.x + dir, gridY - pos.y] != null)
+                                        _figureGrid[gridX + pos.x + dir, gridY - pos.y] != null)
                                 {
                                     moveCheck = false;
                                     break;
@@ -523,6 +529,12 @@ public class Tetris : MonoBehaviour, IService
                                 if (gridY - pos.y == 0 &&
                                     (gridX + pos.x + dir == _rightGridConstrain
                                     || gridX + pos.x + dir < _leftGridConstrain))
+                                {
+                                    moveCheck = false;
+                                    break;
+                                }
+
+                                if (gridX + pos.x + dir < _gameSpace.width)
                                 {
                                     moveCheck = false;
                                     break;
