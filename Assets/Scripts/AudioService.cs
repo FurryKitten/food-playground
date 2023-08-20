@@ -57,7 +57,9 @@ public class AudioService : MonoBehaviour, IService
 
     public void PlayTetrisJingle()
     {
+        _tetrisAudioSource.volume = 0.2f;
         _tetrisAudioSource.clip = _tetrisJingle;
         _tetrisAudioSource.Play();
+        _tetrisAudioSource.volume = 0.9f;
     }
 }

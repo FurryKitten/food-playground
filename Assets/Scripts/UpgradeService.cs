@@ -60,6 +60,8 @@ public class UpgradeService : MonoBehaviour
         isUpgradeBought[col] = true;
         _upgradeButtons[col].interactable = false;
 
+        ServiceLocator.Current.Get<AudioService>().PlayBuyPress();
+
         if (isSpecialReady())
         {
             //open third
