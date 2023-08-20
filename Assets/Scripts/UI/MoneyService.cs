@@ -1,4 +1,4 @@
-using TMPro;
+ï»¿using TMPro;
 using UnityEngine;
 
 public class MoneyService : MonoBehaviour
@@ -7,7 +7,7 @@ public class MoneyService : MonoBehaviour
 
     private void Awake()
     {
-        _moneyText.text = "¥0";
+        _moneyText.text = "Â¥0";
     }
 
     public void SetTrayMoneyText()
@@ -15,6 +15,6 @@ public class MoneyService : MonoBehaviour
         int money = ServiceLocator.Current.Get<GameState>().Money;
         int trayMoney = ServiceLocator.Current.Get<GameState>().MoneyOnTray;
 
-        _moneyText.text = $"¥{trayMoney + money}";
+        _moneyText.text = $"Â¥{trayMoney + money}";
     }
 }
