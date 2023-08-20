@@ -180,6 +180,7 @@ public class Tetris : MonoBehaviour, IService
                                 _flyingFigure.FlyAway();
                                 _flyingFigure = null;
                                 _spawnTimer = 0;
+                                ServiceLocator.Current.Get<AudioService>().PlayTetrisBadSpawn();
                                 break;
                             }
                         }
