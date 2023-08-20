@@ -32,6 +32,7 @@ public class Tetris : MonoBehaviour, IService
     private float _dashTime;
     private float _figureListTimer = 0;
     private bool _dashMode = false;
+    private bool _dashOffOnSpawning = false;
     private float _spawnTimer = 0;
     private bool _lastMove = false;
 
@@ -197,6 +198,12 @@ public class Tetris : MonoBehaviour, IService
                             }
                         }
 
+                        // Отмена _dashModa при спавне
+                        if(_dashMode)
+                        {
+                            _dashMode = false;
+                            _dashOffOnSpawning = true;
+                        }
                     }
                     else
                     {
@@ -705,7 +712,13 @@ public class Tetris : MonoBehaviour, IService
 
     private void DashMode(InputAction.CallbackContext context)
     {
-        _dashMode = !_dashMode;
+        if (_dashOffOnSpawning && !_playerController.Tetris.Dash.triggered)
+        {
+            _dashMode = false;
+            _dashOffOnSpawning = false;
+        }
+        else
+            _dashMode = !_dashMode;
     }
 
     private void GenerateQueue()
