@@ -3,6 +3,7 @@ using UnityEngine;
 public class Walk : MonoBehaviour
 {
     [SerializeField] private float _walkTime = 2.0f;
+    [SerializeField] private Parallax _kitchenParallax;
 
     private GameState _gameState;
 
@@ -21,8 +22,10 @@ public class Walk : MonoBehaviour
             return;
         }
 
-        if (_timer <= 0)
+        //if (_timer <= 0)
+        if (_kitchenParallax.RightObjPos < _kitchenParallax.DefaultPos)
         {
+            _kitchenParallax.ChangeLeftBgIndex();
             _timer = _walkTime;
             _gameState.SetState(State.TETRIS);
             if (_gameState.CurrentStage == _gameState.MaxStage - 1)
@@ -34,6 +37,6 @@ public class Walk : MonoBehaviour
             return;
         }
 
-        _timer -= Time.deltaTime;
+        //_timer -= Time.deltaTime;
     }
 }

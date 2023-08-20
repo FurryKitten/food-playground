@@ -4166,6 +4166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _walkTime: 6
+  _kitchenParallax: {fileID: 1922939545}
 --- !u!4 &1375374494
 Transform:
   m_ObjectHideFlags: 0
