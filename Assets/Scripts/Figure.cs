@@ -87,7 +87,7 @@ public class Figure : MonoBehaviour
 
     public int GetFine() // TO DO: Use Unity Event
     {
-        return -_cost;
+        return (_doubleCost) ? -2 * _cost : -_cost;
     }
 
     public void SetDoubleCost()
