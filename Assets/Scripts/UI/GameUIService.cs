@@ -30,6 +30,8 @@ public class GameUIService : MonoBehaviour
         _waiterUI.SetActive(true);
         _upgradesUI.SetActive(false);
         _darkPanel.SetActive(false);
+
+        ServiceLocator.Current.Get<AudioService>().PlayButtonPress();
     }
 
     public void OnFinishStage()
