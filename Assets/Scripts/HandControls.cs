@@ -12,9 +12,9 @@ public enum BalaceState
 public class HandControls : MonoBehaviour, IService
 {
     [SerializeField] Sprite _tentacleSprite;
+    [SerializeField] private int _handWidth = 3;
 
     private List<Figure> _figures = new List<Figure>();
-    private int _handWidth = 2;
     private int _trayLehgth = 10;
 
    public void AddFigures(List<Figure> figures)
