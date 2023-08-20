@@ -170,7 +170,10 @@ public class Tetris : MonoBehaviour, IService
                                 _flyingFigure.SetDoubleCost();
                         }
 
-                        ServiceLocator.Current.Get<AudioService>().PlayTetrisSpawn();
+                        if (_doubleCost)
+                            ServiceLocator.Current.Get<AudioService>().PlayTetrisGoldSpawn();
+                        else
+                            ServiceLocator.Current.Get<AudioService>().PlayTetrisSpawn();
 
                         // Если нет места для спавна - удаляем фигуру
                         foreach (Vector2Int p in _flyingFigure.GetForm())

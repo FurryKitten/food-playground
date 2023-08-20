@@ -1654,6 +1654,7 @@ MonoBehaviour:
   _uiButtonPress: {fileID: 8300000, guid: 47398ecf7a4535645be2916ae7acfa80, type: 3}
   _uiBuyPress: {fileID: 8300000, guid: 074c512daa63d1c48aaf9e09739198d2, type: 3}
   _tetrisSpawn: {fileID: 8300000, guid: 2ff8e0e887b861b4ea0334b559faf870, type: 3}
+  _tetrisGoldSpawn: {fileID: 8300000, guid: 966c39647aa486f4cb50246d21a05876, type: 3}
   _tetrisBadSpawn: {fileID: 8300000, guid: b7f77aa036350894ba7023fa781ea338, type: 3}
   _tetrisLanding: {fileID: 8300000, guid: f57b5ba467bf908479ce0f17139f867e, type: 3}
   _tetrisJingle: {fileID: 8300000, guid: 054c2be6a0b6a214ab539d4d339ce795, type: 3}

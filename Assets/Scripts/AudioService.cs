@@ -14,6 +14,7 @@ public class AudioService : MonoBehaviour, IService
     [SerializeField] private AudioClip _uiButtonPress;
     [SerializeField] private AudioClip _uiBuyPress;
     [SerializeField] private AudioClip _tetrisSpawn;
+    [SerializeField] private AudioClip _tetrisGoldSpawn;
     [SerializeField] private AudioClip _tetrisBadSpawn;
     [SerializeField] private AudioClip _tetrisLanding;
     [SerializeField] private AudioClip _tetrisJingle;
@@ -47,6 +48,12 @@ public class AudioService : MonoBehaviour, IService
     public void PlayTetrisSpawn()
     {
         _tetrisSpawnAudioSource.clip = _tetrisSpawn;
+        _tetrisSpawnAudioSource.Play();
+    }
+
+    public void PlayTetrisGoldSpawn()
+    {
+        _tetrisSpawnAudioSource.clip = _tetrisGoldSpawn;
         _tetrisSpawnAudioSource.Play();
     }
 
