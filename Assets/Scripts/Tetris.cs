@@ -119,10 +119,17 @@ public class Tetris : MonoBehaviour, IService
             {
                 rotationDir = 1;
             }
-            else if (transform.parent.rotation.eulerAngles.z > 0.1)
+            else
             {
-                rotationDir = -1;
-            }
+                if (transform.parent.rotation.eulerAngles.z > 0.1)
+                {
+                    rotationDir = -1;
+                }
+                else
+                {
+                    transform.parent.rotation = Quaternion.Euler(0, 0, 0));
+                }
+            }   
         }
 
         transform.parent.Rotate(0, 0, rotationDir * _trayAngle * Time.deltaTime);
