@@ -61,6 +61,7 @@ public class Tetris : MonoBehaviour, IService
         _playerController.Enable();
 
         _playerController.Tetris.Dash.started += DashMode;
+        _playerController.Tetris.Dash.canceled += DashMode;
     }
 
     private void Start()
@@ -189,7 +190,6 @@ public class Tetris : MonoBehaviour, IService
                             }
                         }
 
-                        _dashMode = false;
                     }
                     else
                     {
@@ -275,7 +275,6 @@ public class Tetris : MonoBehaviour, IService
                 _gameState.AddTrayMoney(_flyingFigure.GetProfit());
 
                 _flyingFigure = null;
-                _dashMode = false;
                 _spawnTimer = _movementTime;
 
                 ServiceLocator.Current.Get<AudioService>().PlayTetrisLanding();
@@ -283,7 +282,6 @@ public class Tetris : MonoBehaviour, IService
             else
             {
                 _lastMove = true;
-                _dashMode = false;
             }
         }
     }
@@ -700,7 +698,7 @@ public class Tetris : MonoBehaviour, IService
 
     private void DashMode(InputAction.CallbackContext context)
     {
-        _dashMode = true;
+        _dashMode = !_dashMode;
     }
 
     private void GenerateQueue()
