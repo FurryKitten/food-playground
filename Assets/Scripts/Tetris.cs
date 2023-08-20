@@ -368,19 +368,20 @@ public class Tetris : MonoBehaviour, IService
                 }
                 else
                 {
-                    if (_gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y])
-                    {
-                        bordured = true;
-                    }
-                    else
-                    {
-                        if (_trayBorders)
+                    if(gridX + pos.x >= 0 && gridX + pos.x < _gameSpace.width)
+                        if (_gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y])
                         {
-                            if(gridY - pos.y == 0 && 
-                                (gridX + pos.x == _leftGridConstrain || gridX + pos.x == _rightGridConstrain-1))
-                                migthBordured = true;
+                            bordured = true;
                         }
-                    }
+                        else
+                        {
+                            if (_trayBorders)
+                            {
+                                if(gridY - pos.y == 0 && 
+                                    (gridX + pos.x == _leftGridConstrain || gridX + pos.x == _rightGridConstrain-1))
+                                    migthBordured = true;
+                            }
+                        }
                 }
 
                 if((gridX + pos.x) == gridXFlying && (gridY - pos.y) == gridYFlying)
@@ -477,7 +478,7 @@ public class Tetris : MonoBehaviour, IService
                                     moveCheck = false;
                                     break;
                                 }
-                                if(gridX + pos.x + dir < _gameSpace.width)
+                                if(gridX + pos.x + dir >= _gameSpace.width)
                                 {
                                     moveCheck = false;
                                     break;
@@ -534,7 +535,7 @@ public class Tetris : MonoBehaviour, IService
                                     break;
                                 }
 
-                                if (gridX + pos.x + dir < _gameSpace.width)
+                                if (gridX + pos.x + dir < 0)
                                 {
                                     moveCheck = false;
                                     break;
