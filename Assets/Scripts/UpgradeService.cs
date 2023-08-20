@@ -28,7 +28,7 @@ public class UpgradeService : MonoBehaviour
         {
             _buttonTexts[i] = _upgradeButtons[i].GetComponentInChildren<TextMeshProUGUI>();
             Assert.IsNotNull(_buttonTexts[i]);
-            _buttonTexts[i].text = $"{_upgradeInfo.Tier1Costs[i]}¥";
+            _buttonTexts[i].text = $"¥{_upgradeInfo.Tier1Costs[i]}";
             _upgradeButtons[i].interactable = true;
         }
         _upgradeButtons[_maxTier].interactable = false; // special tier
@@ -119,7 +119,7 @@ public class UpgradeService : MonoBehaviour
         int[][] prices = _upgradeInfo.getTierCosts();
         for (int col = 0; col < _buttonTexts.Length; col++)
         {
-            _buttonTexts[col].text = $"{prices[_currentTier][col]}¥";
+            _buttonTexts[col].text = $"¥{prices[_currentTier][col]}";
         }
     }
 
