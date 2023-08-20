@@ -149,10 +149,10 @@ public class Tetris : MonoBehaviour, IService
             {
                 _spawnTimer += Time.deltaTime;
 
-                if (_spawnTimer > _movementTime)
+                if (_spawnTimer > _movementTime) // Спавн
                 {
                     _spawnTimer = 0;
-                    if (_figureSOIdQueue.TryPeek(out int figureSOId))
+                    if (_figureSOIdQueue.TryPeek(out int figureSOId)) // Фигура заспавнилась
                     {
 
                         Vector2 pos = transform.parent.position;
@@ -170,7 +170,11 @@ public class Tetris : MonoBehaviour, IService
                                 _flyingFigure.SetDoubleCost();
                         }
 
+                        ServiceLocator.Current.Get<AudioService>().PlayTetrisSpawn();
+
+                        // Если нет места для спавна - удаляем фигуру
                         foreach (Vector2Int p in _flyingFigure.GetForm())
+                        {
                             if (_gameSpace.cellsStatus[_figureStartPos.x + _gridXOffsetFromWorld + p.x, _figureStartPos.y - p.y])
                             {
                                 _flyingFigure.FlyAway();
@@ -178,7 +182,7 @@ public class Tetris : MonoBehaviour, IService
                                 _spawnTimer = 0;
                                 break;
                             }
-
+                        }
                     }
                     else
                     {
@@ -264,6 +268,8 @@ public class Tetris : MonoBehaviour, IService
             _flyingFigure = null;
             _dashMode = false;
             _spawnTimer = _movementTime;
+            
+            ServiceLocator.Current.Get<AudioService>().PlayTetrisLanding();
         }
     }
 
@@ -721,6 +727,8 @@ public class Tetris : MonoBehaviour, IService
             figure.FlyAway(); ;
         }
         _figureList.Clear();
+
+        ServiceLocator.Current.Get<AudioService>().PlayTetrisJingle();
     }
     
     public void ResetTetris()

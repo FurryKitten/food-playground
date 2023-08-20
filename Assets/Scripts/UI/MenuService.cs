@@ -29,6 +29,9 @@ public class MenuService : MonoBehaviour
         _gameMenu.SetActive(true);
         _gameSpace.SetActive(true);
         _gameState.SetState(State.TETRIS); // TODO: Врубать таймер перед тетрисом
+
+        ServiceLocator.Current.Get<AudioService>().PlayButtonPress();
+        ServiceLocator.Current.Get<AudioService>().PlayMusic();
     }
 
     public void OnPressPause()
