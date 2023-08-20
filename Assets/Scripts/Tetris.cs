@@ -127,7 +127,7 @@ public class Tetris : MonoBehaviour, IService
                 }
                 else
                 {
-                    transform.parent.rotation = Quaternion.Euler(0, 0, 0));
+                    transform.parent.rotation = Quaternion.Euler(0, 0, 0);
                 }
             }   
         }
