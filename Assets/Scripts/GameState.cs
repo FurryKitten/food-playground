@@ -25,7 +25,6 @@ public class GameState : MonoBehaviour, IService
     [SerializeField] public UnityEvent _onFinish;
 
     [SerializeField] private Animator _animatorTrayMoneyCounter;
-    [SerializeField] private Animator _animatorAllMoneyCounter;
 
     [ContextMenu("Add stage")]
     public void AddStage()
@@ -53,10 +52,6 @@ public class GameState : MonoBehaviour, IService
     /// Пока несем, меняем MoneyOnTray, донесли - зафиксировали в Money
     public void AddMoney(int money)
     {
-        if (money < 0)
-            _animatorAllMoneyCounter.SetTrigger("LoseMoney");
-        else
-            _animatorAllMoneyCounter.SetTrigger("GetMoney");
         Money += money;
         Money = Money < 0 ? 0 : Money;
         Debug.Log($"Money: {Money}");
