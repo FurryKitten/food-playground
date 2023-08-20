@@ -164,16 +164,16 @@ public class Tetris : MonoBehaviour, IService
                         _flyingFigure.SetPosition(_figureStartPos.x, _figureStartPos.y);
                         _flyingFigure.SetWorldPosition(_figureStartPos - pos);
 
+                        ServiceLocator.Current.Get<AudioService>().PlayTetrisSpawn();
                         if (_doubleCost)
                         {
                             if ((Random.Range(0f, 1f) < 0.3f))
+                            {
                                 _flyingFigure.SetDoubleCost();
+                                ServiceLocator.Current.Get<AudioService>().PlayTetrisGoldSpawn();
+                            }
                         }
 
-                        if (_doubleCost)
-                            ServiceLocator.Current.Get<AudioService>().PlayTetrisGoldSpawn();
-                        else
-                            ServiceLocator.Current.Get<AudioService>().PlayTetrisSpawn();
 
                         // Если нет места для спавна - удаляем фигуру
                         foreach (Vector2Int p in _flyingFigure.GetForm())

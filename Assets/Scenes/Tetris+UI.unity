@@ -6867,6 +6867,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6781948903205672573, guid: 83e3633a3e48bb948be84a92a6ce92d1, type: 3}
+      propertyPath: _handWidth
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6781948903205672573, guid: 83e3633a3e48bb948be84a92a6ce92d1, type: 3}
       propertyPath: _tentacleSprite
       value: 
       objectReference: {fileID: 1533874417, guid: c1396a468ee6a0d4da196c9069d4fc92, type: 3}
