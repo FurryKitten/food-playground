@@ -52,6 +52,10 @@ public class GameState : MonoBehaviour, IService
     /// Пока несем, меняем MoneyOnTray, донесли - зафиксировали в Money
     public void AddMoney(int money)
     {
+        if (money < 0)
+            _animatorTrayMoneyCounter.SetTrigger("LoseMoney");
+        else
+            _animatorTrayMoneyCounter.SetTrigger("GetMoney");
         Money += money;
         Money = Money < 0 ? 0 : Money;
         Debug.Log($"Money: {Money}");
