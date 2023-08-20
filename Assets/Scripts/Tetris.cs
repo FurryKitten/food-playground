@@ -33,6 +33,7 @@ public class Tetris : MonoBehaviour, IService
     private float _figureListTimer = 0;
     private bool _dashMode = false;
     private float _spawnTimer = 0;
+    private bool _lastMove = false;
 
     private GameState _gameState;
 
@@ -187,6 +188,8 @@ public class Tetris : MonoBehaviour, IService
                                 break;
                             }
                         }
+
+                        _dashMode = false;
                     }
                     else
                     {
@@ -258,22 +261,30 @@ public class Tetris : MonoBehaviour, IService
         }
         else // Ставим на доску
         {
-            foreach (Vector2Int pos in _flyingFigure.GetForm())
+            if (_lastMove)
             {
-                _gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y] = true;
-                _figureGrid[gridX + pos.x, gridY - pos.y] = _flyingFigure;
+                foreach (Vector2Int pos in _flyingFigure.GetForm())
+                {
+                    _gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y] = true;
+                    _figureGrid[gridX + pos.x, gridY - pos.y] = _flyingFigure;
+                }
+
+                _figureList.Add(_flyingFigure);
+                _handControls.AddFigures(_figureList);
+
+                _gameState.AddTrayMoney(_flyingFigure.GetProfit());
+
+                _flyingFigure = null;
+                _dashMode = false;
+                _spawnTimer = _movementTime;
+
+                ServiceLocator.Current.Get<AudioService>().PlayTetrisLanding();
             }
-
-            _figureList.Add(_flyingFigure);
-            _handControls.AddFigures(_figureList);
-
-            _gameState.AddTrayMoney(_flyingFigure.GetProfit());
-
-            _flyingFigure = null;
-            _dashMode = false;
-            _spawnTimer = _movementTime;
-            
-            ServiceLocator.Current.Get<AudioService>().PlayTetrisLanding();
+            else
+            {
+                _lastMove = true;
+                _dashMode = false;
+            }
         }
     }
 
