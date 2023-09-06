@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 public struct Grid
 {
     public int width, height;
-    public bool[,] cellsStatus;
+    public Figure[,] figureGrid;
 }
 
 public class Tetris : MonoBehaviour, IService
@@ -46,7 +46,7 @@ public class Tetris : MonoBehaviour, IService
     private int _leftGridConstrain = 4;
     private int _rightGridConstrain = 14;
     private int _gridXOffsetFromWorld = 0;
-    private Figure[,] _figureGrid;
+    
 
     private int _stageNumber = 0;
     private int _trayNumber = 0;
@@ -76,14 +76,12 @@ public class Tetris : MonoBehaviour, IService
         _gameSpace.width = 18;
         _gridXOffsetFromWorld = (_gameSpace.width - 16) / 2;
         _gameSpace.height = 15;
-        _gameSpace.cellsStatus = new bool[_gameSpace.width, _gameSpace.height];
-        _figureGrid = new Figure[_gameSpace.width, _gameSpace.height];
+        _gameSpace.figureGrid = new Figure[_gameSpace.width, _gameSpace.height];
         for (int i = 0; i < _gameSpace.width; ++i)
         {
             for (int j = 0; j < _gameSpace.height; ++j)
             {
-                _gameSpace.cellsStatus[i, j] = false;
-                _figureGrid[i, j] = null;
+                _gameSpace.figureGrid[i, j] = null;
             }
         }
 
@@ -188,7 +186,7 @@ public class Tetris : MonoBehaviour, IService
                         // Если нет места для спавна - удаляем фигуру
                         foreach (Vector2Int p in _flyingFigure.GetForm())
                         {
-                            if (_gameSpace.cellsStatus[_figureStartPos.x + _gridXOffsetFromWorld + p.x, _figureStartPos.y - p.y])
+                            if (_gameSpace.figureGrid[_figureStartPos.x + _gridXOffsetFromWorld + p.x, _figureStartPos.y - p.y] != null)
                             {
                                 _flyingFigure.FlyAway();
                                 _flyingFigure = null;
@@ -257,7 +255,7 @@ public class Tetris : MonoBehaviour, IService
         foreach (Vector2Int pos in _flyingFigure.GetForm())
             if ((gridY - pos.y - 1) >= 0)
             {
-                if (_gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y - 1])
+                if (_gameSpace.figureGrid[gridX + pos.x, gridY - pos.y - 1] != null)
                 {
                     checkGridSpace = true;
                     break;
@@ -279,8 +277,7 @@ public class Tetris : MonoBehaviour, IService
             {
                 foreach (Vector2Int pos in _flyingFigure.GetForm())
                 {
-                    _gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y] = true;
-                    _figureGrid[gridX + pos.x, gridY - pos.y] = _flyingFigure;
+                    _gameSpace.figureGrid[gridX + pos.x, gridY - pos.y] = _flyingFigure;
                 }
 
                 _figureList.Add(_flyingFigure);
@@ -325,7 +322,7 @@ public class Tetris : MonoBehaviour, IService
         foreach (Vector2Int pos in _flyingFigure.GetForm())
             if ((gridX + pos.x ) >= _leftGridConstrain && (gridX + pos.x ) < _rightGridConstrain && gridY - pos.y >= 0)
             {
-                if (_gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y])
+                if (_gameSpace.figureGrid[gridX + pos.x, gridY - pos.y] != null)
                     return true;
             }
             else
@@ -402,7 +399,7 @@ public class Tetris : MonoBehaviour, IService
                 else
                 {
                     if(gridX + pos.x >= 0 && gridX + pos.x < _gameSpace.width)
-                        if (_gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y])
+                        if (_gameSpace.figureGrid[gridX + pos.x, gridY - pos.y] != null)
                         {
                             bordured = true;
                         }
@@ -437,8 +434,7 @@ public class Tetris : MonoBehaviour, IService
                     if ((gridX + pos.x) < _leftGridConstrain || (gridX + pos.x) == _rightGridConstrain ||
                         (gridX + pos.x) == gridXFlying && (gridY - pos.y) == gridYFlying)
                         continue;
-                    _gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y] = false;
-                    _figureGrid[gridX + pos.x, gridY - pos.y] = null;
+                    _gameSpace.figureGrid[gridX + pos.x, gridY - pos.y] = null;
                 }
                 _figureList[i].FlyAway(dir);
                 _onFigureFall?.Invoke();
@@ -449,8 +445,7 @@ public class Tetris : MonoBehaviour, IService
             {
                 foreach (Vector2Int pos in _figureList[i].GetForm())
                 {
-                    _gameSpace.cellsStatus[gridX + pos.x - dir, gridY - pos.y] = true;
-                    _figureGrid[gridX + pos.x - dir, gridY - pos.y] = _figureList[i];
+                    _gameSpace.figureGrid[gridX + pos.x - dir, gridY - pos.y] = _figureList[i];
                 }
             }
 
@@ -458,8 +453,7 @@ public class Tetris : MonoBehaviour, IService
             {
                 foreach (Vector2Int pos in _figureList[i].GetForm())
                 {
-                    _gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y] = true;
-                    _figureGrid[gridX + pos.x, gridY - pos.y] = _figureList[i];
+                    _gameSpace.figureGrid[gridX + pos.x, gridY - pos.y] = _figureList[i];
                 }
             }
 
@@ -484,15 +478,14 @@ public class Tetris : MonoBehaviour, IService
     {
         if (dir > 0)
         {
-            // Debug.Log("> 0");
             List<Figure> checkedFigures = new List<Figure>();
             for (int i = _gameSpace.width - 1; i > -1; i--)
                 for (int j = 0; j < _gameSpace.height; j++)
                 {
-                    if (!checkedFigures.Contains(_figureGrid[i, j]) && _figureGrid[i, j] != null)
+                    if (!checkedFigures.Contains(_gameSpace.figureGrid[i, j]) && _gameSpace.figureGrid[i, j] != null)
                     {
-                        checkedFigures.Add(_figureGrid[i, j]);
-                        Figure lastFigure = _figureGrid[i, j];
+                        checkedFigures.Add(_gameSpace.figureGrid[i, j]);
+                        Figure lastFigure = _gameSpace.figureGrid[i, j];
 
                         Vector2Int _fPos = lastFigure.GetPosition();
                         int gridX = (_fPos.x) + _gridXOffsetFromWorld;
@@ -517,8 +510,8 @@ public class Tetris : MonoBehaviour, IService
                                     break;
                                 }
 
-                                if (_figureGrid[gridX + pos.x + dir, gridY - pos.y] != lastFigure &&
-                                        _figureGrid[gridX + pos.x + dir, gridY - pos.y] != null)
+                                if (_gameSpace.figureGrid[gridX + pos.x + dir, gridY - pos.y] != lastFigure &&
+                                        _gameSpace.figureGrid[gridX + pos.x + dir, gridY - pos.y] != null)
                                 {
                                     moveCheck = false;
                                     break;
@@ -530,8 +523,7 @@ public class Tetris : MonoBehaviour, IService
                         {
                             foreach (Vector2Int pos in lastFigure.GetForm())
                             {
-                                _gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y] = false;
-                                _figureGrid[gridX + pos.x, gridY - pos.y] = null;
+                                _gameSpace.figureGrid[gridX + pos.x, gridY - pos.y] = null;
                             }
                         }
                     }
@@ -540,15 +532,14 @@ public class Tetris : MonoBehaviour, IService
         }
         else
         {
-            // Debug.Log("<0");
             List<Figure> checkedFigures = new List<Figure>();
             for (int i = 0; i < _gameSpace.width; i++)
                 for (int j = 0; j < _gameSpace.height; j++)
                 {
-                    if (!checkedFigures.Contains(_figureGrid[i, j]) && _figureGrid[i, j] != null)
+                    if (!checkedFigures.Contains(_gameSpace.figureGrid[i, j]) && _gameSpace.figureGrid[i, j] != null)
                     {
-                        checkedFigures.Add(_figureGrid[i, j]);
-                        Figure lastFigure = _figureGrid[i, j];
+                        checkedFigures.Add(_gameSpace.figureGrid[i, j]);
+                        Figure lastFigure = _gameSpace.figureGrid[i, j];
 
                         Vector2Int _fPos = lastFigure.GetPosition();
                         int gridX = (_fPos.x) + _gridXOffsetFromWorld;
@@ -574,8 +565,8 @@ public class Tetris : MonoBehaviour, IService
                                     break;
                                 }
 
-                                if (_figureGrid[gridX + pos.x + dir, gridY - pos.y] != lastFigure &&
-                                    _figureGrid[gridX + pos.x + dir, gridY - pos.y] != null)
+                                if (_gameSpace.figureGrid[gridX + pos.x + dir, gridY - pos.y] != lastFigure &&
+                                    _gameSpace.figureGrid[gridX + pos.x + dir, gridY - pos.y] != null)
                                 {
                                     moveCheck = false;
                                     break;
@@ -587,8 +578,7 @@ public class Tetris : MonoBehaviour, IService
                         {
                             foreach (Vector2Int pos in lastFigure.GetForm())
                             {
-                                _gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y] = false;
-                                _figureGrid[gridX + pos.x, gridY - pos.y] = null;
+                                _gameSpace.figureGrid[gridX + pos.x, gridY - pos.y] = null;
                             }
                         }
                     }
@@ -603,10 +593,10 @@ public class Tetris : MonoBehaviour, IService
         for (int i = 0; i < _gameSpace.width; i++)
             for (int j = 1; j < _gameSpace.height; j++)
             {
-                if (!checkedFigures.Contains(_figureGrid[i, j]) && _figureGrid[i, j] != null)
+                if (!checkedFigures.Contains(_gameSpace.figureGrid[i, j]) && _gameSpace.figureGrid[i, j] != null)
                 {
-                    checkedFigures.Add(_figureGrid[i, j]);
-                    Figure lastFigure = _figureGrid[i, j];
+                    checkedFigures.Add(_gameSpace.figureGrid[i, j]);
+                    Figure lastFigure = _gameSpace.figureGrid[i, j];
 
                     Vector2Int _fPos = lastFigure.GetPosition();
                     int gridX = (_fPos.x) + _gridXOffsetFromWorld;
@@ -622,8 +612,8 @@ public class Tetris : MonoBehaviour, IService
                             moveCheck = false;
                             break;
                         }
-                        if (_figureGrid[gridX + pos.x, gridY - pos.y - 1] != lastFigure &&
-                            _figureGrid[gridX + pos.x, gridY - pos.y - 1] != null)
+                        if (_gameSpace.figureGrid[gridX + pos.x, gridY - pos.y - 1] != lastFigure &&
+                            _gameSpace.figureGrid[gridX + pos.x, gridY - pos.y - 1] != null)
                         {
                             moveCheck = false;
                             break;
@@ -635,8 +625,7 @@ public class Tetris : MonoBehaviour, IService
                     {
                         foreach (Vector2Int pos in lastFigure.GetForm())
                         {
-                            _gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y] = false;
-                            _figureGrid[gridX + pos.x, gridY - pos.y] = null;
+                            _gameSpace.figureGrid[gridX + pos.x, gridY - pos.y] = null;
                         }
                     }
                 }
@@ -653,7 +642,7 @@ public class Tetris : MonoBehaviour, IService
 
             foreach (Vector2Int pos in f.GetForm())
             {
-                if (_gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y])
+                if (_gameSpace.figureGrid[gridX + pos.x, gridY - pos.y] != null)
                 {
                     checkGridSpace = true;
                     break;
@@ -665,49 +654,11 @@ public class Tetris : MonoBehaviour, IService
                 f.Fall();
                 foreach (Vector2Int pos in f.GetForm())
                 {
-                    _gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y - 1] = true;
-                    _figureGrid[gridX + pos.x, gridY - pos.y - 1] = f;
+                    _gameSpace.figureGrid[gridX + pos.x, gridY - pos.y - 1] = f;
                 }
             }
 
         }
-
-        /*
-        foreach (Figure f in _figureList)
-        {
-            Vector2Int _fPos = f.GetPosition();
-            int gridX = (_fPos.x) + _gridXOffsetFromWorld;
-            int gridY =  (_fPos.y);
-
-            bool checkGridSpace = false;
-
-            foreach (Vector2Int pos in f.GetForm())
-                if ((gridY - pos.y - 1) >= 0)
-                {
-                    if (_gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y - 1])
-                    {
-                        checkGridSpace = true;
-                        break;
-                    }
-                }
-                else
-                {
-                    checkGridSpace = true;
-                    break;
-                }
-
-            if(!checkGridSpace)
-            {
-                f.Fall();
-                foreach (Vector2Int pos in f.GetForm())
-                {
-                    _gameSpace.cellsStatus[gridX + pos.x, gridY - pos.y - 1] = true;
-                    _figureGrid[gridX + pos.x, gridY - pos.y - 1] = f;
-                }
-            }
-
-        }
-        */
     }
 
     private void DashMode(InputAction.CallbackContext context)
@@ -769,7 +720,7 @@ public class Tetris : MonoBehaviour, IService
     {
         for (int i = 0; i < _gameSpace.width; ++i)
             for (int j = 0; j < _gameSpace.height; ++j)
-                _gameSpace.cellsStatus[i, j] = false;
+                _gameSpace.figureGrid[i, j] = null;
 
         foreach (var figure in _figureList)
         {
@@ -812,7 +763,7 @@ public class Tetris : MonoBehaviour, IService
             for (int j = 0; j < _gameSpace.height; ++j)
             {
                 Gizmos.color = Color.gray;
-                if (_gameSpace.cellsStatus[i, j])
+                if (_gameSpace.figureGrid[i, j] != null)
                     Gizmos.color = Color.yellow;
                 Gizmos.DrawCube(pos + new Vector2(i + 0.5f, j + 0.5f), Vector2.one * 0.3f);
             }
