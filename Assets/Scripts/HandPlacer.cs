@@ -9,7 +9,7 @@ public class HandPlacer : MonoBehaviour, IService
     [SerializeField] private HandControls _hand;
     [SerializeField] private Camera _camera;
 
-    private Grid _places4Hand; 
+    private int _places4HandWidth;
     private PlayerController _playerController;
 
     private void Awake()
@@ -20,12 +20,7 @@ public class HandPlacer : MonoBehaviour, IService
 
     void Start()
     {
-        _places4Hand.width = 6;
-        _places4Hand.height = 1;
-        _places4Hand.cellsStatus = new bool[_places4Hand.width, _places4Hand.height];
-        for(int i = 0; i < _places4Hand.width; i++)
-            for (int j = 0; j < _places4Hand.height; ++j)
-                _places4Hand.cellsStatus[i, j] = false;
+        _places4HandWidth = 6;
         ControlsOnEnable();
     }
 
@@ -35,7 +30,7 @@ public class HandPlacer : MonoBehaviour, IService
         {
             Vector2 mousePos = _camera.ScreenToWorldPoint(Input.mousePosition) - transform.parent.position;
 
-            float x = Mathf.Clamp(mousePos.x, -(_places4Hand.width * 0.5f), (_places4Hand.width * 0.5f) + 1);
+            float x = Mathf.Clamp(mousePos.x, -(_places4HandWidth * 0.5f), (_places4HandWidth * 0.5f) + 1);
             _hand.transform.localPosition = new Vector2(x, _hand.transform.localPosition.y);
         }
     }
@@ -47,7 +42,7 @@ public class HandPlacer : MonoBehaviour, IService
 
     public void SetGridWidth(int trayWidth) // TO DO: use Unity Event
     {
-        _places4Hand.width = trayWidth - (2 * _hand.GetHandWidth());
+        _places4HandWidth = trayWidth - (2 * _hand.GetHandWidth());
     }
 
     private void ControlsOnEnable()
