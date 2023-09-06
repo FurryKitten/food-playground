@@ -154,7 +154,6 @@ public class Tetris : MonoBehaviour, IService
 
         GenerateQueue(_queueSizes[_trayNumber, _stageNumber]);
     }
-
     private void RotateTray()
     {
         _balaceValue = _handControls.CheckBalance();
@@ -246,8 +245,6 @@ public class Tetris : MonoBehaviour, IService
             }
         }
     }
-
-
     private bool FigureSpawn()
     {
         if (_figureSOIdQueue.TryPeek(out int figureSOId)) // Фигура заспавнилась

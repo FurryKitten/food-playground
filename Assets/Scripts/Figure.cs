@@ -2,7 +2,6 @@
 
 public class Figure : MonoBehaviour
 {
-    [SerializeField] Collider2D _collider;
     [SerializeField] float _mass = 1.0f;
     [SerializeField] Vector2 _centerMass;
     [SerializeField] Material _doubleCostMaterial;
@@ -10,22 +9,16 @@ public class Figure : MonoBehaviour
     private Transform _transform;
     private Vector2Int _centerPos; // TODO: pivot to top left corner
     private Vector2Int[] _form;
-    private int _width;
-    private int _height;
     private int _cost;
     private bool _doubleCost = false;
 
     public void Init(FigureSO figure)
     {
-        // задаем коллайдер из данных фигуры
         _transform = GetComponent<Transform>();
         gameObject.GetComponent<SpriteRenderer>().sprite = figure.sprite;
         _form = figure.form;
-        _width = figure.width;
-        _height = figure.height;
         _cost = figure.cost;
     }
-
     public void SetPosition(int x, int y)
     {
         _centerPos = new Vector2Int(x, y);

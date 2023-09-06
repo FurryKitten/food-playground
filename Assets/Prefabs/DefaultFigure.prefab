@@ -47,9 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a2f87d17c2e2744190abcc435e18f16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _collider: {fileID: 0}
   _mass: 1
   _centerMass: {x: 0, y: 0}
+  _figureDataBase: {fileID: 11400000, guid: 821ad9e9bc33f0445acc9426c7d8cc07, type: 2}
   _doubleCostMaterial: {fileID: 2100000, guid: bd0c4c4a10a4da14abc468dd7de0f7f5, type: 2}
 --- !u!50 &-5777737962150397007
 Rigidbody2D:
