@@ -249,14 +249,14 @@ public class Tetris : MonoBehaviour, IService
         if (_figureSOIdQueue.TryPeek(out int figureSOId)) // Фигура заспавнилась
         {
 
-            Vector2 pos = transform.parent.position;
+            Vector2 posParent = transform.parent.position;
             _flyingFigure = Instantiate(_defaultFigure, transform.parent);
             _flyingFigure.Init(_figureSOPrefabs[figureSOId]);
             _flyingFigure.name = "FlyingFigure";
             _figureSOIdQueue.Dequeue();
 
             _flyingFigure.SetPosition(_figureStartPos.x, _figureStartPos.y);
-            _flyingFigure.SetWorldPosition(_figureStartPos - pos);
+            _flyingFigure.SetWorldPosition(_figureStartPos - posParent);
 
             ServiceLocator.Current.Get<AudioService>().PlayTetrisSpawn();
             if (_doubleCost)
@@ -269,17 +269,35 @@ public class Tetris : MonoBehaviour, IService
             }
 
 
-            // Если нет места для спавна - удаляем фигуру
+            bool placeCheck = true;
+            // Если нет места для спавна - удаляем фигуры
             foreach (Vector2Int p in _flyingFigure.GetForm())
             {
                 if (_gameSpace.figureGrid[_figureStartPos.x + _gridXOffsetFromWorld + p.x, _figureStartPos.y - p.y] != null)
                 {
-                    _flyingFigure.FlyAway();
-                    _flyingFigure = null;
-                    _spawnTimer = 0;
-                    ServiceLocator.Current.Get<AudioService>().PlayTetrisBadSpawn();
-                    break;
+                    int index = _figureList.IndexOf(_gameSpace.figureGrid[_figureStartPos.x + _gridXOffsetFromWorld + p.x, _figureStartPos.y - p.y]);
+                    Vector2Int _fPos = _figureList[index].GetPosition();
+                    int gridX = (_fPos.x) + _gridXOffsetFromWorld;
+                    int gridY = (_fPos.y);
+
+                    foreach (Vector2Int pos in _figureList[index].GetForm())
+                    {
+                        _gameSpace.figureGrid[gridX + pos.x, gridY - pos.y] = null;
+                    }
+                    _figureList[index].FlyAway(-1);
+                    _onFigureFall?.Invoke();
+                    _figureList.RemoveAt(index);
+                    placeCheck = false;
                 }
+            }
+
+            if(!placeCheck)
+            {
+                _flyingFigure.FlyAway();
+                _flyingFigure = null;
+                _spawnTimer = 0;
+                _handControls.AddFigures(_figureList);
+                ServiceLocator.Current.Get<AudioService>().PlayTetrisBadSpawn();
             }
 
             // Отмена _dashModa при спавне

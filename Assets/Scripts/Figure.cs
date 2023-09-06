@@ -69,7 +69,7 @@ public class Figure : MonoBehaviour
     public void FlyAway(int dir)
     {
         GetComponent<Rigidbody2D>().simulated = true;
-        GetComponent<Rigidbody2D>().AddForce(new Vector2(dir * 20, 2));
+        GetComponent<Rigidbody2D>().AddForce(new Vector2(dir * 200, 2));
 
         ServiceLocator.Current.Get<GameState>().AddTrayMoney(GetFine());
     }
@@ -77,7 +77,7 @@ public class Figure : MonoBehaviour
     public void FlyAway()
     {
         GetComponent<Rigidbody2D>().simulated = true;
-        GetComponent<Rigidbody2D>().AddForce(new Vector2((Random.Range(-1, 1) + 2) * 20, 2));
+        GetComponent<Rigidbody2D>().AddForce(Random.insideUnitCircle * 200);
     }
 
     public int GetProfit() // TO DO: Use Unity Event
