@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Parallax : MonoBehaviour
 {
@@ -10,7 +12,10 @@ public class Parallax : MonoBehaviour
 
     private List<GameObject> _backgrounds;
     private float _backgroundSize;
-    private float lastObjectPos;
+    private int _leftBgIndex;
+
+    public float DefaultPos { get; private set; }
+    public float RightObjPos { get; private set; }
 
     private void Start()
     {
@@ -25,6 +30,10 @@ public class Parallax : MonoBehaviour
             var newBg = Instantiate(_backgroundObject, bgPos, Quaternion.identity, transform);
             _backgrounds.Add(newBg);
         }
+
+        _leftBgIndex = _count - 1;
+        DefaultPos = _backgrounds[0].transform.position.x;
+        RightObjPos = _backgrounds[_leftBgIndex].transform.position.x;
     }
 
     private void Update()
@@ -44,6 +53,7 @@ public class Parallax : MonoBehaviour
             pos.x -= _speed * Time.deltaTime;
             _backgrounds[i].transform.position = pos;
         }
+        RightObjPos = _backgrounds[_leftBgIndex].transform.position.x;
     }
 
     private void Loop()
@@ -61,5 +71,21 @@ public class Parallax : MonoBehaviour
                 _backgrounds[i].transform.position = newPos;
             }
         }
+    }
+
+    public void ChangeLeftBgIndex()
+    {
+        float rightPosX = _backgrounds[0].transform.position.x;
+        _leftBgIndex = 0;
+        for (int i = 0; i < _backgrounds.Count; i++)
+        {
+            if (_backgrounds[i].transform.position.x > rightPosX)
+            {
+                rightPosX = _backgrounds[i].transform.position.x;
+                _leftBgIndex = i;
+            }
+        }
+        Debug.Log($"left index {_leftBgIndex} {rightPosX} {_backgrounds[_leftBgIndex].transform.position.x}");
+        RightObjPos = rightPosX;
     }
 }
