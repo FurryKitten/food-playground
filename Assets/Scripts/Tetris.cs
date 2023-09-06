@@ -90,6 +90,11 @@ public class Tetris : MonoBehaviour, IService
     }
     private void Update()
     {
+        TetrisUpdate();
+    }
+
+    public void TetrisUpdate()
+    {
         if (_gameState.State == State.PAUSED)
             return;
 
@@ -106,7 +111,7 @@ public class Tetris : MonoBehaviour, IService
                 {
                     HorizontalMoveFigureList(-1);
                 }
-                else if(transform.parent.rotation.eulerAngles.z < 350 && transform.parent.rotation.eulerAngles.z >= 330)
+                else if (transform.parent.rotation.eulerAngles.z < 350 && transform.parent.rotation.eulerAngles.z >= 330)
                     HorizontalMoveFigureList(1);
             }
         }
@@ -133,7 +138,6 @@ public class Tetris : MonoBehaviour, IService
                 }
             }
         }
-
     }
 
     private void FinishStage()
