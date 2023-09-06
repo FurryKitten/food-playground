@@ -39,7 +39,6 @@ public class Tetris : MonoBehaviour, IService
     private GameState _gameState;
 
     private float _balaceValue = 0;
-    private BalaceState _balaceState;
 
     private bool _doubleCost = false;
     private bool _trayBorders = false;
@@ -94,47 +93,8 @@ public class Tetris : MonoBehaviour, IService
         if (_gameState.State == State.PAUSED)
             return;
 
-        _balaceValue = _handControls.CheckBalance();
+        RotateTray();
 
-        int rotationDir = 0;
-
-        if (_balaceValue != 0)
-        {
-            if (_balaceValue > 0)
-            {
-                rotationDir = 1;
-                _balaceState = BalaceState.Left;
-            }
-            else
-            {
-                rotationDir = -1;
-                _balaceState = BalaceState.Right;
-            }
-        }
-        else
-        {
-            _balaceState = BalaceState.OK;
-            if (transform.parent.rotation.eulerAngles.z >= 340 && transform.parent.rotation.eulerAngles.z < 360f)
-            {
-                rotationDir = 1;
-            }
-            else
-            {
-                if (transform.parent.rotation.eulerAngles.z > 0.1)
-                {
-                    rotationDir = -1;
-                }
-                else
-                {
-                    transform.parent.rotation = Quaternion.Euler(0, 0, 0);
-                }
-            }   
-        }
-
-        transform.parent.Rotate(0, 0, rotationDir * _trayAngle * Time.deltaTime);
-        
-        transform.parent.rotation = Quaternion.Euler(0, 0, RotationClamp(transform.parent.rotation.eulerAngles.z));
-                
         _figureListTimer += Time.deltaTime;
         if (_figureListTimer > _movementTime)
         {
@@ -156,95 +116,81 @@ public class Tetris : MonoBehaviour, IService
             if (_flyingFigure == null)
             {
                 _spawnTimer += Time.deltaTime;
-
                 if (_spawnTimer > _movementTime) // Спавн
                 {
                     _spawnTimer = 0;
-                    if (_figureSOIdQueue.TryPeek(out int figureSOId)) // Фигура заспавнилась
-                    {
-
-                        Vector2 pos = transform.parent.position;
-                        _flyingFigure = Instantiate(_defaultFigure, transform.parent);
-                        _flyingFigure.Init(_figureSOPrefabs[figureSOId]);
-                        _flyingFigure.name = "FlyingFigure";
-                        _figureSOIdQueue.Dequeue();
-
-                        _flyingFigure.SetPosition(_figureStartPos.x, _figureStartPos.y);
-                        _flyingFigure.SetWorldPosition(_figureStartPos - pos);
-
-                        ServiceLocator.Current.Get<AudioService>().PlayTetrisSpawn();
-                        if (_doubleCost)
-                        {
-                            if ((Random.Range(0f, 1f) < 0.3f))
-                            {
-                                _flyingFigure.SetDoubleCost();
-                                ServiceLocator.Current.Get<AudioService>().PlayTetrisGoldSpawn();
-                            }
-                        }
-
-
-                        // Если нет места для спавна - удаляем фигуру
-                        foreach (Vector2Int p in _flyingFigure.GetForm())
-                        {
-                            if (_gameSpace.figureGrid[_figureStartPos.x + _gridXOffsetFromWorld + p.x, _figureStartPos.y - p.y] != null)
-                            {
-                                _flyingFigure.FlyAway();
-                                _flyingFigure = null;
-                                _spawnTimer = 0;
-                                ServiceLocator.Current.Get<AudioService>().PlayTetrisBadSpawn();
-                                break;
-                            }
-                        }
-
-                        // Отмена _dashModa при спавне
-                        if(_dashMode)
-                        {
-                            _dashMode = false;
-                            _dashOffOnSpawning = true;
-                        }
-                    }
-                    else
-                    {
-                        //stop tetris, walk, reset queue
-                        _gameState.SetState(State.WALK);
-                        _gameState.AddStage();
-
-                        _figureSOIdQueue.Clear();
-                        if (_stageNumber != 3)
-                            _stageNumber++;
-                        else
-                            _stageNumber = 0;
-
-                        GenerateQueue(_queueSizes[_trayNumber, _stageNumber]);
-                    }
+                    if (!FigureSpawn())
+                        FinishStage();
                 }
             }
             else
             {
                 _movementTimer += Time.deltaTime;
-                if (!_dashMode)
+                if (_movementTimer >= (_dashMode ? _dashTime : _movementTime))
                 {
-
-                    if (_movementTimer >= _movementTime)
-                    {
-                        MoveFlyingFigure();
-                        _movementTimer = 0;
-
-                    }
-                }
-                else
-                {
-                    if (_movementTimer >= _dashTime)
-                    {
-                        MoveFlyingFigure();
-                        _movementTimer = 0;
-                    }
+                    MoveFlyingFigure();
+                    _movementTimer = 0;
                 }
             }
         }
 
     }
 
+    private void FinishStage()
+    {
+        //stop tetris, walk, reset queue
+        _gameState.SetState(State.WALK);
+        _gameState.AddStage();
+
+        _figureSOIdQueue.Clear();
+        if (_stageNumber != 3)
+            _stageNumber++;
+        else
+            _stageNumber = 0;
+
+        GenerateQueue(_queueSizes[_trayNumber, _stageNumber]);
+    }
+
+    private void RotateTray()
+    {
+        _balaceValue = _handControls.CheckBalance();
+
+        int rotationDir = 0;
+
+        if (_balaceValue != 0)
+        {
+            if (_balaceValue > 0)
+            {
+                rotationDir = 1;
+            }
+            else
+            {
+                rotationDir = -1;
+            }
+        }
+        else
+        {
+            if (transform.parent.rotation.eulerAngles.z >= 340 && transform.parent.rotation.eulerAngles.z < 360f)
+            {
+                rotationDir = 1;
+            }
+            else
+            {
+                if (transform.parent.rotation.eulerAngles.z > 0.1)
+                {
+                    rotationDir = -1;
+                }
+                else
+                {
+                    transform.parent.rotation = Quaternion.Euler(0, 0, 0);
+                }
+            }
+        }
+
+        transform.parent.Rotate(0, 0, rotationDir * _trayAngle * Time.deltaTime);
+
+        transform.parent.rotation = Quaternion.Euler(0, 0, RotationClamp(transform.parent.rotation.eulerAngles.z));
+    }
     private void MoveFlyingFigure()
     {
         Vector2Int _flyingFigurePos = _flyingFigure.GetPosition();
@@ -297,6 +243,56 @@ public class Tetris : MonoBehaviour, IService
         }
     }
 
+
+    private bool FigureSpawn()
+    {
+        if (_figureSOIdQueue.TryPeek(out int figureSOId)) // Фигура заспавнилась
+        {
+
+            Vector2 pos = transform.parent.position;
+            _flyingFigure = Instantiate(_defaultFigure, transform.parent);
+            _flyingFigure.Init(_figureSOPrefabs[figureSOId]);
+            _flyingFigure.name = "FlyingFigure";
+            _figureSOIdQueue.Dequeue();
+
+            _flyingFigure.SetPosition(_figureStartPos.x, _figureStartPos.y);
+            _flyingFigure.SetWorldPosition(_figureStartPos - pos);
+
+            ServiceLocator.Current.Get<AudioService>().PlayTetrisSpawn();
+            if (_doubleCost)
+            {
+                if ((Random.Range(0f, 1f) < 0.3f))
+                {
+                    _flyingFigure.SetDoubleCost();
+                    ServiceLocator.Current.Get<AudioService>().PlayTetrisGoldSpawn();
+                }
+            }
+
+
+            // Если нет места для спавна - удаляем фигуру
+            foreach (Vector2Int p in _flyingFigure.GetForm())
+            {
+                if (_gameSpace.figureGrid[_figureStartPos.x + _gridXOffsetFromWorld + p.x, _figureStartPos.y - p.y] != null)
+                {
+                    _flyingFigure.FlyAway();
+                    _flyingFigure = null;
+                    _spawnTimer = 0;
+                    ServiceLocator.Current.Get<AudioService>().PlayTetrisBadSpawn();
+                    break;
+                }
+            }
+
+            // Отмена _dashModa при спавне
+            if (_dashMode)
+            {
+                _dashMode = false;
+                _dashOffOnSpawning = true;
+            }
+            return true;
+        }
+        
+        return false;
+    }
     private float RotationClamp(float angle)
     {
         if(angle > 20 && angle < 30)
@@ -355,7 +351,6 @@ public class Tetris : MonoBehaviour, IService
     private void HorizontalMoveFigureList(int dir)
     {
         ResetGrid4HorizontalMoveFigureList(dir);
-
 
         int gridXFlying = -100;
         int gridYFlying = -100;
@@ -696,10 +691,6 @@ public class Tetris : MonoBehaviour, IService
 
     public void SetGridWidth(int trayWidth) // TO DO: use Unity Event
     {
-        /*int offset = Mathf.RoundToInt((_gameSpace.width - trayWidth) * 0.5f);
-        _leftGridConstrain -= offset;
-        _rightGridConstrain += offset;*/
-        //int offset = Mathf.RoundToInt((_gameSpace.width - trayWidth) * 0.5f);
         _leftGridConstrain -= 1;
         _rightGridConstrain += 1;
         _trayNumber = Mathf.RoundToInt((trayWidth - 10) * 0.5f);

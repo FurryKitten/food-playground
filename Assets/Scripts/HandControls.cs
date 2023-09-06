@@ -1,14 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum BalaceState
-{
-    OK,
-    Left,
-    Right,
-}
 public class HandControls : MonoBehaviour, IService
 {
     [SerializeField] Sprite _tentacleSprite;
