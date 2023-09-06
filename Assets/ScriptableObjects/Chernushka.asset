@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 0
   _height: 0
-  _form: []
-  _mass: 0
+  _form:
+  - {x: 0, y: 0}
+  _mass: 1
   _cost: 0
-  _sprite: {fileID: 0}
+  _sprite: {fileID: 675146471, guid: 97969cbcbffecb7459318eae758f57fa, type: 3}

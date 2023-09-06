@@ -21,4 +21,4 @@ MonoBehaviour:
   - {x: 2, y: 1}
   _mass: 2
   _cost: 4
-  _sprite: {fileID: 1342912319, guid: 4152b01c41786fe4d8fab4a542d4a475, type: 3}
+  _sprite: {fileID: 1006130652, guid: 97969cbcbffecb7459318eae758f57fa, type: 3}
