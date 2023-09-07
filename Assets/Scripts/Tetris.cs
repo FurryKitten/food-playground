@@ -252,7 +252,7 @@ public class Tetris : MonoBehaviour, IService
 
             Vector2 posParent = transform.parent.position;
             _flyingFigure = Instantiate(_defaultFigure, transform.parent);
-            _flyingFigure.Init(_figureSOPrefabs[figureSOId]);
+            _flyingFigure.Init(_figureSOPrefabs[figureSOId], figureSOId);
             _flyingFigure.name = "FlyingFigure";
             _figureSOIdQueue.Dequeue();
 
@@ -685,6 +685,8 @@ public class Tetris : MonoBehaviour, IService
         else
             _dashMode = !_dashMode;
     }
+
+
 
     private void GenerateQueue()
     {

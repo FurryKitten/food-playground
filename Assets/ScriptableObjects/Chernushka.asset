@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18d29fee866580146848b5298f36a8d1, type: 3}
   m_Name: Chernushka
   m_EditorClassIdentifier: 
-  _width: 0
-  _height: 0
+  _widthTex: 0.2
+  _heightTex: 0.2
   _form:
   - {x: 0, y: 0}
   _mass: 1
   _cost: 0
-  _sprite: {fileID: 675146471, guid: 97969cbcbffecb7459318eae758f57fa, type: 3}
+  _indexTex: 18
+  _sprite: {fileID: 21300000, guid: 3dc88ef0a68dfc247b3d9550a23d0627, type: 3}

@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18d29fee866580146848b5298f36a8d1, type: 3}
   m_Name: Sake
   m_EditorClassIdentifier: 
-  _width: 0
-  _height: 0
+  _widthTex: 0.2
+  _heightTex: 0.6
   _form:
   - {x: 0, y: 0}
   - {x: 0, y: 1}
   - {x: 0, y: 2}
   _mass: 3
   _cost: 3
-  _sprite: {fileID: 1138719253, guid: 97969cbcbffecb7459318eae758f57fa, type: 3}
+  _indexTex: 20
+  _sprite: {fileID: 21300000, guid: 33d3ffbf5b22b674b86e1f308b72a026, type: 3}

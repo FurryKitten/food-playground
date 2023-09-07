@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18d29fee866580146848b5298f36a8d1, type: 3}
   m_Name: RiceCake
   m_EditorClassIdentifier: 
-  _width: 0
-  _height: 0
+  _widthTex: 0.4
+  _heightTex: 0.2
   _form:
   - {x: 0, y: 0}
   - {x: 1, y: 0}
   _mass: 2
   _cost: 2
-  _sprite: {fileID: 1869101581, guid: 97969cbcbffecb7459318eae758f57fa, type: 3}
+  _indexTex: 13
+  _sprite: {fileID: 21300000, guid: 96aa8e66cb6b6f146aa07f69ad164182, type: 3}

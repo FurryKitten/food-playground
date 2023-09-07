@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18d29fee866580146848b5298f36a8d1, type: 3}
   m_Name: FishLong
   m_EditorClassIdentifier: 
-  _width: 5
-  _height: 1
+  _widthTex: 1
+  _heightTex: 0.2
   _form:
   - {x: 0, y: 0}
   - {x: 1, y: 0}
@@ -22,4 +22,5 @@ MonoBehaviour:
   - {x: 4, y: 0}
   _mass: 4
   _cost: 5
-  _sprite: {fileID: -1956859577, guid: 97969cbcbffecb7459318eae758f57fa, type: 3}
+  _indexTex: 5
+  _sprite: {fileID: 21300000, guid: 9896e2e0256f7ca4980787daeb6691bf, type: 3}

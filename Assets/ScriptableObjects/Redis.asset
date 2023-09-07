@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18d29fee866580146848b5298f36a8d1, type: 3}
   m_Name: Redis
   m_EditorClassIdentifier: 
-  _width: 3
-  _height: 1
+  _widthTex: 0.6
+  _heightTex: 0.2
   _form:
   - {x: 0, y: 0}
   - {x: 1, y: 0}
   - {x: 2, y: 0}
   _mass: 2
   _cost: 3
-  _sprite: {fileID: 869022432, guid: 97969cbcbffecb7459318eae758f57fa, type: 3}
+  _indexTex: 16
+  _sprite: {fileID: 21300000, guid: 7b2d389fc094ca540a90a0a578661c45, type: 3}

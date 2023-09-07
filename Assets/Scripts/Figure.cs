@@ -4,20 +4,29 @@ public class Figure : MonoBehaviour
 {
     [SerializeField] float _mass = 1.0f;
     [SerializeField] Vector2 _centerMass;
-    [SerializeField] Material _doubleCostMaterial;
+    [SerializeField] Material _figureMaterial;
     
     private Transform _transform;
     private Vector2Int _centerPos; // TODO: pivot to top left corner
     private Vector2Int[] _form;
     private int _cost;
     private bool _doubleCost = false;
+    private int _id = -1;
+    private int _index = 0;
+    private Material _material;
 
-    public void Init(FigureSO figure)
+    public void Init(FigureSO figure, int id)
     {
         _transform = GetComponent<Transform>();
         gameObject.GetComponent<SpriteRenderer>().sprite = figure.sprite;
+        _material = new Material(_figureMaterial);
+        _material.SetVector("_Tilling", new Vector2(figure.widthTex, figure.heightTex));
+        _index = figure.indexTex;
+        _material.SetFloat("_Index", figure.indexTex);
+        gameObject.GetComponent<SpriteRenderer>().material = _material;
         _form = figure.form;
         _cost = figure.cost;
+        _id = id;
     }
     public void SetPosition(int x, int y)
     {
@@ -86,6 +95,9 @@ public class Figure : MonoBehaviour
     public void SetDoubleCost()
     {
         _doubleCost = true;
-        GetComponent<SpriteRenderer>().material = _doubleCostMaterial;
+        GetComponent<SpriteRenderer>().material.SetFloat("_Index", _index+25);
     }
+
+    public int Id
+    { get { return _id; } }
 }

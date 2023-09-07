@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18d29fee866580146848b5298f36a8d1, type: 3}
   m_Name: Octopus
   m_EditorClassIdentifier: 
-  _width: 0
-  _height: 0
+  _widthTex: 0.6
+  _heightTex: 0.4
   _form:
   - {x: 0, y: 1}
   - {x: 1, y: 1}
@@ -21,4 +21,5 @@ MonoBehaviour:
   - {x: 1, y: 0}
   _mass: 4
   _cost: 4
-  _sprite: {fileID: 899246618, guid: 97969cbcbffecb7459318eae758f57fa, type: 3}
+  _indexTex: 2
+  _sprite: {fileID: 21300000, guid: 85e2a04c614825f428bcce60485635d0, type: 3}

@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18d29fee866580146848b5298f36a8d1, type: 3}
   m_Name: Onigiri
   m_EditorClassIdentifier: 
-  _width: 0
-  _height: 0
+  _widthTex: 0.2
+  _heightTex: 0.2
   _form:
   - {x: 0, y: 0}
   _mass: 1
   _cost: 1
-  _sprite: {fileID: -642091562, guid: 97969cbcbffecb7459318eae758f57fa, type: 3}
+  _indexTex: 10
+  _sprite: {fileID: 21300000, guid: 3512b4a3b72ff3d458360f07383042ec, type: 3}

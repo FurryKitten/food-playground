@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18d29fee866580146848b5298f36a8d1, type: 3}
   m_Name: Teapot
   m_EditorClassIdentifier: 
-  _width: 4
-  _height: 2
+  _widthTex: 0.8
+  _heightTex: 0.4
   _form:
   - {x: 0, y: 0}
   - {x: 1, y: 0}
@@ -23,4 +23,5 @@ MonoBehaviour:
   - {x: 2, y: 1}
   _mass: 6
   _cost: 6
-  _sprite: {fileID: 986383648, guid: 97969cbcbffecb7459318eae758f57fa, type: 3}
+  _indexTex: 21
+  _sprite: {fileID: 21300000, guid: cf7c6c8947a36a04b81cda7267f62a96, type: 3}

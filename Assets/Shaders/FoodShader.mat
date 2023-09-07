@@ -28,7 +28,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 10305, guid: 0000000000000000f000000000000000, type: 0}
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTexMap:
+        m_Texture: {fileID: 18700000, guid: a3e2173f253835f48923c66b6c9dbdb4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskTex:
@@ -37,6 +41,18 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2DArray_05af8313bdfe4ea79fc7830ef5dd73a1_TextureArray_1_Texture2DArray:
+        m_Texture: {fileID: 18700000, guid: a3e2173f253835f48923c66b6c9dbdb4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2DArray_609d7d66a476451484dda4d7ebd6194b_TextureArray_1_Texture2DArray:
+        m_Texture: {fileID: 18700000, guid: a8f8b0be64060ba429c4826cdcda2ce5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2DArray_7b4ec826e4004e29b80444d1fefdb21c_TextureArray_1_Texture2DArray:
+        m_Texture: {fileID: 18700000, guid: a7622b124514a35448a9267a02a08e7e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_8c86eca129874c1ab43122c46c71021d_Texture_1_Texture2D:
@@ -49,6 +65,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _SpoiledTex:
         m_Texture: {fileID: 2800000, guid: 8bd75b9b945fea84895ab452d094b6b7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpoiledTexMap:
+        m_Texture: {fileID: 18700000, guid: a7622b124514a35448a9267a02a08e7e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpoiledTextures:
@@ -70,14 +90,17 @@ Material:
     m_Ints: []
     m_Floats:
     - _EnableExternalAlpha: 0
+    - _Index: 2
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _StepTimer: 0.2
+    - _StepTimer: 1
     - _frequency: 0.1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Tilling: {r: 0.6, g: 0.4, b: 0, a: 0}
+    - _TillingANDIndex: {r: 0.4, g: 0.4, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &970476604366337563
 MonoBehaviour:

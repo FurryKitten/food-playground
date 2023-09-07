@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18d29fee866580146848b5298f36a8d1, type: 3}
   m_Name: Muffin
   m_EditorClassIdentifier: 
-  _width: 1
-  _height: 1
+  _widthTex: 0.2
+  _heightTex: 0.2
   _form:
   - {x: 0, y: 0}
   _mass: 1
   _cost: 1
-  _sprite: {fileID: 378013861, guid: 97969cbcbffecb7459318eae758f57fa, type: 3}
+  _indexTex: 12
+  _sprite: {fileID: 21300000, guid: 8fca0d3c43fc5cf47b724e2035e6c1d5, type: 3}

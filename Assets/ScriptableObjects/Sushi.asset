@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18d29fee866580146848b5298f36a8d1, type: 3}
   m_Name: Sushi
   m_EditorClassIdentifier: 
-  _width: 4
-  _height: 1
+  _widthTex: 0.8
+  _heightTex: 0.2
   _form:
   - {x: 0, y: 0}
   - {x: 1, y: 0}
@@ -21,4 +21,5 @@ MonoBehaviour:
   - {x: 3, y: 0}
   _mass: 3
   _cost: 4
-  _sprite: {fileID: -725176235, guid: 97969cbcbffecb7459318eae758f57fa, type: 3}
+  _indexTex: 3
+  _sprite: {fileID: 21300000, guid: 2a943e6b8ce36d646ac01d0f25718ca4, type: 3}
