@@ -11,11 +11,12 @@ public class Figure : MonoBehaviour
     private Vector2Int[] _form;
     private int _cost;
     private bool _doubleCost = false;
-    private int _id = -1;
     private int _index = 0;
     private Material _material;
+    private bool _spoiled = false;
+    private float _height = 0.2f; // 0.2f - размер одной клетки, такой формат необходим для шейдера
 
-    public void Init(FigureSO figure, int id)
+    public void Init(FigureSO figure)
     {
         _transform = GetComponent<Transform>();
         gameObject.GetComponent<SpriteRenderer>().sprite = figure.sprite;
@@ -26,7 +27,7 @@ public class Figure : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().material = _material;
         _form = figure.form;
         _cost = figure.cost;
-        _id = id;
+        _height = figure.heightTex;
     }
     public void SetPosition(int x, int y)
     {
@@ -82,12 +83,12 @@ public class Figure : MonoBehaviour
         GetComponent<Rigidbody2D>().AddForce(Random.insideUnitCircle * 200);
     }
 
-    public int GetProfit() // TO DO: Use Unity Event
+    public int GetProfit() 
     {
-        return (_doubleCost) ? 2 * _cost : _cost;
+        return (_spoiled) ? 0 :((_doubleCost) ? 2 * _cost : _cost);
     }
 
-    public int GetFine() // TO DO: Use Unity Event
+    public int GetFine() 
     {
         return (_doubleCost) ? -2 * _cost : -_cost;
     }
@@ -98,6 +99,36 @@ public class Figure : MonoBehaviour
         GetComponent<SpriteRenderer>().material.SetFloat("_Index", _index+25);
     }
 
-    public int Id
-    { get { return _id; } }
+    public void ChangeSpoiledStatus(bool status)
+    {
+        if (_spoiled != status)
+        {
+            _spoiled = status;
+
+            if (_spoiled)
+            {
+                //анимация порченья
+                gameObject.GetComponent<SpriteRenderer>().material.SetFloat("_StepTimer", 0.1f);
+            }
+            else
+            {
+                //анимация восстановления
+                gameObject.GetComponent<SpriteRenderer>().material.SetFloat("_StepTimer", 1f);
+            }
+        }
+    }
+
+    public void DestroySpoiler()
+    {
+        // TO DO: Start animation
+    }
+
+    public int Index
+    { get { return _index; } }
+
+    public bool IsSpoiled
+    { get { return _spoiled; } }
+
+    public float Height
+    { get { return _height; } }
 }
