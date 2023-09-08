@@ -1252,13 +1252,7 @@ public class Tetris : MonoBehaviour, IService
         {
             Destroy(figure.gameObject);
         }
-
-        //костыль для удаления физичных фигур
-        foreach (var figure in FindObjectsOfType<Figure>())
-        {
-            Destroy(figure.gameObject);
-        }
-
+        
         transform.parent.rotation = Quaternion.identity;
 
         _figureList.Clear();
