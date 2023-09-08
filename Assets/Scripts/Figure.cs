@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using Unity.VisualScripting;
+using UnityEngine;
 
 public class Figure : MonoBehaviour
 {
@@ -15,6 +17,10 @@ public class Figure : MonoBehaviour
     private Material _material;
     private bool _spoiled = false;
     private float _height = 0.2f; // 0.2f - размер одной клетки, такой формат необходим для шейдера
+    private bool _shaderAnimation = false;
+    private float _step = 0.7f;
+    private float _targetStep = 0f;
+    private bool _shaderStateGold2Spoiled = false;
 
     public void Init(FigureSO figure)
     {
@@ -96,7 +102,10 @@ public class Figure : MonoBehaviour
     public void SetDoubleCost()
     {
         _doubleCost = true;
-        GetComponent<SpriteRenderer>().material.SetFloat("_Index", _index+25);
+        _material.SetInt("_Gold2Normal", 1);
+        _targetStep = 0;
+        if (!_shaderAnimation)
+            StartCoroutine(ShaderAnimation());
     }
 
     public void ChangeSpoiledStatus(bool status)
@@ -105,22 +114,58 @@ public class Figure : MonoBehaviour
         {
             _spoiled = status;
 
+            if(_doubleCost && !_shaderStateGold2Spoiled)
+            {
+                _shaderStateGold2Spoiled = true;
+                _material.SetInt("_Gold2Spoiled", 1);
+                _step = 0.7f;
+                _material.SetFloat("_StepTimer", _step);
+            }
+
             if (_spoiled)
             {
                 //анимация порченья
-                gameObject.GetComponent<SpriteRenderer>().material.SetFloat("_StepTimer", 0.1f);
+                _targetStep = 0;
+                if (!_shaderAnimation)
+                    StartCoroutine(ShaderAnimation());
             }
             else
             {
                 //анимация восстановления
-                gameObject.GetComponent<SpriteRenderer>().material.SetFloat("_StepTimer", 1f);
+                _targetStep = 0.7f;
+                if (!_shaderAnimation)
+                    StartCoroutine(ShaderAnimation());
             }
         }
     }
 
+    private IEnumerator ShaderAnimation()
+    {
+        float t = 0;
+        const float animationSpeed = 0.8f;
+        _shaderAnimation = true;
+        while (t < 1)
+        {
+            _step = Mathf.Lerp(_step, _targetStep, t*t*t);
+            t += Time.deltaTime * animationSpeed;
+            _material.SetFloat("_StepTimer", _step);
+            yield return null; 
+        }
+        _shaderAnimation = false;
+       // Debug.Log("Animation end");
+    }
+
+    private IEnumerator NextAnimation()
+    {
+        while (_shaderAnimation)
+        {
+            yield return null;
+        }
+        StartCoroutine(ShaderAnimation());
+    }
     public void DestroySpoiler()
     {
-        // TO DO: Start animation
+        // TO DO: Start animation of destroy spoiler
     }
 
     public int Index

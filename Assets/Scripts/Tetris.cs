@@ -1154,11 +1154,13 @@ public class Tetris : MonoBehaviour, IService
 
                     if (gridX + 1 < _rightGridConstrain)
                         if (_gameSpace.figureGrid[gridX + 1, gridY] != null)
+                        {
                             if (_gameSpace.figureGrid[gridX + 1, gridY].Index == 18)
                             {
                                 checkSpoiler = true;
-                                break; 
+                                break;
                             }
+                        }
 
                     if (gridX + 1 > _leftGridConstrain)
                         if (_gameSpace.figureGrid[gridX - 1, gridY] != null)
