@@ -246,9 +246,6 @@ public class Tetris : MonoBehaviour, IService
 
                 _figureList.Add(_flyingFigure);
                 _handControls.AddFigures(_figureList);
-
-                
-
                 _gameState.AddTrayMoney(_flyingFigure.GetProfit());
 
                 _flyingFigure = null;
@@ -415,6 +412,22 @@ public class Tetris : MonoBehaviour, IService
                         sortedFigureIndexes[j + 1] = temp;
                     }
                 }
+
+            for (int i = 1; i < sortedFigureIndexes.Count; i++)
+                for (int j = 0; j < sortedFigureIndexes.Count - i; j++)
+                {
+                    if (_figureList[sortedFigureIndexes[j]].GetPosition().x ==
+                        _figureList[sortedFigureIndexes[j + 1]].GetPosition().x)
+                    {
+                        if (_figureList[sortedFigureIndexes[j]].GetPosition().y - (_figureList[sortedFigureIndexes[j]].Height + 0.2f) * 5 >
+                            _figureList[sortedFigureIndexes[j + 1]].GetPosition().y - (_figureList[sortedFigureIndexes[j + 1]].Height + 0.2f) * 5)
+                        {
+                            int temp = sortedFigureIndexes[j];
+                            sortedFigureIndexes[j] = sortedFigureIndexes[j + 1];
+                            sortedFigureIndexes[j + 1] = temp;
+                        }
+                    }
+                }
         }
         else
         {
@@ -426,6 +439,22 @@ public class Tetris : MonoBehaviour, IService
                         int temp = sortedFigureIndexes[j];
                         sortedFigureIndexes[j] = sortedFigureIndexes[j + 1];
                         sortedFigureIndexes[j + 1] = temp;
+                    }
+                }
+
+            for (int i = 1; i < sortedFigureIndexes.Count; i++)
+                for (int j = 0; j < sortedFigureIndexes.Count - i; j++)
+                {
+                    if (_figureList[sortedFigureIndexes[j]].GetPosition().x + _figureList[sortedFigureIndexes[j]].Width * 5 == 
+                        _figureList[sortedFigureIndexes[j + 1]].GetPosition().x + _figureList[sortedFigureIndexes[j + 1]].Width * 5)
+                    {
+                        if (_figureList[sortedFigureIndexes[j]].GetPosition().y - (_figureList[sortedFigureIndexes[j]].Height + 0.2f) * 5 > 
+                            _figureList[sortedFigureIndexes[j + 1]].GetPosition().y - (_figureList[sortedFigureIndexes[j + 1]].Height + 0.2f) * 5)
+                        {
+                            int temp = sortedFigureIndexes[j];
+                            sortedFigureIndexes[j] = sortedFigureIndexes[j + 1];
+                            sortedFigureIndexes[j + 1] = temp;
+                        }
                     }
                 }
         }
@@ -501,7 +530,6 @@ public class Tetris : MonoBehaviour, IService
 
             if(boundaryCheck && !bordured)
             {
-                Debug.Log(_figureList[i].Index + " is flyed");
                 foreach (Vector2Int pos in _figureList[i].GetForm())
                 {
                     if ((gridX + pos.x) < _leftGridConstrain || (gridX + pos.x) == _rightGridConstrain ||
@@ -516,7 +544,6 @@ public class Tetris : MonoBehaviour, IService
 
             if(bordured)
             {
-                Debug.Log(_figureList[i].Index + " is bordured");
                 foreach (Vector2Int p in _figureList[i].GetForm())
                 {
                     if (_gameSpace.figureGrid[gridX - dir + p.x, gridY - p.y] != null
@@ -526,7 +553,6 @@ public class Tetris : MonoBehaviour, IService
                         _fPos = figure.GetPosition();
                         int x = _fPos.x + _gridXOffsetFromWorld;
                         int y = _fPos.y;
-                        Debug.Log(figure.Index + " is corrected");
                         foreach (Vector2Int pos in figure.GetForm())
                         {
                             _gameSpace.figureGrid[x + pos.x, y - pos.y] = null;
@@ -545,7 +571,6 @@ public class Tetris : MonoBehaviour, IService
 
             if(!boundaryCheck && !bordured)
             {
-                Debug.Log(_figureList[i].Index + " is moved");
                 foreach (Vector2Int pos in _figureList[i].GetForm())
                 {
                     _gameSpace.figureGrid[gridX + pos.x, gridY - pos.y] = _figureList[i];
@@ -566,7 +591,6 @@ public class Tetris : MonoBehaviour, IService
             _handControls.AddFigures(_figureList);
             
         }
-        Debug.Log("___________");
     }
 
     private void ResetGrid4HorizontalMoveFigureList(int dir)
@@ -1264,6 +1288,7 @@ public class Tetris : MonoBehaviour, IService
             figure.FlyAway(); ;
         }
         _figureList.Clear();
+        _handControls.AddFigures(_figureList);
 
         ServiceLocator.Current.Get<AudioService>().PlayTetrisJingle();
     }

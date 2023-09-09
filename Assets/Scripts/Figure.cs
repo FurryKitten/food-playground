@@ -93,7 +93,7 @@ public class Figure : MonoBehaviour
 
     public int GetProfit() 
     {
-        return (_spoiled) ? 0 :((_doubleCost) ? 2 * _cost : _cost);
+        return (_doubleCost) ? 2 * _cost : _cost;
     }
 
     public int GetFine() 
@@ -130,6 +130,7 @@ public class Figure : MonoBehaviour
                 _targetStep = 0;
                 if (!_shaderAnimation)
                     StartCoroutine(ShaderAnimation());
+                ServiceLocator.Current.Get<GameState>().AddTrayMoney(GetProfit());
             }
             else
             {
@@ -137,6 +138,7 @@ public class Figure : MonoBehaviour
                 _targetStep = 0.7f;
                 if (!_shaderAnimation)
                     StartCoroutine(ShaderAnimation());
+                ServiceLocator.Current.Get<GameState>().AddTrayMoney(GetFine());
             }
         }
     }
