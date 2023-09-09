@@ -17,6 +17,7 @@ public class Figure : MonoBehaviour
     private Material _material;
     private bool _spoiled = false;
     private float _height = 0.2f; // 0.2f - размер одной клетки, такой формат необходим для шейдера
+    private float _width = 0.2f;
     private bool _shaderAnimation = false;
     private float _step = 0.7f;
     private float _targetStep = 0f;
@@ -34,6 +35,7 @@ public class Figure : MonoBehaviour
         _form = figure.form;
         _cost = figure.cost;
         _height = figure.heightTex;
+        _width = figure.widthTex;
     }
     public void SetPosition(int x, int y)
     {
@@ -176,4 +178,7 @@ public class Figure : MonoBehaviour
 
     public float Height
     { get { return _height; } }
+
+    public float Width
+    { get { return _width; } }
 }

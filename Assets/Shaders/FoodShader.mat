@@ -48,11 +48,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2DArray_609d7d66a476451484dda4d7ebd6194b_TextureArray_1_Texture2DArray:
-        m_Texture: {fileID: 18700000, guid: a8f8b0be64060ba429c4826cdcda2ce5, type: 3}
+        m_Texture: {fileID: 18700000, guid: 0a24517aac99b244d8805f3cb67b6af3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2DArray_7b4ec826e4004e29b80444d1fefdb21c_TextureArray_1_Texture2DArray:
         m_Texture: {fileID: 18700000, guid: a7622b124514a35448a9267a02a08e7e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2DArray_f945009f8c414b2c9ce44e825d13416f_TextureArray_1_Texture2DArray:
+        m_Texture: {fileID: 18700000, guid: 0a24517aac99b244d8805f3cb67b6af3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_8c86eca129874c1ab43122c46c71021d_Texture_1_Texture2D:
@@ -90,10 +94,13 @@ Material:
     m_Ints: []
     m_Floats:
     - _EnableExternalAlpha: 0
+    - _Gold2Normal: 0
+    - _Gold2Spoiled: 0
     - _Index: 2
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _StepTimer: 1
+    - _Spoiled2Normal: 1
+    - _StepTimer: 0.7
     - _frequency: 0.1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
