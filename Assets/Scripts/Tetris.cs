@@ -236,7 +236,8 @@ public class Tetris : MonoBehaviour, IService
 
                     if (_dashMode)
                         if (gridY - pos.y - 1 >= 0)
-                            if (_gameSpace.figureGrid[gridX + pos.x, gridY - pos.y - 1] != null)
+                            if (_gameSpace.figureGrid[gridX + pos.x, gridY - pos.y - 1] != null &&
+                                _gameSpace.figureGrid[gridX + pos.x, gridY - pos.y - 1] != _flyingFigure)
                             {
                                 if (_gameSpace.figureGrid[gridX + pos.x, gridY - pos.y - 1].Index == 18)
                                 {
@@ -564,7 +565,20 @@ public class Tetris : MonoBehaviour, IService
                 }
                 _figureList[i].FlyAway(dir);
                 _onFigureFall?.Invoke();
-                lostFigureIndexes.Add(i);
+
+                if(lostFigureIndexes.Count != 0)
+                {
+                    lostFigureIndexes.Add(i);
+                    int ind = lostFigureIndexes.Count - 2;
+                    while (i < lostFigureIndexes[ind])
+                        ind--;
+
+                    int tmp = lostFigureIndexes[ind];
+                    lostFigureIndexes[ind] = lostFigureIndexes[lostFigureIndexes.Count - 1];
+                    lostFigureIndexes[lostFigureIndexes.Count - 1] = tmp;
+                }
+                else
+                    lostFigureIndexes.Add(i);
             }
 
             if(bordured)
