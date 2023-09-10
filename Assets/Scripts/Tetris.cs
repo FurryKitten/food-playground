@@ -294,7 +294,7 @@ public class Tetris : MonoBehaviour, IService
                 posParent.x += 1;
             }
 
-            _flyingFigure.SetPosition(_figureStartPos.x - spawnOffset, _figureStartPos.y);
+            _flyingFigure.SetPosition(_figureStartPos.x - spawnOffset - _gridXOffsetFromWorld, _figureStartPos.y);
             _flyingFigure.SetWorldPosition(_figureStartPos - posParent);
 
             ServiceLocator.Current.Get<AudioService>().PlayTetrisSpawn();
