@@ -281,10 +281,14 @@ public class Tetris : MonoBehaviour, IService
         {
 
             Vector2 posParent = transform.parent.position;
+            posParent.x += _gridXOffsetFromWorld;
             _flyingFigure = Instantiate(_defaultFigure, transform.parent);
             _flyingFigure.Init(_figureSOPrefabs[figureSOId]);
             _flyingFigure.name = "FlyingFigure";
             _figureSOIdQueue.Dequeue();
+
+            if(_flyingFigure.Width > 0.7f)
+                posParent.x += 1;
 
             _flyingFigure.SetPosition(_figureStartPos.x, _figureStartPos.y);
             _flyingFigure.SetWorldPosition(_figureStartPos - posParent);
