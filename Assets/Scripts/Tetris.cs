@@ -287,10 +287,14 @@ public class Tetris : MonoBehaviour, IService
             _flyingFigure.name = "FlyingFigure";
             _figureSOIdQueue.Dequeue();
 
-            if(_flyingFigure.Width > 0.7f)
+            int spawnOffset = 0;
+            if (_flyingFigure.Width > 0.7f)
+            {
+                spawnOffset = 1;
                 posParent.x += 1;
+            }
 
-            _flyingFigure.SetPosition(_figureStartPos.x, _figureStartPos.y);
+            _flyingFigure.SetPosition(_figureStartPos.x - spawnOffset, _figureStartPos.y);
             _flyingFigure.SetWorldPosition(_figureStartPos - posParent);
 
             ServiceLocator.Current.Get<AudioService>().PlayTetrisSpawn();
