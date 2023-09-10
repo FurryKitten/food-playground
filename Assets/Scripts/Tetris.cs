@@ -281,20 +281,19 @@ public class Tetris : MonoBehaviour, IService
         {
 
             Vector2 posParent = transform.parent.position;
-            posParent.x += _gridXOffsetFromWorld;
             _flyingFigure = Instantiate(_defaultFigure, transform.parent);
             _flyingFigure.Init(_figureSOPrefabs[figureSOId]);
             _flyingFigure.name = "FlyingFigure";
             _figureSOIdQueue.Dequeue();
 
             int spawnOffset = 0;
-            if (_flyingFigure.Width > 0.7f)
+            if(_flyingFigure.Width > 0.7f)
             {
-                spawnOffset = 1;
                 posParent.x += 1;
+                spawnOffset += 1;
             }
 
-            _flyingFigure.SetPosition(_figureStartPos.x - spawnOffset - _gridXOffsetFromWorld, _figureStartPos.y);
+            _flyingFigure.SetPosition(_figureStartPos.x - spawnOffset, _figureStartPos.y);
             _flyingFigure.SetWorldPosition(_figureStartPos - posParent);
 
             ServiceLocator.Current.Get<AudioService>().PlayTetrisSpawn();
@@ -312,9 +311,9 @@ public class Tetris : MonoBehaviour, IService
             // Если нет места для спавна - удаляем фигуры
             foreach (Vector2Int p in _flyingFigure.GetForm())
             {
-                if (_gameSpace.figureGrid[_figureStartPos.x + _gridXOffsetFromWorld + p.x, _figureStartPos.y - p.y] != null)
+                if (_gameSpace.figureGrid[_figureStartPos.x + _gridXOffsetFromWorld - spawnOffset + p.x, _figureStartPos.y - p.y] != null)
                 {
-                    int index = _figureList.IndexOf(_gameSpace.figureGrid[_figureStartPos.x + _gridXOffsetFromWorld + p.x, _figureStartPos.y - p.y]);
+                    int index = _figureList.IndexOf(_gameSpace.figureGrid[_figureStartPos.x + _gridXOffsetFromWorld - spawnOffset + p.x, _figureStartPos.y - p.y]);
                     Vector2Int _fPos = _figureList[index].GetPosition();
                     int gridX = (_fPos.x) + _gridXOffsetFromWorld;
                     int gridY = (_fPos.y);
