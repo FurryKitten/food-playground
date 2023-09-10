@@ -128,17 +128,17 @@ public class Figure : MonoBehaviour
             {
                 //анимация порченья
                 _targetStep = 0;
+                ServiceLocator.Current.Get<GameState>().AddTrayMoney(GetFine());
                 if (!_shaderAnimation)
                     StartCoroutine(ShaderAnimation());
-                ServiceLocator.Current.Get<GameState>().AddTrayMoney(GetProfit());
             }
             else
             {
                 //анимация восстановления
                 _targetStep = 0.7f;
+                ServiceLocator.Current.Get<GameState>().AddTrayMoney(GetProfit());
                 if (!_shaderAnimation)
                     StartCoroutine(ShaderAnimation());
-                ServiceLocator.Current.Get<GameState>().AddTrayMoney(GetFine());
             }
         }
     }

@@ -226,22 +226,38 @@ public class Tetris : MonoBehaviour, IService
         {
             if (_lastMove)
             {
+                bool smashSpoiler = true;
+                List<int> spoilersX = new List<int>();
+                List<int> spoilersY = new List<int>();
+
                 foreach (Vector2Int pos in _flyingFigure.GetForm())
                 {
                     _gameSpace.figureGrid[gridX + pos.x, gridY - pos.y] = _flyingFigure;
 
-                    if(_dashMode)
+                    if (_dashMode)
                         if (gridY - pos.y - 1 >= 0)
                             if (_gameSpace.figureGrid[gridX + pos.x, gridY - pos.y - 1] != null)
-                                if(_gameSpace.figureGrid[gridX + pos.x, gridY - pos.y - 1].Index == 18)
+                            {
+                                if (_gameSpace.figureGrid[gridX + pos.x, gridY - pos.y - 1].Index == 18)
                                 {
-                                    // Давим спойлеры
-                                    _figureList.Remove(_gameSpace.figureGrid[gridX + pos.x, gridY - pos.y - 1]);
-                                    _gameSpace.figureGrid[gridX + pos.x, gridY - pos.y - 1].DestroySpoiler();
-                                    _gameSpace.figureGrid[gridX + pos.x, gridY - pos.y - 1].FlyAway();
-                                    _gameSpace.figureGrid[gridX + pos.x, gridY - pos.y - 1] = null;
+                                    spoilersX.Add(gridX + pos.x);
+                                    spoilersY.Add(gridY - pos.y - 1);
                                 }
+                                else
+                                    smashSpoiler = false;
+                            }
+                }
 
+                if(smashSpoiler)
+                {
+                    // Давим спойлеры
+                    for (int i = 0; i < spoilersX.Count; i++)
+                    {
+                        _figureList.Remove(_gameSpace.figureGrid[spoilersX[i], spoilersY[i]]);
+                        _gameSpace.figureGrid[spoilersX[i], spoilersY[i]].DestroySpoiler();
+                        _gameSpace.figureGrid[spoilersX[i], spoilersY[i]].FlyAway();
+                        _gameSpace.figureGrid[spoilersX[i], spoilersY[i]] = null;
+                    }
                 }
 
                 _figureList.Add(_flyingFigure);
@@ -402,10 +418,11 @@ public class Tetris : MonoBehaviour, IService
 
         if (dir < 0)
         {
-            for (int i = 1; i < sortedFigureIndexes.Count; i++)
-                for (int j = 0; j < sortedFigureIndexes.Count - i; j++)
+            for (int i = 0; i < sortedFigureIndexes.Count; i++)
+                for (int j = 0; j < sortedFigureIndexes.Count - 1; j++)
                 {
-                    if (_figureList[j].GetPosition().x > _figureList[j + 1].GetPosition().x)
+                    if (_figureList[sortedFigureIndexes[j]].GetPosition().x 
+                        > _figureList[sortedFigureIndexes[j + 1]].GetPosition().x)
                     {
                         int temp = sortedFigureIndexes[j];
                         sortedFigureIndexes[j] = sortedFigureIndexes[j + 1];
@@ -413,14 +430,14 @@ public class Tetris : MonoBehaviour, IService
                     }
                 }
 
-            for (int i = 1; i < sortedFigureIndexes.Count; i++)
-                for (int j = 0; j < sortedFigureIndexes.Count - i; j++)
+            for (int i = 0; i < sortedFigureIndexes.Count; i++)
+                for (int j = 0; j < sortedFigureIndexes.Count - 1; j++)
                 {
                     if (_figureList[sortedFigureIndexes[j]].GetPosition().x ==
                         _figureList[sortedFigureIndexes[j + 1]].GetPosition().x)
                     {
-                        if (_figureList[sortedFigureIndexes[j]].GetPosition().y - (_figureList[sortedFigureIndexes[j]].Height + 0.2f) * 5 >
-                            _figureList[sortedFigureIndexes[j + 1]].GetPosition().y - (_figureList[sortedFigureIndexes[j + 1]].Height + 0.2f) * 5)
+                        if (_figureList[sortedFigureIndexes[j]].GetPosition().y - (_figureList[sortedFigureIndexes[j]].Height - 0.2f) * 5 >
+                            _figureList[sortedFigureIndexes[j + 1]].GetPosition().y - (_figureList[sortedFigureIndexes[j + 1]].Height - 0.2f) * 5)
                         {
                             int temp = sortedFigureIndexes[j];
                             sortedFigureIndexes[j] = sortedFigureIndexes[j + 1];
@@ -431,25 +448,26 @@ public class Tetris : MonoBehaviour, IService
         }
         else
         {
-            for (int i = 1; i < sortedFigureIndexes.Count; i++)
-                for (int j = 0; j < sortedFigureIndexes.Count - i; j++)
+            for (int i = 0; i < sortedFigureIndexes.Count; i++)
+                for (int j = 0; j < sortedFigureIndexes.Count - 1; j++)
                 {
-                    if (_figureList[j].GetPosition().x + _figureList[j].Width * 5 < _figureList[j + 1].GetPosition().x + _figureList[j + 1].Width * 5)
+                    if (_figureList[sortedFigureIndexes[j]].GetPosition().x + _figureList[sortedFigureIndexes[j]].Width * 5 
+                        < _figureList[sortedFigureIndexes[j + 1]].GetPosition().x + _figureList[sortedFigureIndexes[j + 1]].Width * 5)
                     {
                         int temp = sortedFigureIndexes[j];
                         sortedFigureIndexes[j] = sortedFigureIndexes[j + 1];
                         sortedFigureIndexes[j + 1] = temp;
                     }
                 }
-
-            for (int i = 1; i < sortedFigureIndexes.Count; i++)
-                for (int j = 0; j < sortedFigureIndexes.Count - i; j++)
+           
+            for (int i = 0; i < sortedFigureIndexes.Count; i++)
+                for (int j = 0; j < sortedFigureIndexes.Count - 1; j++)
                 {
                     if (_figureList[sortedFigureIndexes[j]].GetPosition().x + _figureList[sortedFigureIndexes[j]].Width * 5 == 
                         _figureList[sortedFigureIndexes[j + 1]].GetPosition().x + _figureList[sortedFigureIndexes[j + 1]].Width * 5)
                     {
-                        if (_figureList[sortedFigureIndexes[j]].GetPosition().y - (_figureList[sortedFigureIndexes[j]].Height + 0.2f) * 5 > 
-                            _figureList[sortedFigureIndexes[j + 1]].GetPosition().y - (_figureList[sortedFigureIndexes[j + 1]].Height + 0.2f) * 5)
+                        if (_figureList[sortedFigureIndexes[j]].GetPosition().y - (_figureList[sortedFigureIndexes[j]].Height - 0.2f) * 5 > 
+                            _figureList[sortedFigureIndexes[j + 1]].GetPosition().y - (_figureList[sortedFigureIndexes[j + 1]].Height - 0.2f) * 5)
                         {
                             int temp = sortedFigureIndexes[j];
                             sortedFigureIndexes[j] = sortedFigureIndexes[j + 1];
@@ -458,7 +476,7 @@ public class Tetris : MonoBehaviour, IService
                     }
                 }
         }
-
+                
         foreach (int i in sortedFigureIndexes)
         {
             Vector2Int _fPos = _figureList[i].GetPosition();
