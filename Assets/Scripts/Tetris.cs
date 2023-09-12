@@ -234,7 +234,7 @@ public class Tetris : MonoBehaviour, IService
                 {
                     _gameSpace.figureGrid[gridX + pos.x, gridY - pos.y] = _flyingFigure;
 
-                    if (_dashMode)
+                    if (_dashMode && _flyingFigure.Index != 18)
                         if (gridY - pos.y - 1 >= 0)
                             if (_gameSpace.figureGrid[gridX + pos.x, gridY - pos.y - 1] != null &&
                                 _gameSpace.figureGrid[gridX + pos.x, gridY - pos.y - 1] != _flyingFigure)
