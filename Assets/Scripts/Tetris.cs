@@ -107,13 +107,13 @@ public class Tetris : MonoBehaviour, IService
             _figureListTimer = 0;
             if (_figureList.Count != 0)
             {
-                VerticalMoveFigureList();
+                NewVerticalMoveFigureList();
                 if (transform.parent.rotation.eulerAngles.z > 10 && transform.parent.rotation.eulerAngles.z <= 30)
                 {
-                    HorizontalMoveFigureList(-1);
+                    NewHorizontalMoveFigureList(-1);
                 }
                 else if (transform.parent.rotation.eulerAngles.z < 350 && transform.parent.rotation.eulerAngles.z >= 330)
-                    HorizontalMoveFigureList(1);
+                    NewHorizontalMoveFigureList(1);
                 UseFiguresEffects();
             }
         }
@@ -265,6 +265,7 @@ public class Tetris : MonoBehaviour, IService
                 _handControls.AddFigures(_figureList);
                 _gameState.AddTrayMoney(_flyingFigure.GetProfit());
 
+
                 _flyingFigure = null;
                 _spawnTimer = _movementTime;
 
@@ -383,7 +384,6 @@ public class Tetris : MonoBehaviour, IService
 
         return false;
     }
-
     private void HorizontalMove(InputAction.CallbackContext context)
     {
         if (_flyingFigure == null)
@@ -404,23 +404,71 @@ public class Tetris : MonoBehaviour, IService
         }
         
     }
-
-    private void HorizontalMoveFigureList(int dir)
+    private void NewHorizontalMoveFigureList(int dir)
     {
-        ResetGrid4HorizontalMoveFigureList(dir);
+        bool[,] gridMask = new bool[_gameSpace.width, _gameSpace.height];
 
-        int gridXFlying = -100;
-        int gridYFlying = -100;
+        for (int i = 0; i < _gameSpace.width; i++)
+            for (int j = 0; j < _gameSpace.height; j++)
+                gridMask[i, j] = false;
+
+        if (_trayBorders)
+        {
+            gridMask[_leftGridConstrain - 1, 0] = true;
+            gridMask[_rightGridConstrain, 0] = true;
+        }
+
         if (_flyingFigure != null)
         {
             Vector2Int _flyingFigurePos = _flyingFigure.GetPosition();
-            gridXFlying = (_flyingFigurePos.x) + _gridXOffsetFromWorld;
-            gridYFlying = (_flyingFigurePos.y);
+            int gridXFlying = (_flyingFigurePos.x) + _gridXOffsetFromWorld;
+            int gridYFlying = (_flyingFigurePos.y);
+
+            foreach(Vector2Int pos in _flyingFigure.GetForm())
+                gridMask[gridXFlying + pos.x, gridYFlying - pos.y] = true;
         }
+
+        
+        for(int j = 0; j < _gameSpace.height; j++)
+            for (int i = (dir > 0) ? _gameSpace.width - 1 : 0; 
+                i != ((dir > 0) ? -1 : _gameSpace.width); i -= dir)
+            {
+                if (_gameSpace.figureGrid[i, j] != null && !gridMask[i, j])
+                {
+                    Vector2Int figurePos = _gameSpace.figureGrid[i, j].GetPosition();
+                    int gridX = (figurePos.x) + _gridXOffsetFromWorld + dir;
+                    int gridY = (figurePos.y);
+
+                    bool bordured = false;
+                    
+                    foreach (Vector2Int pos in _gameSpace.figureGrid[i, j].GetForm())
+                    {
+                        if (gridX + pos.x > 0 && gridX + pos.x < _gameSpace.width)
+                            if (gridMask[gridX + pos.x, gridY - pos.y])
+                            {
+                                bordured = true;
+                                break;
+                            }
+                    }
+
+                    if (bordured)
+                    {
+                        int newJ = j;
+                        foreach (Vector2Int pos in _gameSpace.figureGrid[i, j].GetForm())
+                        {
+                            gridMask[gridX + pos.x - dir, gridY - pos.y] = true;
+                            if (newJ > gridY - pos.y)
+                                newJ = gridY - pos.y;
+                        }
+                        i = (dir > 0) ? _gameSpace.width - 1 : 0;
+                        Debug.Log(_gameSpace.figureGrid[i, j].Index);
+                    }
+                    
+                }
+            }
 
         List<int> lostFigureIndexes = new List<int>();
         List<int> sortedFigureIndexes = new List<int>();
-        List<int> blockedFiguresIndexes = new List<int>();
         for (int i = 0; i < _figureList.Count; i++)
             sortedFigureIndexes.Add(i);
 
@@ -429,7 +477,7 @@ public class Tetris : MonoBehaviour, IService
             for (int i = 0; i < sortedFigureIndexes.Count; i++)
                 for (int j = 0; j < sortedFigureIndexes.Count - 1; j++)
                 {
-                    if (_figureList[sortedFigureIndexes[j]].GetPosition().x 
+                    if (_figureList[sortedFigureIndexes[j]].GetPosition().x
                         > _figureList[sortedFigureIndexes[j + 1]].GetPosition().x)
                     {
                         int temp = sortedFigureIndexes[j];
@@ -459,7 +507,7 @@ public class Tetris : MonoBehaviour, IService
             for (int i = 0; i < sortedFigureIndexes.Count; i++)
                 for (int j = 0; j < sortedFigureIndexes.Count - 1; j++)
                 {
-                    if (_figureList[sortedFigureIndexes[j]].GetPosition().x + _figureList[sortedFigureIndexes[j]].Width * 5 
+                    if (_figureList[sortedFigureIndexes[j]].GetPosition().x + _figureList[sortedFigureIndexes[j]].Width * 5
                         < _figureList[sortedFigureIndexes[j + 1]].GetPosition().x + _figureList[sortedFigureIndexes[j + 1]].Width * 5)
                     {
                         int temp = sortedFigureIndexes[j];
@@ -467,14 +515,14 @@ public class Tetris : MonoBehaviour, IService
                         sortedFigureIndexes[j + 1] = temp;
                     }
                 }
-           
+
             for (int i = 0; i < sortedFigureIndexes.Count; i++)
                 for (int j = 0; j < sortedFigureIndexes.Count - 1; j++)
                 {
-                    if (_figureList[sortedFigureIndexes[j]].GetPosition().x + _figureList[sortedFigureIndexes[j]].Width * 5 == 
+                    if (_figureList[sortedFigureIndexes[j]].GetPosition().x + _figureList[sortedFigureIndexes[j]].Width * 5 ==
                         _figureList[sortedFigureIndexes[j + 1]].GetPosition().x + _figureList[sortedFigureIndexes[j + 1]].Width * 5)
                     {
-                        if (_figureList[sortedFigureIndexes[j]].GetPosition().y - (_figureList[sortedFigureIndexes[j]].Height - 0.2f) * 5 > 
+                        if (_figureList[sortedFigureIndexes[j]].GetPosition().y - (_figureList[sortedFigureIndexes[j]].Height - 0.2f) * 5 >
                             _figureList[sortedFigureIndexes[j + 1]].GetPosition().y - (_figureList[sortedFigureIndexes[j + 1]].Height - 0.2f) * 5)
                         {
                             int temp = sortedFigureIndexes[j];
@@ -484,142 +532,47 @@ public class Tetris : MonoBehaviour, IService
                     }
                 }
         }
-                
-        foreach (int i in sortedFigureIndexes)
-        {
-            Vector2Int _fPos = _figureList[i].GetPosition();
-            int gridX = (_fPos.x) + dir + _gridXOffsetFromWorld;
-            int gridY = (_fPos.y);
-
-            bool boundaryCheck = false;
-            bool bordured = false;
-            bool migthBordured = false;
-
-            foreach (Vector2Int pos in _figureList[i].GetForm())
+        
+        for(int i = 0; i < _gameSpace.width; i++)
+            for(int j = 0; j < _gameSpace.height; j++)
             {
-                if (((gridX + pos.x) < _leftGridConstrain || (gridX + pos.x) == _rightGridConstrain))
-                {
-                    if (!_trayBorders)
-                    {
-                        boundaryCheck = true;
-                        break;
-                    }
-
-                    if (gridY - pos.y == 0)
-                    { 
-                        bordured = true;
-                    }
-                    else
-                    {
-                        boundaryCheck = true;
-                    }
-                }
-                else
-                {
-                    if(gridX + pos.x >= 0 && gridX + pos.x < _gameSpace.width)
-                        if (_gameSpace.figureGrid[gridX + pos.x, gridY - pos.y] != null)
-                        {
-                            bordured = true;
-                        }
-                        else
-                        {
-                            if (_trayBorders) // вывешивание круассанов, крeветок, мороженого и чайника за бордюр
-                            {
-                                if(gridY - pos.y == 0 && 
-                                    (gridX + pos.x == _leftGridConstrain || gridX + pos.x == _rightGridConstrain-1))
-                                    migthBordured = true;
-                            }
-                        }
-                }
-
-                if(_flyingFigure != null)
-                {
-                    foreach (Vector2Int p in _flyingFigure.GetForm())
-                    {
-                        if (gridX + pos.x == gridXFlying + p.x &&
-                            gridY - pos.y == gridYFlying - p.y)
-                        {
-                            bordured = true;
-                            break;
-                        }
-                    }
-                    if (bordured)
-                        break;
-                }
+                _gameSpace.figureGrid[i, j] = null;
             }
 
-            if (!bordured)
+        foreach(int i in sortedFigureIndexes)
+        {
+            Vector2Int figurePos = _figureList[i].GetPosition();
+            int gridX = (figurePos.x) + _gridXOffsetFromWorld;
+            int gridY = (figurePos.y);
+
+            if(!gridMask[gridX + _figureList[i].GetForm()[0].x, gridY - _figureList[i].GetForm()[0].y])
+            {
                 _figureList[i].HorizontalMove(dir);
 
-            if(migthBordured)
-                boundaryCheck = false;
-
-            if(boundaryCheck && !bordured)
-            {
-                foreach (Vector2Int pos in _figureList[i].GetForm())
+                foreach(Vector2Int pos in _figureList[i].GetForm())
                 {
-                    if ((gridX + pos.x) < _leftGridConstrain || (gridX + pos.x) == _rightGridConstrain ||
-                        (gridX + pos.x) == gridXFlying && (gridY - pos.y) == gridYFlying)
-                        continue;
-                    _gameSpace.figureGrid[gridX + pos.x, gridY - pos.y] = null;
-                }
-                _figureList[i].FlyAway(dir);
-                _onFigureFall?.Invoke();
-
-                if(lostFigureIndexes.Count != 0)
-                {
-                    lostFigureIndexes.Add(i);
-                    int ind = lostFigureIndexes.Count - 2;
-                    while (i < lostFigureIndexes[ind])
-                        ind--;
-
-                    int tmp = lostFigureIndexes[ind];
-                    lostFigureIndexes[ind] = lostFigureIndexes[lostFigureIndexes.Count - 1];
-                    lostFigureIndexes[lostFigureIndexes.Count - 1] = tmp;
-                }
-                else
-                    lostFigureIndexes.Add(i);
-            }
-
-            if(bordured)
-            {
-                foreach (Vector2Int p in _figureList[i].GetForm())
-                {
-                    if (_gameSpace.figureGrid[gridX - dir + p.x, gridY - p.y] != null
-                        && _gameSpace.figureGrid[gridX - dir + p.x, gridY - p.y] != _figureList[i])
+                    if(gridX + dir + pos.x < _leftGridConstrain || gridX + dir + pos.x == _rightGridConstrain)
                     {
-                        Figure figure = _gameSpace.figureGrid[gridX - dir + p.x, gridY - p.y];
-                        _fPos = figure.GetPosition();
-                        int x = _fPos.x + _gridXOffsetFromWorld;
-                        int y = _fPos.y;
-                        foreach (Vector2Int pos in figure.GetForm())
-                        {
-                            _gameSpace.figureGrid[x + pos.x, y - pos.y] = null;
-                            _gameSpace.figureGrid[x + pos.x - dir, y - pos.y] = figure;
-                        }
-                        figure.HorizontalMove(-dir);
+                        lostFigureIndexes.Add(i);
+                        _figureList[i].FlyAway(dir);
+                        _onFigureFall?.Invoke();
                         break;
                     }
                 }
-
-                foreach (Vector2Int pos in _figureList[i].GetForm())
-                {
-                    _gameSpace.figureGrid[gridX + pos.x - dir, gridY - pos.y] = _figureList[i];
-                }
             }
-
-            if(!boundaryCheck && !bordured)
-            {
-                foreach (Vector2Int pos in _figureList[i].GetForm())
-                {
-                    _gameSpace.figureGrid[gridX + pos.x, gridY - pos.y] = _figureList[i];
-                }
-            }
-
         }
 
         if (lostFigureIndexes.Count > 0)
         {
+            for (int i = 0; i < lostFigureIndexes.Count; i++)
+                for (int j = 0; j < lostFigureIndexes.Count - 1; j++)
+                    if (lostFigureIndexes[j] > lostFigureIndexes[j + 1])
+                    {
+                        int tmp = lostFigureIndexes[j];
+                        lostFigureIndexes[j] = lostFigureIndexes[j + 1];
+                        lostFigureIndexes[j + 1] = tmp;
+                    }
+
             int offset = 0;
             foreach (int i in lostFigureIndexes)
             {
@@ -628,557 +581,101 @@ public class Tetris : MonoBehaviour, IService
             }
 
             _handControls.AddFigures(_figureList);
-            
-        }
-    }
 
-    private void ResetGrid4HorizontalMoveFigureList(int dir)
-    {
-        if (dir > 0)
+        }
+
+        foreach (Figure figure in _figureList)
         {
-            List<Figure> checkedFigures = new List<Figure>();
-            for (int i = _gameSpace.width - 1; i > -1; i--)
-                for (int j = 0; j < _gameSpace.height; j++)
-                {
-                    if (!checkedFigures.Contains(_gameSpace.figureGrid[i, j]) && _gameSpace.figureGrid[i, j] != null)
-                    {
-                        checkedFigures.Add(_gameSpace.figureGrid[i, j]);
-                        Figure lastFigure = _gameSpace.figureGrid[i, j];
+            Vector2Int figurePos = figure.GetPosition();
+            int gridX = (figurePos.x) + _gridXOffsetFromWorld;
+            int gridY = (figurePos.y);
 
-                        Vector2Int _fPos = lastFigure.GetPosition();
-                        int gridX = (_fPos.x) + _gridXOffsetFromWorld;
-                        int gridY = (_fPos.y);
-
-                        bool moveCheck = true;
-
-                        if (_trayBorders)
-                        {
-                            if(lastFigure.Index == 8) // Проверка на колбасу
-                            {
-                                if(_gameSpace.figureGrid[gridX + 1, gridY] != null)
-                                {
-                                    checkedFigures.Add(_gameSpace.figureGrid[gridX + 1, gridY]);
-                                    if (MoveFigureCheck(gridX + 1, gridY, dir, 8, -1))
-                                    {
-                                        if (MoveFigureCheck(i, j, dir, 8))
-                                        {
-                                            moveCheck = true;
-                                            Figure f = _gameSpace.figureGrid[gridX + 1, gridY];
-                                            _fPos = f.GetPosition();
-                                            int x = (_fPos.x) + _gridXOffsetFromWorld;
-                                            int y = (_fPos.y);
-                                            foreach (Vector2Int pos in f.GetForm())
-                                            {
-                                                _gameSpace.figureGrid[x + pos.x, y - pos.y] = null;
-                                            }
-                                        }
-                                        else
-                                        {
-                                            moveCheck = false;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        moveCheck = false;
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                if(lastFigure.Index == 4) // Проверка на краба
-                                {
-                                    bool firstFigureMove = true;
-                                    bool secondFigureMove = true;
-
-                                    if (_gameSpace.figureGrid[gridX + 2, gridY] != null)
-                                    {
-                                        firstFigureMove = MoveFigureCheck(gridX + 2, gridY, dir, 4, -2);
-                                        checkedFigures.Add(_gameSpace.figureGrid[gridX + 2, gridY]);
-                                    }
-
-                                    if (_gameSpace.figureGrid[gridX + 1, gridY] != null)
-                                    {
-                                        secondFigureMove = MoveFigureCheck(gridX + 1, gridY, dir, 4, -1);
-                                        checkedFigures.Add(_gameSpace.figureGrid[gridX + 1, gridY]);
-                                    }
-
-                                    if (firstFigureMove && secondFigureMove)
-                                    {
-                                        if (MoveFigureCheck(i, j, dir, 4))
-                                        {
-                                            moveCheck = true;
-                                            if (_gameSpace.figureGrid[gridX + 1, gridY] != null)
-                                            {
-                                                Figure f = _gameSpace.figureGrid[gridX + 1, gridY];
-                                                _fPos = f.GetPosition();
-                                                int x = (_fPos.x) + _gridXOffsetFromWorld;
-                                                int y = (_fPos.y);
-                                                foreach (Vector2Int pos in f.GetForm())
-                                                {
-                                                    _gameSpace.figureGrid[x + pos.x, y - pos.y] = null;
-                                                }
-                                            }
-                                            if (_gameSpace.figureGrid[gridX + 2, gridY] != null)
-                                            {
-                                                Figure f = _gameSpace.figureGrid[gridX + 2, gridY];
-                                                _fPos = f.GetPosition();
-                                                int x = (_fPos.x) + _gridXOffsetFromWorld;
-                                                int y = (_fPos.y);
-                                                foreach (Vector2Int pos in f.GetForm())
-                                                {
-                                                    _gameSpace.figureGrid[x + pos.x, y - pos.y] = null;
-                                                }
-                                            }
-                                        }
-                                        else
-                                        {
-                                            if(_gameSpace.figureGrid[gridX + 2, gridY] == null &&
-                                                _gameSpace.figureGrid[gridX + 1, gridY] != null)
-                                            {
-                                                Figure f = _gameSpace.figureGrid[gridX + 1, gridY];
-                                                _fPos = f.GetPosition();
-                                                int x = (_fPos.x) + _gridXOffsetFromWorld;
-                                                int y = (_fPos.y);
-                                                foreach (Vector2Int pos in f.GetForm())
-                                                {
-                                                    _gameSpace.figureGrid[x + pos.x, y - pos.y] = null;
-                                                }
-                                            }
-                                            moveCheck = false; 
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if(firstFigureMove)
-                                        {
-                                            if (_gameSpace.figureGrid[gridX + 2, gridY] != null)
-                                            {
-                                                if (_gameSpace.figureGrid[gridX + 2, gridY].Height > 0.2f)
-                                                {
-                                                    moveCheck = MoveFigureCheck(i, j, dir, 4);
-
-                                                    if (moveCheck)
-                                                    {
-                                                        if (_gameSpace.figureGrid[gridX + 1, gridY] != null)
-                                                        {
-                                                            Figure f = _gameSpace.figureGrid[gridX + 1, gridY];
-                                                            _fPos = f.GetPosition();
-                                                            int x = (_fPos.x) + _gridXOffsetFromWorld;
-                                                            int y = (_fPos.y);
-                                                            foreach (Vector2Int pos in f.GetForm())
-                                                            {
-                                                                _gameSpace.figureGrid[x + pos.x, y - pos.y] = null;
-                                                            }
-                                                        }
-                                                        if (_gameSpace.figureGrid[gridX + 2, gridY] != null)
-                                                        {
-                                                            Figure f = _gameSpace.figureGrid[gridX + 2, gridY];
-                                                            _fPos = f.GetPosition();
-                                                            int x = (_fPos.x) + _gridXOffsetFromWorld;
-                                                            int y = (_fPos.y);
-                                                            foreach (Vector2Int pos in f.GetForm())
-                                                            {
-                                                                _gameSpace.figureGrid[x + pos.x, y - pos.y] = null;
-                                                            }
-                                                        }
-                                                    }
-                                                    else
-                                                    {
-                                                        moveCheck = false;
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    moveCheck = false;
-                                                }
-                                            }
-                                            else
-                                                moveCheck = false;
-                                        }
-                                    }
-                                }
-                                else
-                                    moveCheck = MoveFigureCheck(i, j, dir);
-                            }
-                        }
-
-                        if (moveCheck)
-                        {
-                            foreach (Vector2Int pos in lastFigure.GetForm())
-                            {
-                                _gameSpace.figureGrid[gridX + pos.x, gridY - pos.y] = null;
-                            }
-                        }
-                    }
-                }
-
+            foreach (Vector2Int pos in figure.GetForm())
+            {
+                _gameSpace.figureGrid[gridX + pos.x, gridY - pos.y] = figure;
+            }
         }
-        else
-        {
-            List<Figure> checkedFigures = new List<Figure>();
-            for (int i = 0; i < _gameSpace.width; i++)
-                for (int j = 0; j < _gameSpace.height; j++)
-                {
-                    if (!checkedFigures.Contains(_gameSpace.figureGrid[i, j]) && _gameSpace.figureGrid[i, j] != null)
-                    {
-                        checkedFigures.Add(_gameSpace.figureGrid[i, j]);
-                        Figure lastFigure = _gameSpace.figureGrid[i, j];
 
-                        Vector2Int _fPos = lastFigure.GetPosition();
-                        int gridX = (_fPos.x) + _gridXOffsetFromWorld;
-                        int gridY = (_fPos.y);
-
-                        bool moveCheck = true;
-
-                        if (_trayBorders)
-                        {
-                            if (lastFigure.Index == 8) // Проверка на колбасу
-                            {
-                                if (_gameSpace.figureGrid[gridX + 1, gridY] != null)
-                                {
-                                    checkedFigures.Add(_gameSpace.figureGrid[gridX + 1, gridY]);
-                                    if (MoveFigureCheck(gridX + 1, gridY, dir, 8, -1))
-                                    {
-                                        if (MoveFigureCheck(i, j, dir, 8))
-                                        {
-                                            moveCheck = true;
-                                            Figure f = _gameSpace.figureGrid[gridX + 1, gridY];
-                                            _fPos = f.GetPosition();
-                                            int x = (_fPos.x) + _gridXOffsetFromWorld;
-                                            int y = (_fPos.y);
-                                            foreach (Vector2Int pos in f.GetForm())
-                                            {
-                                                _gameSpace.figureGrid[x + pos.x, y - pos.y] = null;
-                                            }
-                                        }
-                                        else
-                                        {
-                                            moveCheck = false;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        moveCheck = false;
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                if (lastFigure.Index == 4) // Проверка на краба
-                                {
-                                    bool firstFigureMove = true;
-                                    bool secondFigureMove = true;
-
-                                    if (_gameSpace.figureGrid[gridX + 2, gridY] != null)
-                                    {
-                                        firstFigureMove = MoveFigureCheck(gridX + 2, gridY, dir, 4, -2);
-                                        checkedFigures.Add(_gameSpace.figureGrid[gridX + 2, gridY]);
-                                    }
-
-                                    if (_gameSpace.figureGrid[gridX + 1, gridY] != null)
-                                    {
-                                        secondFigureMove = MoveFigureCheck(gridX + 1, gridY, dir, 4, -1);
-                                        checkedFigures.Add(_gameSpace.figureGrid[gridX + 1, gridY]);
-                                    }
-
-                                    if (firstFigureMove && secondFigureMove)
-                                    {
-                                        if (MoveFigureCheck(i, j, dir, 4))
-                                        {
-                                            moveCheck = true;
-                                            if (_gameSpace.figureGrid[gridX + 1, gridY] != null)
-                                            {
-                                                Figure f = _gameSpace.figureGrid[gridX + 1, gridY];
-                                                _fPos = f.GetPosition();
-                                                int x = (_fPos.x) + _gridXOffsetFromWorld;
-                                                int y = (_fPos.y);
-                                                foreach (Vector2Int pos in f.GetForm())
-                                                {
-                                                    _gameSpace.figureGrid[x + pos.x, y - pos.y] = null;
-                                                }
-                                            }
-                                            if (_gameSpace.figureGrid[gridX + 2, gridY] != null)
-                                            {
-                                                Figure f = _gameSpace.figureGrid[gridX + 2, gridY];
-                                                _fPos = f.GetPosition();
-                                                int x = (_fPos.x) + _gridXOffsetFromWorld;
-                                                int y = (_fPos.y);
-                                                foreach (Vector2Int pos in f.GetForm())
-                                                {
-                                                    _gameSpace.figureGrid[x + pos.x, y - pos.y] = null;
-                                                }
-                                            }
-                                        }
-                                        else
-                                        {
-                                            if (_gameSpace.figureGrid[gridX + 1, gridY] == null &&
-                                                _gameSpace.figureGrid[gridX + 2, gridY] != null)
-                                            {
-                                                Figure f = _gameSpace.figureGrid[gridX + 2, gridY];
-                                                _fPos = f.GetPosition();
-                                                int x = (_fPos.x) + _gridXOffsetFromWorld;
-                                                int y = (_fPos.y);
-                                                foreach (Vector2Int pos in f.GetForm())
-                                                {
-                                                    _gameSpace.figureGrid[x + pos.x, y - pos.y] = null;
-                                                }
-                                            }
-                                            moveCheck = false;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (secondFigureMove)
-                                        {
-                                            if (_gameSpace.figureGrid[gridX + 1, gridY] != null)
-                                            {
-                                                if (_gameSpace.figureGrid[gridX + 1, gridY].Height > 0.2f)
-                                                {
-                                                    moveCheck = MoveFigureCheck(i, j, dir, 4);
-
-                                                    if (moveCheck)
-                                                    {
-                                                        if (_gameSpace.figureGrid[gridX + 1, gridY] != null)
-                                                        {
-                                                            Figure f = _gameSpace.figureGrid[gridX + 1, gridY];
-                                                            _fPos = f.GetPosition();
-                                                            int x = (_fPos.x) + _gridXOffsetFromWorld;
-                                                            int y = (_fPos.y);
-                                                            foreach (Vector2Int pos in f.GetForm())
-                                                            {
-                                                                _gameSpace.figureGrid[x + pos.x, y - pos.y] = null;
-                                                            }
-                                                        }
-                                                        if (_gameSpace.figureGrid[gridX + 2, gridY] != null)
-                                                        {
-                                                            Figure f = _gameSpace.figureGrid[gridX + 2, gridY];
-                                                            _fPos = f.GetPosition();
-                                                            int x = (_fPos.x) + _gridXOffsetFromWorld;
-                                                            int y = (_fPos.y);
-                                                            foreach (Vector2Int pos in f.GetForm())
-                                                            {
-                                                                _gameSpace.figureGrid[x + pos.x, y - pos.y] = null;
-                                                            }
-                                                        }
-                                                    }
-                                                    else
-                                                    { 
-                                                        moveCheck = false;
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    moveCheck = false;
-                                                }
-                                            }
-                                            else
-                                                moveCheck = false;
-                                        }
-                                    }
-                                }
-                                else
-                                    moveCheck = MoveFigureCheck(i, j, dir);
-                            }
-                        }
-
-                        if (moveCheck)
-                        {
-                            foreach (Vector2Int pos in lastFigure.GetForm())
-                            {
-                                _gameSpace.figureGrid[gridX + pos.x, gridY - pos.y] = null;
-                            }
-                        }
-                    }
-                }
-        }
-    }
-
-    private bool MoveFigureCheck(int x, int y, int dir)
+    } 
+    private void NewVerticalMoveFigureList()
     {
-        Vector2Int _fPos = _gameSpace.figureGrid[x, y].GetPosition();
-        int gridX = (_fPos.x) + _gridXOffsetFromWorld;
-        int gridY = (_fPos.y);
-        foreach (Vector2Int pos in _gameSpace.figureGrid[x, y].GetForm())
-        {
-            if (gridY - pos.y == 0 &&
-                (gridX + pos.x + dir == _rightGridConstrain
-                || gridX + pos.x + dir < _leftGridConstrain))
-            {
-                return false;
-            }
-            if (gridX + pos.x + dir >= _gameSpace.width)
-            {
-                return false;
-            }
+        bool[,] gridMask = new bool[_gameSpace.width, _gameSpace.height];
+        
+        for (int i = 0; i < _gameSpace.width; i++)
+            for (int j = 0; j < _gameSpace.height; j++)
+                gridMask[i, j] = false;
 
-            if (_gameSpace.figureGrid[gridX + pos.x + dir, gridY - pos.y] != _gameSpace.figureGrid[x, y] &&
-                    _gameSpace.figureGrid[gridX + pos.x + dir, gridY - pos.y] != null)
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private bool MoveFigureCheck(int x, int y, int dir, int index)
-    {
-        Vector2Int _fPos = _gameSpace.figureGrid[x, y].GetPosition();
-        int gridX = (_fPos.x) + _gridXOffsetFromWorld;
-        int gridY = (_fPos.y);
-        foreach (Vector2Int pos in _gameSpace.figureGrid[x, y].GetForm())
-        {
-            if (pos.y == 0 && (gridX + pos.x + dir == gridX + 1 
-                || (index == 4 && gridX + pos.x + dir == gridX + 2)))
-                continue;
-
-            if (gridY - pos.y == 0 &&
-                (gridX + pos.x + dir == _rightGridConstrain
-                || gridX + pos.x + dir < _leftGridConstrain))
-            {
-                return false;
-            }
-            if (gridX + pos.x + dir >= _gameSpace.width)
-            {
-                return false;
-            }
-
-            if (_gameSpace.figureGrid[gridX + pos.x + dir, gridY - pos.y] != _gameSpace.figureGrid[x, y] &&
-                    _gameSpace.figureGrid[gridX + pos.x + dir, gridY - pos.y] != null)
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private bool MoveFigureCheck(int x, int y, int dir, int index, int correction)
-    {
-        Vector2Int _fPos = _gameSpace.figureGrid[x, y].GetPosition();
-        int gridX = (_fPos.x) + _gridXOffsetFromWorld;
-        int gridY = (_fPos.y);
-        int leftX = x + correction;
-        int rightX = leftX + ((index == 4) ? 3 : 2);
-        foreach (Vector2Int pos in _gameSpace.figureGrid[x, y].GetForm())
-        {
-            if (gridY - pos.y == y &&
-                (gridX + pos.x + dir == leftX || gridX + pos.x + dir == rightX))
-                continue;
-            if (gridY - pos.y == 0 &&
-                (gridX + pos.x + dir == _rightGridConstrain
-                || gridX + pos.x + dir < _leftGridConstrain))
-            {
-                return false;
-            }
-            if (gridX + pos.x + dir >= _gameSpace.width)
-            {
-                return false;
-            }
-
-            if (_gameSpace.figureGrid[gridX + pos.x + dir, gridY - pos.y] != _gameSpace.figureGrid[x, y] &&
-                    _gameSpace.figureGrid[gridX + pos.x + dir, gridY - pos.y] != null)
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private void VerticalMoveFigureList()
-    {
-        List<Figure> checkedFigures = new List<Figure>();
-        int gridXFlying = -100;
-        int gridYFlying = -100;
         if (_flyingFigure != null)
         {
             Vector2Int _flyingFigurePos = _flyingFigure.GetPosition();
-            gridXFlying = (_flyingFigurePos.x) + _gridXOffsetFromWorld;
-            gridYFlying = (_flyingFigurePos.y);
+            int gridXFlying = (_flyingFigurePos.x) + _gridXOffsetFromWorld;
+            int gridYFlying = (_flyingFigurePos.y);
+
+            foreach (Vector2Int pos in _flyingFigure.GetForm())
+                gridMask[gridXFlying + pos.x, gridYFlying - pos.y] = true;
         }
 
-        for (int i = 0; i < _gameSpace.width; i++)
-            for (int j = 1; j < _gameSpace.height; j++)
+        for (int j = 0; j < _gameSpace.height; j++)
+            for (int i = _gridXOffsetFromWorld; i < _gameSpace.width; i++)
             {
-                if (!checkedFigures.Contains(_gameSpace.figureGrid[i, j]) && _gameSpace.figureGrid[i, j] != null)
+                if (_gameSpace.figureGrid[i, j] != null && !gridMask[i, j])
                 {
-                    checkedFigures.Add(_gameSpace.figureGrid[i, j]);
-                    Figure lastFigure = _gameSpace.figureGrid[i, j];
+                    Vector2Int figurePos = _gameSpace.figureGrid[i, j].GetPosition();
+                    int gridX = (figurePos.x) + _gridXOffsetFromWorld;
+                    int gridY = (figurePos.y);
 
-                    Vector2Int _fPos = lastFigure.GetPosition();
-                    int gridX = (_fPos.x) + _gridXOffsetFromWorld;
-                    int gridY = (_fPos.y);
+                    bool bordured = false;
 
-                    bool moveCheck = true;
-
-                    
-                    foreach (Vector2Int pos in lastFigure.GetForm())
+                    foreach (Vector2Int pos in _gameSpace.figureGrid[i, j].GetForm())
                     {
-                        if (gridY - pos.y == 0)
+                        if (gridY - pos.y - 1 >= 0)
                         {
-                            moveCheck = false;
-                            break;
-                        }
-                        if (_gameSpace.figureGrid[gridX + pos.x, gridY - pos.y - 1] != lastFigure &&
-                            _gameSpace.figureGrid[gridX + pos.x, gridY - pos.y - 1] != null)
-                        {
-                            moveCheck = false;
-                            break;
-                        }
-
-                        if (_flyingFigure != null)
-                        {
-                            foreach (Vector2Int p in _flyingFigure.GetForm())
+                            if (gridMask[gridX + pos.x, gridY - pos.y - 1])
                             {
-                                if (gridX + pos.x == gridXFlying + p.x &&
-                                    gridY - pos.y - 1 == gridYFlying - p.y)
-                                {
-                                    moveCheck = false;
-                                    break;
-                                }
+                                bordured = true;
+                                break;
                             }
                         }
-                    }
-                   
-
-                    if (moveCheck)
-                    {
-                        foreach (Vector2Int pos in lastFigure.GetForm())
+                        else
                         {
-                            _gameSpace.figureGrid[gridX + pos.x, gridY - pos.y] = null;
+                            bordured = true;
+                            break;
+                        }
+                    }
+
+                    if (bordured)
+                    {
+                        foreach (Vector2Int pos in _gameSpace.figureGrid[i, j].GetForm())
+                        {
+                            gridMask[gridX + pos.x, gridY - pos.y] = true;
                         }
                     }
                 }
             }
 
-        foreach (Figure f in _figureList)
+        for (int i = 0; i < _figureList.Count; i++)
         {
-            Vector2Int _fPos = f.GetPosition();
-            int gridX = (_fPos.x) + _gridXOffsetFromWorld;
-            int gridY = (_fPos.y);
-            
-            bool checkGridSpace = false;
+            Vector2Int figurePos = _figureList[i].GetPosition();
+            int gridX = (figurePos.x) + _gridXOffsetFromWorld;
+            int gridY = (figurePos.y);
 
-
-            foreach (Vector2Int pos in f.GetForm())
+            if (!gridMask[gridX + _figureList[i].GetForm()[0].x, gridY - _figureList[i].GetForm()[0].y])
             {
-                if (_gameSpace.figureGrid[gridX + pos.x, gridY - pos.y] != null)
+                foreach (Vector2Int pos in _figureList[i].GetForm())
                 {
-                    checkGridSpace = true;
-                    break;
+                    _gameSpace.figureGrid[gridX + pos.x, gridY - pos.y] = null;
                 }
-            }
 
-            if (!checkGridSpace)
-            {
-                f.Fall();
-                foreach (Vector2Int pos in f.GetForm())
+                foreach (Vector2Int pos in _figureList[i].GetForm())
                 {
-                    _gameSpace.figureGrid[gridX + pos.x, gridY - pos.y - 1] = f;
+                    _gameSpace.figureGrid[gridX + pos.x, gridY - pos.y - 1] = _figureList[i];
                 }
-            }
 
+                _figureList[i].Fall();
+            }
         }
-    }
 
+    }
     private void DashMode(InputAction.CallbackContext context)
     {
         if (_dashOffOnSpawning && !_playerController.Tetris.Dash.triggered)

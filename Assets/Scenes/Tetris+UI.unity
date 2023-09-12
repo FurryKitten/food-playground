@@ -6843,7 +6843,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 475acad5a24ee9d458dc86e1f15eace6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _figureStartPos: {x: 6, y: 11}
+  _figureStartPos: {x: 7, y: 11}
   _figureSOPrefabs:
   - {fileID: 11400000, guid: 4311b3a43f546744fa8f765685d1ab2f, type: 2}
   - {fileID: 11400000, guid: 5efa8af6713304441a712a5a6e361f07, type: 2}
