@@ -461,7 +461,6 @@ public class Tetris : MonoBehaviour, IService
                                 newJ = gridY - pos.y;
                         }
                         i = (dir > 0) ? _gameSpace.width - 1 : 0;
-                        Debug.Log(_gameSpace.figureGrid[i, j].Index);
                     }
                     
                 }
