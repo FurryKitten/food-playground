@@ -22,6 +22,7 @@ public class Figure : MonoBehaviour
     private float _step = 0.7f;
     private float _targetStep = 0f;
     private bool _shaderStateGold2Spoiled = false;
+    private bool _figureDestroyed = false;
 
     public void Init(FigureSO figure)
     {
@@ -156,6 +157,8 @@ public class Figure : MonoBehaviour
             yield return null; 
         }
         _shaderAnimation = false;
+        if (_figureDestroyed)
+            Destroy(this.gameObject);
        // Debug.Log("Animation end");
     }
 
@@ -170,6 +173,21 @@ public class Figure : MonoBehaviour
     public void DestroySpoiler()
     {
         // TO DO: Start animation of destroy spoiler
+    }
+
+    public void CreateTriplet()
+    {
+        ServiceLocator.Current.Get<GameState>().AddTrayMoney(GetProfit());
+        SetDoubleCost();
+    }
+    public void CombineIntoTriplet()
+    {
+        _material.SetInt("_Normal2Disappear", 1);
+        _targetStep = 0;
+        _figureDestroyed = true;
+        ServiceLocator.Current.Get<GameState>().AddTrayMoney(GetFine());
+        if (!_shaderAnimation)
+            StartCoroutine(ShaderAnimation());
     }
 
     public int Index

@@ -792,7 +792,7 @@ public class Tetris : MonoBehaviour, IService
                     _figureList[i].ChangeSpoiledStatus(false);
 
             }
-            else 
+            else if(!_figureList[i].IsGold)
             {
                 List<Vector2Int> tripletList = new List<Vector2Int>();
                 Vector2Int fPos = _figureList[i].GetPosition();
@@ -886,12 +886,12 @@ public class Tetris : MonoBehaviour, IService
                 if(tripletList.Count > 1)
                 {
                     Debug.Log(tripletList.Count);
-                    _figureList[i].SetDoubleCost();
+                    _figureList[i].CreateTriplet();
 
                     for(int j = 0; j < 2; ++j)
                     {
-                        Vector2Int fPosition = tripletList[j];
-                        int gridXx = (fPosition.x) + _gridXOffsetFromWorld;
+                        Vector2Int fPosition = _gameSpace.figureGrid[tripletList[j].x, tripletList[j].y].GetPosition();
+                        int gridXx = (fPosition.x + _gridXOffsetFromWorld);
                         int gridYy = (fPosition.y);
 
                         deletedFigures.Add(_gameSpace.figureGrid[tripletList[j].x, tripletList[j].y]);
@@ -909,7 +909,7 @@ public class Tetris : MonoBehaviour, IService
         {
             foreach (Figure figure in deletedFigures)
             {
-                figure.FlyAway();
+                figure.CombineIntoTriplet();
                 _figureList.Remove(figure);
             }
             _handControls.AddFigures(_figureList);
