@@ -7,7 +7,9 @@ public class Figure : MonoBehaviour
     [SerializeField] float _mass = 1.0f;
     [SerializeField] Vector2 _centerMass;
     [SerializeField] Material _figureMaterial;
-    
+    [SerializeField] GameObject _spoiledParticleSystem;
+    [SerializeField] GameObject _goldParticleSystem;
+
     private Transform _transform;
     private Vector2Int _centerPos; // TODO: pivot to top left corner
     private Vector2Int[] _form;
@@ -173,12 +175,14 @@ public class Figure : MonoBehaviour
     public void DestroySpoiler()
     {
         // TO DO: Start animation of destroy spoiler
+        Instantiate(_spoiledParticleSystem, _transform.position, Quaternion.identity);
     }
 
     public void CreateTriplet()
     {
         ServiceLocator.Current.Get<GameState>().AddTrayMoney(GetProfit());
         SetDoubleCost();
+        Instantiate(_goldParticleSystem, _transform.position, Quaternion.identity);
     }
     public void CombineIntoTriplet()
     {

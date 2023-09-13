@@ -50,6 +50,8 @@ MonoBehaviour:
   _mass: 1
   _centerMass: {x: 0, y: 0}
   _figureMaterial: {fileID: 2100000, guid: 7b72ac1b9e4068e4a827893cee4c31d4, type: 2}
+  _spoiledParticleSystem: {fileID: 3396146216869232387, guid: dcafe076dfa06d549bb6e40dfb3b6df1, type: 3}
+  _goldParticleSystem: {fileID: 164286268459053003, guid: 8272c8983a3833b4dbd5d47fcada94a7, type: 3}
 --- !u!50 &-5777737962150397007
 Rigidbody2D:
   serializedVersion: 4
