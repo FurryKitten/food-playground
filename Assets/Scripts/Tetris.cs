@@ -547,10 +547,17 @@ public class Tetris : MonoBehaviour, IService
             if(!gridMask[gridX + _figureList[i].GetForm()[0].x, gridY - _figureList[i].GetForm()[0].y])
             {
                 _figureList[i].HorizontalMove(dir);
-
                 foreach(Vector2Int pos in _figureList[i].GetForm())
                 {
-                    if(gridX + dir + pos.x < _leftGridConstrain || gridX + dir + pos.x == _rightGridConstrain)
+                    if(gridX + dir + pos.x < _leftGridConstrain-1 || gridX + dir + pos.x > _rightGridConstrain)
+                    {
+                        lostFigureIndexes.Add(i);
+                        _figureList[i].FlyAway(dir);
+                        _onFigureFall?.Invoke();
+                        break;
+                    }
+                    else if ((gridX + dir + pos.x < _leftGridConstrain || gridX + dir + pos.x == _rightGridConstrain)
+                        && _figureList[i].Width < 0.3f)
                     {
                         lostFigureIndexes.Add(i);
                         _figureList[i].FlyAway(dir);
@@ -558,6 +565,7 @@ public class Tetris : MonoBehaviour, IService
                         break;
                     }
                 }
+
             }
         }
 

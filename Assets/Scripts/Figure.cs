@@ -182,7 +182,9 @@ public class Figure : MonoBehaviour
     {
         ServiceLocator.Current.Get<GameState>().AddTrayMoney(GetProfit());
         SetDoubleCost();
-        Instantiate(_goldParticleSystem, _transform.position, Quaternion.identity);
+        Vector3 position = _transform.position;
+        position.x += _width * 2.5f;
+        Instantiate(_goldParticleSystem, position, Quaternion.identity);
     }
     public void CombineIntoTriplet()
     {
