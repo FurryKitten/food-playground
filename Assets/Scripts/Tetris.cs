@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -141,7 +142,6 @@ public class Tetris : MonoBehaviour, IService
             }
         }
     }
-
     private void FinishStage()
     {
         //stop tetris, walk, reset queue
@@ -685,54 +685,58 @@ public class Tetris : MonoBehaviour, IService
         else
             _dashMode = !_dashMode;
     }
-
     private void UseFiguresEffects()
     {
-        foreach(Figure figure in _figureList)
+        List<Figure> deletedFigures = new List<Figure>();
+        for(int i = 0; i < _figureList.Count; ++i)
         {
-            if(figure.Index == 18) // Проверка спойлеров
+            if(_figureList[i].Index == 18) // Проверка спойлеров
             {
-                Vector2Int fPos = figure.GetPosition();
+                Vector2Int fPos = _figureList[i].GetPosition();
                 int gridX = (fPos.x) + _gridXOffsetFromWorld;
                 int gridY = (fPos.y);
 
                 if(gridX + 1 < _rightGridConstrain)
                     if (_gameSpace.figureGrid[gridX + 1, gridY] != null)
                     {
-                        //вызов метода порченья продукта
-                        _gameSpace.figureGrid[gridX + 1, gridY].ChangeSpoiledStatus(true);
+                        if (!deletedFigures.Contains(_gameSpace.figureGrid[gridX + 1, gridY]))
+                            //вызов метода порченья продукта
+                            _gameSpace.figureGrid[gridX + 1, gridY].ChangeSpoiledStatus(true);
                     }
 
                 if (gridX + 1 > _leftGridConstrain)
                     if (_gameSpace.figureGrid[gridX - 1, gridY] != null)
                     {
-                        //вызов метода порченья продукта
-                        _gameSpace.figureGrid[gridX - 1, gridY].ChangeSpoiledStatus(true);
+                        if (!deletedFigures.Contains(_gameSpace.figureGrid[gridX - 1, gridY]))
+                            //вызов метода порченья продукта
+                            _gameSpace.figureGrid[gridX - 1, gridY].ChangeSpoiledStatus(true);
                     }
 
 
                 if (_gameSpace.figureGrid[gridX, gridY + 1] != null)
                 {
-                    //вызов метода порченья продукта
-                    _gameSpace.figureGrid[gridX, gridY + 1].ChangeSpoiledStatus(true);
+                    if (!deletedFigures.Contains(_gameSpace.figureGrid[gridX, gridY + 1]))
+                        //вызов метода порченья продукта
+                        _gameSpace.figureGrid[gridX, gridY + 1].ChangeSpoiledStatus(true);
                 }
 
                 if (gridY - 1  >= 0)
                     if (_gameSpace.figureGrid[gridX, gridY - 1] != null)
                     {
-                        //вызов метода порченья продукта
-                        _gameSpace.figureGrid[gridX, gridY - 1].ChangeSpoiledStatus(true);
+                        if (!deletedFigures.Contains(_gameSpace.figureGrid[gridX, gridY - 1]))
+                            //вызов метода порченья продукта
+                            _gameSpace.figureGrid[gridX, gridY - 1].ChangeSpoiledStatus(true);
                     }
 
             }
-            else if(figure.IsSpoiled)
+            else if(_figureList[i].IsSpoiled)
             {
                 bool checkSpoiler = false;
-                Vector2Int fPos = figure.GetPosition();
+                Vector2Int fPos = _figureList[i].GetPosition();
                 int gridX = (fPos.x) + _gridXOffsetFromWorld;
                 int gridY = (fPos.y);
 
-                foreach (Vector2Int pos in figure.GetForm())
+                foreach (Vector2Int pos in _figureList[i].GetForm())
                 {
                     gridX += pos.x;
                     gridY -= pos.y;
@@ -740,7 +744,8 @@ public class Tetris : MonoBehaviour, IService
                     if (gridX + 1 < _rightGridConstrain)
                         if (_gameSpace.figureGrid[gridX + 1, gridY] != null)
                         {
-                            if (_gameSpace.figureGrid[gridX + 1, gridY].Index == 18)
+                            if (_gameSpace.figureGrid[gridX + 1, gridY].Index == 18 
+                                && !deletedFigures.Contains(_gameSpace.figureGrid[gridX + 1, gridY]))
                             {
                                 checkSpoiler = true;
                                 break;
@@ -750,7 +755,8 @@ public class Tetris : MonoBehaviour, IService
                     if (gridX + 1 > _leftGridConstrain)
                         if (_gameSpace.figureGrid[gridX - 1, gridY] != null)
                         {
-                            if(_gameSpace.figureGrid[gridX - 1, gridY].Index == 18)
+                            if(_gameSpace.figureGrid[gridX - 1, gridY].Index == 18
+                                && !deletedFigures.Contains(_gameSpace.figureGrid[gridX - 1, gridY]))
                             {
                                 checkSpoiler = true;
                                 break;
@@ -759,7 +765,8 @@ public class Tetris : MonoBehaviour, IService
 
                     if (_gameSpace.figureGrid[gridX, gridY + 1] != null)
                     {
-                        if(_gameSpace.figureGrid[gridX, gridY + 1].Index == 18)
+                        if(_gameSpace.figureGrid[gridX, gridY + 1].Index == 18
+                            && !deletedFigures.Contains(_gameSpace.figureGrid[gridX, gridY + 1]))
                         {
                             checkSpoiler = true;
                             break;
@@ -769,7 +776,8 @@ public class Tetris : MonoBehaviour, IService
                     if (gridY - 1 >= 0)
                         if (_gameSpace.figureGrid[gridX, gridY - 1] != null)
                         {
-                            if(_gameSpace.figureGrid[gridX, gridY - 1].Index == 18)
+                            if(_gameSpace.figureGrid[gridX, gridY - 1].Index == 18
+                                && !deletedFigures.Contains(_gameSpace.figureGrid[gridX, gridY - 1]))
                             {
                                 checkSpoiler = true;
                                 break;
@@ -781,41 +789,156 @@ public class Tetris : MonoBehaviour, IService
                 }
 
                 if (!checkSpoiler)
-                    figure.ChangeSpoiledStatus(false);
+                    _figureList[i].ChangeSpoiledStatus(false);
 
             }
+            else 
+            {
+                List<Vector2Int> tripletList = new List<Vector2Int>();
+                Vector2Int fPos = _figureList[i].GetPosition();
+                int gridX = (fPos.x) + _gridXOffsetFromWorld;
+                int gridY = (fPos.y);
+
+                foreach (Vector2Int pos in _figureList[i].GetForm())
+                {
+                    gridX += pos.x;
+                    gridY -= pos.y;
+
+                    if (gridX + 1 < _rightGridConstrain)
+                        if (_gameSpace.figureGrid[gridX + 1, gridY] != null 
+                            && _gameSpace.figureGrid[gridX + 1, gridY] != _figureList[i])
+                        {
+                            if (_gameSpace.figureGrid[gridX + 1, gridY].Index == _figureList[i].Index 
+                                && !_gameSpace.figureGrid[gridX + 1, gridY].IsSpoiled
+                                && !_gameSpace.figureGrid[gridX + 1, gridY].IsGold
+                                && !deletedFigures.Contains(_gameSpace.figureGrid[gridX + 1, gridY]))
+                            {
+                                Vector2Int figureAncor = new Vector2Int(_gameSpace.figureGrid[gridX + 1, gridY].GetPosition().x 
+                                    + _gameSpace.figureGrid[gridX + 1, gridY].GetForm()[0].x + _gridXOffsetFromWorld,
+                                         _gameSpace.figureGrid[gridX + 1, gridY].GetPosition().y - _gameSpace.figureGrid[gridX + 1, gridY].GetForm()[0].y);
+                                if (!tripletList.Contains(figureAncor))
+                                {
+                                    tripletList.Add(figureAncor);
+                                }
+                            }
+                        }
+
+                    if (gridX + 1 > _leftGridConstrain)
+                        if (_gameSpace.figureGrid[gridX - 1, gridY] != null
+                            && _gameSpace.figureGrid[gridX - 1, gridY] != _figureList[i])
+                        {
+                            if (_gameSpace.figureGrid[gridX - 1, gridY].Index == _figureList[i].Index
+                                && !_gameSpace.figureGrid[gridX - 1, gridY].IsSpoiled
+                                && !_gameSpace.figureGrid[gridX - 1, gridY].IsGold
+                                && !deletedFigures.Contains(_gameSpace.figureGrid[gridX - 1, gridY]))
+                            {
+                                Vector2Int figureAncor = new Vector2Int(_gameSpace.figureGrid[gridX - 1, gridY].GetPosition().x 
+                                    + _gameSpace.figureGrid[gridX - 1, gridY].GetForm()[0].x + _gridXOffsetFromWorld,
+                                         _gameSpace.figureGrid[gridX - 1, gridY].GetPosition().y - _gameSpace.figureGrid[gridX - 1, gridY].GetForm()[0].y);
+                                if (!tripletList.Contains(figureAncor))
+                                {
+                                    tripletList.Add(figureAncor);
+                                }
+                            }
+                        }
+
+                    if (_gameSpace.figureGrid[gridX, gridY + 1] != null
+                            && _gameSpace.figureGrid[gridX, gridY + 1] != _figureList[i])
+                    {
+                        if (_gameSpace.figureGrid[gridX, gridY + 1].Index == _figureList[i].Index
+                                && !_gameSpace.figureGrid[gridX, gridY + 1].IsSpoiled
+                                && !_gameSpace.figureGrid[gridX, gridY + 1].IsGold
+                                && !deletedFigures.Contains(_gameSpace.figureGrid[gridX, gridY + 1]))
+                        {
+                            Vector2Int figureAncor = new Vector2Int(_gameSpace.figureGrid[gridX, gridY + 1].GetPosition().x 
+                                + _gameSpace.figureGrid[gridX, gridY + 1].GetForm()[0].x + _gridXOffsetFromWorld,
+                                         _gameSpace.figureGrid[gridX, gridY + 1].GetPosition().y - _gameSpace.figureGrid[gridX, gridY + 1].GetForm()[0].y);
+                            if (!tripletList.Contains(figureAncor))
+                            {
+                                tripletList.Add(figureAncor);
+                            }
+                        }
+                    }
+
+                    if (gridY - 1 >= 0)
+                        if (_gameSpace.figureGrid[gridX, gridY - 1] != null
+                            && _gameSpace.figureGrid[gridX, gridY - 1] != _figureList[i])
+                        {
+                            if (_gameSpace.figureGrid[gridX, gridY - 1].Index == _figureList[i].Index
+                                && !_gameSpace.figureGrid[gridX, gridY - 1].IsSpoiled
+                                && !_gameSpace.figureGrid[gridX, gridY - 1].IsGold
+                                && !deletedFigures.Contains(_gameSpace.figureGrid[gridX, gridY - 1]))
+                            {
+                                Vector2Int figureAncor = new Vector2Int(_gameSpace.figureGrid[gridX, gridY - 1].GetPosition().x 
+                                    + _gameSpace.figureGrid[gridX, gridY - 1].GetForm()[0].x + _gridXOffsetFromWorld,
+                                        _gameSpace.figureGrid[gridX, gridY - 1].GetPosition().y - _gameSpace.figureGrid[gridX, gridY - 1].GetForm()[0].y);
+                                if (!tripletList.Contains(figureAncor))
+                                {
+                                    tripletList.Add(figureAncor);
+                                }
+                            }
+                        }
+
+                    gridX -= pos.x;
+                    gridY += pos.y;
+                }
+
+                if(tripletList.Count > 1)
+                {
+                    Debug.Log(tripletList.Count);
+                    _figureList[i].SetDoubleCost();
+
+                    for(int j = 0; j < 2; ++j)
+                    {
+                        Vector2Int fPosition = tripletList[j];
+                        int gridXx = (fPosition.x) + _gridXOffsetFromWorld;
+                        int gridYy = (fPosition.y);
+
+                        deletedFigures.Add(_gameSpace.figureGrid[tripletList[j].x, tripletList[j].y]);
+
+                        foreach(Vector2Int pos in _gameSpace.figureGrid[tripletList[j].x, tripletList[j].y].GetForm())
+                        {
+                            _gameSpace.figureGrid[gridXx + pos.x, gridYy - pos.y] = null;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (deletedFigures.Count > 0)
+        {
+            foreach (Figure figure in deletedFigures)
+            {
+                figure.FlyAway();
+                _figureList.Remove(figure);
+            }
+            _handControls.AddFigures(_figureList);
         }
     }
-
     private void GenerateQueue()
     {
         for(int i = 0; i < _queueSize; i++)
             _figureSOIdQueue.Enqueue(Random.Range(0, _figureSOPrefabs.Length));
     }
-
     private void GenerateQueue(int queueSize)
     {
         for (int i = 0; i < queueSize; i++)
             _figureSOIdQueue.Enqueue(Random.Range(0, _figureSOPrefabs.Length));
     }
-
     public void SetDoubleCost()
     {
         _doubleCost = true;
     }
-
     public void SetTrayBorders()
     {
         _trayBorders = true;
     }
-
     public void SetGridWidth(int trayWidth) // TO DO: use Unity Event
     {
         _leftGridConstrain -= 1;
         _rightGridConstrain += 1;
         _trayNumber = Mathf.RoundToInt((trayWidth - 10) * 0.5f);
     }
-
     public void DropAllFigures()
     {
         foreach(Figure figure in _figureList)
@@ -827,7 +950,6 @@ public class Tetris : MonoBehaviour, IService
 
         ServiceLocator.Current.Get<AudioService>().PlayTetrisJingle();
     }
-    
     public void ResetTetris()
     {
         for (int i = 0; i < _gameSpace.width; ++i)

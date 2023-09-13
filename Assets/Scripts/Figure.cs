@@ -183,4 +183,7 @@ public class Figure : MonoBehaviour
 
     public float Width
     { get { return _width; } }
+
+    public bool IsGold
+    { get { return _doubleCost; } }
 }
