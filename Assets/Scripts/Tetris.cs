@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
-using static UnityEditor.PlayerSettings;
 using Random = UnityEngine.Random;
 
 public struct Grid
@@ -281,7 +279,6 @@ public class Tetris : MonoBehaviour, IService
     {
         if (_figureSOIdQueue.TryPeek(out int figureSOId)) // Фигура заспавнилась
         {
-
             Vector2 posParent = transform.parent.position;
             _flyingFigure = Instantiate(_defaultFigure, transform.parent);
             _flyingFigure.Init(_figureSOPrefabs[figureSOId]);
@@ -346,6 +343,13 @@ public class Tetris : MonoBehaviour, IService
                 _dashMode = false;
                 _dashOffOnSpawning = true;
             }
+
+            // Обновление UI очереди
+            if (_figureSOIdQueue.TryPeek(out int nextFigureSOId))
+                ServiceLocator.Current.Get<GameState>().ChangeFigureInOrder(nextFigureSOId);
+            else
+                ServiceLocator.Current.Get<GameState>().ChangeFigureInOrder(25);
+
             return true;
         }
         
@@ -443,7 +447,7 @@ public class Tetris : MonoBehaviour, IService
                     
                     foreach (Vector2Int pos in _gameSpace.figureGrid[i, j].GetForm())
                     {
-                        if (gridX + pos.x > 0 && gridX + pos.x < _gameSpace.width)
+                        if (gridX + pos.x >= 0 && gridX + pos.x < _gameSpace.width)
                             if (gridMask[gridX + pos.x, gridY - pos.y])
                             {
                                 bordured = true;
@@ -453,12 +457,9 @@ public class Tetris : MonoBehaviour, IService
 
                     if (bordured)
                     {
-                        int newJ = j;
                         foreach (Vector2Int pos in _gameSpace.figureGrid[i, j].GetForm())
                         {
                             gridMask[gridX + pos.x - dir, gridY - pos.y] = true;
-                            if (newJ > gridY - pos.y)
-                                newJ = gridY - pos.y;
                         }
                         i = (dir > 0) ? _gameSpace.width - 1 : 0;
                     }
@@ -547,23 +548,47 @@ public class Tetris : MonoBehaviour, IService
             if(!gridMask[gridX + _figureList[i].GetForm()[0].x, gridY - _figureList[i].GetForm()[0].y])
             {
                 _figureList[i].HorizontalMove(dir);
-                foreach(Vector2Int pos in _figureList[i].GetForm())
+
+                bool lost = false;
+
+                foreach (Vector2Int pos in _figureList[i].GetForm())
                 {
-                    if(gridX + dir + pos.x < _leftGridConstrain-1 || gridX + dir + pos.x > _rightGridConstrain)
+                    if(gridX + dir + pos.x < _leftGridConstrain || gridX + dir + pos.x == _rightGridConstrain)
                     {
-                        lostFigureIndexes.Add(i);
-                        _figureList[i].FlyAway(dir);
-                        _onFigureFall?.Invoke();
-                        break;
+                        lost = true;
+                        if (_figureList[i].Index != 0 && _figureList[i].Index != 14 
+                            && _figureList[i].Index != 15 && _figureList[i].Index != 21)
+                        {
+                            break;
+                        } 
+                        
                     }
-                    else if ((gridX + dir + pos.x < _leftGridConstrain || gridX + dir + pos.x == _rightGridConstrain)
-                        && _figureList[i].Width < 0.3f)
+                    else
                     {
-                        lostFigureIndexes.Add(i);
-                        _figureList[i].FlyAway(dir);
-                        _onFigureFall?.Invoke();
-                        break;
+                        if (_figureList[i].Index != 0 && _figureList[i].Index != 14
+                            && _figureList[i].Index != 15 && _figureList[i].Index != 21)
+                        {
+                            continue;
+                        }
+                        Debug.Log(_figureList[i].Index);
+                        Debug.Log(gridX + 2 * dir + pos.x);
+                        if (gridX + 2 * dir + pos.x == _leftGridConstrain - 1 || gridX + 2 * dir + pos.x == _rightGridConstrain)
+                        {
+                            if (gridMask[gridX + 2 * dir + pos.x, gridY - pos.y])
+                            {
+                                lost = false;
+                                Debug.Log("bordured");
+                                break;
+                            }
+                        }
                     }
+                }
+
+                if (lost)
+                {
+                    lostFigureIndexes.Add(i);
+                    _figureList[i].FlyAway(dir);
+                    _onFigureFall?.Invoke();
                 }
 
             }

@@ -23,6 +23,7 @@ public class GameState : MonoBehaviour, IService
     [SerializeField] private UnityEvent _onMoneyChange;
     [SerializeField] private UnityEvent _onTrayMoneyChange;
     [SerializeField] public UnityEvent _onFinish;
+    [SerializeField] public UnityEvent<int> _onFigureInOrderChange;
 
     [SerializeField] private Animator _animatorTrayMoneyCounter;
 
@@ -74,6 +75,11 @@ public class GameState : MonoBehaviour, IService
         MoneyOnTray = MoneyOnTray < 0 ? 0 : MoneyOnTray;
         Debug.Log($"MoneyOnTray: {MoneyOnTray}");
         _onTrayMoneyChange?.Invoke();
+    }
+
+    public void ChangeFigureInOrder(int index)
+    {
+        _onFigureInOrderChange?.Invoke(index);
     }
 
     public void RestartRun()

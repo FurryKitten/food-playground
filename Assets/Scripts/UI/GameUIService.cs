@@ -6,6 +6,7 @@ public class GameUIService : MonoBehaviour
     [SerializeField] private GameObject _waiterUI;
     [SerializeField] private GameObject _upgradesUI;
     [SerializeField] private GameObject _darkPanel;
+    [SerializeField] private GameObject _orderFrame;
 
     [SerializeField] private RectTransform _manSprite;
     [SerializeField] private RectTransform[] _stageTransforms;
@@ -27,6 +28,7 @@ public class GameUIService : MonoBehaviour
     public void OnUpgradesContinueButton()
     {
         _stagesUI.SetActive(true);
+        _orderFrame.SetActive(true);
         _waiterUI.SetActive(true);
         _upgradesUI.SetActive(false);
         _darkPanel.SetActive(false);
@@ -37,6 +39,7 @@ public class GameUIService : MonoBehaviour
     public void OnFinishStage()
     {
         _stagesUI.SetActive(false);
+        _orderFrame.SetActive(false);
         _waiterUI.SetActive(true);
         _upgradesUI.SetActive(true);
         _darkPanel.SetActive(true);
