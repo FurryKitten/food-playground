@@ -25,6 +25,7 @@ public class Figure : MonoBehaviour
     private float _targetStep = 0f;
     private bool _shaderStateGold2Spoiled = false;
     private bool _figureDestroyed = false;
+    private bool _timedDoubleCost = false;
 
     public void Init(FigureSO figure)
     {
@@ -113,17 +114,60 @@ public class Figure : MonoBehaviour
             StartCoroutine(ShaderAnimation());
     }
 
+    public void ResetDoubleCost()
+    {
+        _doubleCost = false;
+        ServiceLocator.Current.Get<GameState>().AddTrayMoney(GetFine());
+        _targetStep = 0.7f;
+        if (!_shaderAnimation)
+            StartCoroutine(ShaderAnimation());
+    }
+
+    public void ChangeGoldenStatus(bool status)
+    {
+        if(!_doubleCost && status)
+        {
+            _timedDoubleCost = true;
+            ServiceLocator.Current.Get<GameState>().AddTrayMoney(GetProfit());
+            SetDoubleCost();
+            return;
+        }
+
+        if(_doubleCost && _timedDoubleCost && !status)
+        {
+            ResetDoubleCost();
+        }
+
+    }
+
     public void ChangeSpoiledStatus(bool status)
     {
         if (_spoiled != status)
         {
             _spoiled = status;
 
-            if(_doubleCost && !_shaderStateGold2Spoiled)
+            if (_doubleCost && !_shaderStateGold2Spoiled)
             {
                 _shaderStateGold2Spoiled = true;
                 _material.SetInt("_Gold2Spoiled", 1);
                 _step = 0.7f;
+                _material.SetFloat("_StepTimer", _step);
+            }
+
+            if(!_doubleCost && _timedDoubleCost)
+            {
+                Debug.Log("_Gold2Spoiled false");
+                if (_shaderStateGold2Spoiled)
+                {
+                    _shaderStateGold2Spoiled = false;
+                    _material.SetInt("_Gold2Spoiled", 0);
+                }
+                _material.SetInt("_Gold2Normal", 0);
+
+                if (status)
+                    _step = 0.7f;
+                else
+                    _step = 0f;
                 _material.SetFloat("_StepTimer", _step);
             }
 
@@ -181,10 +225,17 @@ public class Figure : MonoBehaviour
     public void CreateTriplet()
     {
         ServiceLocator.Current.Get<GameState>().AddTrayMoney(GetProfit());
+
         SetDoubleCost();
+        _timedDoubleCost = false;
         Vector3 position = _transform.position;
         position.x += _width * 2.5f;
         Instantiate(_goldParticleSystem, position, Quaternion.identity);
+    }
+
+    public void DoGoldSpoiler()
+    {
+        SetDoubleCost();
     }
     public void CombineIntoTriplet()
     {
@@ -210,4 +261,7 @@ public class Figure : MonoBehaviour
 
     public bool IsGold
     { get { return _doubleCost; } }
+
+    public bool IsTimedGold
+    { get { return _doubleCost & _timedDoubleCost; } }
 }

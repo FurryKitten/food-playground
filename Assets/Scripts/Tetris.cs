@@ -725,6 +725,7 @@ public class Tetris : MonoBehaviour, IService
         {
             if(_figureList[i].Index == 18) // Проверка спойлеров
             {
+                List<Vector2Int> tripletList = new List<Vector2Int>();
                 Vector2Int fPos = _figureList[i].GetPosition();
                 int gridX = (fPos.x) + _gridXOffsetFromWorld;
                 int gridY = (fPos.y);
@@ -733,38 +734,177 @@ public class Tetris : MonoBehaviour, IService
                     if (_gameSpace.figureGrid[gridX + 1, gridY] != null)
                     {
                         if (!deletedFigures.Contains(_gameSpace.figureGrid[gridX + 1, gridY]))
-                            //вызов метода порченья продукта
-                            _gameSpace.figureGrid[gridX + 1, gridY].ChangeSpoiledStatus(true);
+                        {
+                            if (_gameSpace.figureGrid[gridX + 1, gridY].Index != 18)
+                            {
+                                if (_figureList[i].IsGold)
+                                    //вызов метода золочения продукт
+                                    _gameSpace.figureGrid[gridX + 1, gridY].ChangeGoldenStatus(true);
+                                else
+                                    //вызов метода порченья продукта
+                                    _gameSpace.figureGrid[gridX + 1, gridY].ChangeSpoiledStatus(true);
+                            }
+                            else
+                            {
+                                if (_figureList[i].IsGold)
+                                {
+                                    //Золотим соседний спойлер
+                                    if (!_gameSpace.figureGrid[gridX + 1, gridY].IsGold)
+                                        _gameSpace.figureGrid[gridX + 1, gridY].DoGoldSpoiler();
+                                }
+                                else
+                                    // триплет спойлеров
+                                    if (!_gameSpace.figureGrid[gridX + 1, gridY].IsGold)
+                                    {
+                                        Vector2Int figureAncor = new Vector2Int(_gameSpace.figureGrid[gridX + 1, gridY].GetPosition().x
+                                        + _gameSpace.figureGrid[gridX + 1, gridY].GetForm()[0].x + _gridXOffsetFromWorld,
+                                             _gameSpace.figureGrid[gridX + 1, gridY].GetPosition().y - _gameSpace.figureGrid[gridX + 1, gridY].GetForm()[0].y);
+                                        if (!tripletList.Contains(figureAncor))
+                                        {
+                                            tripletList.Add(figureAncor);
+                                        }
+                                    }
+                            }
+                        }
                     }
 
-                if (gridX + 1 > _leftGridConstrain)
+                if (gridX - 1 > _leftGridConstrain)
                     if (_gameSpace.figureGrid[gridX - 1, gridY] != null)
                     {
                         if (!deletedFigures.Contains(_gameSpace.figureGrid[gridX - 1, gridY]))
-                            //вызов метода порченья продукта
-                            _gameSpace.figureGrid[gridX - 1, gridY].ChangeSpoiledStatus(true);
+                        {
+                            if (_gameSpace.figureGrid[gridX - 1, gridY].Index != 18)
+                            {
+                                if (_figureList[i].IsGold)
+                                    //вызов метода золочения продукт
+                                    _gameSpace.figureGrid[gridX - 1, gridY].ChangeGoldenStatus(true);
+                                else
+                                    //вызов метода порченья продукта
+                                    _gameSpace.figureGrid[gridX - 1, gridY].ChangeSpoiledStatus(true);
+                            }
+                            else
+                            {
+                                if (_figureList[i].IsGold)
+                                {
+                                    //Золотим соседний спойлер
+                                    if (!_gameSpace.figureGrid[gridX - 1, gridY].IsGold)
+                                        _gameSpace.figureGrid[gridX - 1, gridY].DoGoldSpoiler();
+                                }
+                                else
+                                    // триплет спойлеров
+                                    if (!_gameSpace.figureGrid[gridX - 1, gridY].IsGold)
+                                    {
+                                        Vector2Int figureAncor = new Vector2Int(_gameSpace.figureGrid[gridX - 1, gridY].GetPosition().x
+                                        + _gameSpace.figureGrid[gridX - 1, gridY].GetForm()[0].x + _gridXOffsetFromWorld,
+                                             _gameSpace.figureGrid[gridX - 1, gridY].GetPosition().y - _gameSpace.figureGrid[gridX - 1, gridY].GetForm()[0].y);
+                                        if (!tripletList.Contains(figureAncor))
+                                        {
+                                            tripletList.Add(figureAncor);
+                                        }
+                                    }
+                            }
+                        }
                     }
 
 
                 if (_gameSpace.figureGrid[gridX, gridY + 1] != null)
                 {
                     if (!deletedFigures.Contains(_gameSpace.figureGrid[gridX, gridY + 1]))
-                        //вызов метода порченья продукта
-                        _gameSpace.figureGrid[gridX, gridY + 1].ChangeSpoiledStatus(true);
+                    {
+                        if (_gameSpace.figureGrid[gridX, gridY + 1].Index != 18)
+                        {
+                            if (_figureList[i].IsGold)
+                                //вызов метода золочения продукт
+                                _gameSpace.figureGrid[gridX, gridY + 1].ChangeGoldenStatus(true);
+                            else
+                                //вызов метода порченья продукта
+                                _gameSpace.figureGrid[gridX, gridY + 1].ChangeSpoiledStatus(true);
+                        }
+                        else
+                        {
+                            if (_figureList[i].IsGold)
+                            {
+                                //Золотим соседний спойлер
+                                if (!_gameSpace.figureGrid[gridX, gridY + 1].IsGold)
+                                    _gameSpace.figureGrid[gridX, gridY + 1].DoGoldSpoiler();
+                            }
+                            else
+                                // триплет спойлеров
+                                if (!_gameSpace.figureGrid[gridX, gridY + 1].IsGold)
+                                {
+                                    Vector2Int figureAncor = new Vector2Int(_gameSpace.figureGrid[gridX, gridY + 1].GetPosition().x
+                                    + _gameSpace.figureGrid[gridX, gridY + 1].GetForm()[0].x + _gridXOffsetFromWorld,
+                                         _gameSpace.figureGrid[gridX, gridY + 1].GetPosition().y - _gameSpace.figureGrid[gridX, gridY + 1].GetForm()[0].y);
+                                    if (!tripletList.Contains(figureAncor))
+                                    {
+                                        tripletList.Add(figureAncor);
+                                    }
+                                }
+                        }
+                    }
                 }
 
                 if (gridY - 1  >= 0)
                     if (_gameSpace.figureGrid[gridX, gridY - 1] != null)
                     {
                         if (!deletedFigures.Contains(_gameSpace.figureGrid[gridX, gridY - 1]))
-                            //вызов метода порченья продукта
-                            _gameSpace.figureGrid[gridX, gridY - 1].ChangeSpoiledStatus(true);
+                        {
+                            if (_gameSpace.figureGrid[gridX, gridY - 1].Index != 18)
+                            {
+                                if (_figureList[i].IsGold)
+                                    //вызов метода золочения продукт
+                                    _gameSpace.figureGrid[gridX, gridY - 1].ChangeGoldenStatus(true);
+                                else
+                                    //вызов метода порченья продукта
+                                    _gameSpace.figureGrid[gridX, gridY - 1].ChangeSpoiledStatus(true);
+                            }
+                            else
+                            {
+                                if (_figureList[i].IsGold)
+                                {
+                                    //Золотим соседний спойлер
+                                    if (!_gameSpace.figureGrid[gridX, gridY - 1].IsGold)
+                                        _gameSpace.figureGrid[gridX, gridY - 1].DoGoldSpoiler();
+                                }
+                                else
+                                    // триплет спойлеров
+                                    if (!_gameSpace.figureGrid[gridX, gridY - 1].IsGold)
+                                    {
+                                        Vector2Int figureAncor = new Vector2Int(_gameSpace.figureGrid[gridX, gridY - 1].GetPosition().x
+                                        + _gameSpace.figureGrid[gridX, gridY - 1].GetForm()[0].x + _gridXOffsetFromWorld,
+                                             _gameSpace.figureGrid[gridX, gridY - 1].GetPosition().y - _gameSpace.figureGrid[gridX, gridY - 1].GetForm()[0].y);
+                                        if (!tripletList.Contains(figureAncor))
+                                        {
+                                            tripletList.Add(figureAncor);
+                                        }
+                                    }
+                            }
+                        }
                     }
 
+                if (tripletList.Count > 1)
+                {
+                    _figureList[i].CreateTriplet();
+
+                    for (int j = 0; j < 2; ++j)
+                    {
+                        Vector2Int fPosition = _gameSpace.figureGrid[tripletList[j].x, tripletList[j].y].GetPosition();
+                        int gridXx = (fPosition.x + _gridXOffsetFromWorld);
+                        int gridYy = (fPosition.y);
+
+                        deletedFigures.Add(_gameSpace.figureGrid[tripletList[j].x, tripletList[j].y]);
+
+                        foreach (Vector2Int pos in _gameSpace.figureGrid[tripletList[j].x, tripletList[j].y].GetForm())
+                        {
+                            _gameSpace.figureGrid[gridXx + pos.x, gridYy - pos.y] = null;
+                        }
+                    }
+                }
             }
-            else if(_figureList[i].IsSpoiled)
+            else if(_figureList[i].IsSpoiled || _figureList[i].IsTimedGold)
             {
                 bool checkSpoiler = false;
+                bool checkGoldSpoiler = false;
                 Vector2Int fPos = _figureList[i].GetPosition();
                 int gridX = (fPos.x) + _gridXOffsetFromWorld;
                 int gridY = (fPos.y);
@@ -780,8 +920,14 @@ public class Tetris : MonoBehaviour, IService
                             if (_gameSpace.figureGrid[gridX + 1, gridY].Index == 18 
                                 && !deletedFigures.Contains(_gameSpace.figureGrid[gridX + 1, gridY]))
                             {
-                                checkSpoiler = true;
-                                break;
+                                if (_gameSpace.figureGrid[gridX + 1, gridY].IsGold)
+                                {
+                                    checkGoldSpoiler = true;
+                                }
+                                else
+                                {
+                                    checkSpoiler = true;
+                                }
                             }
                         }
 
@@ -791,8 +937,14 @@ public class Tetris : MonoBehaviour, IService
                             if(_gameSpace.figureGrid[gridX - 1, gridY].Index == 18
                                 && !deletedFigures.Contains(_gameSpace.figureGrid[gridX - 1, gridY]))
                             {
-                                checkSpoiler = true;
-                                break;
+                                if (_gameSpace.figureGrid[gridX - 1, gridY].IsGold)
+                                {
+                                    checkGoldSpoiler = true;
+                                }
+                                else
+                                {
+                                    checkSpoiler = true;
+                                }
                             }
                         }
 
@@ -801,8 +953,14 @@ public class Tetris : MonoBehaviour, IService
                         if(_gameSpace.figureGrid[gridX, gridY + 1].Index == 18
                             && !deletedFigures.Contains(_gameSpace.figureGrid[gridX, gridY + 1]))
                         {
-                            checkSpoiler = true;
-                            break;
+                            if (_gameSpace.figureGrid[gridX, gridY + 1].IsGold)
+                            {
+                                checkGoldSpoiler = true;
+                            }
+                            else
+                            {
+                                checkSpoiler = true;
+                            }
                         }
                     }
 
@@ -812,17 +970,29 @@ public class Tetris : MonoBehaviour, IService
                             if(_gameSpace.figureGrid[gridX, gridY - 1].Index == 18
                                 && !deletedFigures.Contains(_gameSpace.figureGrid[gridX, gridY - 1]))
                             {
-                                checkSpoiler = true;
-                                break;
+                                if (_gameSpace.figureGrid[gridX, gridY - 1].IsGold)
+                                {
+                                    checkGoldSpoiler = true;
+                                }
+                                else
+                                {
+                                    checkSpoiler = true;
+                                }
                             }
                         }
-                    
+
+                    if (checkSpoiler && checkGoldSpoiler)
+                        break;
+
                     gridX -= pos.x;
                     gridY += pos.y;
                 }
 
                 if (!checkSpoiler)
                     _figureList[i].ChangeSpoiledStatus(false);
+
+                if (!checkGoldSpoiler)
+                    _figureList[i].ChangeGoldenStatus(false);
 
             }
             else if(!_figureList[i].IsGold)
@@ -918,7 +1088,6 @@ public class Tetris : MonoBehaviour, IService
 
                 if(tripletList.Count > 1)
                 {
-                    Debug.Log(tripletList.Count);
                     _figureList[i].CreateTriplet();
 
                     for(int j = 0; j < 2; ++j)
@@ -935,7 +1104,8 @@ public class Tetris : MonoBehaviour, IService
                         }
                     }
                 }
-            }
+            } 
+            
         }
 
         if (deletedFigures.Count > 0)
