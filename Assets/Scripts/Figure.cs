@@ -116,11 +116,28 @@ public class Figure : MonoBehaviour
 
     public void ResetDoubleCost()
     {
-        _doubleCost = false;
-        ServiceLocator.Current.Get<GameState>().AddTrayMoney(GetFine());
-        _targetStep = 0.7f;
-        if (!_shaderAnimation)
-            StartCoroutine(ShaderAnimation());
+        if (!_spoiled)
+        {
+            _doubleCost = false;
+            if (_shaderStateGold2Spoiled)
+            {
+                _shaderStateGold2Spoiled = false;
+                _material.SetInt("_Gold2Spoiled", 0);
+            }
+            ServiceLocator.Current.Get<GameState>().AddTrayMoney(GetFine());
+            _targetStep = 0.7f;
+            if (!_shaderAnimation)
+                StartCoroutine(ShaderAnimation());
+        }
+        else
+        {
+            _doubleCost = false;
+            if (_shaderStateGold2Spoiled)
+            {
+                _shaderStateGold2Spoiled = false;
+                _material.SetInt("_Gold2Spoiled", 0);
+            }
+        }
     }
 
     public void ChangeGoldenStatus(bool status)

@@ -88,6 +88,15 @@ public class Tetris : MonoBehaviour, IService
         _dashTime = 0.1f * _movementTime;
 
         _gameState = ServiceLocator.Current.Get<GameState>();
+
+        currentFigureNumber = 1;
+        _figureSOIdQueue.Enqueue(SmartGenerateQueue());
+
+        // Обновление UI очереди
+        if (_figureSOIdQueue.TryPeek(out int nextFigureSOId))
+            ServiceLocator.Current.Get<GameState>().ChangeFigureInOrder(nextFigureSOId);
+        else
+            ServiceLocator.Current.Get<GameState>().ChangeFigureInOrder(25);
     }
     private void Update()
     {
