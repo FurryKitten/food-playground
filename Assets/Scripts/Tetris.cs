@@ -162,14 +162,15 @@ public class Tetris : MonoBehaviour, IService
         else
             _stageNumber = 0;
 
-        currentFigureNumber = 1;
-        _figureSOIdQueue.Enqueue(SmartGenerateQueue());
-
+        
         // Обновление UI очереди
         if (_figureSOIdQueue.TryPeek(out int nextFigureSOId))
             ServiceLocator.Current.Get<GameState>().ChangeFigureInOrder(nextFigureSOId);
         else
             ServiceLocator.Current.Get<GameState>().ChangeFigureInOrder(25);
+
+        currentFigureNumber = 1;
+        _figureSOIdQueue.Enqueue(SmartGenerateQueue());
 
         //GenerateQueue(_queueSizes[_trayNumber, _stageNumber]);
     }
