@@ -234,6 +234,7 @@ public class Tetris : MonoBehaviour, IService
 
                     if (_dashMode && _flyingFigure.Index != 18)
                         if (gridY - pos.y - 1 >= 0)
+                        {
                             if (_gameSpace.figureGrid[gridX + pos.x, gridY - pos.y - 1] != null &&
                                 _gameSpace.figureGrid[gridX + pos.x, gridY - pos.y - 1] != _flyingFigure)
                             {
@@ -245,6 +246,9 @@ public class Tetris : MonoBehaviour, IService
                                 else
                                     smashSpoiler = false;
                             }
+                        }
+                        else
+                            smashSpoiler = false;
                 }
 
                 if(smashSpoiler)
