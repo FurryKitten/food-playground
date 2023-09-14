@@ -53,6 +53,7 @@ public class Tetris : MonoBehaviour, IService
                                     { 6, 8, 10, 12 }, 
                                     { 7, 9, 11, 14 },
                                     { 8, 10, 12, 15 }};
+    private int currentFigureNumber = 0;
 
     private void Awake()
     {
@@ -71,7 +72,7 @@ public class Tetris : MonoBehaviour, IService
         //_figureSOIdQueue.Enqueue(1); // TODO: generate or premade queue SO
         //_figureSOIdQueue.Enqueue(0);
         //GenerateQueue();
-        GenerateQueue(_queueSizes[0, 0]);
+        //GenerateQueue(_queueSizes[0, 0]);
         _gameSpace.width = 18;
         _gridXOffsetFromWorld = (_gameSpace.width - 16) / 2;
         _gameSpace.height = 15;
@@ -152,7 +153,10 @@ public class Tetris : MonoBehaviour, IService
         else
             _stageNumber = 0;
 
-        GenerateQueue(_queueSizes[_trayNumber, _stageNumber]);
+        currentFigureNumber = 1;
+        _figureSOIdQueue.Enqueue(SmartGenerateQueue());
+
+        //GenerateQueue(_queueSizes[_trayNumber, _stageNumber]);
     }
     private void RotateTray()
     {
@@ -346,6 +350,13 @@ public class Tetris : MonoBehaviour, IService
             {
                 _dashMode = false;
                 _dashOffOnSpawning = true;
+            }
+
+            // Генерация следующей фигуры
+            currentFigureNumber++;
+            if(currentFigureNumber <= _queueSizes[_trayNumber, _stageNumber])
+            {
+                _figureSOIdQueue.Enqueue(SmartGenerateQueue());
             }
 
             // Обновление UI очереди
@@ -1131,6 +1142,42 @@ public class Tetris : MonoBehaviour, IService
     {
         for (int i = 0; i < queueSize; i++)
             _figureSOIdQueue.Enqueue(Random.Range(0, _figureSOPrefabs.Length));
+    }
+    private int SmartGenerateQueue()
+    {
+        int[] figureSpawnPercent = new int[25];
+        for (int i = 0; i < figureSpawnPercent.Length; ++i)
+            figureSpawnPercent[i] = 2 * (i + 1);
+
+        if(_figureList.Count > 0)
+            for(int i = _leftGridConstrain; i < _rightGridConstrain; ++i)
+                for(int j = 10; j >= 0; j--)
+                {
+                    if (_gameSpace.figureGrid[i, j] != null)
+                    {
+                        if(!_gameSpace.figureGrid[i, j].IsGold)
+                        {
+                            figureSpawnPercent[_gameSpace.figureGrid[i, j].Index] += 2;
+                        }
+                    }
+                }
+
+        int sum = 0;
+
+        foreach (int i in figureSpawnPercent)
+            sum += i;
+
+        int figureDefinitor = Random.Range(0, sum);
+
+        int index = 0;
+        sum = figureSpawnPercent[index];
+        while (sum < figureDefinitor)
+        {
+            index++;
+            sum += figureSpawnPercent[index];
+        }
+
+        return index;
     }
     public void SetDoubleCost()
     {
