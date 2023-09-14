@@ -156,6 +156,12 @@ public class Tetris : MonoBehaviour, IService
         currentFigureNumber = 1;
         _figureSOIdQueue.Enqueue(SmartGenerateQueue());
 
+        // Обновление UI очереди
+        if (_figureSOIdQueue.TryPeek(out int nextFigureSOId))
+            ServiceLocator.Current.Get<GameState>().ChangeFigureInOrder(nextFigureSOId);
+        else
+            ServiceLocator.Current.Get<GameState>().ChangeFigureInOrder(25);
+
         //GenerateQueue(_queueSizes[_trayNumber, _stageNumber]);
     }
     private void RotateTray()
@@ -585,14 +591,12 @@ public class Tetris : MonoBehaviour, IService
                         {
                             continue;
                         }
-                        Debug.Log(_figureList[i].Index);
-                        Debug.Log(gridX + 2 * dir + pos.x);
+
                         if (gridX + 2 * dir + pos.x == _leftGridConstrain - 1 || gridX + 2 * dir + pos.x == _rightGridConstrain)
                         {
                             if (gridMask[gridX + 2 * dir + pos.x, gridY - pos.y])
                             {
                                 lost = false;
-                                Debug.Log("bordured");
                                 break;
                             }
                         }
@@ -1149,6 +1153,7 @@ public class Tetris : MonoBehaviour, IService
         for (int i = 0; i < figureSpawnPercent.Length; ++i)
             figureSpawnPercent[i] = 2 * (i + 1);
 
+        //TO DO: A* 
         if(_figureList.Count > 0)
             for(int i = _leftGridConstrain; i < _rightGridConstrain; ++i)
                 for(int j = 10; j >= 0; j--)
@@ -1158,6 +1163,7 @@ public class Tetris : MonoBehaviour, IService
                         if(!_gameSpace.figureGrid[i, j].IsGold)
                         {
                             figureSpawnPercent[_gameSpace.figureGrid[i, j].Index] += 2;
+                            break;
                         }
                     }
                 }
