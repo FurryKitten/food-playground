@@ -310,9 +310,9 @@ public class Tetris : MonoBehaviour, IService
             _flyingFigure.SetWorldPosition(_figureStartPos - posParent);
 
             ServiceLocator.Current.Get<AudioService>().PlayTetrisSpawn();
-            if (_doubleCost)
+            if (_doubleCost && _flyingFigure.Index != 18)
             {
-                if ((Random.Range(0f, 1f) < 0.3f))
+                if ((Random.Range(0f, 1f) < 0.1f))
                 {
                     _flyingFigure.SetDoubleCost();
                     ServiceLocator.Current.Get<AudioService>().PlayTetrisGoldSpawn();
