@@ -17,6 +17,7 @@ public class GameState : MonoBehaviour, IService
 
     public int Money { get; private set; } = 0;
     public int MoneyOnTray { get; private set; } = 0;
+    public int Health { get; private set; } = 100;
 
     [SerializeField, Range(2, 5)] private int _stages = 5;
     [SerializeField] private UnityEvent _onStageChange;
@@ -24,6 +25,7 @@ public class GameState : MonoBehaviour, IService
     [SerializeField] private UnityEvent _onTrayMoneyChange;
     [SerializeField] public UnityEvent _onFinish;
     [SerializeField] public UnityEvent<int> _onFigureInOrderChange;
+    [SerializeField] public UnityEvent<int> _onHealthChange;
 
     [SerializeField] private Animator _animatorTrayMoneyCounter;
 
@@ -87,5 +89,11 @@ public class GameState : MonoBehaviour, IService
         CurrentStage = 0;
         MoneyOnTray = 0;
         State = State.TETRIS;
+    }
+
+    public void ChangeHealth(int delta)
+    {
+        Health += delta;
+        _onHealthChange?.Invoke(Health);
     }
 }

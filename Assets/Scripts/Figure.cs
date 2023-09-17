@@ -87,6 +87,9 @@ public class Figure : MonoBehaviour
         GetComponent<Rigidbody2D>().AddForce(new Vector2(dir * 200, 2));
 
         ServiceLocator.Current.Get<GameState>().AddTrayMoney(GetFine());
+
+        if (_index != 18)
+            ServiceLocator.Current.Get<GameState>().ChangeHealth(-1);
     }
 
     public void FlyAway()

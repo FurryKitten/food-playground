@@ -43,6 +43,7 @@ public class Tetris : MonoBehaviour, IService
 
     private bool _doubleCost = false;
     private bool _trayBorders = false;
+    private bool _triplets = true;
     private int _leftGridConstrain = 4;
     private int _rightGridConstrain = 14;
     private int _gridXOffsetFromWorld = 0;
@@ -50,11 +51,16 @@ public class Tetris : MonoBehaviour, IService
 
     private int _stageNumber = 0;
     private int _trayNumber = 0;
-    private int[,] _queueSizes = {  { 5, 6, 8, 10 }, 
-                                    { 6, 8, 10, 12 }, 
-                                    { 7, 9, 11, 14 },
-                                    { 8, 10, 12, 15 }};
-    private int currentFigureNumber = 0;
+    private int[,] _queueSizes = {  { 7, 9, 11, 14 }, 
+                                    { 8, 10, 12, 15 }, 
+                                    { 9, 11, 14, 17 },
+                                    { 10, 12, 15, 18 }};
+    private int _currentFigureNumber = 0;
+    private int[] _SpawnProbability = { 7, 6, 6, 6, 3, 
+                                        6, 7, 6, 6, 6, 
+                                        2, 2, 2, 5, 7, 
+                                        6, 7, 7, 7, 5, 
+                                        7, 3, 5, 5, 3 };
 
     private void Awake()
     {
@@ -90,7 +96,7 @@ public class Tetris : MonoBehaviour, IService
 
         _gameState = ServiceLocator.Current.Get<GameState>();
 
-        currentFigureNumber = 1;
+        _currentFigureNumber = 1;
         _figureSOIdQueue.Enqueue(SmartGenerateQueue());
 
         // Обновление UI очереди
@@ -110,6 +116,7 @@ public class Tetris : MonoBehaviour, IService
             return;
 
         RotateTray();
+
 
         _figureListTimer += Time.deltaTime;
         if (_figureListTimer > _movementTime)
@@ -170,7 +177,7 @@ public class Tetris : MonoBehaviour, IService
         else
             ServiceLocator.Current.Get<GameState>().ChangeFigureInOrder(25);
 
-        currentFigureNumber = 1;
+        _currentFigureNumber = 1;
         _figureSOIdQueue.Enqueue(SmartGenerateQueue());
 
         //GenerateQueue(_queueSizes[_trayNumber, _stageNumber]);
@@ -290,13 +297,14 @@ public class Tetris : MonoBehaviour, IService
 
 
                 _flyingFigure = null;
-                _spawnTimer = _movementTime;
+                _spawnTimer = 0;//_movementTime;
 
                 ServiceLocator.Current.Get<AudioService>().PlayTetrisLanding();
             }
             else
             {
                 _lastMove = true;
+                _movementTimer = -_movementTime;
             }
         }
     }
@@ -370,8 +378,8 @@ public class Tetris : MonoBehaviour, IService
             }
 
             // Генерация следующей фигуры
-            currentFigureNumber++;
-            if(currentFigureNumber <= 2 * _queueSizes[_trayNumber, _stageNumber])
+            _currentFigureNumber++;
+            if(_currentFigureNumber <= _queueSizes[_trayNumber, _stageNumber])
             {
                 _figureSOIdQueue.Enqueue(SmartGenerateQueue());
             }
@@ -1032,6 +1040,9 @@ public class Tetris : MonoBehaviour, IService
                 int gridX = (fPos.x) + _gridXOffsetFromWorld;
                 int gridY = (fPos.y);
 
+                tripletList.Add(new Vector2Int(gridX + _figureList[i].GetForm()[0].x, 
+                    gridY - _figureList[i].GetForm()[0].y));
+
                 foreach (Vector2Int pos in _figureList[i].GetForm())
                 {
                     gridX += pos.x;
@@ -1116,23 +1127,41 @@ public class Tetris : MonoBehaviour, IService
                     gridY += pos.y;
                 }
 
-                if(tripletList.Count > 1)
+                if(tripletList.Count > 2)
                 {
-                    _figureList[i].CreateTriplet();
+                    int lowerY = tripletList[0].y;
+                    int lowerInd = 0;
 
-                    for(int j = 0; j < 2; ++j)
-                    {
-                        Vector2Int fPosition = _gameSpace.figureGrid[tripletList[j].x, tripletList[j].y].GetPosition();
-                        int gridXx = (fPosition.x + _gridXOffsetFromWorld);
-                        int gridYy = (fPosition.y);
-
-                        deletedFigures.Add(_gameSpace.figureGrid[tripletList[j].x, tripletList[j].y]);
-
-                        foreach(Vector2Int pos in _gameSpace.figureGrid[tripletList[j].x, tripletList[j].y].GetForm())
+                    for(int j = 1; j < 3; ++j)
+                        if(lowerY > tripletList[j].y)
                         {
-                            _gameSpace.figureGrid[gridXx + pos.x, gridYy - pos.y] = null;
+                            lowerY = tripletList[j].y;
+                            lowerInd = j;
+                        }
+
+                    
+                    for (int j = 0; j < 3; ++j)
+                    {
+                        if (j != lowerInd)
+                        {
+                            Vector2Int fPosition = _gameSpace.figureGrid[tripletList[j].x, tripletList[j].y].GetPosition();
+                            int gridXx = (fPosition.x + _gridXOffsetFromWorld);
+                            int gridYy = (fPosition.y);
+
+                            deletedFigures.Add(_gameSpace.figureGrid[tripletList[j].x, tripletList[j].y]);
+
+                            foreach (Vector2Int pos in _gameSpace.figureGrid[tripletList[j].x, tripletList[j].y].GetForm())
+                            {
+                                _gameSpace.figureGrid[gridXx + pos.x, gridYy - pos.y] = null;
+                            }
+                        }
+                        else
+                        {
+                            _gameSpace.figureGrid[tripletList[j].x, tripletList[j].y].CreateTriplet();
                         }
                     }
+
+                    
                 }
             } 
             
@@ -1162,188 +1191,189 @@ public class Tetris : MonoBehaviour, IService
     {
         int[] figureSpawnPercent = new int[25];
         for (int i = 0; i < figureSpawnPercent.Length; ++i)
-            figureSpawnPercent[i] = 2;
+            figureSpawnPercent[i] = _SpawnProbability[i];
 
-        figureSpawnPercent[18] = 4;
+        //figureSpawnPercent[18] = 3;
 
-        if (_figureList.Count > 0)
+        if (_figureList.Count > 0 && _triplets)
+        {
             figureSpawnPercent[_figureList.Last().Index] = 0;
 
-        //TO DO: A* 
-        Dictionary<Vector2Int, int> costSoFar = new Dictionary<Vector2Int, int>();
-        Dictionary<Vector2Int, int> ways = new Dictionary<Vector2Int, int>();
-        Vector2Int goal = _figureStartPos;
-        goal.x += _gridXOffsetFromWorld;
-        Vector2Int[] neighborsOffsets = new Vector2Int[3];
-        neighborsOffsets[0] = Vector2Int.right;
-        neighborsOffsets[1] = Vector2Int.left;
-        neighborsOffsets[2] = Vector2Int.up;
+            Dictionary<Vector2Int, int> costSoFar = new Dictionary<Vector2Int, int>();
+            Dictionary<Vector2Int, int> ways = new Dictionary<Vector2Int, int>();
+            Vector2Int goal = _figureStartPos;
+            goal.x += _gridXOffsetFromWorld;
+            Vector2Int[] neighborsOffsets = new Vector2Int[3];
+            neighborsOffsets[0] = Vector2Int.right;
+            neighborsOffsets[1] = Vector2Int.left;
+            neighborsOffsets[2] = Vector2Int.up;
 
-        foreach (Figure figure in _figureList)
-        {
-            if (figure.IsGold || figure.IsSpoiled)
-                continue;
+            foreach (Figure figure in _figureList)
+            {
+                if (figure.IsGold || figure.IsSpoiled)
+                    continue;
 
 
-            Vector2Int fPos = figure.GetPosition();
-            int gridX = fPos.x + _gridXOffsetFromWorld;
-            int gridY = fPos.y;
+                Vector2Int fPos = figure.GetPosition();
+                int gridX = fPos.x + _gridXOffsetFromWorld;
+                int gridY = fPos.y;
 
-            Vector2Int leftUpPos = new Vector2Int(Mathf.RoundToInt(gridX - figure.Width*5), 
-                Mathf.RoundToInt(gridY + figure.Height * 5));
-            Vector2Int rightDownPos = new Vector2Int(Mathf.RoundToInt(gridX + figure.Width * 5),
-                Mathf.RoundToInt(gridY - figure.Height * 5));
+                Vector2Int leftUpPos = new Vector2Int(Mathf.RoundToInt(gridX - figure.Width * 5),
+                    Mathf.RoundToInt(gridY + figure.Height * 5));
+                Vector2Int rightDownPos = new Vector2Int(Mathf.RoundToInt(gridX + figure.Width * 5),
+                    Mathf.RoundToInt(gridY - figure.Height * 5));
 
-            List<Vector2Int> probablyFinishPos = new List<Vector2Int>();
+                List<Vector2Int> probablyFinishPos = new List<Vector2Int>();
 
-            for (int x = leftUpPos.x; x <= rightDownPos.x; x++)
-                for(int y = leftUpPos.y; y >= rightDownPos.y; y--)
-                {
-                    if (x < _leftGridConstrain || x >= _rightGridConstrain
-                        || y < 0 || y > goal.y)
-                        continue;
-
-                    bool checkPos = true;
-                    bool checkTouch = false;
-
-                    foreach(Vector2Int pos in figure.GetForm())
+                for (int x = leftUpPos.x; x <= rightDownPos.x; x++)
+                    for (int y = leftUpPos.y; y >= rightDownPos.y; y--)
                     {
-                        if(x + pos.x < _leftGridConstrain || x + pos.x >= _rightGridConstrain
-                        || y - pos.y < 0 || y - pos.y > goal.y)
+                        if (x < _leftGridConstrain || x >= _rightGridConstrain
+                            || y < 0 || y > goal.y)
+                            continue;
+
+                        bool checkPos = true;
+                        bool checkTouch = false;
+
+                        foreach (Vector2Int pos in figure.GetForm())
                         {
-                            checkPos = false;
-                            break;
-                        }
-                        else
-                        {
-                            if (_gameSpace.figureGrid[x + pos.x, y - pos.y] != null)
+                            if (x + pos.x < _leftGridConstrain || x + pos.x >= _rightGridConstrain
+                            || y - pos.y < 0 || y - pos.y > goal.y)
                             {
                                 checkPos = false;
                                 break;
                             }
-
-                            if (x + pos.x - 1 >= _leftGridConstrain)
-                                if (_gameSpace.figureGrid[x + pos.x - 1, y - pos.y] == figure)
-                                    checkTouch = true;
-
-                            if (x + pos.x + 1 < _rightGridConstrain)
-                                if (_gameSpace.figureGrid[x + pos.x + 1, y - pos.y] == figure)
-                                    checkTouch = true;
-
-                            if (y - pos.y - 1 >= 0)
-                                if (_gameSpace.figureGrid[x + pos.x, y - pos.y - 1] == figure)
-                                    checkTouch = true;
-
-                            if (y - pos.y + 1 <= goal.y)
-                                if (_gameSpace.figureGrid[x + pos.x, y - pos.y + 1] == figure)
-                                    checkTouch = true;
-                        }
-                    }
-
-                    if (checkPos && checkTouch)
-                    {
-                        probablyFinishPos.Add(new Vector2Int(x, y));
-                    }
-                }
-
-            
-
-            foreach (Vector2Int position in probablyFinishPos)
-            {
-                costSoFar.Clear();
-                ways.Clear();
-
-                Vector2Int currentCell = position;
-
-                if (currentCell.x < _leftGridConstrain || currentCell.x == _rightGridConstrain
-                    || currentCell.y > goal.y)
-                    continue;
-
-
-                ways[currentCell] = 0;
-                costSoFar[currentCell] = 0;
-
-                bool checkWay = false;
-
-                while (ways.Count > 0)
-                {
-                    //выбрать текущую
-                    int prior = 10000;
-                    foreach (Vector2Int cell in ways.Keys)
-                        if (ways[cell] < prior)
-                        {
-                            prior = ways[cell];
-                            currentCell = cell;
-                        }
-
-
-                    if (currentCell == goal)
-                    {
-                        figureSpawnPercent[figure.Index] += Mathf.RoundToInt(50 * figure.Width * figure.Height);
-                        checkWay = true;
-                        break;
-                    }
-
-                    foreach (Vector2Int offset in neighborsOffsets)
-                    {
-                        int newCost = costSoFar[currentCell] + 1;
-
-                        Vector2Int nextCell = currentCell;
-                        nextCell.x += offset.x;
-                        nextCell.y += offset.y;
-
-                        if (nextCell.x < _leftGridConstrain || nextCell.x == _rightGridConstrain
-                            || nextCell.y > goal.y)
-                            continue;
-
-                        bool placeCheck = true;
-
-                        foreach (Vector2Int pos in figure.GetForm())
-                        {
-                            if (nextCell.x + pos.x < _leftGridConstrain || nextCell.x + pos.x == _rightGridConstrain 
-                                || nextCell.y - pos.y < 0 || nextCell.y - pos.y > goal.y)
-                            {
-                                placeCheck = false;
-                                break;
-                            }
                             else
                             {
-                                if (_gameSpace.figureGrid[nextCell.x + pos.x, nextCell.y - pos.y] != null)
+                                if (_gameSpace.figureGrid[x + pos.x, y - pos.y] != null)
                                 {
-                                    if (_gameSpace.figureGrid[nextCell.x + pos.x, nextCell.y - pos.y] != figure)
+                                    checkPos = false;
+                                    break;
+                                }
+
+                                if (x + pos.x - 1 >= _leftGridConstrain)
+                                    if (_gameSpace.figureGrid[x + pos.x - 1, y - pos.y] == figure)
+                                        checkTouch = true;
+
+                                if (x + pos.x + 1 < _rightGridConstrain)
+                                    if (_gameSpace.figureGrid[x + pos.x + 1, y - pos.y] == figure)
+                                        checkTouch = true;
+
+                                if (y - pos.y - 1 >= 0)
+                                    if (_gameSpace.figureGrid[x + pos.x, y - pos.y - 1] == figure)
+                                        checkTouch = true;
+
+                                if (y - pos.y + 1 <= goal.y)
+                                    if (_gameSpace.figureGrid[x + pos.x, y - pos.y + 1] == figure)
+                                        checkTouch = true;
+                            }
+                        }
+
+                        if (checkPos && checkTouch)
+                        {
+                            probablyFinishPos.Add(new Vector2Int(x, y));
+                        }
+                    }
+
+
+
+                foreach (Vector2Int position in probablyFinishPos)
+                {
+                    costSoFar.Clear();
+                    ways.Clear();
+
+                    Vector2Int currentCell = position;
+
+                    if (currentCell.x < _leftGridConstrain || currentCell.x == _rightGridConstrain
+                        || currentCell.y > goal.y)
+                        continue;
+
+
+                    ways[currentCell] = 0;
+                    costSoFar[currentCell] = 0;
+
+                    bool checkWay = false;
+
+                    while (ways.Count > 0)
+                    {
+                        //выбрать текущую
+                        int prior = 10000;
+                        foreach (Vector2Int cell in ways.Keys)
+                            if (ways[cell] < prior)
+                            {
+                                prior = ways[cell];
+                                currentCell = cell;
+                            }
+
+
+                        if (currentCell == goal)
+                        {
+                            figureSpawnPercent[figure.Index] += 10;
+                            checkWay = true;
+                            break;
+                        }
+
+                        foreach (Vector2Int offset in neighborsOffsets)
+                        {
+                            int newCost = costSoFar[currentCell] + 1;
+
+                            Vector2Int nextCell = currentCell;
+                            nextCell.x += offset.x;
+                            nextCell.y += offset.y;
+
+                            if (nextCell.x < _leftGridConstrain || nextCell.x == _rightGridConstrain
+                                || nextCell.y > goal.y)
+                                continue;
+
+                            bool placeCheck = true;
+
+                            foreach (Vector2Int pos in figure.GetForm())
+                            {
+                                if (nextCell.x + pos.x < _leftGridConstrain || nextCell.x + pos.x == _rightGridConstrain
+                                    || nextCell.y - pos.y < 0 || nextCell.y - pos.y > goal.y)
+                                {
+                                    placeCheck = false;
+                                    break;
+                                }
+                                else
+                                {
+                                    if (_gameSpace.figureGrid[nextCell.x + pos.x, nextCell.y - pos.y] != null)
                                     {
-                                        placeCheck = false;
-                                        break;
+                                        if (_gameSpace.figureGrid[nextCell.x + pos.x, nextCell.y - pos.y] != figure)
+                                        {
+                                            placeCheck = false;
+                                            break;
+                                        }
                                     }
                                 }
                             }
+
+                            if (!placeCheck)
+                                continue;
+
+                            if (!costSoFar.ContainsKey(nextCell))
+                            {
+                                costSoFar[nextCell] = newCost;
+                                int priority = newCost + heuristic(goal, nextCell);
+                                ways[nextCell] = priority;
+                            }
+                            else if (newCost < costSoFar[nextCell])
+                            {
+                                costSoFar[nextCell] = newCost;
+                                int priority = newCost + heuristic(goal, nextCell);
+                                ways[nextCell] = priority;
+                            }
                         }
 
-                        if (!placeCheck)
-                            continue;
-
-                        if (!costSoFar.ContainsKey(nextCell))
-                        {
-                            costSoFar[nextCell] = newCost;
-                            int priority = newCost + heuristic(goal, nextCell);
-                            ways[nextCell] = priority;
-                        }
-                        else if (newCost < costSoFar[nextCell])
-                        {
-                            costSoFar[nextCell] = newCost;
-                            int priority = newCost + heuristic(goal, nextCell);
-                            ways[nextCell] = priority;
-                        }
+                        ways.Remove(currentCell);
                     }
 
-                    ways.Remove(currentCell);
+                    if (checkWay)
+                        break;
                 }
-
-                if (checkWay)
-                    break;
             }
-        }
 
+        }
         /*
         if(_figureList.Count > 0)
             for(int i = _leftGridConstrain; i < _rightGridConstrain; ++i)
