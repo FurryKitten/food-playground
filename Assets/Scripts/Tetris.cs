@@ -497,11 +497,15 @@ public class Tetris : MonoBehaviour, IService
 
                     if (bordured)
                     {
+                        int newJ = j;
                         foreach (Vector2Int pos in _gameSpace.figureGrid[i, j].GetForm())
                         {
                             gridMask[gridX + pos.x - dir, gridY - pos.y] = true;
+                            if (gridY - pos.y < newJ)
+                                newJ = gridY - pos.y;
                         }
-                        i = (dir > 0) ? _gameSpace.width - 1 : 0;
+                        i = (dir > 0) ? _gameSpace.width - 1 : 0; 
+                        j = newJ;
                     }
                     
                 }

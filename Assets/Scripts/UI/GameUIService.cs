@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class GameUIService : MonoBehaviour
 {
-    [SerializeField] private GameObject _stagesUI;
     [SerializeField] private GameObject _waiterUI;
     [SerializeField] private GameObject _upgradesUI;
     [SerializeField] private GameObject _darkPanel;
@@ -27,7 +26,6 @@ public class GameUIService : MonoBehaviour
 
     public void OnUpgradesContinueButton()
     {
-        _stagesUI.SetActive(true);
         _orderFrame.SetActive(true);
         _waiterUI.SetActive(true);
         _upgradesUI.SetActive(false);
@@ -38,7 +36,6 @@ public class GameUIService : MonoBehaviour
 
     public void OnFinishStage()
     {
-        _stagesUI.SetActive(false);
         _orderFrame.SetActive(false);
         _waiterUI.SetActive(true);
         _upgradesUI.SetActive(true);
