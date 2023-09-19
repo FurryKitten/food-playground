@@ -4255,7 +4255,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c422262ab0901334fb4a24fc8119f99c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stagesUI: {fileID: 0}
   _waiterUI: {fileID: 2124904688}
   _upgradesUI: {fileID: 1203226939}
   _darkPanel: {fileID: 775260370}

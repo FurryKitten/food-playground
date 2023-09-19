@@ -10,6 +10,7 @@ public class FigureSO : ScriptableObject
     [SerializeField] int _cost;
     [SerializeField] int _indexTex;
     [SerializeField] Sprite _sprite;
+    [SerializeField] Sprite _spriteO;
 
     
     public float widthTex
@@ -32,4 +33,7 @@ public class FigureSO : ScriptableObject
 
     public Sprite sprite
     { get { return _sprite; } }
+
+    public Sprite spriteO
+    { get { return _spriteO; } }
 }

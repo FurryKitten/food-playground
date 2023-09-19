@@ -9,6 +9,7 @@ public class Figure : MonoBehaviour
     [SerializeField] Material _figureMaterial;
     [SerializeField] GameObject _spoiledParticleSystem;
     [SerializeField] GameObject _goldParticleSystem;
+    [SerializeField] GameObject _outline;
 
     private Transform _transform;
     private Vector2Int _centerPos; // TODO: pivot to top left corner
@@ -31,11 +32,11 @@ public class Figure : MonoBehaviour
     {
         _transform = GetComponent<Transform>();
         gameObject.GetComponent<SpriteRenderer>().sprite = figure.sprite;
+        _outline.GetComponent<SpriteRenderer>().sprite = figure.spriteO;
         _material = new Material(_figureMaterial);
         _material.SetVector("_Tilling", new Vector2(figure.widthTex, figure.heightTex));
         _index = figure.indexTex;
         _material.SetFloat("_Index", figure.indexTex);
-        gameObject.GetComponent<SpriteRenderer>().material = _material;
         _form = figure.form;
         _cost = figure.cost;
         _height = figure.heightTex;
@@ -265,6 +266,13 @@ public class Figure : MonoBehaviour
         ServiceLocator.Current.Get<GameState>().AddTrayMoney(GetFine());
         if (!_shaderAnimation)
             StartCoroutine(ShaderAnimation());
+    }
+
+    public void SetMaterial()
+    {
+        _outline.SetActive(false);
+        gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        gameObject.GetComponent<SpriteRenderer>().material = _material;
     }
 
     public int Index

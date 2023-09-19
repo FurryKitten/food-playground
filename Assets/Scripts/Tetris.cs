@@ -295,6 +295,7 @@ public class Tetris : MonoBehaviour, IService
                 _handControls.AddFigures(_figureList);
                 _gameState.AddTrayMoney(_flyingFigure.GetProfit());
 
+                _flyingFigure.SetMaterial();
 
                 _flyingFigure = null;
                 _spawnTimer = 0;//_movementTime;
@@ -363,6 +364,7 @@ public class Tetris : MonoBehaviour, IService
 
             if(!placeCheck)
             {
+                _flyingFigure.SetMaterial();
                 _flyingFigure.FlyAway();
                 _flyingFigure = null;
                 _spawnTimer = 0;

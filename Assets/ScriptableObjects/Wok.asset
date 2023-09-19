@@ -23,3 +23,4 @@ MonoBehaviour:
   _cost: 4
   _indexTex: 6
   _sprite: {fileID: 21300000, guid: 0e714cfb404b8a6428df4c9943d6137a, type: 3}
+  _spriteO: {fileID: 21300000, guid: 9c8d7d7812a6ee54da323e930dac8fa2, type: 3}
