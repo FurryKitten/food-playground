@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameUIService : MonoBehaviour
 {
@@ -8,21 +9,20 @@ public class GameUIService : MonoBehaviour
     [SerializeField] private GameObject _darkPanel;
     [SerializeField] private GameObject _orderFrame;
 
-    [SerializeField] private RectTransform _manSprite;
-    [SerializeField] private RectTransform[] _stageTransforms;
+
+    [SerializeField] private Slider _stageSlider;
 
     private void Start()
     {
         _darkPanel.SetActive(false);
+        _stageSlider.value = 0;
         SetManSpritePosition();
     }
 
     public void SetManSpritePosition()
     {
         int stage = ServiceLocator.Current.Get<GameState>().CurrentStage;
-        Vector2 manPos = _manSprite.anchoredPosition;
-        manPos.y = _stageTransforms[stage].anchoredPosition.y;
-        _manSprite.anchoredPosition = manPos;
+        _stageSlider.value = stage % 4;
     }
 
     public void OnUpgradesContinueButton()

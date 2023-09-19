@@ -1,0 +1,1253 @@
+fileFormatVersion: 2
+guid: 2a7db56ccc1e5694aaad3ddc4e36dd3e
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Food_Outline_0
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 207
+        width: 34
+        height: 34
+      alignment: 9
+      pivot: {x: 0.029411765, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7bdc18ec34484d428fba2bffaee814b
+      internalID: 1246790050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_1
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 207
+        width: 17
+        height: 17
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: afd3f7d3ebdfc5c4d98d628d9f848f0c
+      internalID: -237423500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_2
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 207
+        width: 50
+        height: 34
+      alignment: 9
+      pivot: {x: 0.02, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54d934f3551ee1646b2895a9f073ee68
+      internalID: -840699067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_3
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 207
+        width: 24
+        height: 17
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28bdbd6bec180c84287763f2d71fb49a
+      internalID: 763142771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_4
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 207
+        width: 50
+        height: 34
+      alignment: 9
+      pivot: {x: 0.02, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30ba9e990fbf3b045a5911a5157ce692
+      internalID: 1784623271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_5
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 207
+        width: 24
+        height: 17
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39923ce4ad353c64d8137002ae139479
+      internalID: -1199055970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_6
+      rect:
+        serializedVersion: 2
+        x: 287
+        y: 207
+        width: 66
+        height: 18
+      alignment: 9
+      pivot: {x: 0.01515152, y: 0.055555556}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b139ad8446291b4093deccc3279f87a
+      internalID: 1276267992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_7
+      rect:
+        serializedVersion: 2
+        x: 367
+        y: 207
+        width: 31
+        height: 10
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31e7f90dc861ba4488e78a92c3b97566
+      internalID: -1981122313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_8
+      rect:
+        serializedVersion: 2
+        x: 415
+        y: 207
+        width: 66
+        height: 34
+      alignment: 9
+      pivot: {x: 0.015151516, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8cd1e85cf7fba334a8bd353069ecdbb3
+      internalID: 1731162619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_9
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 207
+        width: 31
+        height: 17
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90affeae15088f64bb6802ead09d764d
+      internalID: 1968792750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_10
+      rect:
+        serializedVersion: 2
+        x: 543
+        y: 207
+        width: 82
+        height: 18
+      alignment: 9
+      pivot: {x: 0.01219512, y: 0.055555556}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b57a839f25b6d3448641ad58fb1c017
+      internalID: -474971352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_11
+      rect:
+        serializedVersion: 2
+        x: 639
+        y: 207
+        width: 38
+        height: 10
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9ef645178eb6b848a2af0e8123f714f
+      internalID: 1422402948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_12
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 159
+        width: 34
+        height: 34
+      alignment: 9
+      pivot: {x: 0.029411765, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2745ed4838da0014facce18cda173f09
+      internalID: 1714295167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_13
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 159
+        width: 17
+        height: 17
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: feea7cbe3c6b4bf4aa56c60814648839
+      internalID: 1089782659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_14
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 159
+        width: 50
+        height: 34
+      alignment: 9
+      pivot: {x: 0.02, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65b97dc11db45ca4d9a4fb2f5922c97a
+      internalID: 1840853331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_15
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 159
+        width: 24
+        height: 17
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3046a865831c1e4498eed013cb106087
+      internalID: 1479620846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_16
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 159
+        width: 50
+        height: 34
+      alignment: 9
+      pivot: {x: 0.02, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47e6382f94387344d8a6b88e5b90dde9
+      internalID: 152308289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_17
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 159
+        width: 24
+        height: 17
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27d52333e24f75e4b8ed615288e82d69
+      internalID: -116692325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_18
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 159
+        width: 50
+        height: 34
+      alignment: 9
+      pivot: {x: 0.02, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ea5634dc9ce1534cbe0c77ccf2d57b6
+      internalID: -2096662728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_19
+      rect:
+        serializedVersion: 2
+        x: 367
+        y: 159
+        width: 24
+        height: 17
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ebcd62eb509898f4bbae39383e269a87
+      internalID: 1697423279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_20
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 111
+        width: 18
+        height: 18
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.055555556}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 907eabd605905554584a6e07e2d743af
+      internalID: 1683856954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_21
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 111
+        width: 10
+        height: 10
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a37c21699da2d4f4eb55227d37656e6c
+      internalID: -2097576658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_22
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 111
+        width: 18
+        height: 18
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.055555556}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 970e3fae66ffd904887e6f368c3ea67a
+      internalID: -791007125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_23
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 111
+        width: 10
+        height: 10
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b7cff48d12eef34eb125f422317fbdb
+      internalID: 391913918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_24
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 111
+        width: 18
+        height: 18
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.055555556}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2a2fd0ea746bb84f8c3e92aabe0630f
+      internalID: 1139989681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_25
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 111
+        width: 10
+        height: 10
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b793ce2f3f84b3d45a728839eb52d711
+      internalID: 1274119963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_26
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 111
+        width: 34
+        height: 18
+      alignment: 9
+      pivot: {x: 0.029411765, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f90e50796068c54e9d2d87af49adfce
+      internalID: 438127624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_27
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 111
+        width: 17
+        height: 10
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d636a4da6e00b1f4f8a47b857ce942f6
+      internalID: 1359303419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_28
+      rect:
+        serializedVersion: 2
+        x: 287
+        y: 111
+        width: 34
+        height: 34
+      alignment: 9
+      pivot: {x: 0.029411765, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b06dff78e56ac33408c3991399b1f1cd
+      internalID: 442071392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_29
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 111
+        width: 17
+        height: 17
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2562a53ffca5b274f82e5d4ddea1df23
+      internalID: 477033275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_30
+      rect:
+        serializedVersion: 2
+        x: 367
+        y: 111
+        width: 50
+        height: 34
+      alignment: 9
+      pivot: {x: 0.02, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 711bd5538a6c3a443b40d314a21439bc
+      internalID: -740189138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_31
+      rect:
+        serializedVersion: 2
+        x: 431
+        y: 111
+        width: 24
+        height: 17
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a88dc5214c6740d4db3e89882b6110b0
+      internalID: 1838566181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_32
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 79
+        width: 50
+        height: 18
+      alignment: 9
+      pivot: {x: 0.02, y: 0.055555556}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2fa960550579ea40b110f3cb40b449b
+      internalID: -1358997087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_33
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 79
+        width: 24
+        height: 10
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4359df695b174d143aad887f4ddaacef
+      internalID: 1300583474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_34
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 79
+        width: 50
+        height: 18
+      alignment: 9
+      pivot: {x: 0.02, y: 0.055555556}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fda71d33ba5462e4a8a90076d0bb360d
+      internalID: 388906855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_35
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 79
+        width: 24
+        height: 10
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1b8a35ca94575c4faf84fc04b637a67
+      internalID: -314599258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_36
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 79
+        width: 18
+        height: 18
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.055555556}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a02e059ca94845f4abfb6482188b9873
+      internalID: 1950301723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_37
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 79
+        width: 10
+        height: 10
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c07330ecac523bb478d24df85831d408
+      internalID: -181775616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_38
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 15
+        width: 18
+        height: 34
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6e4db4e5d3addc47b154c8a990adc38
+      internalID: 593608902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_39
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 15
+        width: 10
+        height: 17
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d9d8762dc6fbc843a73d64ad3debc61
+      internalID: 1143063594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_40
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 15
+        width: 18
+        height: 50
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.667}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c99f37519ad3c4041a228e5bdd68eecb
+      internalID: -1616750851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_41
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 15
+        width: 10
+        height: 24
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efe485bcc3356694d871ade7f633e1a6
+      internalID: -981792516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_42
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 15
+        width: 66
+        height: 34
+      alignment: 9
+      pivot: {x: 0.015151516, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48a34b9530c16804a893c59b655169c7
+      internalID: -967182949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_43
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 15
+        width: 31
+        height: 17
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f8277618c542934d88d074d2100911e
+      internalID: -1506686444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_44
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 15
+        width: 34
+        height: 18
+      alignment: 9
+      pivot: {x: 0.029411765, y: 0.055555556}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7aad30ea3c620c94db175ce55a33ba56
+      internalID: 859326980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_45
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 15
+        width: 17
+        height: 10
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89adca251e42db543a3b34d9a10a9a1a
+      internalID: -1678103180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_46
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 15
+        width: 18
+        height: 34
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c60bee542e829f40b25e156f9e4ffc8
+      internalID: 1141359476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_47
+      rect:
+        serializedVersion: 2
+        x: 383
+        y: 15
+        width: 10
+        height: 17
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d65256e8c7e187144bed0de70e2645a1
+      internalID: -418738591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_48
+      rect:
+        serializedVersion: 2
+        x: 415
+        y: 15
+        width: 34
+        height: 50
+      alignment: 9
+      pivot: {x: 0.055555556, y: 0.667}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b5adddf292c98245ac86e8d6ef78110
+      internalID: 502562736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Food_Outline_49
+      rect:
+        serializedVersion: 2
+        x: 463
+        y: 15
+        width: 17
+        height: 24
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4cdd2afd06819624394d732e60c3237e
+      internalID: -147895123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Food_Outline_0: 1246790050
+      Food_Outline_1: -237423500
+      Food_Outline_10: -474971352
+      Food_Outline_11: 1422402948
+      Food_Outline_12: 1714295167
+      Food_Outline_13: 1089782659
+      Food_Outline_14: 1840853331
+      Food_Outline_15: 1479620846
+      Food_Outline_16: 152308289
+      Food_Outline_17: -116692325
+      Food_Outline_18: -2096662728
+      Food_Outline_19: 1697423279
+      Food_Outline_2: -840699067
+      Food_Outline_20: 1683856954
+      Food_Outline_21: -2097576658
+      Food_Outline_22: -791007125
+      Food_Outline_23: 391913918
+      Food_Outline_24: 1139989681
+      Food_Outline_25: 1274119963
+      Food_Outline_26: 438127624
+      Food_Outline_27: 1359303419
+      Food_Outline_28: 442071392
+      Food_Outline_29: 477033275
+      Food_Outline_3: 763142771
+      Food_Outline_30: -740189138
+      Food_Outline_31: 1838566181
+      Food_Outline_32: -1358997087
+      Food_Outline_33: 1300583474
+      Food_Outline_34: 388906855
+      Food_Outline_35: -314599258
+      Food_Outline_36: 1950301723
+      Food_Outline_37: -181775616
+      Food_Outline_38: 593608902
+      Food_Outline_39: 1143063594
+      Food_Outline_4: 1784623271
+      Food_Outline_40: -1616750851
+      Food_Outline_41: -981792516
+      Food_Outline_42: -967182949
+      Food_Outline_43: -1506686444
+      Food_Outline_44: 859326980
+      Food_Outline_45: -1678103180
+      Food_Outline_46: 1141359476
+      Food_Outline_47: -418738591
+      Food_Outline_48: 502562736
+      Food_Outline_49: -147895123
+      Food_Outline_5: -1199055970
+      Food_Outline_6: 1276267992
+      Food_Outline_7: -1981122313
+      Food_Outline_8: 1731162619
+      Food_Outline_9: 1968792750
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

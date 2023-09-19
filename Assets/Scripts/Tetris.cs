@@ -806,7 +806,7 @@ public class Tetris : MonoBehaviour, IService
                         }
                     }
 
-                if (gridX - 1 > _leftGridConstrain)
+                if (gridX - 1 >= _leftGridConstrain)
                     if (_gameSpace.figureGrid[gridX - 1, gridY] != null)
                     {
                         if (!deletedFigures.Contains(_gameSpace.figureGrid[gridX - 1, gridY]))
@@ -969,7 +969,7 @@ public class Tetris : MonoBehaviour, IService
                             }
                         }
 
-                    if (gridX + 1 > _leftGridConstrain)
+                    if (gridX - 1 >= _leftGridConstrain)
                         if (_gameSpace.figureGrid[gridX - 1, gridY] != null)
                         {
                             if(_gameSpace.figureGrid[gridX - 1, gridY].Index == 18
@@ -1067,7 +1067,7 @@ public class Tetris : MonoBehaviour, IService
                             }
                         }
 
-                    if (gridX + 1 > _leftGridConstrain)
+                    if (gridX - 1 >= _leftGridConstrain)
                         if (_gameSpace.figureGrid[gridX - 1, gridY] != null
                             && _gameSpace.figureGrid[gridX - 1, gridY] != _figureList[i])
                         {

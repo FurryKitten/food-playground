@@ -17,7 +17,7 @@ public class GameState : MonoBehaviour, IService
 
     public int Money { get; private set; } = 0;
     public int MoneyOnTray { get; private set; } = 0;
-    public int Health { get; private set; } = 100;
+    public int Health { get; private set; } = 20;
 
     [SerializeField, Range(2, 5)] private int _stages = 5;
     [SerializeField] private UnityEvent _onStageChange;
