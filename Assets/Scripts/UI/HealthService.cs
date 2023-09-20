@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class HealthService : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI _healthText;
+    [SerializeField] TextMeshProUGUI[] _healthText;
     [SerializeField] Slider _healthBar;
     [SerializeField] int _maxHealth = 100;
 
@@ -14,13 +14,15 @@ public class HealthService : MonoBehaviour
     {
         _healthBar.maxValue = _maxHealth;
         _healthBar.value = _maxHealth;
-        _healthText.text = $"{_maxHealth}";
+        foreach(var health in _healthText)
+            health.text = $"{_maxHealth}";
     }
 
     public void SetHeath()
     {
         int hp = ServiceLocator.Current.Get<GameState>().Health;
-        _healthText.text = $"{hp}";
+        foreach (var health in _healthText)
+            health.text = $"{hp}";
         _healthBar.value = hp;
     }
 }
