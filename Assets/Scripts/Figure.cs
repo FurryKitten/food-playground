@@ -31,12 +31,13 @@ public class Figure : MonoBehaviour
     public void Init(FigureSO figure)
     {
         _transform = GetComponent<Transform>();
-        gameObject.GetComponent<SpriteRenderer>().sprite = figure.sprite;
-        _outline.GetComponent<SpriteRenderer>().sprite = figure.spriteO;
+        gameObject.GetComponent<SpriteRenderer>().sprite = figure.spriteO;
+        _outline.GetComponent<SpriteRenderer>().sprite = figure.sprite;
         _material = new Material(_figureMaterial);
         _material.SetVector("_Tilling", new Vector2(figure.widthTex, figure.heightTex));
         _index = figure.indexTex;
         _material.SetFloat("_Index", figure.indexTex);
+        _outline.GetComponent<SpriteRenderer>().material = _material;
         _form = figure.form;
         _cost = figure.cost;
         _height = figure.heightTex;
@@ -270,9 +271,7 @@ public class Figure : MonoBehaviour
 
     public void SetMaterial()
     {
-        _outline.SetActive(false);
-        gameObject.GetComponent<SpriteRenderer>().enabled = true;
-        gameObject.GetComponent<SpriteRenderer>().material = _material;
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
     }
 
     public int Index
