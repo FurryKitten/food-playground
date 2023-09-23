@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2480161816110505477}
   - component: {fileID: 4563061959350846619}
+  - component: {fileID: 9174344791421877844}
   m_Layer: 0
   m_Name: Kitchen_Back
   m_TagString: Untagged
@@ -84,3 +85,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &9174344791421877844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173380896936533056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7ba708e85ac7aa4db31b815ec9e94af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _kitchenSprite: {fileID: 21300000, guid: 0d451b0b45d9d484685722c44c314b80, type: 3}
+  _restaurantSprite: {fileID: 21300000, guid: 9892b86770743fe4bab71947264a3ea0, type: 3}
+  _corridorSprite: {fileID: 21300000, guid: 9892b86770743fe4bab71947264a3ea0, type: 3}
