@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,9 @@ public class GameUIService : MonoBehaviour
 
     [SerializeField] private Slider _stageSlider;
 
+    private int _currentStage = 0;
+    private bool _animationCheck = false;
+
     private void Start()
     {
         _darkPanel.SetActive(false);
@@ -20,8 +24,9 @@ public class GameUIService : MonoBehaviour
 
     public void SetManSpritePosition()
     {
-        int stage = ServiceLocator.Current.Get<GameState>().CurrentStage;
-        _stageSlider.value = stage % 4;
+        _currentStage = ServiceLocator.Current.Get<GameState>().CurrentStage % 4;
+        if (!_animationCheck)
+            StartCoroutine(SliderMove());
     }
 
     public void OnUpgradesContinueButton()
@@ -40,5 +45,18 @@ public class GameUIService : MonoBehaviour
         _waiterUI.SetActive(true);
         _upgradesUI.SetActive(true);
         _darkPanel.SetActive(true);
+    }
+
+    private IEnumerator SliderMove()
+    {
+        float t = 0;
+        const float animationSpeed = 0.2f;
+        while (t < 1)
+        {
+            _stageSlider.value = Mathf.Lerp(_stageSlider.value, _currentStage, t * t * t);
+            t += Time.deltaTime * animationSpeed;
+            yield return null;
+        }
+        _animationCheck = false;
     }
 }

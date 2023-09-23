@@ -42,7 +42,7 @@ public class HealthService : MonoBehaviour
     private IEnumerator SliderAnimation()
     {
         float t = 0;
-        const float animationSpeed = 0.8f;
+        const float animationSpeed = 0.4f;
         while (t < 1)
         {
             _whiteValue = Mathf.Lerp(_whiteValue, _healthBar.value, t * t * t);
