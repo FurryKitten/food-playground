@@ -79,6 +79,9 @@ public class Parallax : MonoBehaviour
         _leftBgIndex = 0;
         for (int i = 0; i < _backgrounds.Count; i++)
         {
+            Vector3 pos = _backgrounds[i].transform.position;
+            pos.x = Mathf.Round(_backgrounds[i].transform.position.x);
+            _backgrounds[i].transform.position = pos;
             if (_backgrounds[i].transform.position.x > rightPosX)
             {
                 rightPosX = _backgrounds[i].transform.position.x;
