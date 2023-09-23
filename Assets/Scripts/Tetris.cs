@@ -44,6 +44,7 @@ public class Tetris : MonoBehaviour, IService
     private bool _doubleCost = false;
     private bool _trayBorders = false;
     private bool _triplets = true;
+    private bool _stickyTray = false;
     private int _leftGridConstrain = 4;
     private int _rightGridConstrain = 14;
     private int _gridXOffsetFromWorld = 0;
@@ -71,7 +72,6 @@ public class Tetris : MonoBehaviour, IService
         _playerController.Tetris.Dash.started += DashMode;
         _playerController.Tetris.Dash.canceled += DashMode;
     }
-
     private void Start()
     {
         _figureSOIdQueue = new Queue<int>();
@@ -109,7 +109,6 @@ public class Tetris : MonoBehaviour, IService
     {
         TetrisUpdate();
     }
-
     public void TetrisUpdate()
     {
         if (_gameState.State == State.PAUSED)
@@ -462,6 +461,12 @@ public class Tetris : MonoBehaviour, IService
         {
             gridMask[_leftGridConstrain - 1, 0] = true;
             gridMask[_rightGridConstrain, 0] = true;
+        }
+
+        if(_stickyTray)
+        {
+            for (int j = 0; j < _gameSpace.height; j++)
+                gridMask[j, 0] = true;
         }
 
         if (_flyingFigure != null)
@@ -1434,6 +1439,14 @@ public class Tetris : MonoBehaviour, IService
     public void SetTrayBorders()
     {
         _trayBorders = true;
+    }
+    public void SetStickyTray()
+    {
+        _stickyTray = true;
+    }
+    public void SetTrayRotationSlow()
+    {
+        _trayAngle *= 0.5f;
     }
     public void SetGridWidth(int trayWidth) // TO DO: use Unity Event
     {
