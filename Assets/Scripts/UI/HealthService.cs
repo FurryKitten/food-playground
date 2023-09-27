@@ -13,6 +13,7 @@ public class HealthService : MonoBehaviour
 
     private float _whiteValue;
     private bool _animationCheck = false;
+    private float _time = 0;
 
     private void Awake()
     {
@@ -37,16 +38,18 @@ public class HealthService : MonoBehaviour
             _animationCheck = true;
             StartCoroutine(SliderAnimation());
         }
+        else
+            _time = 0;
     }
 
     private IEnumerator SliderAnimation()
     {
-        float t = 0;
+        _time = 0;
         const float animationSpeed = 0.4f;
-        while (t < 1)
+        while (_time < 1)
         {
-            _whiteValue = Mathf.Lerp(_whiteValue, _healthBar.value, t * t * t);
-            t += Time.deltaTime * animationSpeed;
+            _whiteValue = Mathf.Lerp(_whiteValue, _healthBar.value, _time * _time * _time);
+            _time += Time.deltaTime * animationSpeed;
             _whiteHealthBar.value = _whiteValue;
             yield return null;
         }
