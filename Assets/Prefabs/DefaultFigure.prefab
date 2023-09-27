@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4951332441486415486}
   - component: {fileID: 3021833091329029860}
   m_Layer: 0
-  m_Name: Outline
+  m_Name: mainTexture
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -137,7 +137,7 @@ MonoBehaviour:
   _figureMaterial: {fileID: 2100000, guid: 7b72ac1b9e4068e4a827893cee4c31d4, type: 2}
   _spoiledParticleSystem: {fileID: 3396146216869232387, guid: dcafe076dfa06d549bb6e40dfb3b6df1, type: 3}
   _goldParticleSystem: {fileID: 164286268459053003, guid: 8272c8983a3833b4dbd5d47fcada94a7, type: 3}
-  _outline: {fileID: 183527633594713186}
+  _mainTexture: {fileID: 183527633594713186}
 --- !u!50 &-5777737962150397007
 Rigidbody2D:
   serializedVersion: 4

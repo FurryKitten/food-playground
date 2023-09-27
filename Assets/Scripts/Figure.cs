@@ -9,7 +9,7 @@ public class Figure : MonoBehaviour
     [SerializeField] Material _figureMaterial;
     [SerializeField] GameObject _spoiledParticleSystem;
     [SerializeField] GameObject _goldParticleSystem;
-    [SerializeField] GameObject _outline;
+    [SerializeField] GameObject _mainTexture;
 
     private Transform _transform;
     private Vector2Int _centerPos; // TODO: pivot to top left corner
@@ -32,12 +32,14 @@ public class Figure : MonoBehaviour
     {
         _transform = GetComponent<Transform>();
         gameObject.GetComponent<SpriteRenderer>().sprite = figure.spriteO;
-        _outline.GetComponent<SpriteRenderer>().sprite = figure.sprite;
+        _mainTexture.GetComponent<SpriteRenderer>().sprite = figure.sprite;
         _material = new Material(_figureMaterial);
         _material.SetVector("_Tilling", new Vector2(figure.widthTex, figure.heightTex));
         _index = figure.indexTex;
+        if(_index == 18)
+            _mainTexture.layer = 0;
         _material.SetFloat("_Index", figure.indexTex);
-        _outline.GetComponent<SpriteRenderer>().material = _material;
+        _mainTexture.GetComponent<SpriteRenderer>().material = _material;
         _form = figure.form;
         _cost = figure.cost;
         _height = figure.heightTex;
@@ -178,7 +180,6 @@ public class Figure : MonoBehaviour
 
             if(!_doubleCost && _timedDoubleCost)
             {
-                Debug.Log("_Gold2Spoiled false");
                 if (_shaderStateGold2Spoiled)
                 {
                     _shaderStateGold2Spoiled = false;
@@ -215,7 +216,7 @@ public class Figure : MonoBehaviour
     private IEnumerator ShaderAnimation()
     {
         float t = 0;
-        const float animationSpeed = 0.8f;
+        float animationSpeed = (_index != 18) ? 0.8f : 1.6f;
         _shaderAnimation = true;
         while (t < 1)
         {
@@ -227,20 +228,13 @@ public class Figure : MonoBehaviour
         _shaderAnimation = false;
         if (_figureDestroyed)
             Destroy(this.gameObject);
-       // Debug.Log("Animation end");
     }
 
-    private IEnumerator NextAnimation()
-    {
-        while (_shaderAnimation)
-        {
-            yield return null;
-        }
-        StartCoroutine(ShaderAnimation());
-    }
+
     public void DestroySpoiler()
     {
         // TO DO: Start animation of destroy spoiler
+        ChangeSpoiledStatus(true);
         Instantiate(_spoiledParticleSystem, _transform.position, Quaternion.identity);
     }
 
