@@ -10,7 +10,7 @@ public class OrderScript : MonoBehaviour
     [SerializeField] Image _SandTimer;
     private Image _image;
 
-    private void Start()
+    private void Awake()
     {
         _image = GetComponent<Image>();
     }
