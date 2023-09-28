@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Walk : MonoBehaviour
 {
@@ -28,6 +28,8 @@ public class Walk : MonoBehaviour
             _kitchenParallax.ChangeLeftBgIndex();
             _timer = _walkTime;
             _gameState.SetState(State.TETRIS);
+            
+            /// последний этап пройден, начисляем деньги, показываем апгрейды
             if (_gameState.CurrentStage == _gameState.MaxStage - 1)
             {
                 _gameState.SetState(State.PAUSED);

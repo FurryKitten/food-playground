@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 
-public class MenuService : MonoBehaviour
+public class MenuService : MonoBehaviour, IService
 {
     [SerializeField] private GameObject _mainMenu;
     [SerializeField] private GameObject _pauseMenu;
     [SerializeField] private GameObject _gameMenu;
     [SerializeField] private GameObject _upgradesMenu;
+    [SerializeField] private GameObject _questsMenu;
 
     [SerializeField] private GameObject _gameSpace;
 
@@ -16,6 +17,7 @@ public class MenuService : MonoBehaviour
         DisableAllMenu();
         _mainMenu.SetActive(true);
         _gameSpace.SetActive(false);
+        _questsMenu.SetActive(false);
     }
 
     private void Start()
@@ -25,10 +27,11 @@ public class MenuService : MonoBehaviour
 
     public void OnPressPlay()
     {
-        DisableAllMenu();
+      /* DisableAllMenu();
         _gameMenu.SetActive(true);
         _gameSpace.SetActive(true);
-        _gameState.SetState(State.TETRIS); // TODO: Врубать таймер перед тетрисом
+        _gameState.SetState(State.TETRIS); // TODO: Врубать таймер перед тетрисом*/
+        OnOpenQuests();
 
         ServiceLocator.Current.Get<AudioService>().PlayButtonPress();
         ServiceLocator.Current.Get<AudioService>().PlayMusic();
@@ -38,41 +41,40 @@ public class MenuService : MonoBehaviour
     {
         DisableAllMenu();
         _pauseMenu.SetActive(true);
+        _gameState.SetState(State.PAUSED);
     }
 
     public void OnExitPause()
     {
         DisableAllMenu();
         _gameMenu.SetActive(true);
+        _gameState.SetState(State.TETRIS);
+        ServiceLocator.Current.Get<AudioService>().PlayButtonPress();
     }
 
-/*    public void OnShowUpgrades()
+    public void OnOpenQuests()
     {
         DisableAllMenu();
-        _gameSpace.SetActive(false);
+        _questsMenu.SetActive(true);
+        _gameState.SetState(State.PAUSED);
+    }
 
+    public void OnQuestAccept()
+    {
+        DisableAllMenu();
         _gameMenu.SetActive(true);
-        SetActiveInChildren(_gameMenu.transform, false);
-        _upgradesMenu.SetActive(true);
-    }
-
-    public void OnContinueUpgrades()
-    {
-        DisableAllMenu();
         _gameSpace.SetActive(true);
-
-        _gameMenu.SetActive(true);
-        SetActiveInChildren(_gameMenu.transform, true);
-        _upgradesMenu.SetActive(false);
+        _gameState.SetState(State.TETRIS);
+        ServiceLocator.Current.Get<AudioService>().PlayButtonPress();
     }
 
-    private void SetActiveInChildren(Transform transform, bool active)
+    public void OnGiftAccept()
     {
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            transform.GetChild(i).gameObject.SetActive(active);
-        }
-    }*/
+        OnOpenQuests();
+    }
+
+
+
 
     private void DisableAllMenu()
     {
@@ -80,5 +82,6 @@ public class MenuService : MonoBehaviour
         _pauseMenu.SetActive(false);
         _gameMenu.SetActive(false);
         _upgradesMenu.SetActive(false);
+        _questsMenu.SetActive(false);
     }
 }

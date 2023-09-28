@@ -1,0 +1,1218 @@
+fileFormatVersion: 2
+guid: 9ea2dc6707e063e4ca150b389ba4d3e9
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Order_Interface_All_0
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 281
+        width: 216
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c715d6d860e64f94c842c46f5737b535
+      internalID: 1974841987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_1
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 440
+        width: 96
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7388b460a2a8c14468383c65b2c14528
+      internalID: 691599940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_2
+      rect:
+        serializedVersion: 2
+        x: 355
+        y: 281
+        width: 216
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c77d0c4b5ddd7b743aebf9728d5a1daa
+      internalID: 1103499382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_3
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 281
+        width: 216
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf2c2f21a8176ae4880e7d3941841d81
+      internalID: -270805414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_4
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 390
+        width: 68
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9cd83b63241306748b492ea3f059f0fd
+      internalID: 1291446424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_5
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 368
+        width: 68
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f92df68cfe2bffb498ab274792215fb7
+      internalID: 1941377960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_6
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 346
+        width: 68
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c7d054e28400f8409cb4a6bd2589cce
+      internalID: 1642737595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_7
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 325
+        width: 68
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2e713109ddf20841a995c500469e947
+      internalID: 1205585021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_8
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 304
+        width: 68
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 576e5af1a64998245be48d20f8bf3102
+      internalID: -430166547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_9
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 282
+        width: 68
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac6345c65ea107e429b89b4f9ce04ab6
+      internalID: 2057939996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_10
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 5
+        width: 106
+        height: 241
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9764bf7e2624324f95a4e52e8dd940c
+      internalID: -1614720347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_11
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 5
+        width: 106
+        height: 241
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4360f2004ca21a04b98260636e44eb93
+      internalID: -1760540071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_12
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 226
+        width: 32
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 683d79ddbc1ea0047abe36a68f919f94
+      internalID: 1756867286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_13
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 226
+        width: 32
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 408d39d91e6817d4791cc00460708f67
+      internalID: 525139208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_14
+      rect:
+        serializedVersion: 2
+        x: 387
+        y: 226
+        width: 32
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e16c65732b8518419a949ba0bdb3bcf
+      internalID: -1602178933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_15
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 226
+        width: 32
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13077236bfad54a48aa662cfb35e4b18
+      internalID: -296290923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_16
+      rect:
+        serializedVersion: 2
+        x: 470
+        y: 226
+        width: 32
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b89aeb2f11b0bc46954c5abd3bb1dbb
+      internalID: -427675710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_17
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 226
+        width: 32
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec361c30fe0160942accd8a87f010da1
+      internalID: 2027966924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_18
+      rect:
+        serializedVersion: 2
+        x: 554
+        y: 226
+        width: 32
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1587d64a153e681428f980c55ce2a487
+      internalID: 976492419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_19
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 226
+        width: 32
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30a6b6683a7b1e14f8503caded40fe4b
+      internalID: 399117089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_20
+      rect:
+        serializedVersion: 2
+        x: 638
+        y: 226
+        width: 32
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a22382f52c8e3f45a96269b46d2327f
+      internalID: -1043533604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_21
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 226
+        width: 32
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3b286737b212414ca5dbea924bd9107
+      internalID: -309653258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_22
+      rect:
+        serializedVersion: 2
+        x: 731
+        y: 175
+        width: 106
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ca96fc1a620e5a47979250bd1e0d442
+      internalID: 1610684549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_23
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 196
+        width: 32
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64767d8e44977e847ba3b6147d8caa27
+      internalID: -1476840410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_24
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 196
+        width: 32
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60b63e4722c8b9340a359041223604d2
+      internalID: 2140024334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_25
+      rect:
+        serializedVersion: 2
+        x: 387
+        y: 196
+        width: 32
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 389ce64f869377846b3cc7e664711732
+      internalID: -1350882953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_26
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 196
+        width: 32
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc01c7439e5ac4e449332768c8547936
+      internalID: 1692072685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_27
+      rect:
+        serializedVersion: 2
+        x: 470
+        y: 196
+        width: 32
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01642e1be63aea046a4be0f36df2f12f
+      internalID: 372873430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_28
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 196
+        width: 32
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b69ef607475f960449b8594c6423b271
+      internalID: -722362231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_29
+      rect:
+        serializedVersion: 2
+        x: 554
+        y: 196
+        width: 32
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ac0d6ddb2bde9f48aa5997d4772f16c
+      internalID: -1682632571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_30
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 196
+        width: 32
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d364c27f5e0a1ce4caa898e6fb1fb050
+      internalID: -134838049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_31
+      rect:
+        serializedVersion: 2
+        x: 638
+        y: 195
+        width: 32
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38e4e360ce4d44642ae65f99eeade0a0
+      internalID: -415280921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_32
+      rect:
+        serializedVersion: 2
+        x: 679
+        y: 192
+        width: 36
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 111a1d202a871074f9e5ed31e6020d74
+      internalID: -737219182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_33
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 103
+        width: 106
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 041fcdf174147ae4f8e37cb5f56e5c45
+      internalID: -2096869093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_34
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 103
+        width: 106
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11ec248a526de0f4b8c6f890a1886154
+      internalID: -1879752723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_35
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 164
+        width: 32
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 594aae688b6fff845827d8ec7e922d57
+      internalID: -637832777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_36
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 169
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4d214c40635b8446b39d5601113ccd7
+      internalID: 186006041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_37
+      rect:
+        serializedVersion: 2
+        x: 679
+        y: 159
+        width: 36
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b326faa46a8684449c7802b885c7a87
+      internalID: 1177972501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_38
+      rect:
+        serializedVersion: 2
+        x: 731
+        y: 102
+        width: 106
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f17ca18d056dd504ab7173e78c587253
+      internalID: 517971697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_39
+      rect:
+        serializedVersion: 2
+        x: 646
+        y: 143
+        width: 17
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a194460ff645b349979dae405405eaf
+      internalID: -921269817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_40
+      rect:
+        serializedVersion: 2
+        x: 643
+        y: 121
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 280ec538596cbdf4da76d33dbe07699f
+      internalID: 71981821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_41
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 5
+        width: 106
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 662c97e84ebe9f04d806bad56c35e2c0
+      internalID: 1042154181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_42
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 5
+        width: 106
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 066e8f7d3fe7eae4184194148ee930d2
+      internalID: 1872398486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_43
+      rect:
+        serializedVersion: 2
+        x: 506
+        y: 61
+        width: 106
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b88eeafdcd48ee9468d04d625e1db98b
+      internalID: 781100056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_44
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 61
+        width: 106
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 711d6fe20ac870e4cbbfd7a5a237809e
+      internalID: 430031037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_45
+      rect:
+        serializedVersion: 2
+        x: 731
+        y: 5
+        width: 106
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f82ca2f8f75c8da4cb01bbaa5b5c0c49
+      internalID: -1467783483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_46
+      rect:
+        serializedVersion: 2
+        x: 842
+        y: 5
+        width: 106
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 524976e4d786f434396bed24aa23dfca
+      internalID: -1297285159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_47
+      rect:
+        serializedVersion: 2
+        x: 506
+        y: 5
+        width: 106
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5dd6479f33cc4047a13ead0af31310c
+      internalID: -2118859680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All_48
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 5
+        width: 106
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9f299b97bb75bb409d7e7aa3e154889
+      internalID: -406629225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Order_Interface_All_0: 1974841987
+      Order_Interface_All_1: 691599940
+      Order_Interface_All_10: -1614720347
+      Order_Interface_All_11: -1760540071
+      Order_Interface_All_12: 1756867286
+      Order_Interface_All_13: 525139208
+      Order_Interface_All_14: -1602178933
+      Order_Interface_All_15: -296290923
+      Order_Interface_All_16: -427675710
+      Order_Interface_All_17: 2027966924
+      Order_Interface_All_18: 976492419
+      Order_Interface_All_19: 399117089
+      Order_Interface_All_2: 1103499382
+      Order_Interface_All_20: -1043533604
+      Order_Interface_All_21: -309653258
+      Order_Interface_All_22: 1610684549
+      Order_Interface_All_23: -1476840410
+      Order_Interface_All_24: 2140024334
+      Order_Interface_All_25: -1350882953
+      Order_Interface_All_26: 1692072685
+      Order_Interface_All_27: 372873430
+      Order_Interface_All_28: -722362231
+      Order_Interface_All_29: -1682632571
+      Order_Interface_All_3: -270805414
+      Order_Interface_All_30: -134838049
+      Order_Interface_All_31: -415280921
+      Order_Interface_All_32: -737219182
+      Order_Interface_All_33: -2096869093
+      Order_Interface_All_34: -1879752723
+      Order_Interface_All_35: -637832777
+      Order_Interface_All_36: 186006041
+      Order_Interface_All_37: 1177972501
+      Order_Interface_All_38: 517971697
+      Order_Interface_All_39: -921269817
+      Order_Interface_All_4: 1291446424
+      Order_Interface_All_40: 71981821
+      Order_Interface_All_41: 1042154181
+      Order_Interface_All_42: 1872398486
+      Order_Interface_All_43: 781100056
+      Order_Interface_All_44: 430031037
+      Order_Interface_All_45: -1467783483
+      Order_Interface_All_46: -1297285159
+      Order_Interface_All_47: -2118859680
+      Order_Interface_All_48: -406629225
+      Order_Interface_All_5: 1941377960
+      Order_Interface_All_6: 1642737595
+      Order_Interface_All_7: 1205585021
+      Order_Interface_All_8: -430166547
+      Order_Interface_All_9: 2057939996
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
