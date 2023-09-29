@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9ea2dc6707e063e4ca150b389ba4d3e9
+guid: 477f4635b98193347960f8413ce4f440
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -107,6 +107,19 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
     buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -123,13 +136,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Order_Interface_All_0
+      name: Order_Interface_All 1_0
       rect:
         serializedVersion: 2
-        x: 134
-        y: 281
-        width: 216
-        height: 160
+        x: 191
+        y: 441
+        width: 98
+        height: 94
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,77 +150,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c715d6d860e64f94c842c46f5737b535
-      internalID: 1974841987
+      spriteID: c8c464d7473c09c41aad505417ff7e4b
+      internalID: -1653238492
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_1
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 440
-        width: 96
-        height: 93
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7388b460a2a8c14468383c65b2c14528
-      internalID: 691599940
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Order_Interface_All_2
-      rect:
-        serializedVersion: 2
-        x: 355
-        y: 281
-        width: 216
-        height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c77d0c4b5ddd7b743aebf9728d5a1daa
-      internalID: 1103499382
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Order_Interface_All_3
-      rect:
-        serializedVersion: 2
-        x: 576
-        y: 281
-        width: 216
-        height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cf2c2f21a8176ae4880e7d3941841d81
-      internalID: -270805414
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Order_Interface_All_4
+      name: Order_Interface_All 1_1
       rect:
         serializedVersion: 2
         x: 51
@@ -221,14 +171,77 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9cd83b63241306748b492ea3f059f0fd
-      internalID: 1291446424
+      spriteID: 0999c45ad2239a9419c9f82562c2116c
+      internalID: 1648851598
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_5
+      name: Order_Interface_All 1_2
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 281
+        width: 216
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34f382893f3ec214b9926e9e1348bc07
+      internalID: 2129427362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All 1_3
+      rect:
+        serializedVersion: 2
+        x: 355
+        y: 281
+        width: 216
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4a60ffdd5cf4374a97b1517b651acfd
+      internalID: -1128376418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All 1_4
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 281
+        width: 216
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 551a7d6342e5bce48983ca2910bb8f1d
+      internalID: 678333652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All 1_5
       rect:
         serializedVersion: 2
         x: 51
@@ -242,14 +255,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f92df68cfe2bffb498ab274792215fb7
-      internalID: 1941377960
+      spriteID: 08f425285a4a3234c838e4f0726c7627
+      internalID: 1557854894
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_6
+      name: Order_Interface_All 1_6
       rect:
         serializedVersion: 2
         x: 51
@@ -263,14 +276,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4c7d054e28400f8409cb4a6bd2589cce
-      internalID: 1642737595
+      spriteID: 197fa50ecfc5ab84688ab2d21d75929b
+      internalID: 500838654
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_7
+      name: Order_Interface_All 1_7
       rect:
         serializedVersion: 2
         x: 51
@@ -284,14 +297,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d2e713109ddf20841a995c500469e947
-      internalID: 1205585021
+      spriteID: b446bed354d194442a00c40d58bba7ea
+      internalID: 498166309
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_8
+      name: Order_Interface_All 1_8
       rect:
         serializedVersion: 2
         x: 51
@@ -305,14 +318,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 576e5af1a64998245be48d20f8bf3102
-      internalID: -430166547
+      spriteID: 404003f38ef4b414e8a6a30192636dbb
+      internalID: 1319797011
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_9
+      name: Order_Interface_All 1_9
       rect:
         serializedVersion: 2
         x: 51
@@ -326,14 +339,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ac6345c65ea107e429b89b4f9ce04ab6
-      internalID: 2057939996
+      spriteID: 1cee74aecb9c765499b5994b947d2d66
+      internalID: -2126622051
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_10
+      name: Order_Interface_All 1_10
       rect:
         serializedVersion: 2
         x: 62
@@ -347,14 +360,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e9764bf7e2624324f95a4e52e8dd940c
-      internalID: -1614720347
+      spriteID: ce94c91644e6a59418caac39e0998f1e
+      internalID: -2135803765
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_11
+      name: Order_Interface_All 1_11
       rect:
         serializedVersion: 2
         x: 173
@@ -368,14 +381,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4360f2004ca21a04b98260636e44eb93
-      internalID: -1760540071
+      spriteID: 6dedcb543d85b29438ac29bbba052284
+      internalID: 1956314633
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_12
+      name: Order_Interface_All 1_12
       rect:
         serializedVersion: 2
         x: 303
@@ -389,14 +402,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 683d79ddbc1ea0047abe36a68f919f94
-      internalID: 1756867286
+      spriteID: b752d7bcb17a71e4ab935aa44f72c4d2
+      internalID: -487279646
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_13
+      name: Order_Interface_All 1_13
       rect:
         serializedVersion: 2
         x: 345
@@ -410,14 +423,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 408d39d91e6817d4791cc00460708f67
-      internalID: 525139208
+      spriteID: f150bef6447ed58468edd6f87eb1372a
+      internalID: -331693842
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_14
+      name: Order_Interface_All 1_14
       rect:
         serializedVersion: 2
         x: 387
@@ -431,14 +444,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1e16c65732b8518419a949ba0bdb3bcf
-      internalID: -1602178933
+      spriteID: c76c5c4c42323014c9e2f8a2be1105a3
+      internalID: 1534815535
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_15
+      name: Order_Interface_All 1_15
       rect:
         serializedVersion: 2
         x: 428
@@ -452,14 +465,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 13077236bfad54a48aa662cfb35e4b18
-      internalID: -296290923
+      spriteID: ee998f6444a18354582d52d7b918ffa1
+      internalID: 1880221176
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_16
+      name: Order_Interface_All 1_16
       rect:
         serializedVersion: 2
         x: 470
@@ -473,14 +486,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6b89aeb2f11b0bc46954c5abd3bb1dbb
-      internalID: -427675710
+      spriteID: cb36bc592082a094ab1926969ac10383
+      internalID: -498202443
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_17
+      name: Order_Interface_All 1_17
       rect:
         serializedVersion: 2
         x: 512
@@ -494,14 +507,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ec361c30fe0160942accd8a87f010da1
-      internalID: 2027966924
+      spriteID: 8d5ed69c1b473f740b7b2dec594124a5
+      internalID: 1017322964
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_18
+      name: Order_Interface_All 1_18
       rect:
         serializedVersion: 2
         x: 554
@@ -515,14 +528,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1587d64a153e681428f980c55ce2a487
-      internalID: 976492419
+      spriteID: fc25d19ee81f86445ae04a99ba5c28f1
+      internalID: 1195477303
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_19
+      name: Order_Interface_All 1_19
       rect:
         serializedVersion: 2
         x: 595
@@ -536,14 +549,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 30a6b6683a7b1e14f8503caded40fe4b
-      internalID: 399117089
+      spriteID: 6861bdc3aaf64a348973f884a29f5385
+      internalID: 1990330934
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_20
+      name: Order_Interface_All 1_20
       rect:
         serializedVersion: 2
         x: 638
@@ -557,14 +570,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4a22382f52c8e3f45a96269b46d2327f
-      internalID: -1043533604
+      spriteID: da7f0a1f3c6ebe14ab6341956e059230
+      internalID: -919294274
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_21
+      name: Order_Interface_All 1_21
       rect:
         serializedVersion: 2
         x: 680
@@ -578,14 +591,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b3b286737b212414ca5dbea924bd9107
-      internalID: -309653258
+      spriteID: 1fc9a00508106724585c5b47bbcfd92c
+      internalID: -1503160617
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_22
+      name: Order_Interface_All 1_22
       rect:
         serializedVersion: 2
         x: 731
@@ -599,14 +612,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5ca96fc1a620e5a47979250bd1e0d442
-      internalID: 1610684549
+      spriteID: ee8aec1d26b196249be23748edb4ceac
+      internalID: -1222935321
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_23
+      name: Order_Interface_All 1_23
       rect:
         serializedVersion: 2
         x: 303
@@ -620,14 +633,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 64767d8e44977e847ba3b6147d8caa27
-      internalID: -1476840410
+      spriteID: 8b7da7e29683dd24ab67f4b491381a50
+      internalID: 1503220738
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_24
+      name: Order_Interface_All 1_24
       rect:
         serializedVersion: 2
         x: 345
@@ -641,14 +654,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 60b63e4722c8b9340a359041223604d2
-      internalID: 2140024334
+      spriteID: d5061cf5c43ef4a4fb692d3f91f95c76
+      internalID: -2113163665
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_25
+      name: Order_Interface_All 1_25
       rect:
         serializedVersion: 2
         x: 387
@@ -662,14 +675,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 389ce64f869377846b3cc7e664711732
-      internalID: -1350882953
+      spriteID: 7a4a0df873c57334bbfeafa149c631f1
+      internalID: 167407535
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_26
+      name: Order_Interface_All 1_26
       rect:
         serializedVersion: 2
         x: 428
@@ -683,14 +696,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cc01c7439e5ac4e449332768c8547936
-      internalID: 1692072685
+      spriteID: 7854c0e3f1ffbcf4ea39a8ce29f726ea
+      internalID: -1285521280
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_27
+      name: Order_Interface_All 1_27
       rect:
         serializedVersion: 2
         x: 470
@@ -704,14 +717,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 01642e1be63aea046a4be0f36df2f12f
-      internalID: 372873430
+      spriteID: 9313ec5495ce50d4ebd3fdda8030f0b5
+      internalID: 795345922
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_28
+      name: Order_Interface_All 1_28
       rect:
         serializedVersion: 2
         x: 512
@@ -725,14 +738,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b69ef607475f960449b8594c6423b271
-      internalID: -722362231
+      spriteID: c3d79967750cb174d8855734a9bb8479
+      internalID: -1201921296
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_29
+      name: Order_Interface_All 1_29
       rect:
         serializedVersion: 2
         x: 554
@@ -746,14 +759,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2ac0d6ddb2bde9f48aa5997d4772f16c
-      internalID: -1682632571
+      spriteID: b8c7fa44ca7ca064a808edd0fb79963d
+      internalID: 1428252758
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_30
+      name: Order_Interface_All 1_30
       rect:
         serializedVersion: 2
         x: 595
@@ -767,14 +780,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d364c27f5e0a1ce4caa898e6fb1fb050
-      internalID: -134838049
+      spriteID: 29af38ca69547a64da052011d2529f31
+      internalID: 175720512
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_31
+      name: Order_Interface_All 1_31
       rect:
         serializedVersion: 2
         x: 638
@@ -788,14 +801,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 38e4e360ce4d44642ae65f99eeade0a0
-      internalID: -415280921
+      spriteID: 0239ed372c29657489cd687df64c9123
+      internalID: 2124426389
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_32
+      name: Order_Interface_All 1_32
       rect:
         serializedVersion: 2
         x: 679
@@ -809,14 +822,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 111a1d202a871074f9e5ed31e6020d74
-      internalID: -737219182
+      spriteID: 0334660e47ff03f4583eafafe9303bce
+      internalID: 609330915
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_33
+      name: Order_Interface_All 1_33
       rect:
         serializedVersion: 2
         x: 284
@@ -830,14 +843,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 041fcdf174147ae4f8e37cb5f56e5c45
-      internalID: -2096869093
+      spriteID: 08e0ea08f82529e49a3ec766340706a4
+      internalID: 1788530849
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_34
+      name: Order_Interface_All 1_34
       rect:
         serializedVersion: 2
         x: 395
@@ -851,14 +864,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 11ec248a526de0f4b8c6f890a1886154
-      internalID: -1879752723
+      spriteID: caea73f5eebfa7c4e9d2819425a9364a
+      internalID: -1913916298
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_35
+      name: Order_Interface_All 1_35
+      rect:
+        serializedVersion: 2
+        x: 554
+        y: 164
+        width: 32
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0b04a94c27595248afbe9eae5322fda
+      internalID: -1390723272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All 1_36
       rect:
         serializedVersion: 2
         x: 595
@@ -872,14 +906,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 594aae688b6fff845827d8ec7e922d57
-      internalID: -637832777
+      spriteID: d64485a6ca943ae4b88f287a711416ee
+      internalID: 581821045
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_36
+      name: Order_Interface_All 1_37
       rect:
         serializedVersion: 2
         x: 644
@@ -893,14 +927,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e4d214c40635b8446b39d5601113ccd7
-      internalID: 186006041
+      spriteID: 39421c30b43fb2640badc8f0c829ff29
+      internalID: 657216640
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_37
+      name: Order_Interface_All 1_38
       rect:
         serializedVersion: 2
         x: 679
@@ -914,14 +948,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b326faa46a8684449c7802b885c7a87
-      internalID: 1177972501
+      spriteID: 2efa8490f53555b46b77e7fe3d2d354d
+      internalID: 1653130168
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_38
+      name: Order_Interface_All 1_39
       rect:
         serializedVersion: 2
         x: 731
@@ -935,14 +969,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f17ca18d056dd504ab7173e78c587253
-      internalID: 517971697
+      spriteID: b8a3264193fc71648a1b81cb81c804a9
+      internalID: 1910956422
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_39
+      name: Order_Interface_All 1_40
+      rect:
+        serializedVersion: 2
+        x: 554
+        y: 135
+        width: 32
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac2deda121bd7ee40a1e4a4303f274dd
+      internalID: -338366784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Order_Interface_All 1_41
       rect:
         serializedVersion: 2
         x: 646
@@ -956,14 +1011,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1a194460ff645b349979dae405405eaf
-      internalID: -921269817
+      spriteID: 8da0e4840171088498939753c0f09782
+      internalID: -1857164095
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_40
+      name: Order_Interface_All 1_42
       rect:
         serializedVersion: 2
         x: 643
@@ -977,14 +1032,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 280ec538596cbdf4da76d33dbe07699f
-      internalID: 71981821
+      spriteID: 612a88a5188eaf947adcf8ea9178d0e5
+      internalID: 930757821
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_41
+      name: Order_Interface_All 1_43
       rect:
         serializedVersion: 2
         x: 284
@@ -998,14 +1053,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 662c97e84ebe9f04d806bad56c35e2c0
-      internalID: 1042154181
+      spriteID: c3c867a152c68b948b8e30d1e23047c4
+      internalID: 1826823911
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_42
+      name: Order_Interface_All 1_44
       rect:
         serializedVersion: 2
         x: 395
@@ -1019,14 +1074,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 066e8f7d3fe7eae4184194148ee930d2
-      internalID: 1872398486
+      spriteID: ad4a4bb503d09534e96bd6e8701f5707
+      internalID: -1294108205
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_43
+      name: Order_Interface_All 1_45
       rect:
         serializedVersion: 2
         x: 506
@@ -1040,14 +1095,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b88eeafdcd48ee9468d04d625e1db98b
-      internalID: 781100056
+      spriteID: c2bc287d24fc7c54c828c8fd88b467d4
+      internalID: 1295464554
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_44
+      name: Order_Interface_All 1_46
       rect:
         serializedVersion: 2
         x: 617
@@ -1061,14 +1116,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 711d6fe20ac870e4cbbfd7a5a237809e
-      internalID: 430031037
+      spriteID: 4d8b3a9aad36aaf42b59cf79e61d0d74
+      internalID: -105283126
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_45
+      name: Order_Interface_All 1_47
       rect:
         serializedVersion: 2
         x: 731
@@ -1082,14 +1137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f82ca2f8f75c8da4cb01bbaa5b5c0c49
-      internalID: -1467783483
+      spriteID: 7d18c5de0d75c8048ac7c447a31e1633
+      internalID: -567040559
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_46
+      name: Order_Interface_All 1_48
       rect:
         serializedVersion: 2
         x: 842
@@ -1103,14 +1158,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 524976e4d786f434396bed24aa23dfca
-      internalID: -1297285159
+      spriteID: e6357dcfbf0ccf745b9bcaf87fd08865
+      internalID: -114701445
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_47
+      name: Order_Interface_All 1_49
       rect:
         serializedVersion: 2
         x: 506
@@ -1124,14 +1179,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e5dd6479f33cc4047a13ead0af31310c
-      internalID: -2118859680
+      spriteID: bc21037be34bdbf4ebe6f59b4b080110
+      internalID: 761049875
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Order_Interface_All_48
+      name: Order_Interface_All 1_50
       rect:
         serializedVersion: 2
         x: 617
@@ -1145,8 +1200,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f9f299b97bb75bb409d7e7aa3e154889
-      internalID: -406629225
+      spriteID: b7abdce53d209ab49bf9783be3b5b992
+      internalID: 182607039
       vertices: []
       indices: 
       edges: []
@@ -1162,55 +1217,57 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Order_Interface_All_0: 1974841987
-      Order_Interface_All_1: 691599940
-      Order_Interface_All_10: -1614720347
-      Order_Interface_All_11: -1760540071
-      Order_Interface_All_12: 1756867286
-      Order_Interface_All_13: 525139208
-      Order_Interface_All_14: -1602178933
-      Order_Interface_All_15: -296290923
-      Order_Interface_All_16: -427675710
-      Order_Interface_All_17: 2027966924
-      Order_Interface_All_18: 976492419
-      Order_Interface_All_19: 399117089
-      Order_Interface_All_2: 1103499382
-      Order_Interface_All_20: -1043533604
-      Order_Interface_All_21: -309653258
-      Order_Interface_All_22: 1610684549
-      Order_Interface_All_23: -1476840410
-      Order_Interface_All_24: 2140024334
-      Order_Interface_All_25: -1350882953
-      Order_Interface_All_26: 1692072685
-      Order_Interface_All_27: 372873430
-      Order_Interface_All_28: -722362231
-      Order_Interface_All_29: -1682632571
-      Order_Interface_All_3: -270805414
-      Order_Interface_All_30: -134838049
-      Order_Interface_All_31: -415280921
-      Order_Interface_All_32: -737219182
-      Order_Interface_All_33: -2096869093
-      Order_Interface_All_34: -1879752723
-      Order_Interface_All_35: -637832777
-      Order_Interface_All_36: 186006041
-      Order_Interface_All_37: 1177972501
-      Order_Interface_All_38: 517971697
-      Order_Interface_All_39: -921269817
-      Order_Interface_All_4: 1291446424
-      Order_Interface_All_40: 71981821
-      Order_Interface_All_41: 1042154181
-      Order_Interface_All_42: 1872398486
-      Order_Interface_All_43: 781100056
-      Order_Interface_All_44: 430031037
-      Order_Interface_All_45: -1467783483
-      Order_Interface_All_46: -1297285159
-      Order_Interface_All_47: -2118859680
-      Order_Interface_All_48: -406629225
-      Order_Interface_All_5: 1941377960
-      Order_Interface_All_6: 1642737595
-      Order_Interface_All_7: 1205585021
-      Order_Interface_All_8: -430166547
-      Order_Interface_All_9: 2057939996
+      Order_Interface_All 1_0: -1653238492
+      Order_Interface_All 1_1: 1648851598
+      Order_Interface_All 1_10: -2135803765
+      Order_Interface_All 1_11: 1956314633
+      Order_Interface_All 1_12: -487279646
+      Order_Interface_All 1_13: -331693842
+      Order_Interface_All 1_14: 1534815535
+      Order_Interface_All 1_15: 1880221176
+      Order_Interface_All 1_16: -498202443
+      Order_Interface_All 1_17: 1017322964
+      Order_Interface_All 1_18: 1195477303
+      Order_Interface_All 1_19: 1990330934
+      Order_Interface_All 1_2: 2129427362
+      Order_Interface_All 1_20: -919294274
+      Order_Interface_All 1_21: -1503160617
+      Order_Interface_All 1_22: -1222935321
+      Order_Interface_All 1_23: 1503220738
+      Order_Interface_All 1_24: -2113163665
+      Order_Interface_All 1_25: 167407535
+      Order_Interface_All 1_26: -1285521280
+      Order_Interface_All 1_27: 795345922
+      Order_Interface_All 1_28: -1201921296
+      Order_Interface_All 1_29: 1428252758
+      Order_Interface_All 1_3: -1128376418
+      Order_Interface_All 1_30: 175720512
+      Order_Interface_All 1_31: 2124426389
+      Order_Interface_All 1_32: 609330915
+      Order_Interface_All 1_33: 1788530849
+      Order_Interface_All 1_34: -1913916298
+      Order_Interface_All 1_35: -1390723272
+      Order_Interface_All 1_36: 581821045
+      Order_Interface_All 1_37: 657216640
+      Order_Interface_All 1_38: 1653130168
+      Order_Interface_All 1_39: 1910956422
+      Order_Interface_All 1_4: 678333652
+      Order_Interface_All 1_40: -338366784
+      Order_Interface_All 1_41: -1857164095
+      Order_Interface_All 1_42: 930757821
+      Order_Interface_All 1_43: 1826823911
+      Order_Interface_All 1_44: -1294108205
+      Order_Interface_All 1_45: 1295464554
+      Order_Interface_All 1_46: -105283126
+      Order_Interface_All 1_47: -567040559
+      Order_Interface_All 1_48: -114701445
+      Order_Interface_All 1_49: 761049875
+      Order_Interface_All 1_5: 1557854894
+      Order_Interface_All 1_50: 182607039
+      Order_Interface_All 1_6: 500838654
+      Order_Interface_All 1_7: 498166309
+      Order_Interface_All 1_8: 1319797011
+      Order_Interface_All 1_9: -2126622051
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

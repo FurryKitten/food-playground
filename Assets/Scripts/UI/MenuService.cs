@@ -4,9 +4,10 @@ public class MenuService : MonoBehaviour, IService
 {
     [SerializeField] private GameObject _mainMenu;
     [SerializeField] private GameObject _pauseMenu;
-    [SerializeField] private GameObject _gameMenu;
+    [SerializeField] private GameObject _gameMenuWaiterFrame;
     [SerializeField] private GameObject _upgradesMenu;
     [SerializeField] private GameObject _questsMenu;
+    [SerializeField] private GameObject _gameMenuOrderFrame;
 
     [SerializeField] private GameObject _gameSpace;
 
@@ -32,7 +33,6 @@ public class MenuService : MonoBehaviour, IService
         _gameSpace.SetActive(true);
         _gameState.SetState(State.TETRIS); // TODO: Врубать таймер перед тетрисом*/
         OnOpenQuests();
-
         ServiceLocator.Current.Get<AudioService>().PlayButtonPress();
         ServiceLocator.Current.Get<AudioService>().PlayMusic();
     }
@@ -47,7 +47,7 @@ public class MenuService : MonoBehaviour, IService
     public void OnExitPause()
     {
         DisableAllMenu();
-        _gameMenu.SetActive(true);
+        _gameMenuOrderFrame.SetActive(true);
         _gameState.SetState(State.TETRIS);
         ServiceLocator.Current.Get<AudioService>().PlayButtonPress();
     }
@@ -55,6 +55,7 @@ public class MenuService : MonoBehaviour, IService
     public void OnOpenQuests()
     {
         DisableAllMenu();
+        _gameMenuWaiterFrame.SetActive(true);
         _questsMenu.SetActive(true);
         _gameState.SetState(State.PAUSED);
     }
@@ -62,9 +63,10 @@ public class MenuService : MonoBehaviour, IService
     public void OnQuestAccept()
     {
         DisableAllMenu();
-        _gameMenu.SetActive(true);
-        _gameSpace.SetActive(true);
         _gameState.SetState(State.TETRIS);
+        _gameSpace.SetActive(true);
+        _gameMenuWaiterFrame.SetActive(true);
+        _gameMenuOrderFrame.SetActive(true);
         ServiceLocator.Current.Get<AudioService>().PlayButtonPress();
     }
 
@@ -80,8 +82,9 @@ public class MenuService : MonoBehaviour, IService
     {
         _mainMenu.SetActive(false);
         _pauseMenu.SetActive(false);
-        _gameMenu.SetActive(false);
+        _gameMenuWaiterFrame.SetActive(false);
         _upgradesMenu.SetActive(false);
         _questsMenu.SetActive(false);
+        _gameMenuOrderFrame.SetActive(false);
     }
 }
