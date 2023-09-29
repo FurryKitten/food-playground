@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 using Random = UnityEngine.Random;
 
 public struct Grid
@@ -41,10 +42,24 @@ public class Tetris : MonoBehaviour, IService
 
     private float _balaceValue = 0;
 
+    // boosts flags
     private bool _doubleCost = false;
     private bool _trayBorders = false;
-    private bool _triplets = true;
+    private bool _triplets = false;
     private bool _stickyTray = false;
+    private bool _spoilerTriplets = false;
+    private bool _goldenFish = false;
+    private bool _goldenTea = false;
+    private bool _goldenSmallFood = false;
+
+    // quests flags
+    private bool _expressQuest = true;
+    private bool _seafoodQuest = false;
+    private bool _teaPartyQuest = false;
+    private bool _killSpoilersQuest = false;
+    private bool _collectSpoilersQuest = false;
+    private bool _collectSpoiledFoodsQuest = false;
+
     private int _leftGridConstrain = 4;
     private int _rightGridConstrain = 14;
     private int _gridXOffsetFromWorld = 0;
@@ -62,6 +77,7 @@ public class Tetris : MonoBehaviour, IService
                                         2, 2, 2, 5, 7, 
                                         6, 7, 7, 7, 5, 
                                         7, 3, 5, 5, 3 };
+    private int[] _figureSpawnPercent;
 
     private void Awake()
     {
@@ -96,8 +112,10 @@ public class Tetris : MonoBehaviour, IService
 
         _gameState = ServiceLocator.Current.Get<GameState>();
 
+        _figureSpawnPercent = new int[25];
         _currentFigureNumber = 1;
-        _figureSOIdQueue.Enqueue(SmartGenerateQueue());
+        PrepareSmartGenerate();
+        _figureSOIdQueue.Enqueue(SmartGenerateQueue(18));
 
         // Обновление UI очереди
         if (_figureSOIdQueue.TryPeek(out int nextFigureSOId))
@@ -164,11 +182,14 @@ public class Tetris : MonoBehaviour, IService
         _gameState.AddStage();
 
         _figureSOIdQueue.Clear();
+
         if (_stageNumber != 3)
             _stageNumber++;
         else
+        {
             _stageNumber = 0;
-
+            PrepareSmartGenerate();
+        }
         
         // Обновление UI очереди
         if (_figureSOIdQueue.TryPeek(out int nextFigureSOId))
@@ -177,7 +198,8 @@ public class Tetris : MonoBehaviour, IService
             ServiceLocator.Current.Get<GameState>().ChangeFigureInOrder(25);
 
         _currentFigureNumber = 1;
-        _figureSOIdQueue.Enqueue(SmartGenerateQueue());
+        
+        _figureSOIdQueue.Enqueue(SmartGenerateQueue(Random.Range(0, _figureSOPrefabs.Length)));
 
         //GenerateQueue(_queueSizes[_trayNumber, _stageNumber]);
     }
@@ -337,6 +359,30 @@ public class Tetris : MonoBehaviour, IService
                     ServiceLocator.Current.Get<AudioService>().PlayTetrisGoldSpawn();
                 }
             }
+            else
+            {
+                if (_goldenFish && (_flyingFigure.Index == 1 || _flyingFigure.Index == 5))
+                {
+                    _flyingFigure.SetDoubleCost();
+                    ServiceLocator.Current.Get<AudioService>().PlayTetrisGoldSpawn();
+                }
+                else
+                {
+                    if(_goldenTea && (_flyingFigure.Index == 22 || _flyingFigure.Index == 21))
+                    {
+                        _flyingFigure.SetDoubleCost();
+                        ServiceLocator.Current.Get<AudioService>().PlayTetrisGoldSpawn();
+                    }
+                    else
+                    {
+                        if(_goldenSmallFood && (_flyingFigure.Index >= 10 && _flyingFigure.Index <= 12))
+                        {
+                            _flyingFigure.SetDoubleCost();
+                            ServiceLocator.Current.Get<AudioService>().PlayTetrisGoldSpawn();
+                        }
+                    }
+                }
+            }
 
 
             bool placeCheck = true;
@@ -382,7 +428,7 @@ public class Tetris : MonoBehaviour, IService
             _currentFigureNumber++;
             if(_currentFigureNumber <= _queueSizes[_trayNumber, _stageNumber])
             {
-                _figureSOIdQueue.Enqueue(SmartGenerateQueue());
+                _figureSOIdQueue.Enqueue(SmartGenerateQueue(figureSOId));
             }
 
             // Обновление UI очереди
@@ -803,7 +849,7 @@ public class Tetris : MonoBehaviour, IService
                                 }
                                 else
                                     // триплет спойлеров
-                                    if (!_gameSpace.figureGrid[gridX + 1, gridY].IsGold)
+                                    if (!_gameSpace.figureGrid[gridX + 1, gridY].IsGold && _spoilerTriplets)
                                     {
                                         Vector2Int figureAncor = new Vector2Int(_gameSpace.figureGrid[gridX + 1, gridY].GetPosition().x
                                         + _gameSpace.figureGrid[gridX + 1, gridY].GetForm()[0].x + _gridXOffsetFromWorld,
@@ -841,7 +887,7 @@ public class Tetris : MonoBehaviour, IService
                                 }
                                 else
                                     // триплет спойлеров
-                                    if (!_gameSpace.figureGrid[gridX - 1, gridY].IsGold)
+                                    if (!_gameSpace.figureGrid[gridX - 1, gridY].IsGold && _spoilerTriplets)
                                     {
                                         Vector2Int figureAncor = new Vector2Int(_gameSpace.figureGrid[gridX - 1, gridY].GetPosition().x
                                         + _gameSpace.figureGrid[gridX - 1, gridY].GetForm()[0].x + _gridXOffsetFromWorld,
@@ -879,7 +925,7 @@ public class Tetris : MonoBehaviour, IService
                             }
                             else
                                 // триплет спойлеров
-                                if (!_gameSpace.figureGrid[gridX, gridY + 1].IsGold)
+                                if (!_gameSpace.figureGrid[gridX, gridY + 1].IsGold && _spoilerTriplets)
                                 {
                                     Vector2Int figureAncor = new Vector2Int(_gameSpace.figureGrid[gridX, gridY + 1].GetPosition().x
                                     + _gameSpace.figureGrid[gridX, gridY + 1].GetForm()[0].x + _gridXOffsetFromWorld,
@@ -917,7 +963,7 @@ public class Tetris : MonoBehaviour, IService
                                 }
                                 else
                                     // триплет спойлеров
-                                    if (!_gameSpace.figureGrid[gridX, gridY - 1].IsGold)
+                                    if (!_gameSpace.figureGrid[gridX, gridY - 1].IsGold && _spoilerTriplets)
                                     {
                                         Vector2Int figureAncor = new Vector2Int(_gameSpace.figureGrid[gridX, gridY - 1].GetPosition().x
                                         + _gameSpace.figureGrid[gridX, gridY - 1].GetForm()[0].x + _gridXOffsetFromWorld,
@@ -931,7 +977,7 @@ public class Tetris : MonoBehaviour, IService
                         }
                     }
 
-                if (tripletList.Count > 1)
+                if (tripletList.Count > 1 && _spoilerTriplets)
                 {
                     _figureList[i].CreateTriplet();
 
@@ -1044,7 +1090,7 @@ public class Tetris : MonoBehaviour, IService
                     _figureList[i].ChangeGoldenStatus(false);
 
             }
-            else if(!_figureList[i].IsGold)
+            else if(!_figureList[i].IsGold && _triplets)
             {
                 List<Vector2Int> tripletList = new List<Vector2Int>();
                 Vector2Int fPos = _figureList[i].GetPosition();
@@ -1198,18 +1244,191 @@ public class Tetris : MonoBehaviour, IService
         for (int i = 0; i < queueSize; i++)
             _figureSOIdQueue.Enqueue(Random.Range(0, _figureSOPrefabs.Length));
     }
-    private int SmartGenerateQueue()
+   
+    private void PrepareSmartGenerate()
     {
-        int[] figureSpawnPercent = new int[25];
-        for (int i = 0; i < figureSpawnPercent.Length; ++i)
-            figureSpawnPercent[i] = _SpawnProbability[i];
+        if(!_expressQuest)
+            for (int i = 0; i < _figureSpawnPercent.Length; ++i)
+                _figureSpawnPercent[i] = _SpawnProbability[i];
+        else
+            for (int i = 0; i < _figureSpawnPercent.Length; ++i)
+                _figureSpawnPercent[i] = 1;
 
-        //figureSpawnPercent[18] = 3;
+        if (_spoilerTriplets)
+            _figureSpawnPercent[18] *= 10;
+
+        if (_collectSpoiledFoodsQuest)
+            _figureSpawnPercent[18] *= 2;
+        else
+        {
+            if ((_collectSpoilersQuest || _killSpoilersQuest))
+            {
+                if(!_spoilerTriplets)
+                    _figureSpawnPercent[18] *= 10;
+            }
+            else 
+            {
+                if(_seafoodQuest)
+                {
+                    for (int i = 0; i < 6; ++i)
+                        _figureSpawnPercent[i] = Random.Range(0, 3);
+                }
+                else
+                {
+                    if(_teaPartyQuest)
+                    {
+                        _figureSpawnPercent[21] = Random.Range(0, 3);
+                        _figureSpawnPercent[22] = 7;
+                    }
+                }
+            }
+        }
+    }
+    private int SmartGenerateQueue(int lastFigureIndex)
+    {
+        int[] _timedFigureSpawnPercent = { 0, 0, 0, 0, 0,
+                                           0, 0, 0, 0, 0,
+                                           0, 0, 0, 0, 0,
+                                           0, 0, 0, 0, 0,
+                                           0, 0, 0, 0, 0 };
+        int cupCounter = 0;
+
+        if(_seafoodQuest)
+        {
+            for (int i = 0; i < 6; ++i)
+                _figureSpawnPercent[i] += Random.Range(_stageNumber, _stageNumber + 2);
+
+            if (_figureList.Count > 0)
+                foreach (Figure figure in _figureList)
+                    if (figure.Index >= 0 && figure.Index < 6)
+                        _figureSpawnPercent[figure.Index] = 2;
+        }
+        else 
+        {
+            if(_teaPartyQuest)
+            {
+                _figureSpawnPercent[21] += Random.Range(_stageNumber + 1, _stageNumber + 2); // Teapot
+                _figureSpawnPercent[22] += Random.Range(_stageNumber + 4 - cupCounter, _stageNumber + 6 - cupCounter);
+
+                if (_figureList.Count > 0)
+                    foreach (Figure figure in _figureList)
+                    {
+                        if (figure.Index == 21)
+                            _figureSpawnPercent[figure.Index] = 2;
+                        else
+                        {
+                            if(figure.Index == 22)
+                                if(cupCounter < 4)
+                                {
+                                    cupCounter++;
+                                }
+                                else
+                                {
+                                    _figureSpawnPercent[figure.Index] = 2;
+                                }
+                        }
+                    }
+
+            }
+            else 
+            {
+                if(_expressQuest)
+                {
+                    if (_figureList.Count > 0)
+                    {
+                        for (int i = _leftGridConstrain; i < _rightGridConstrain; i++)
+                            for (int j = _figureStartPos.y; j >= 0; j--)
+                            {
+                                if (j - 1 >= 0)
+                                {
+                                    if (_gameSpace.figureGrid[i, j - 1] != null)
+                                    {
+                                        foreach (FigureSO figureSO in _figureSOPrefabs)
+                                        {
+                                            bool spaceCheck = true;
+                                            int offsetJ = Mathf.RoundToInt(figureSO.heightTex * 5) - 1;
+
+                                            foreach (Vector2Int pos in figureSO.form)
+                                            {
+                                                if (i + pos.x >= _leftGridConstrain && i + pos.x < _rightGridConstrain &&
+                                                    j + offsetJ - pos.y >= 0 && j + offsetJ - pos.y <= _figureStartPos.y)
+                                                {
+                                                    if (_gameSpace.figureGrid[i + pos.x, j + offsetJ - pos.y] != null)
+                                                    {
+                                                        spaceCheck = false;
+                                                        break;
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    spaceCheck = false;
+                                                    break;
+                                                }
+                                            }
+
+                                            if (spaceCheck)
+                                            {
+                                                foreach (Vector2Int pos in figureSO.form)
+                                                {
+                                                    if (i + pos.x >= _leftGridConstrain && i + pos.x < _rightGridConstrain)
+                                                        if (_gameSpace.figureGrid[i + pos.x, j - 1] == null)
+                                                        {
+                                                            spaceCheck = false;
+                                                            break;
+                                                        }
+                                                }
+
+                                                if (spaceCheck)
+                                                    _timedFigureSpawnPercent[figureSO.indexTex] = (_figureStartPos.y - j) * (_figureStartPos.y - j) *
+                                                        Mathf.RoundToInt(figureSO.widthTex / figureSO.heightTex + 1);// * figureSO.form.Length;
+                                            }
+                                        }
+
+                                        break;
+                                    }
+                                }
+                                else 
+                                {
+                                    if (_gameSpace.figureGrid[i, j] == null)
+                                    {
+                                        foreach (FigureSO figureSO in _figureSOPrefabs)
+                                        {
+                                            bool spaceCheck = true;
+                                            int offsetJ = Mathf.RoundToInt(figureSO.heightTex * 5);
+
+                                            foreach (Vector2Int pos in figureSO.form)
+                                            {
+                                                if (i + pos.x >= _leftGridConstrain && i + pos.x < _rightGridConstrain &&
+                                                    j + offsetJ - pos.y >= 0 && j + offsetJ - pos.y <= _figureStartPos.y)
+                                                {
+                                                    if (_gameSpace.figureGrid[i + pos.x, j + offsetJ - pos.y] != null)
+                                                    {
+                                                        spaceCheck = false;
+                                                        break;
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    spaceCheck = false;
+                                                    break;
+                                                }
+                                            }
+
+                                            if (spaceCheck)
+                                                _timedFigureSpawnPercent[figureSO.indexTex] += (_figureStartPos.y - j) * figureSO.form.Length;
+                                        }
+
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                }
+            }
+        }
 
         if (_figureList.Count > 0 && _triplets)
         {
-            figureSpawnPercent[_figureList.Last().Index] = 0;
-
             Dictionary<Vector2Int, int> costSoFar = new Dictionary<Vector2Int, int>();
             Dictionary<Vector2Int, int> ways = new Dictionary<Vector2Int, int>();
             Vector2Int goal = _figureStartPos;
@@ -1223,7 +1442,6 @@ public class Tetris : MonoBehaviour, IService
             {
                 if (figure.IsGold || figure.IsSpoiled)
                     continue;
-
 
                 Vector2Int fPos = figure.GetPosition();
                 int gridX = fPos.x + _gridXOffsetFromWorld;
@@ -1286,8 +1504,6 @@ public class Tetris : MonoBehaviour, IService
                         }
                     }
 
-
-
                 foreach (Vector2Int position in probablyFinishPos)
                 {
                     costSoFar.Clear();
@@ -1319,7 +1535,7 @@ public class Tetris : MonoBehaviour, IService
 
                         if (currentCell == goal)
                         {
-                            figureSpawnPercent[figure.Index] += 10;
+                            _timedFigureSpawnPercent[figure.Index] += 10;
                             checkWay = true;
                             break;
                         }
@@ -1385,45 +1601,26 @@ public class Tetris : MonoBehaviour, IService
             }
 
         }
-        /*
-        if(_figureList.Count > 0)
-            for(int i = _leftGridConstrain; i < _rightGridConstrain; ++i)
-                for(int j = 10; j >= 0; j--)
-                {
-                    if (_gameSpace.figureGrid[i, j] != null)
-                    {
-                        if(!_gameSpace.figureGrid[i, j].IsGold)
-                        {
-                            figureSpawnPercent[_gameSpace.figureGrid[i, j].Index] += 2;
-                            break;
-                        }
-                    }
-                }
-        */
-
-        
-       /* for (int i = 0; i < 25; ++i)
-        {
-            Debug.Log(i + " spawn chance " + (figureSpawnPercent[i]));
-        }
-
-        Debug.Log("---------------------");
-       */
-
+       
         int sum = 0;
 
-        foreach (int i in figureSpawnPercent)
-            sum += i;
+        for (int i = 0; i < _figureSpawnPercent.Length; ++i)
+        {
+            sum += _figureSpawnPercent[i] + _timedFigureSpawnPercent[i];
+        }
 
         int figureDefinitor = Random.Range(0, sum);
 
         int index = 0;
-        sum = figureSpawnPercent[index];
+        sum = _figureSpawnPercent[index] + _timedFigureSpawnPercent[index];
         while (sum <= figureDefinitor)
         {
             index++;
-            sum += figureSpawnPercent[index];
+            sum += _figureSpawnPercent[index] + _timedFigureSpawnPercent[index];
         }
+
+        if (index == lastFigureIndex)
+            index = (index + 1) % 25;
 
         return index;
     }
@@ -1448,6 +1645,17 @@ public class Tetris : MonoBehaviour, IService
     {
         _trayAngle *= 0.5f;
     }
+
+    public void SetTriplets()
+    {
+        _triplets = true;
+    }
+
+    public void SetSpoilerTriplets()
+    {
+        _spoilerTriplets = true;
+    }
+
     public void SetGridWidth(int trayWidth) // TO DO: use Unity Event
     {
         _leftGridConstrain -= 1;
