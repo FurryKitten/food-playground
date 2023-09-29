@@ -12,6 +12,7 @@ public class MenuService : MonoBehaviour, IService
     [SerializeField] private GameObject _gameSpace;
 
     private GameState _gameState;
+    private AudioService _audioService;
 
     private void Awake()
     {
@@ -24,6 +25,7 @@ public class MenuService : MonoBehaviour, IService
     private void Start()
     {
         _gameState = ServiceLocator.Current.Get<GameState>();
+        _audioService = ServiceLocator.Current.Get<AudioService>();
     }
 
     public void OnPressPlay()
@@ -33,8 +35,8 @@ public class MenuService : MonoBehaviour, IService
         _gameSpace.SetActive(true);
         _gameState.SetState(State.TETRIS); // TODO: Врубать таймер перед тетрисом*/
         OnOpenQuests();
-        ServiceLocator.Current.Get<AudioService>().PlayButtonPress();
-        ServiceLocator.Current.Get<AudioService>().PlayMusic();
+        _audioService.PlayButtonPress();
+        _audioService.PlayMusic();
     }
 
     public void OnPressPause()
@@ -49,7 +51,7 @@ public class MenuService : MonoBehaviour, IService
         DisableAllMenu();
         _gameMenuOrderFrame.SetActive(true);
         _gameState.SetState(State.TETRIS);
-        ServiceLocator.Current.Get<AudioService>().PlayButtonPress();
+        _audioService.PlayButtonPress();
     }
 
     public void OnOpenQuests()
@@ -63,19 +65,19 @@ public class MenuService : MonoBehaviour, IService
     public void OnQuestAccept()
     {
         DisableAllMenu();
-        _gameState.SetState(State.TETRIS);
         _gameSpace.SetActive(true);
         _gameMenuWaiterFrame.SetActive(true);
         _gameMenuOrderFrame.SetActive(true);
-        ServiceLocator.Current.Get<AudioService>().PlayButtonPress();
+        
+        _audioService.PlayButtonPress();
+
+        _gameState.RestartRun();
     }
 
     public void OnGiftAccept()
     {
         OnOpenQuests();
     }
-
-
 
 
     private void DisableAllMenu()
