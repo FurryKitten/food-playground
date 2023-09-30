@@ -25,6 +25,11 @@ public class UpgradesUIService : MonoBehaviour
             _questInfoBlock.SetActive(false);
             _giftsInfoBlock.SetActive(true);
         });
+        _acceptGiftButton.onClick.AddListener(() =>
+        {
+            _questInfoBlock.SetActive(true);
+            _giftsInfoBlock.SetActive(false);
+        });
         _acceptGiftButton.onClick.AddListener(_menuService.OnGiftAccept);
     }
 
