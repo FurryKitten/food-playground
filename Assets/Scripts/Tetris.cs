@@ -51,9 +51,10 @@ public class Tetris : MonoBehaviour, IService
     private bool _goldenFish = false;
     private bool _goldenTea = false;
     private bool _goldenSmallFood = false;
+    private bool _traySlowMo = false;
 
     // quests flags
-    private bool _expressQuest = true;
+    private bool _expressQuest = false;
     private bool _seafoodQuest = false;
     private bool _teaPartyQuest = false;
     private bool _killSpoilersQuest = false;
@@ -121,9 +122,9 @@ public class Tetris : MonoBehaviour, IService
 
         // Обновление UI очереди
         if (_figureSOIdQueue.TryPeek(out int nextFigureSOId))
-            ServiceLocator.Current.Get<GameState>().ChangeFigureInOrder(nextFigureSOId);
+            _gameState.ChangeFigureInOrder(nextFigureSOId);
         else
-            ServiceLocator.Current.Get<GameState>().ChangeFigureInOrder(25);
+            _gameState.ChangeFigureInOrder(25);
     }
     private void Update()
     {
@@ -195,9 +196,9 @@ public class Tetris : MonoBehaviour, IService
         
         // Обновление UI очереди
         if (_figureSOIdQueue.TryPeek(out int nextFigureSOId))
-            ServiceLocator.Current.Get<GameState>().ChangeFigureInOrder(nextFigureSOId);
+            _gameState.ChangeFigureInOrder(nextFigureSOId);
         else
-            ServiceLocator.Current.Get<GameState>().ChangeFigureInOrder(25);
+            _gameState.ChangeFigureInOrder(25);
 
         _currentFigureNumber = 1;
         
@@ -435,9 +436,9 @@ public class Tetris : MonoBehaviour, IService
 
             // Обновление UI очереди
             if (_figureSOIdQueue.TryPeek(out int nextFigureSOId))
-                ServiceLocator.Current.Get<GameState>().ChangeFigureInOrder(nextFigureSOId);
+                _gameState.ChangeFigureInOrder(nextFigureSOId);
             else
-                ServiceLocator.Current.Get<GameState>().ChangeFigureInOrder(25);
+                _gameState.ChangeFigureInOrder(25);
 
             return true;
         }
@@ -1246,7 +1247,6 @@ public class Tetris : MonoBehaviour, IService
         for (int i = 0; i < queueSize; i++)
             _figureSOIdQueue.Enqueue(Random.Range(0, _figureSOPrefabs.Length));
     }
-   
     private void PrepareSmartGenerate()
     {
         if(!_expressQuest)
@@ -1656,6 +1656,39 @@ public class Tetris : MonoBehaviour, IService
     public void SetSpoilerTriplets()
     {
         _spoilerTriplets = true;
+    }
+
+    public void SetGift(int giftNumber)
+    {
+        _doubleCost = false; // 5
+        _trayBorders = false; // 4
+        _triplets = false; // 7
+        _stickyTray = false; // 10
+        _spoilerTriplets = false; // 13
+        _goldenFish = false; // 1
+        _goldenTea = false; // 2
+        _goldenSmallFood = false; // 3
+        if (_traySlowMo) // 8 - traySlowMo
+        {
+            _traySlowMo = false;
+            _trayAngle *= 2.0f;
+        }
+
+        switch(giftNumber)
+        {
+            case 1: _goldenFish = true; break;
+            case 3: _goldenTea = true; break;
+            case 2: _goldenSmallFood = true; break;
+            case 4: _trayBorders = true; break;
+            case 5: _doubleCost = true; break;
+            case 7: _triplets = true; break;
+            case 8:
+                _traySlowMo = false;
+                _trayAngle *= 0.5f;
+                break;
+            case 10: _stickyTray = true; break;
+            case 13: _spoilerTriplets = true; break;
+        }
     }
 
     public void SetGridWidth(int trayWidth) // TO DO: use Unity Event

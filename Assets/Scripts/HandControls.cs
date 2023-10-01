@@ -5,7 +5,8 @@ using UnityEngine;
 public class HandControls : MonoBehaviour, IService
 {
     [SerializeField] Sprite _tentacleSprite;
-    [SerializeField] private int _handWidth = 3;
+    [SerializeField] Sprite _tripleTentacleSprite;
+    [SerializeField] private int _handWidth = 1;
 
     private List<Figure> _figures = new List<Figure>();
     private int _trayLehgth = 10;
@@ -58,6 +59,11 @@ public class HandControls : MonoBehaviour, IService
     public void SetTentacle() //TO DO: use Unity Event
     {
         GetComponentInChildren<SpriteRenderer>().sprite = _tentacleSprite;
+        _handWidth *= 2;
+    }
+    public void SetTripleTentacle() //TO DO: use Unity Event
+    {
+        GetComponentInChildren<SpriteRenderer>().sprite = _tripleTentacleSprite;
         _handWidth *= 2;
     }
 

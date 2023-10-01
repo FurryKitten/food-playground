@@ -18,6 +18,7 @@ public class UpgradesUIService : MonoBehaviour
 
     private MenuService _menuService;
     private bool _questDone = false; // TO DO: use Locator
+    private Vector3Int _gifts = new Vector3Int(-1, -1, -1);
 
     private void Awake()
     {
@@ -35,55 +36,63 @@ public class UpgradesUIService : MonoBehaviour
             _giftsInfoBlock.SetActive(true);
             _giftsRadioGroup.ResetAllButtons();
 
-            Vector3Int gifts = ServiceLocator.Current.Get<GiftsService>().GenerateGifts();
-
+            _gifts = ServiceLocator.Current.Get<GiftsService>().GenerateGifts();
 
             if (_questDone)
             {
-                _giftsImages[0].overrideSprite = _icons[gifts.x];
-                _giftsButtons[0].SetTooltip(_giftsTooltips[gifts.x]);
+                _giftsImages[0].overrideSprite = _icons[_gifts.x];
+                _giftsImages[0].SetNativeSize();
+                _giftsButtons[0].SetTooltip(_giftsTooltips[_gifts.x]);
                 _giftsButtons[0].SetEnable(true);
             }
             else
             {
                 _giftsImages[0].overrideSprite = _failedQuestIcon;
+                _giftsImages[0].SetNativeSize();
                 _giftsButtons[0].SetTooltip(_failedQuestTooltip);
                 _giftsButtons[0].SetEnable(false);
             }
 
-            _giftsImages[1].overrideSprite = _icons[gifts.y]; 
-            _giftsButtons[1].SetTooltip(_giftsTooltips[gifts.y]);
+            _giftsImages[1].overrideSprite = _icons[_gifts.y]; 
+            _giftsButtons[1].SetTooltip(_giftsTooltips[_gifts.y]);
 
-            _giftsImages[2].overrideSprite = _icons[gifts.z];
-            _giftsButtons[2].SetTooltip(_giftsTooltips[gifts.z]);
+            _giftsImages[2].overrideSprite = _icons[_gifts.z];
+            _giftsButtons[2].SetTooltip(_giftsTooltips[_gifts.z]);
         });
+
         _acceptGiftButton.onClick.AddListener(() =>
         {
             _questInfoBlock.SetActive(true);
             _giftsInfoBlock.SetActive(false);
             _acceptGiftButton.interactable = false;
+            ServiceLocator.Current.Get<Tetris>().SetGift(_giftsRadioGroup.SelectedButton == 2 ? _gifts.z 
+                : (_giftsRadioGroup.SelectedButton == 1 ? _gifts.y : _gifts.x));
         });
+
+
         _acceptGiftButton.onClick.AddListener(_menuService.OnGiftAccept);
-        Vector3Int gifts = ServiceLocator.Current.Get<GiftsService>().GenerateGifts();
+        _gifts = ServiceLocator.Current.Get<GiftsService>().GenerateGifts();
 
         if (_questDone)
         {
-            _giftsImages[0].overrideSprite = _icons[gifts.x];
-            _giftsButtons[0].SetTooltip(_giftsTooltips[gifts.x]);
+            _giftsImages[0].overrideSprite = _icons[_gifts.x];
+            _giftsImages[0].SetNativeSize();
+            _giftsButtons[0].SetTooltip(_giftsTooltips[_gifts.x]);
             _giftsButtons[0].SetEnable(true);
         }
         else
         {
             _giftsImages[0].overrideSprite = _failedQuestIcon;
+            _giftsImages[0].SetNativeSize();
             _giftsButtons[0].SetTooltip(_failedQuestTooltip);
             _giftsButtons[0].SetEnable(false);
         }
 
-        _giftsImages[1].overrideSprite = _icons[gifts.y];
-        _giftsButtons[1].SetTooltip(_giftsTooltips[gifts.y]);
+        _giftsImages[1].overrideSprite = _icons[_gifts.y];
+        _giftsButtons[1].SetTooltip(_giftsTooltips[_gifts.y]);
 
-        _giftsImages[2].overrideSprite = _icons[gifts.z];
-        _giftsButtons[2].SetTooltip(_giftsTooltips[gifts.z]);
+        _giftsImages[2].overrideSprite = _icons[_gifts.z];
+        _giftsButtons[2].SetTooltip(_giftsTooltips[_gifts.z]);
     }
 
     public void ShowUpgrades()
