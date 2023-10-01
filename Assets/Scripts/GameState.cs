@@ -34,7 +34,7 @@ public class GameState : MonoBehaviour, IService
     private void Start()
     {
         _tetrisService = ServiceLocator.Current.Get<Tetris>();
-        _onHealthChange.AddListener(ServiceLocator.Current.Get<MenuService>().ShowDeathScreen);
+        _onHealthChange.AddListener(ServiceLocator.Current.Get<UIService>().ShowDeathScreen);
     }
 
     [ContextMenu("Add stage")]

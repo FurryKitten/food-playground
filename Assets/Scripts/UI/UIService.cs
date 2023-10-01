@@ -1,14 +1,13 @@
 ﻿using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class MenuService : MonoBehaviour, IService
+public class UIService : MonoBehaviour, IService
 {
     [SerializeField] private GameObject _mainMenu;
-    [SerializeField] private GameObject _gameUI;
     [SerializeField] private GameObject _pauseMenu;
     [SerializeField] private GameObject _upgradesMenu;
     [SerializeField] private GameObject _questsMenu;
     [SerializeField] private GameObject _deathMenu;
+    [SerializeField] private GameObject _shopMenu;
 
     [SerializeField] private GameObject _gameMenuWaiterFrame;
     [SerializeField] private GameObject _gameMenuOrderFrame;
@@ -129,6 +128,21 @@ public class MenuService : MonoBehaviour, IService
     }
     #endregion
 
+    /** Shop
+     */
+    #region SHOP
+    public void ShowShop()
+    {
+        DisableAllMenu();
+        _shopMenu.SetActive(true);
+    }
+
+    public void OnShopBackButton()
+    {
+        ShowMainMenu();
+    }
+    #endregion
+
     private void DisableAllMenu()
     {
         _mainMenu.SetActive(false);
@@ -136,6 +150,7 @@ public class MenuService : MonoBehaviour, IService
         _upgradesMenu.SetActive(false);
         _questsMenu.SetActive(false);
         _deathMenu.SetActive(false);
+        _shopMenu.SetActive(false);
 
         _gameMenuOrderFrame.SetActive(false);
         _gameMenuWaiterFrame.SetActive(false);

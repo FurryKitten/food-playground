@@ -16,7 +16,7 @@ public class UpgradesUIService : MonoBehaviour
     [SerializeField] private Sprite _failedQuestIcon;
     [SerializeField] private GameObject _failedQuestTooltip;
 
-    private MenuService _menuService;
+    private UIService _menuService;
     private bool _questDone = false; // TO DO: use Locator
     private Vector3Int _gifts = new Vector3Int(-1, -1, -1);
 
@@ -30,7 +30,7 @@ public class UpgradesUIService : MonoBehaviour
     private void Start()
     {
         ServiceLocator.Current.Get<GiftsService>().ResetGiftPool();
-        _menuService = ServiceLocator.Current.Get<MenuService>();
+        _menuService = ServiceLocator.Current.Get<UIService>();
         _continueButton.onClick.AddListener(() => { 
             _questInfoBlock.SetActive(false);
             _giftsInfoBlock.SetActive(true);

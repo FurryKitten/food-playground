@@ -16,14 +16,14 @@ public class QuestsUIService : MonoBehaviour
     [SerializeField] private GameObject _quest2;
 
 
-    private MenuService _menuService;
+    private UIService _menuService;
     private bool _questChoice;
     private int _numberQuest1;
     private int _numberQuest2;
 
     private void Start()
     {
-        _menuService = ServiceLocator.Current.Get<MenuService>();
+        _menuService = ServiceLocator.Current.Get<UIService>();
         _acceptQuestButton.onClick.AddListener(_menuService.OnQuestAccept);
         _acceptQuestButton.onClick.AddListener(() =>
         {

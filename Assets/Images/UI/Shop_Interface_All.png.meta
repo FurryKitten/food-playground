@@ -1,0 +1,1410 @@
+fileFormatVersion: 2
+guid: 190f8af78b5bffc4a821268f1f68fdda
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Shop_Interface_All_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 320
+        height: 540
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 003c25ace0ef90f4d94f1d580e3714c8
+      internalID: 1147956047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_1
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 491
+        width: 8
+        height: 49
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 5, z: 0, w: 5}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb02c55b9ade616428485e6721a88a6b
+      internalID: -1853747361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_2
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 270
+        width: 8
+        height: 270
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a180340bd4ed4b64baee4620e2dd81dc
+      internalID: -411068298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_3
+      rect:
+        serializedVersion: 2
+        x: 556
+        y: 518
+        width: 68
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae851f928d59c2143a3ccc7d97e80c58
+      internalID: -1176865052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_4
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 480
+        width: 48
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b787cef21dd36534089e37242c1caf42
+      internalID: 2027983836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_5
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 492
+        width: 48
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3502b0b35bc81fb498789b199d1b49e6
+      internalID: -72742354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_6
+      rect:
+        serializedVersion: 2
+        x: 732
+        y: 480
+        width: 48
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d3622a8e1457224eb1398c708407d32
+      internalID: -1528900122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_7
+      rect:
+        serializedVersion: 2
+        x: 804
+        y: 480
+        width: 48
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03da1a1529188484f9d4db3b4e93f61d
+      internalID: 262872517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_8
+      rect:
+        serializedVersion: 2
+        x: 856
+        y: 492
+        width: 48
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 933a7584e598fa6449aac60d3ca334a2
+      internalID: 451287468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_9
+      rect:
+        serializedVersion: 2
+        x: 908
+        y: 480
+        width: 48
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eff651cf871ab8044a6ebbefabf3337f
+      internalID: -1586910080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_10
+      rect:
+        serializedVersion: 2
+        x: 556
+        y: 497
+        width: 68
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3bcdb4cae54f8f846aaa6f5d59fa7188
+      internalID: -1917986590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_11
+      rect:
+        serializedVersion: 2
+        x: 556
+        y: 475
+        width: 68
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96a54062fff21ff47acd5d263983de82
+      internalID: 624730834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_12
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 422
+        width: 48
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f95b9caef3725094bb19119cd7f16dad
+      internalID: -1974274394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_13
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 434
+        width: 48
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64a4eeb653035574982f92c078d41016
+      internalID: -1135621511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_14
+      rect:
+        serializedVersion: 2
+        x: 732
+        y: 422
+        width: 48
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1776e8c523fda714ba30c13f0b30f551
+      internalID: 1530606968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_15
+      rect:
+        serializedVersion: 2
+        x: 804
+        y: 422
+        width: 48
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 619f61ec0e1531947b1f4a2d5cd25243
+      internalID: -1909524904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_16
+      rect:
+        serializedVersion: 2
+        x: 856
+        y: 434
+        width: 48
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2a2e44b1ffa5da4b9d4a46a25d5dc09
+      internalID: -1754004373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_17
+      rect:
+        serializedVersion: 2
+        x: 908
+        y: 422
+        width: 48
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 070be3bd699cde74e9588ed7df7c35a6
+      internalID: -75355315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_18
+      rect:
+        serializedVersion: 2
+        x: 556
+        y: 456
+        width: 28
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd11079948a6dd4408576d51a6bb349b
+      internalID: -1081067006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_19
+      rect:
+        serializedVersion: 2
+        x: 586
+        y: 456
+        width: 28
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 327096b9836bc664ab278c3fbb9d85c2
+      internalID: -1326349426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_20
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 270
+        width: 8
+        height: 135
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 5, z: 0, w: 6}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3032cb7927a19d54a97d619ddcc63f7e
+      internalID: 862569986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_21
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 384
+        width: 50
+        height: 57
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd65a1dcc57990c499edad93a63c88ff
+      internalID: -1377938945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_22
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 364
+        width: 48
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c24718e6dd04db648af9af2fc8011b4f
+      internalID: 1441725069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_23
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 376
+        width: 48
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 939cc47cd73cc174a895487587fd74ce
+      internalID: 1077096818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_24
+      rect:
+        serializedVersion: 2
+        x: 732
+        y: 364
+        width: 48
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa286788c59020b4da8e2a6723c80a51
+      internalID: 1103369597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_25
+      rect:
+        serializedVersion: 2
+        x: 804
+        y: 364
+        width: 48
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: afd5613523ce1ed4e9d853eabfe74f2a
+      internalID: -2024000643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_26
+      rect:
+        serializedVersion: 2
+        x: 856
+        y: 376
+        width: 48
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1935c87d2c7d48b4e827814bf5d0fbdf
+      internalID: 1842020390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_27
+      rect:
+        serializedVersion: 2
+        x: 908
+        y: 364
+        width: 48
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e082635e71e1814d99abcbf5b8d58eb
+      internalID: -9024423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_28
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 334
+        width: 50
+        height: 45
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd72df7690759b74aa199d9442a8ac9e
+      internalID: -1592294218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_29
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 306
+        width: 48
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8289b9ebbca4d8f4180fa1ac9dccb2eb
+      internalID: -2055280009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_30
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 318
+        width: 48
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2446c8206c9bed40bd0cd93beee6536
+      internalID: -2127563072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_31
+      rect:
+        serializedVersion: 2
+        x: 732
+        y: 306
+        width: 48
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff7b33406b210944a930315b605ed350
+      internalID: 427258585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_32
+      rect:
+        serializedVersion: 2
+        x: 804
+        y: 306
+        width: 48
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b76a7aaf99eebf344ad517a1e5723f4e
+      internalID: -1660911460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_33
+      rect:
+        serializedVersion: 2
+        x: 856
+        y: 318
+        width: 48
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4d0f46e0960ad042942c1e7496bc20b
+      internalID: -350501963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_34
+      rect:
+        serializedVersion: 2
+        x: 908
+        y: 306
+        width: 48
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da83e015a90d56a43ae66935b41ef6b3
+      internalID: 310233039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_37
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 248
+        width: 48
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1a7e4791f52cf14aa3b1e16e68adedd
+      internalID: -2109080217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_38
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 260
+        width: 48
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5fe37bf3769739f48829215da56c64a5
+      internalID: 1984309828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_39
+      rect:
+        serializedVersion: 2
+        x: 732
+        y: 248
+        width: 48
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff00ecf06b4ee83459a2e77a62df431d
+      internalID: -2108983262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_41
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 230
+        width: 30
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eaa6e52a18f6bc34fa873116ddf7aac2
+      internalID: 1309356201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_46
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 190
+        width: 48
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa5c8c36d6fccd24e9f11fe04bcdda9c
+      internalID: 1869153997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_47
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 202
+        width: 48
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f035409a16bad7408f7733c8bc77ec8
+      internalID: -1502012868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_48
+      rect:
+        serializedVersion: 2
+        x: 732
+        y: 190
+        width: 48
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3cf9552229b9c1a4daf84c8238dae869
+      internalID: 1045792047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_49
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 181
+        width: 274
+        height: 85
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6c411df681659b4291b42b1c1d5bd2a
+      internalID: 1600659794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_53
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 132
+        width: 48
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d57a041b1df255346b8adacf761d20e6
+      internalID: -804459775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_54
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 144
+        width: 48
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2939169dbe77f874e846b9f95b13b802
+      internalID: 1561087122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_55
+      rect:
+        serializedVersion: 2
+        x: 732
+        y: 132
+        width: 48
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 837a6827465e72c4eb2b37b0d88d056b
+      internalID: -103946745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_57
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 143
+        width: 272
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d7d43eb838a863499a9eace59838f07
+      internalID: 583184835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_64
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 127
+        width: 224
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6fd2a0357f934f843bac85467606901c
+      internalID: 124402793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_65
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 74
+        width: 48
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd1391c63e302f243bad48d367d447d1
+      internalID: -458666661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_66
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 86
+        width: 48
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5012c031875ba0a46885573d9e3f9e16
+      internalID: 1166803822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_67
+      rect:
+        serializedVersion: 2
+        x: 732
+        y: 74
+        width: 48
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43f5bcb1c4914f946a0d57a6b7c84378
+      internalID: -60550163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_68
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 118
+        width: 224
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a239315fb195611448f5667245289e56
+      internalID: -706958151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_69
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 109
+        width: 224
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e43fe3b8dc5fab34fba154237bf5d00c
+      internalID: -128988297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_70
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 99
+        width: 224
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b378ab6576cc09b45bb828d5c1358991
+      internalID: -271821387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_71
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 90
+        width: 224
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31cc186f4a1d56443ad461c6ff58b377
+      internalID: 1888418427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_72
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 78
+        width: 224
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3da0a1285c23a04b9d32ac1bd0a5eec
+      internalID: -315624001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop_Interface_All_35
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 270
+        width: 152
+        height: 270
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9fc6d05908623514fac11f3601180463
+      internalID: -1440354659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Shop_Interface_All_0: 1147956047
+      Shop_Interface_All_1: -1853747361
+      Shop_Interface_All_10: -1917986590
+      Shop_Interface_All_11: 624730834
+      Shop_Interface_All_12: -1974274394
+      Shop_Interface_All_13: -1135621511
+      Shop_Interface_All_14: 1530606968
+      Shop_Interface_All_15: -1909524904
+      Shop_Interface_All_16: -1754004373
+      Shop_Interface_All_17: -75355315
+      Shop_Interface_All_18: -1081067006
+      Shop_Interface_All_19: -1326349426
+      Shop_Interface_All_2: -411068298
+      Shop_Interface_All_20: 862569986
+      Shop_Interface_All_21: -1377938945
+      Shop_Interface_All_22: 1441725069
+      Shop_Interface_All_23: 1077096818
+      Shop_Interface_All_24: 1103369597
+      Shop_Interface_All_25: -2024000643
+      Shop_Interface_All_26: 1842020390
+      Shop_Interface_All_27: -9024423
+      Shop_Interface_All_28: -1592294218
+      Shop_Interface_All_29: -2055280009
+      Shop_Interface_All_3: -1176865052
+      Shop_Interface_All_30: -2127563072
+      Shop_Interface_All_31: 427258585
+      Shop_Interface_All_32: -1660911460
+      Shop_Interface_All_33: -350501963
+      Shop_Interface_All_34: 310233039
+      Shop_Interface_All_35: -1440354659
+      Shop_Interface_All_36: 414204023
+      Shop_Interface_All_37: -2109080217
+      Shop_Interface_All_38: 1984309828
+      Shop_Interface_All_39: -2108983262
+      Shop_Interface_All_4: 2027983836
+      Shop_Interface_All_40: 1530632339
+      Shop_Interface_All_41: 1309356201
+      Shop_Interface_All_42: -838116427
+      Shop_Interface_All_43: -484118953
+      Shop_Interface_All_44: -1969985624
+      Shop_Interface_All_45: 1874098196
+      Shop_Interface_All_46: 1869153997
+      Shop_Interface_All_47: -1502012868
+      Shop_Interface_All_48: 1045792047
+      Shop_Interface_All_49: 1600659794
+      Shop_Interface_All_5: -72742354
+      Shop_Interface_All_50: -1888524815
+      Shop_Interface_All_51: -1032198624
+      Shop_Interface_All_52: -694274347
+      Shop_Interface_All_53: -804459775
+      Shop_Interface_All_54: 1561087122
+      Shop_Interface_All_55: -103946745
+      Shop_Interface_All_56: 240821334
+      Shop_Interface_All_57: 583184835
+      Shop_Interface_All_58: -1468917567
+      Shop_Interface_All_59: 1063207647
+      Shop_Interface_All_6: -1528900122
+      Shop_Interface_All_60: 2122995803
+      Shop_Interface_All_61: 1227366565
+      Shop_Interface_All_62: -2103063133
+      Shop_Interface_All_63: -468199599
+      Shop_Interface_All_64: 124402793
+      Shop_Interface_All_65: -458666661
+      Shop_Interface_All_66: 1166803822
+      Shop_Interface_All_67: -60550163
+      Shop_Interface_All_68: -706958151
+      Shop_Interface_All_69: -128988297
+      Shop_Interface_All_7: 262872517
+      Shop_Interface_All_70: -271821387
+      Shop_Interface_All_71: 1888418427
+      Shop_Interface_All_72: -315624001
+      Shop_Interface_All_8: 451287468
+      Shop_Interface_All_9: -1586910080
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
