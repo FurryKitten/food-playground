@@ -88,7 +88,7 @@ public class Tetris : MonoBehaviour, IService
         _playerController.Tetris.Dash.started += DashMode;
         _playerController.Tetris.Dash.canceled += DashMode;
 
-        _playerController.Tetris.Pause.performed += (_) => ServiceLocator.Current.Get<MenuService>().OnPressPause();
+        _playerController.Tetris.Pause.performed += (_) => ServiceLocator.Current.Get<UIService>().OnPressPause();
     }
     private void Start()
     {
