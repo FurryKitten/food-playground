@@ -9,6 +9,7 @@ public class ServiceLoaderGame : MonoBehaviour
     [SerializeField] private HandControls _handControls;
     [SerializeField] private AudioService _audioService;
     [SerializeField] private MenuService _menuService;
+    [SerializeField] private GiftsService _giftsService;
 
     private void Awake()
     {
@@ -21,5 +22,6 @@ public class ServiceLoaderGame : MonoBehaviour
         ServiceLocator.Current.Register<HandControls>(_handControls);
         ServiceLocator.Current.Register<AudioService>(_audioService);
         ServiceLocator.Current.Register<MenuService>(_menuService);
+        ServiceLocator.Current.Register<GiftsService>(_giftsService);
     }
 }

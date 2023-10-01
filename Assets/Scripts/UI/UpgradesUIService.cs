@@ -13,8 +13,11 @@ public class UpgradesUIService : MonoBehaviour
     [SerializeField] ButtonWithTooltipScript[] _giftsButtons;
     [SerializeField] private Image[] _giftsImages;
     [SerializeField] private GameObject[] _giftsTooltips;
+    [SerializeField] private Sprite _failedQuestIcon;
+    [SerializeField] private GameObject _failedQuestTooltip;
 
     private MenuService _menuService;
+    private bool _questDone = false; // TO DO: use Locator
 
     private void Awake()
     {
@@ -25,29 +28,34 @@ public class UpgradesUIService : MonoBehaviour
 
     private void Start()
     {
+        ServiceLocator.Current.Get<GiftsService>().ResetGiftPool();
         _menuService = ServiceLocator.Current.Get<MenuService>();
         _continueButton.onClick.AddListener(() => { 
             _questInfoBlock.SetActive(false);
             _giftsInfoBlock.SetActive(true);
             _giftsRadioGroup.ResetAllButtons();
 
-            int gift1 = Random.Range(0, _icons.Length);
-            int gift2 = Random.Range(0, _icons.Length);
-            int gift3 = Random.Range(0, _icons.Length);
-            while(gift1 == gift2)
-                gift2 = Random.Range(0, _icons.Length);
-            
-            while(gift2 == gift3 || gift1 == gift3)
-                gift3 = Random.Range(0, _icons.Length);
+            Vector3Int gifts = ServiceLocator.Current.Get<GiftsService>().GenerateGifts();
 
-            _giftsImages[0].overrideSprite = _icons[gift1];
-            _giftsButtons[0].SetTooltip(_giftsTooltips[gift1]);
 
-            _giftsImages[1].overrideSprite = _icons[gift2]; 
-            _giftsButtons[1].SetTooltip(_giftsTooltips[gift2]);
+            if (_questDone)
+            {
+                _giftsImages[0].overrideSprite = _icons[gifts.x];
+                _giftsButtons[0].SetTooltip(_giftsTooltips[gifts.x]);
+                _giftsButtons[0].SetEnable(true);
+            }
+            else
+            {
+                _giftsImages[0].overrideSprite = _failedQuestIcon;
+                _giftsButtons[0].SetTooltip(_failedQuestTooltip);
+                _giftsButtons[0].SetEnable(false);
+            }
 
-            _giftsImages[2].overrideSprite = _icons[gift3];
-            _giftsButtons[2].SetTooltip(_giftsTooltips[gift3]);
+            _giftsImages[1].overrideSprite = _icons[gifts.y]; 
+            _giftsButtons[1].SetTooltip(_giftsTooltips[gifts.y]);
+
+            _giftsImages[2].overrideSprite = _icons[gifts.z];
+            _giftsButtons[2].SetTooltip(_giftsTooltips[gifts.z]);
         });
         _acceptGiftButton.onClick.AddListener(() =>
         {
@@ -56,23 +64,26 @@ public class UpgradesUIService : MonoBehaviour
             _acceptGiftButton.interactable = false;
         });
         _acceptGiftButton.onClick.AddListener(_menuService.OnGiftAccept);
-        int gift1 = Random.Range(0, _icons.Length);
-        int gift2 = Random.Range(0, _icons.Length);
-        int gift3 = Random.Range(0, _icons.Length);
-        while (gift1 == gift2)
-            gift2 = Random.Range(0, _icons.Length);
+        Vector3Int gifts = ServiceLocator.Current.Get<GiftsService>().GenerateGifts();
 
-        while (gift2 == gift3 || gift1 == gift3)
-            gift3 = Random.Range(0, _icons.Length);
+        if (_questDone)
+        {
+            _giftsImages[0].overrideSprite = _icons[gifts.x];
+            _giftsButtons[0].SetTooltip(_giftsTooltips[gifts.x]);
+            _giftsButtons[0].SetEnable(true);
+        }
+        else
+        {
+            _giftsImages[0].overrideSprite = _failedQuestIcon;
+            _giftsButtons[0].SetTooltip(_failedQuestTooltip);
+            _giftsButtons[0].SetEnable(false);
+        }
 
-        _giftsImages[0].overrideSprite = _icons[gift1];
-        _giftsButtons[0].SetTooltip(_giftsTooltips[gift1]);
+        _giftsImages[1].overrideSprite = _icons[gifts.y];
+        _giftsButtons[1].SetTooltip(_giftsTooltips[gifts.y]);
 
-        _giftsImages[1].overrideSprite = _icons[gift2];
-        _giftsButtons[1].SetTooltip(_giftsTooltips[gift2]);
-
-        _giftsImages[2].overrideSprite = _icons[gift3];
-        _giftsButtons[2].SetTooltip(_giftsTooltips[gift3]);
+        _giftsImages[2].overrideSprite = _icons[gifts.z];
+        _giftsButtons[2].SetTooltip(_giftsTooltips[gifts.z]);
     }
 
     public void ShowUpgrades()
