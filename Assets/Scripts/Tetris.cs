@@ -1722,7 +1722,11 @@ public class Tetris : MonoBehaviour, IService
         transform.parent.rotation = Quaternion.identity;
 
         _figureList.Clear();
-        _flyingFigure = null;
+        if (_flyingFigure != null)
+        {
+            Destroy(_flyingFigure.gameObject);
+            _flyingFigure = null;
+        }
         _movementTimer = 0;
         _figureListTimer = 0;
     }
