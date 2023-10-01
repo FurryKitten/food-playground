@@ -29,6 +29,14 @@ public class GameState : MonoBehaviour, IService
 
     [SerializeField] private Animator _animatorTrayMoneyCounter;
 
+    private Tetris _tetrisService;
+
+    private void Start()
+    {
+        _tetrisService = ServiceLocator.Current.Get<Tetris>();
+        _onHealthChange.AddListener(ServiceLocator.Current.Get<MenuService>().ShowDeathScreen);
+    }
+
     [ContextMenu("Add stage")]
     public void AddStage()
     {
@@ -88,12 +96,14 @@ public class GameState : MonoBehaviour, IService
     {
         CurrentStage = 0;
         MoneyOnTray = 0;
-        State = State.TETRIS;
+        _tetrisService.ResetTetris();
+        _onTrayMoneyChange?.Invoke();
+        _onMoneyChange?.Invoke();
     }
 
     public void ChangeHealth(int delta)
     {
-        Health += delta;
+        Health = Mathf.Clamp(Health + delta, 0, 100);
         _onHealthChange?.Invoke(Health);
     }
 }

@@ -62,6 +62,15 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""4e485081-428d-412d-bdd9-28eca2afee1f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -174,6 +183,17 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b4a92f7d-00f7-45f1-850a-92d14013923d"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -203,6 +223,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         m_Tetris_Flip = m_Tetris.FindAction("Flip", throwIfNotFound: true);
         m_Tetris_PlaceHand = m_Tetris.FindAction("PlaceHand", throwIfNotFound: true);
         m_Tetris_Dash = m_Tetris.FindAction("Dash", throwIfNotFound: true);
+        m_Tetris_Pause = m_Tetris.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -268,6 +289,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
     private readonly InputAction m_Tetris_Flip;
     private readonly InputAction m_Tetris_PlaceHand;
     private readonly InputAction m_Tetris_Dash;
+    private readonly InputAction m_Tetris_Pause;
     public struct TetrisActions
     {
         private @PlayerController m_Wrapper;
@@ -276,6 +298,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         public InputAction @Flip => m_Wrapper.m_Tetris_Flip;
         public InputAction @PlaceHand => m_Wrapper.m_Tetris_PlaceHand;
         public InputAction @Dash => m_Wrapper.m_Tetris_Dash;
+        public InputAction @Pause => m_Wrapper.m_Tetris_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Tetris; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -297,6 +320,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Dash.started += instance.OnDash;
             @Dash.performed += instance.OnDash;
             @Dash.canceled += instance.OnDash;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         private void UnregisterCallbacks(ITetrisActions instance)
@@ -313,6 +339,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Dash.started -= instance.OnDash;
             @Dash.performed -= instance.OnDash;
             @Dash.canceled -= instance.OnDash;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         public void RemoveCallbacks(ITetrisActions instance)
@@ -345,5 +374,6 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         void OnFlip(InputAction.CallbackContext context);
         void OnPlaceHand(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }
