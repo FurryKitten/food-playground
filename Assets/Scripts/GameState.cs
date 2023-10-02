@@ -19,6 +19,8 @@ public class GameState : MonoBehaviour, IService
     public int MoneyOnTray { get; private set; } = 0;
     public int Health { get; private set; } = 20;
 
+    public bool LastHealthGift { get; set; } = false;
+
     [SerializeField, Range(2, 5)] private int _stages = 5;
     [SerializeField] private UnityEvent _onStageChange;
     [SerializeField] private UnityEvent _onMoneyChange;
@@ -103,7 +105,13 @@ public class GameState : MonoBehaviour, IService
 
     public void ChangeHealth(int delta)
     {
-        Health = Mathf.Clamp(Health + delta, 0, 100);
+        Health = Mathf.Clamp(Health + delta, 0, 20);
+
+        if(Health <= 0 && LastHealthGift)
+        {
+            Health = 1;
+        }    
+
         _onHealthChange?.Invoke(Health);
     }
 }

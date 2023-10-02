@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HandControls : MonoBehaviour, IService
 {
+    [SerializeField] Sprite _handSprite;
     [SerializeField] Sprite _tentacleSprite;
     [SerializeField] Sprite _tripleTentacleSprite;
     [SerializeField] private int _handWidth = 1;

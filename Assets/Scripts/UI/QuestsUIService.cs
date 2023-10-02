@@ -14,10 +14,10 @@ public class QuestsUIService : MonoBehaviour
     [SerializeField] private ButtonWithTooltipScript _buttonQuest1;
     [SerializeField] private ButtonWithTooltipScript _buttonQuest2;
     [SerializeField] private GameObject _quest2;
+    [SerializeField] private GameObject _rerollButton;
 
 
     private UIService _menuService;
-    private bool _questChoice;
     private int _numberQuest1;
     private int _numberQuest2;
 
@@ -45,9 +45,24 @@ public class QuestsUIService : MonoBehaviour
             _textQuest2.text = _quests[_numberQuest2].GetString();
             _iconQuest2.overrideSprite = _quests[_numberQuest2].GetIcon();
             _buttonQuest2.SetTooltip(_toolTips[_numberQuest2]);
+
+            _rerollButton.SetActive(false);
+            _quest2.SetActive(false);
         });
 
-        _numberQuest1 = Random.Range(0, _quests.Length);
+        _rerollButton.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            _rerollButton.SetActive(false);
+            while (_numberQuest1 == Random.Range(0, _quests.Length))
+                _numberQuest1 = Random.Range(0, _quests.Length);
+
+            _textQuest1.text = _quests[_numberQuest1].GetString();
+            _iconQuest1.overrideSprite = _quests[_numberQuest1].GetIcon();
+            _buttonQuest1.SetTooltip(_toolTips[_numberQuest1]);
+        });
+
+
+       _numberQuest1 = Random.Range(0, _quests.Length);
 
         _textQuest1.text = _quests[_numberQuest1].GetString();
         _iconQuest1.overrideSprite = _quests[_numberQuest1].GetIcon();

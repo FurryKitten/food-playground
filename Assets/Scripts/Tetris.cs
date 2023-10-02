@@ -1666,8 +1666,8 @@ public class Tetris : MonoBehaviour, IService
         _stickyTray = false; // 10
         _spoilerTriplets = false; // 13
         _goldenFish = false; // 1
-        _goldenTea = false; // 2
-        _goldenSmallFood = false; // 3
+        _goldenTea = false; // 3
+        _goldenSmallFood = false; // 2
         if (_traySlowMo) // 8 - traySlowMo
         {
             _traySlowMo = false;
@@ -1683,7 +1683,7 @@ public class Tetris : MonoBehaviour, IService
             case 5: _doubleCost = true; break;
             case 7: _triplets = true; break;
             case 8:
-                _traySlowMo = false;
+                _traySlowMo = true;
                 _trayAngle *= 0.5f;
                 break;
             case 10: _stickyTray = true; break;

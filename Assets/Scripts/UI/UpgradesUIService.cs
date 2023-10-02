@@ -15,9 +15,11 @@ public class UpgradesUIService : MonoBehaviour
     [SerializeField] private GameObject[] _giftsTooltips;
     [SerializeField] private Sprite _failedQuestIcon;
     [SerializeField] private GameObject _failedQuestTooltip;
+    [SerializeField] private GameObject _questReroll;
+    [SerializeField] private GameObject _secondQuest;
 
     private UIService _menuService;
-    private bool _questDone = false; // TO DO: use Locator
+    private bool _questDone = true; // TO DO: use Locator
     private Vector3Int _gifts = new Vector3Int(-1, -1, -1);
 
     private void Awake()
@@ -36,41 +38,46 @@ public class UpgradesUIService : MonoBehaviour
             _giftsInfoBlock.SetActive(true);
             _giftsRadioGroup.ResetAllButtons();
 
-            _gifts = ServiceLocator.Current.Get<GiftsService>().GenerateGifts();
-
-            if (_questDone)
+            if(ServiceLocator.Current.Get<GameState>().LastHealthGift)
             {
-                _giftsImages[0].overrideSprite = _icons[_gifts.x];
-                _giftsImages[0].SetNativeSize();
-                _giftsButtons[0].SetTooltip(_giftsTooltips[_gifts.x]);
-                _giftsButtons[0].SetEnable(true);
-            }
-            else
-            {
-                _giftsImages[0].overrideSprite = _failedQuestIcon;
-                _giftsImages[0].SetNativeSize();
-                _giftsButtons[0].SetTooltip(_failedQuestTooltip);
-                _giftsButtons[0].SetEnable(false);
+                ServiceLocator.Current.Get<GameState>().LastHealthGift = false;
+                ServiceLocator.Current.Get<GameState>().ChangeHealth(-1);
             }
 
-            _giftsImages[1].overrideSprite = _icons[_gifts.y]; 
-            _giftsButtons[1].SetTooltip(_giftsTooltips[_gifts.y]);
+            FillGiftsButtons();
 
-            _giftsImages[2].overrideSprite = _icons[_gifts.z];
-            _giftsButtons[2].SetTooltip(_giftsTooltips[_gifts.z]);
         });
 
         _acceptGiftButton.onClick.AddListener(() =>
         {
-            _questInfoBlock.SetActive(true);
-            _giftsInfoBlock.SetActive(false);
             _acceptGiftButton.interactable = false;
-            ServiceLocator.Current.Get<Tetris>().SetGift(_giftsRadioGroup.SelectedButton == 2 ? _gifts.z 
-                : (_giftsRadioGroup.SelectedButton == 1 ? _gifts.y : _gifts.x));
+
+            if (SetChosenGift())
+            {
+                _questInfoBlock.SetActive(true);
+                _giftsInfoBlock.SetActive(false);
+                _menuService.OnGiftAccept();
+            }
         });
 
 
-        _acceptGiftButton.onClick.AddListener(_menuService.OnGiftAccept);
+        //_acceptGiftButton.onClick.AddListener(_menuService.OnGiftAccept);
+        
+    }
+
+    public void ShowUpgrades()
+    {
+        _upgradesMenu.SetActive(true);
+        _questInfoBlock.SetActive(true);
+    }
+
+    public void SetEnableAcceptGiftButton(bool enabled)
+    {
+        _acceptGiftButton.interactable = enabled;
+    }
+
+    private void FillGiftsButtons()
+    {
         _gifts = ServiceLocator.Current.Get<GiftsService>().GenerateGifts();
 
         if (_questDone)
@@ -95,14 +102,47 @@ public class UpgradesUIService : MonoBehaviour
         _giftsButtons[2].SetTooltip(_giftsTooltips[_gifts.z]);
     }
 
-    public void ShowUpgrades()
+    private bool SetChosenGift()
     {
-        _upgradesMenu.SetActive(true);
-        _questInfoBlock.SetActive(true);
-    }
+        int _giftNum = _giftsRadioGroup.SelectedButton == 2 ? _gifts.z
+                : (_giftsRadioGroup.SelectedButton == 1 ? _gifts.y : _gifts.x);
 
-    public void SetEnableAcceptGiftButton(bool enabled)
-    {
-        _acceptGiftButton.interactable = enabled;
+        Debug.Log(_giftNum);
+
+        if (_giftNum == 0)
+            ServiceLocator.Current.Get<GameState>().ChangeHealth(5);
+        else
+        {
+            if (_giftNum == 12)
+                ServiceLocator.Current.Get<GameState>().LastHealthGift = true;
+            else
+            {
+                if (_giftNum == 11)
+                {
+                    _giftsRadioGroup.ResetAllButtons();
+                    FillGiftsButtons();
+                    return false;
+                }
+                else
+                {
+                    if(_giftNum == 9)
+                    {
+                        _secondQuest.SetActive(true);
+                    }
+                    else
+                    {
+                        if(_giftNum == 6)
+                        {
+                            _questReroll.SetActive(true);
+                        }
+                    }
+                }
+            }
+        }
+
+        ServiceLocator.Current.Get<TrayControl>().SetGift(_giftNum);
+        ServiceLocator.Current.Get<Tetris>().SetGift(_giftNum);
+
+        return true;
     }
 }
