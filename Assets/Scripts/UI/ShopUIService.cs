@@ -1,18 +1,33 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ShopUIService : MonoBehaviour
 {
-    [SerializeField] private Button _buyButton;
+    [SerializeField] private GameObject _buyButton;
+    [SerializeField] private GameObject _switchSkinButton;
     [SerializeField] private Button _backButton;
     [SerializeField] private TextMeshProUGUI _descriptionText;
     [SerializeField] private TextMeshProUGUI _priceText;
     [SerializeField] private Image _descriptionIcon;
     [SerializeField] private Sprite[] _descriptionIcons;
     [SerializeField] private Button[] _shopButtons;
+    [SerializeField] private TextMeshProUGUI[] _costsText;
+    [SerializeField] private TextMeshProUGUI _playerMoney;
 
     private UIService _menuService;
+    private GameState _gameState;
+    private TrayControl _tray;
+
+    private int _selectedButtonNumber = -1;
+    private bool[] _avaivableSkins = { true, true, false, false, false, false };
+    private bool[] _avaivableUpgrades = {true, true, true, false, false, false, false, false,
+                                                false, false, false, false, false, false, false };
+    private bool[] _avaivableTier = { true, false, false, false, false };
+    private static int[] _costs = { 300, 300, 300, 600, 600, 600, 900,
+                                    900, 900, 1200, 1200, 1200, 1500, 1500, 1500};
+   
     // DESCRIPTIONS CONTENT
     #region DESCRIPTIONS CONTENT
     private static string[] _descriptions =
@@ -43,7 +58,9 @@ public class ShopUIService : MonoBehaviour
 
     private void Start()
     {
+        _gameState = ServiceLocator.Current.Get<GameState>();
         _menuService = ServiceLocator.Current.Get<UIService>();
+        _tray = ServiceLocator.Current.Get<TrayControl>();
         //_buyButton.onClick.AddListener(_menuService.OnDeathReturnToShop);
         _backButton.onClick.AddListener(_menuService.ShowMainMenu);
         
@@ -51,7 +68,18 @@ public class ShopUIService : MonoBehaviour
         {
             _shopButtons[i].GetComponent<ButtonValue>().SetButtonParametrs(this, i);
             _shopButtons[i].onClick.AddListener(_shopButtons[i].GetComponent<ButtonValue>().SetDescription);
+            
+            if(i < 15)
+                _costsText[i].text = $"¥{_costs[i]}";
         }
+
+        _buyButton.GetComponent<Button>().onClick.AddListener(TryBuy);
+        _buyButton.GetComponent<Button>().interactable = false;
+
+        _switchSkinButton.GetComponent<Button>().onClick.AddListener(TrySwitchSkin);
+        _switchSkinButton.SetActive(false);
+
+        UpdatePlayerMoneyCounter();
     }
 
     public void SetDescription(int index)
@@ -60,10 +88,56 @@ public class ShopUIService : MonoBehaviour
         _descriptionIcon.overrideSprite = _descriptionIcons[index];
         _descriptionIcon.SetNativeSize();
 
+        _selectedButtonNumber = index;
+
         if (index < 15)
-            _priceText.text = "300";
+        {
+            _priceText.text = $"¥{_costs[index]}";
+            _buyButton.SetActive(true);
+            _switchSkinButton.SetActive(false);
+
+            if (_avaivableTier[index/3] && _avaivableUpgrades[index] 
+                && _gameState.Money >= _costs[_selectedButtonNumber])
+            {
+                _buyButton.GetComponent<Button>().interactable = true;
+            }
+            else
+            {
+                _buyButton.GetComponent<Button>().interactable = false;
+            }
+        }
         else
+        {
             _priceText.text = "";
+            _buyButton.SetActive(false);
+            _switchSkinButton.SetActive(true);
+            if (_avaivableSkins[index - 15])
+            {
+                _switchSkinButton.GetComponent<Button>().interactable = true;
+            }
+            else
+            {
+                _switchSkinButton.GetComponent<Button>().interactable = false;
+            }
+        }
+    }
+
+    private void UpdatePlayerMoneyCounter()
+    {
+        _playerMoney.text = $"Мои сбережения: ¥{_gameState.Money}";
+    }
+
+    private void TryBuy()
+    {
+        _gameState.AddMoney(-_costs[_selectedButtonNumber]);
+        UpdatePlayerMoneyCounter();
+        // buy stuff
+
+    }
+
+    private void TrySwitchSkin()
+    {
+        _tray.SetSkin(_selectedButtonNumber - 15);
     }
 
 }

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 49178266411e6af4e8dfabbf6e1b1d28
+guid: a94836d391e86c64b8211d3d4a04d549
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -136,232 +136,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Shop_New_Style_0
+      name: SwitchSkinButton_0
       rect:
         serializedVersion: 2
-        x: 8
-        y: 0
-        width: 152
-        height: 270
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b370a4d8fcb524246a2f08056995fc32
-      internalID: 607825352
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shop_New_Style_1
-      rect:
-        serializedVersion: 2
-        x: 174
-        y: 236
+        x: 13
+        y: 94
         width: 70
         height: 19
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 75f467320c000794ab61ab6ff19037d4
-      internalID: 1332429966
+      spriteID: b812aa0bfa332484ba649beaae9e87dd
+      internalID: 239266533
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shop_New_Style_2
+      name: SwitchSkinButton_1
       rect:
         serializedVersion: 2
-        x: 257
-        y: 228
-        width: 8
-        height: 37
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 16, z: 0, w: 16}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 52b313dd0ad28cf4482bfeef7485db0f
-      internalID: 183842290
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shop_New_Style_3
-      rect:
-        serializedVersion: 2
-        x: 174
-        y: 205
+        x: 13
+        y: 63
         width: 70
         height: 19
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 772bd36adfca20a40adf2d91497adbf7
-      internalID: 1602398546
+      spriteID: 4b951d815c40c0741a02855eec15221d
+      internalID: 1022609426
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shop_New_Style_4
+      name: SwitchSkinButton_2
       rect:
         serializedVersion: 2
-        x: 253
-        y: 205
-        width: 38
-        height: 19
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f5da6445e9a7a404c84c5c70a4b05cce
-      internalID: -1907182357
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shop_New_Style_5
-      rect:
-        serializedVersion: 2
-        x: 174
-        y: 178
+        x: 13
+        y: 36
         width: 70
         height: 19
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b1bebb183db17d0489d7b6d50da0e50a
-      internalID: 1915449572
+      spriteID: 4f2733e9b3e784c4da5d50ba28603a94
+      internalID: -808149148
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shop_New_Style_6
+      name: SwitchSkinButton_3
       rect:
         serializedVersion: 2
-        x: 253
-        y: 179
-        width: 38
-        height: 19
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 720b236de6d5056499da70353bc45945
-      internalID: 1737257179
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shop_New_Style_7
-      rect:
-        serializedVersion: 2
-        x: 174
-        y: 146
+        x: 13
+        y: 4
         width: 70
         height: 19
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f9ff0049af8abf2459296382a5097c2e
-      internalID: -242897894
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shop_New_Style_8
-      rect:
-        serializedVersion: 2
-        x: 253
-        y: 146
-        width: 38
-        height: 19
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 912fffaa43c67ed4787754890c1c0d02
-      internalID: -530041294
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shop_New_Style_9
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 8
-        height: 270
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 772bdd6a3b1bf07468f59dbfc09c6dc4
-      internalID: -576843062
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shop_New_Style_10
-      rect:
-        serializedVersion: 2
-        x: 257
-        y: 228
-        width: 8
-        height: 37
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 16, z: 0, w: 16}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7e110532a5ae2aa4e8ad1f27216477c7
-      internalID: -1784915179
+      spriteID: 12341f70047551147962ec8e472fabc9
+      internalID: 428174194
       vertices: []
       indices: 
       edges: []
@@ -377,17 +230,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Shop_New_Style_0: 607825352
-      Shop_New_Style_1: 1332429966
-      Shop_New_Style_10: -1784915179
-      Shop_New_Style_2: 183842290
-      Shop_New_Style_3: 1602398546
-      Shop_New_Style_4: -1907182357
-      Shop_New_Style_5: 1915449572
-      Shop_New_Style_6: 1737257179
-      Shop_New_Style_7: -242897894
-      Shop_New_Style_8: -530041294
-      Shop_New_Style_9: -576843062
+      SwitchSkinButton_0: 239266533
+      SwitchSkinButton_1: 1022609426
+      SwitchSkinButton_2: -808149148
+      SwitchSkinButton_3: 428174194
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
