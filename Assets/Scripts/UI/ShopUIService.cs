@@ -26,6 +26,8 @@ public class ShopUIService : MonoBehaviour
     private UIService _menuService;
     private GameState _gameState;
     private TrayControl _tray;
+    private GiftsService _giftsService;
+    private HandControls _handControls;
 
     private int _selectedButtonNumber = -1;
     private bool[] _avaivableUpgrades = {true, true, true, false, false, false, false, false,
@@ -34,7 +36,11 @@ public class ShopUIService : MonoBehaviour
     private int _currentTier = 0;
     private static int[] _costs = { 300, 300, 300, 600, 600, 600, 900,
                                     900, 900, 1200, 1200, 1200, 1500, 1500, 1500};
-   
+    private static int[] _giftNumbers = { 0, 4, 5, 1, 6, 7, 0, 8, 
+                                          9, 2, 10, 11, 0, 12,
+                                          13, -1, -1, -1, -1, -1 };
+    
+
     // DESCRIPTIONS CONTENT
     #region DESCRIPTIONS CONTENT
     private static string[] _descriptions =
@@ -68,6 +74,9 @@ public class ShopUIService : MonoBehaviour
         _gameState = ServiceLocator.Current.Get<GameState>();
         _menuService = ServiceLocator.Current.Get<UIService>();
         _tray = ServiceLocator.Current.Get<TrayControl>();
+        _giftsService = ServiceLocator.Current.Get<GiftsService>();
+        _handControls = ServiceLocator.Current.Get<HandControls>();
+
         //_buyButton.onClick.AddListener(_menuService.OnDeathReturnToShop);
         _backButton.onClick.AddListener(_menuService.ShowMainMenu);
 
@@ -149,7 +158,25 @@ public class ShopUIService : MonoBehaviour
         _gameState.AddMoney(-_costs[_selectedButtonNumber]);
         _avaivableUpgrades[_selectedButtonNumber] = false;
         UpdatePlayerMoneyCounter();
+
         // buy stuff
+        if (_giftNumbers[_selectedButtonNumber] > 3)
+            _giftsService.AddGiftInPool(_giftNumbers[_selectedButtonNumber]);
+        else
+        {
+            if (_giftNumbers[_selectedButtonNumber] == 0)
+            {
+                _tray.IncreaseTrayWidth();
+                ServiceLocator.Current.Get<Tetris>().IncreaseGridWidth();
+            }
+            else
+            {
+                if (_giftNumbers[_selectedButtonNumber] == 1)
+                    _handControls.SetTripleTentacle();
+                else if (_giftNumbers[_selectedButtonNumber] == 2)
+                    _handControls.SetTentacle();
+            }
+        }
 
         _shopIcons[_selectedButtonNumber].overrideSprite = _boughtIcons[_selectedButtonNumber];
         _shopIcons[_selectedButtonNumber].SetNativeSize();

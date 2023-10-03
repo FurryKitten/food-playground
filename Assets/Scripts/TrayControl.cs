@@ -94,6 +94,70 @@ public class TrayControl : MonoBehaviour, IService
         _trayWidth = width;
     }
 
+    public void IncreaseTrayWidth() 
+    {
+        Vector3 difference = Vector3.right;
+
+        _trayLeftEnd.transform.localPosition += -difference;
+        _trayRightEnd.transform.localPosition += difference;
+
+        if (_trayLeftParts.Count > 0)
+            foreach (var part in _trayLeftParts)
+            {
+                part.transform.localPosition += -difference;
+            }
+
+        if (_trayBodyLeftEffects.Count > 0)
+            foreach (var part in _trayBodyLeftEffects)
+            {
+                part.transform.localPosition += -difference;
+            }
+
+        var trayPart = Instantiate(_trayBody, transform);
+        trayPart.transform.localPosition = new Vector3(_trayCenter.transform.localPosition.x - 1.5f,
+            _trayCenter.transform.localPosition.y, _trayCenter.transform.localPosition.z);
+        trayPart.transform.rotation = transform.rotation;
+        _trayLeftParts.Add(trayPart);
+
+        var trayPartEffect = Instantiate(_trayBodyEffects, transform);
+        trayPartEffect.transform.localPosition = new Vector3(_trayCenter.transform.localPosition.x - 1.5f,
+            _trayCenter.transform.localPosition.y, _trayCenter.transform.localPosition.z);
+        trayPartEffect.transform.rotation = transform.rotation;
+        _trayBodyLeftEffects.Add(trayPartEffect);
+
+
+        if (_trayRightParts.Count > 0)
+            foreach (var part in _trayRightParts)
+            {
+                part.transform.localPosition += difference;
+            }
+
+        if (_trayBodyRightEffects.Count > 0)
+            foreach (var part in _trayBodyRightEffects)
+            {
+                part.transform.localPosition += -difference;
+            }
+
+        trayPart = Instantiate(_trayBody, transform);
+        trayPart.transform.localPosition = new Vector3(_trayCenter.transform.localPosition.x + 1.5f,
+            _trayCenter.transform.localPosition.y, _trayCenter.transform.localPosition.z);
+        trayPart.transform.rotation = transform.rotation;
+        _trayRightParts.Add(trayPart);
+
+        trayPartEffect = Instantiate(_trayBodyEffects, transform);
+        trayPartEffect.transform.localPosition = new Vector3(_trayCenter.transform.localPosition.x + 1.5f,
+            _trayCenter.transform.localPosition.y, _trayCenter.transform.localPosition.z);
+        trayPartEffect.transform.rotation = transform.rotation;
+        _trayBodyRightEffects.Add(trayPartEffect);
+
+        _trayWidth += 2;
+    }
+
+    public void ResetTrayWidth()
+    {
+        //TO DO:
+    }
+
     public void SetTrayBorders()
     {
         _trayLeftEnd.GetComponent<SpriteRenderer>().sprite = _trayBordersSprites[_traySkin];

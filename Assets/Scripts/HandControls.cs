@@ -7,10 +7,11 @@ public class HandControls : MonoBehaviour, IService
     [SerializeField] Sprite _handSprite;
     [SerializeField] Sprite _tentacleSprite;
     [SerializeField] Sprite _tripleTentacleSprite;
-    [SerializeField] private int _handWidth = 1;
 
+    private int _handWidth = 1;
     private List<Figure> _figures = new List<Figure>();
     private int _trayLehgth = 10;
+    private int _handPower = 0;
 
    public void AddFigures(List<Figure> figures)
     {
@@ -51,22 +52,32 @@ public class HandControls : MonoBehaviour, IService
         leftSideWeight += (leftBalanceX + _trayLehgth * 0.5f) * (leftBalanceX + _trayLehgth * 0.5f) * 0.1f;
         rightSideWeight += (_trayLehgth * 0.5f - rightBalanceX) * (_trayLehgth * 0.5f - rightBalanceX) * 0.1f;  
 
-        if (Mathf.Abs(leftSideWeight - rightSideWeight) > 5f)
+        if (Mathf.Abs(leftSideWeight - rightSideWeight) > _handPower)
             return leftSideWeight - rightSideWeight;
 
         return 0f;
     }
-
+    
     public void SetTentacle() //TO DO: use Unity Event
     {
         GetComponentInChildren<SpriteRenderer>().sprite = _tentacleSprite;
-        _handWidth *= 2;
+        _handWidth *= 2; 
+        _handPower += 3;
     }
     public void SetTripleTentacle() //TO DO: use Unity Event
     {
         GetComponentInChildren<SpriteRenderer>().sprite = _tripleTentacleSprite;
         _handWidth *= 2;
+        _handPower += 2;
     }
+
+    public void ResetHand()
+    {
+        GetComponentInChildren<SpriteRenderer>().sprite = _handSprite;
+        _handWidth = 1; 
+        _trayLehgth = 10;
+        _handPower = 0;
+}
 
     public int GetHandWidth()
     {

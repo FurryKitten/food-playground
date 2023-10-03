@@ -5712,7 +5712,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1079.5208}
+  m_AnchoredPosition: {x: 0, y: 1080}
   m_SizeDelta: {x: 1280, y: 2160}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &567984295
@@ -19222,7 +19222,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 79754204}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.49977818
+  m_Size: 0.5
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -21830,9 +21830,8 @@ MonoBehaviour:
   - {fileID: -127696107, guid: 76c1ec89c9f98b340b0b7adecdc83050, type: 3}
   - {fileID: 97014508, guid: 76c1ec89c9f98b340b0b7adecdc83050, type: 3}
   - {fileID: 932610592, guid: 76c1ec89c9f98b340b0b7adecdc83050, type: 3}
-  - {fileID: 932610592, guid: 76c1ec89c9f98b340b0b7adecdc83050, type: 3}
   - {fileID: 422127027, guid: 76c1ec89c9f98b340b0b7adecdc83050, type: 3}
-  - {fileID: 498612271, guid: 76c1ec89c9f98b340b0b7adecdc83050, type: 3}
+  - {fileID: -1064197498, guid: 76c1ec89c9f98b340b0b7adecdc83050, type: 3}
   _trayStikySprites:
   - {fileID: -535377475, guid: 76c1ec89c9f98b340b0b7adecdc83050, type: 3}
   - {fileID: 130294154, guid: 76c1ec89c9f98b340b0b7adecdc83050, type: 3}
