@@ -223,10 +223,10 @@ TextureImporter:
       name: Shop_New_Style_4
       rect:
         serializedVersion: 2
-        x: 254
-        y: 206
-        width: 36
-        height: 17
+        x: 253
+        y: 205
+        width: 38
+        height: 19
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

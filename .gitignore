@@ -73,3 +73,4 @@ crashlytics-build.properties
 *.json
 /Assets/Scenes/tetris 1.unity
 /Assets/Scenes/tetris 1.unity.meta
+/UpgradeLog.htm
