@@ -5,7 +5,7 @@ using UnityEngine;
 public class GiftsService : MonoBehaviour, IService
 {
     private List<int> _giftPool = new List<int>();
-    public int activeGift { get; set; } = -1;
+    public int ActiveGift { get; set; } = -1;
 
     public Vector3Int GenerateGifts()
     {
