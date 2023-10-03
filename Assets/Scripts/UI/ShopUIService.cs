@@ -12,11 +12,16 @@ public class ShopUIService : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _priceText;
     [SerializeField] private Image _descriptionIcon;
     [SerializeField] private Sprite[] _descriptionIcons;
+    [SerializeField] private Sprite[] _boughtIcons;
+    [SerializeField] private Sprite[] _disabledIcons;
     [SerializeField] private Button[] _shopButtons;
     [SerializeField] private TextMeshProUGUI[] _costsText;
     [SerializeField] private TextMeshProUGUI _playerMoney;
     [SerializeField] private GameObject[] _blackTrays;
     [SerializeField] private ShopFramePart[] _shopFrame;
+    [SerializeField] private Image[] _shopIcons;
+    [SerializeField] private Sprite _outLineForButtons;
+    [SerializeField] private Sprite _outLineForButtonsDefault;
 
     private UIService _menuService;
     private GameState _gameState;
@@ -65,14 +70,22 @@ public class ShopUIService : MonoBehaviour
         _tray = ServiceLocator.Current.Get<TrayControl>();
         //_buyButton.onClick.AddListener(_menuService.OnDeathReturnToShop);
         _backButton.onClick.AddListener(_menuService.ShowMainMenu);
-        
-        for(int i = 0; i < _shopButtons.Length; i++)
+
+
+        for (int i = 0; i < _shopButtons.Length; i++)
         {
             _shopButtons[i].GetComponent<ButtonValue>().SetButtonParametrs(this, i);
             _shopButtons[i].onClick.AddListener(_shopButtons[i].GetComponent<ButtonValue>().SetDescription);
-            
-            if(i < 15)
+
+            if (i < 15)
+            {
                 _costsText[i].text = $"¥{_costs[i]}";
+                if(i < 3)
+                    _shopIcons[i].overrideSprite = _descriptionIcons[i];
+                else
+                    _shopIcons[i].overrideSprite = _disabledIcons[i];
+                _shopIcons[i].SetNativeSize();
+            }
         }
 
         _buyButton.GetComponent<Button>().onClick.AddListener(TryBuy);
@@ -98,6 +111,7 @@ public class ShopUIService : MonoBehaviour
             _buyButton.SetActive(true);
             _switchSkinButton.SetActive(false);
 
+
             if (_avaivableTier[index/3] && _avaivableUpgrades[index] 
                 && _gameState.Money >= _costs[_selectedButtonNumber])
             {
@@ -110,7 +124,7 @@ public class ShopUIService : MonoBehaviour
         }
         else
         {
-            _priceText.text = "";
+            _priceText.text = $"";
             _buyButton.SetActive(false);
             _switchSkinButton.SetActive(true);
 
@@ -137,6 +151,12 @@ public class ShopUIService : MonoBehaviour
         UpdatePlayerMoneyCounter();
         // buy stuff
 
+        _shopIcons[_selectedButtonNumber].overrideSprite = _boughtIcons[_selectedButtonNumber];
+        _shopIcons[_selectedButtonNumber].SetNativeSize();
+        _costsText[_selectedButtonNumber].text = $"";
+        _shopButtons[_selectedButtonNumber].GetComponent<Image>().overrideSprite = _outLineForButtons;
+        _shopButtons[_selectedButtonNumber].GetComponent<Image>().SetNativeSize();
+
         if (!_avaivableUpgrades[_currentTier * 3] && !_avaivableUpgrades[_currentTier * 3 + 1]
             && !_avaivableUpgrades[_currentTier * 3 + 2])
         {
@@ -151,11 +171,20 @@ public class ShopUIService : MonoBehaviour
                 _avaivableUpgrades[_currentTier * 3] = true;
                 _avaivableUpgrades[_currentTier * 3 + 1] = true;
                 _avaivableUpgrades[_currentTier * 3 + 2] = true;
+
+                _shopIcons[_currentTier * 3].overrideSprite = _descriptionIcons[_currentTier * 3];
+                _shopIcons[_currentTier * 3].SetNativeSize();
+                _shopIcons[_currentTier * 3 + 1].overrideSprite = _descriptionIcons[_currentTier * 3 + 1];
+                _shopIcons[_currentTier * 3 + 1].SetNativeSize();
+                _shopIcons[_currentTier * 3 + 2].overrideSprite = _descriptionIcons[_currentTier * 3 + 2];
+                _shopIcons[_currentTier * 3 + 2].SetNativeSize();
+
                 _avaivableTier[_currentTier] = true;
                 _shopFrame[_currentTier].SetGray();
             }
         }
 
+        SetDescription(_selectedButtonNumber);
     }
 
     private void TrySwitchSkin()
@@ -163,4 +192,49 @@ public class ShopUIService : MonoBehaviour
         _tray.SetSkin(_selectedButtonNumber - 15);
     }
 
+    private void ResetShop()
+    {
+        _currentTier = 0;
+        _switchSkinButton.SetActive(false);
+        _buyButton.SetActive(true);
+        _buyButton.GetComponent<Button>().interactable = false;
+
+
+        for (int i = 0; i < _shopButtons.Length; i++)
+        {
+            if (i < 15)
+            {
+                _costsText[i].text = $"¥{_costs[i]}";
+                if (i < 3)
+                {
+                    _shopIcons[i].overrideSprite = _descriptionIcons[i];
+                    _avaivableUpgrades[i] = true;
+                }
+                else
+                {
+                    _shopIcons[i].overrideSprite = _disabledIcons[i];
+                    _avaivableUpgrades[i] = false;
+                }
+                _shopIcons[i].SetNativeSize();
+                _shopButtons[i].GetComponent<Image>().overrideSprite = _outLineForButtonsDefault;
+                _shopButtons[i].GetComponent<Image>().SetNativeSize();
+            }
+            else
+            {
+                if (i < 20)
+                {
+                    _shopFrame[i - 15].ResetAll();
+                    _avaivableTier[i - 15] = false;
+
+                    if (i == 15)
+                    {
+                        _shopFrame[i - 15].SetGray();
+                        _avaivableTier[i - 15] = true;
+                    }
+
+                    _blackTrays[i - 15].SetActive(true);
+                }
+            }
+        }
+    }
 }

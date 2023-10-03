@@ -14118,6 +14118,38 @@ MonoBehaviour:
   - {fileID: -39082385, guid: 76c1ec89c9f98b340b0b7adecdc83050, type: 3}
   - {fileID: -568199601, guid: 76c1ec89c9f98b340b0b7adecdc83050, type: 3}
   - {fileID: 1312420528, guid: 76c1ec89c9f98b340b0b7adecdc83050, type: 3}
+  _boughtIcons:
+  - {fileID: -72742354, guid: 190f8af78b5bffc4a821268f1f68fdda, type: 3}
+  - {fileID: -1647976579, guid: 5abe9469e3c89c342a69e72726bed6c9, type: 3}
+  - {fileID: 657484371, guid: 5abe9469e3c89c342a69e72726bed6c9, type: 3}
+  - {fileID: 1077096818, guid: 190f8af78b5bffc4a821268f1f68fdda, type: 3}
+  - {fileID: 1984309828, guid: 190f8af78b5bffc4a821268f1f68fdda, type: 3}
+  - {fileID: -2127563072, guid: 190f8af78b5bffc4a821268f1f68fdda, type: 3}
+  - {fileID: -72742354, guid: 190f8af78b5bffc4a821268f1f68fdda, type: 3}
+  - {fileID: 1561087122, guid: 190f8af78b5bffc4a821268f1f68fdda, type: 3}
+  - {fileID: 1166803822, guid: 190f8af78b5bffc4a821268f1f68fdda, type: 3}
+  - {fileID: 1077096818, guid: 190f8af78b5bffc4a821268f1f68fdda, type: 3}
+  - {fileID: 451287468, guid: 190f8af78b5bffc4a821268f1f68fdda, type: 3}
+  - {fileID: -1754004373, guid: 190f8af78b5bffc4a821268f1f68fdda, type: 3}
+  - {fileID: -72742354, guid: 190f8af78b5bffc4a821268f1f68fdda, type: 3}
+  - {fileID: 1842020390, guid: 190f8af78b5bffc4a821268f1f68fdda, type: 3}
+  - {fileID: -350501963, guid: 190f8af78b5bffc4a821268f1f68fdda, type: 3}
+  _disabledIcons:
+  - {fileID: -1528900122, guid: 190f8af78b5bffc4a821268f1f68fdda, type: 3}
+  - {fileID: 285680418, guid: 5abe9469e3c89c342a69e72726bed6c9, type: 3}
+  - {fileID: -2085298665, guid: 5abe9469e3c89c342a69e72726bed6c9, type: 3}
+  - {fileID: 1103369597, guid: 190f8af78b5bffc4a821268f1f68fdda, type: 3}
+  - {fileID: -2108983262, guid: 190f8af78b5bffc4a821268f1f68fdda, type: 3}
+  - {fileID: 427258585, guid: 190f8af78b5bffc4a821268f1f68fdda, type: 3}
+  - {fileID: -1528900122, guid: 190f8af78b5bffc4a821268f1f68fdda, type: 3}
+  - {fileID: -103946745, guid: 190f8af78b5bffc4a821268f1f68fdda, type: 3}
+  - {fileID: -60550163, guid: 190f8af78b5bffc4a821268f1f68fdda, type: 3}
+  - {fileID: 1103369597, guid: 190f8af78b5bffc4a821268f1f68fdda, type: 3}
+  - {fileID: -1586910080, guid: 190f8af78b5bffc4a821268f1f68fdda, type: 3}
+  - {fileID: -75355315, guid: 190f8af78b5bffc4a821268f1f68fdda, type: 3}
+  - {fileID: -1528900122, guid: 190f8af78b5bffc4a821268f1f68fdda, type: 3}
+  - {fileID: -9024423, guid: 190f8af78b5bffc4a821268f1f68fdda, type: 3}
+  - {fileID: 310233039, guid: 190f8af78b5bffc4a821268f1f68fdda, type: 3}
   _shopButtons:
   - {fileID: 279610519}
   - {fileID: 444001186}
@@ -14169,6 +14201,24 @@ MonoBehaviour:
   - {fileID: 536054128}
   - {fileID: 1808391341}
   - {fileID: 1406032591}
+  _shopIcons:
+  - {fileID: 847401608}
+  - {fileID: 1300959262}
+  - {fileID: 1814833171}
+  - {fileID: 1201520318}
+  - {fileID: 1597524492}
+  - {fileID: 247148363}
+  - {fileID: 1591296063}
+  - {fileID: 1034949815}
+  - {fileID: 1024320684}
+  - {fileID: 1492748720}
+  - {fileID: 432535713}
+  - {fileID: 396748139}
+  - {fileID: 1427025955}
+  - {fileID: 159591958}
+  - {fileID: 2116294897}
+  _outLineForButtons: {fileID: -1592294218, guid: 190f8af78b5bffc4a821268f1f68fdda, type: 3}
+  _outLineForButtonsDefault: {fileID: 0}
 --- !u!1 &1367473885
 GameObject:
   m_ObjectHideFlags: 0
@@ -19156,7 +19206,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 79754204}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0
+  m_Size: 0.5
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

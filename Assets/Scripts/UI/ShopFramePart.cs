@@ -18,6 +18,6 @@ public class ShopFramePart : MonoBehaviour
     public void ResetAll()
     {
         _grayFrame.SetActive(false);
-        _grayFrame.SetActive(false);
+        _goldFrame.SetActive(false);
     }
 }
