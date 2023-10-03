@@ -2,14 +2,16 @@ using UnityEngine;
 
 public class Quest
 {
-    private int _guestId; /// к какому гостю относится
-    private Sprite _icon;
-    private string _description;
+    public readonly int GuestId; /// к какому гостю относится
+    public readonly Sprite Icon;
+    public readonly string Description;
+    public readonly int TooltipId; /// костыль для массива тултипов
 
     public Quest(QuestSO questSO)
     {
-        _guestId = questSO.GuestId;
-        _icon = questSO.Icon;
-        _description = questSO.Description;
+        GuestId = questSO.GuestId;
+        Icon = questSO.Icon;
+        Description = questSO.Description;
+        TooltipId = questSO.TooltipId;
     }
 }

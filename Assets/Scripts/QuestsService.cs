@@ -4,37 +4,72 @@ using UnityEngine;
 public class QuestsService : MonoBehaviour, IService
 {
     [SerializeField] private QuestSO[] _questsSO;
-    [SerializeField, Range(1,5)] private int _maxGuests = 3;
+    [SerializeField, Range(1, 5)] private int _maxGuests = 3;
 
     public int CurrentGuest { get; private set; } = 0;
+    public Quest ActiveQuest {  get; private set; }
+    public List<Quest> DisplayQuests { get; private set; }
 
-    private Dictionary<int, List<Quest>> _activeQuests;
+    private Dictionary<int, List<Quest>> _questByGuest;
+    //private Dictionary<int, List<Quest>> _activeQuests;
+    //private List<Quest> _activeQuests;
+
+    private GiftsService _giftService;
 
     private void Start()
     {
-        _activeQuests = new Dictionary<int, List<Quest>>();
+        _giftService = ServiceLocator.Current.Get<GiftsService>();
+
+        DisplayQuests = new List<Quest>();
+        _questByGuest = new Dictionary<int, List<Quest>>();
         foreach (var questSO in _questsSO)
         {
-            if (_activeQuests.TryGetValue(questSO.GuestId, out var questList))
+            if (_questByGuest.TryGetValue(questSO.GuestId, out var questList))
             {
                 questList.Add(new Quest(questSO));
             }
             else
             {
-                questList = new List<Quest>{ new Quest(questSO) };
+                _questByGuest.Add(questSO.GuestId, new List<Quest> { new Quest(questSO) });
             }
         }
     }
 
-    public Quest GetRandomQuestByGuest()
+    public void SetActiveQuest(int id)
     {
-        var questList = _activeQuests[CurrentGuest];
-        return questList[Random.Range(0, questList.Count - 1)];
+        ActiveQuest = DisplayQuests[id];
     }
 
+    /// <summary>
+    /// Сменить гостя
+    /// </summary>
     public void ChooseNewGuest()
     {
         int newGuestId = Random.Range(0, _maxGuests - 2);
         CurrentGuest = newGuestId < CurrentGuest ? newGuestId : newGuestId + 1;
+    }
+
+    /// <summary>
+    /// Генерируем для отображения в UI
+    /// </summary>
+    public void GenerateDisplayQuests()
+    {
+        int questCount = _giftService.ActiveGift == MagicVars.GIFT_QUEST_CHOICE_ID ? 2 : 1;
+        
+        DisplayQuests.Clear();
+        while (questCount --> 0)
+        {
+            DisplayQuests.Add(GetRandomQuestByGuest());
+        }
+    }
+
+    private Quest GetRandomQuestByGuest()
+    {
+        var questList = _questByGuest[CurrentGuest];
+        Quest quest;
+        do
+            quest = questList[Random.Range(0, questList.Count - 1)];
+        while (DisplayQuests.Contains(quest));
+        return quest;
     }
 }

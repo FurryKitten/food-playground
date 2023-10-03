@@ -16,6 +16,7 @@ public class UIService : MonoBehaviour, IService
 
     private GameState _gameState;
     private AudioService _audioService;
+    private QuestsUIService _questsUIService;
 
     private void Awake()
     {
@@ -26,6 +27,8 @@ public class UIService : MonoBehaviour, IService
     {
         _gameState = ServiceLocator.Current.Get<GameState>();
         _audioService = ServiceLocator.Current.Get<AudioService>();
+
+        _questsUIService = GetComponent<QuestsUIService>();
     }
 
     /** MAIN MENU
@@ -81,6 +84,8 @@ public class UIService : MonoBehaviour, IService
         _gameMenuWaiterFrame.SetActive(true);
         _questsMenu.SetActive(true);
         _gameState.SetState(State.PAUSED);
+        
+        _questsUIService.FillQuests();
     }
 
     public void OnQuestAccept()

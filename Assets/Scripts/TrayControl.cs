@@ -163,4 +163,27 @@ public class TrayControl : MonoBehaviour, IService
             if (giftNum == 4)
                 SetTrayBorders();
     }
+
+    public void SetSkin(int skin)
+    {
+        if (_traySkin == skin)
+            return;
+
+        _traySkin = skin;
+        _trayCenter.GetComponent<SpriteRenderer>().sprite = _trayCenterSprites[_traySkin];
+        _trayLeftEnd.GetComponent<SpriteRenderer>().sprite = _trayEndSprites[_traySkin];
+        _trayRightEnd.GetComponent<SpriteRenderer>().sprite = _trayEndSprites[_traySkin];
+
+        if (_trayLeftParts.Count > 0)
+            foreach (var part in _trayLeftParts)
+            {
+                part.GetComponent<SpriteRenderer>().sprite = _trayBodySprites[_traySkin];
+            }
+
+        if (_trayRightParts.Count > 0)
+            foreach (var part in _trayRightParts)
+            {
+                part.GetComponent<SpriteRenderer>().sprite = _trayBodySprites[_traySkin];
+            }
+    }
 }

@@ -102,22 +102,23 @@ public class UpgradesUIService : MonoBehaviour
         _giftsButtons[2].SetTooltip(_giftsTooltips[_gifts.z]);
     }
 
+    // TODO: Перенести эту логику в GiftService, Здесь только вычислять айди гифта
     private bool SetChosenGift()
     {
-        int _giftNum = _giftsRadioGroup.SelectedButton == 2 ? _gifts.z
+        int giftNum = _giftsRadioGroup.SelectedButton == 2 ? _gifts.z
                 : (_giftsRadioGroup.SelectedButton == 1 ? _gifts.y : _gifts.x);
 
-        Debug.Log(_giftNum);
+        Debug.Log(giftNum);
 
-        if (_giftNum == 0)
+        if (giftNum == 0)
             ServiceLocator.Current.Get<GameState>().ChangeHealth(5);
         else
         {
-            if (_giftNum == 12)
+            if (giftNum == 12)
                 ServiceLocator.Current.Get<GameState>().LastHealthGift = true;
             else
             {
-                if (_giftNum == 11)
+                if (giftNum == 11)
                 {
                     _giftsRadioGroup.ResetAllButtons();
                     FillGiftsButtons();
@@ -125,13 +126,13 @@ public class UpgradesUIService : MonoBehaviour
                 }
                 else
                 {
-                    if(_giftNum == 9)
+                    if(giftNum == 9)
                     {
                         _secondQuest.SetActive(true);
                     }
                     else
                     {
-                        if(_giftNum == 6)
+                        if(giftNum == 6)
                         {
                             _questReroll.SetActive(true);
                         }
@@ -140,8 +141,10 @@ public class UpgradesUIService : MonoBehaviour
             }
         }
 
-        ServiceLocator.Current.Get<TrayControl>().SetGift(_giftNum);
-        ServiceLocator.Current.Get<Tetris>().SetGift(_giftNum);
+        ServiceLocator.Current.Get<TrayControl>().SetGift(giftNum);
+        ServiceLocator.Current.Get<Tetris>().SetGift(giftNum);
+
+        ServiceLocator.Current.Get<GiftsService>().ActiveGift = giftNum;
 
         return true;
     }
