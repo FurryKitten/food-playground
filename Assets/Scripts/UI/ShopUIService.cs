@@ -15,16 +15,18 @@ public class ShopUIService : MonoBehaviour
     [SerializeField] private Button[] _shopButtons;
     [SerializeField] private TextMeshProUGUI[] _costsText;
     [SerializeField] private TextMeshProUGUI _playerMoney;
+    [SerializeField] private GameObject[] _blackTrays;
+    [SerializeField] private ShopFramePart[] _shopFrame;
 
     private UIService _menuService;
     private GameState _gameState;
     private TrayControl _tray;
 
     private int _selectedButtonNumber = -1;
-    private bool[] _avaivableSkins = { true, true, false, false, false, false };
     private bool[] _avaivableUpgrades = {true, true, true, false, false, false, false, false,
                                                 false, false, false, false, false, false, false };
     private bool[] _avaivableTier = { true, false, false, false, false };
+    private int _currentTier = 0;
     private static int[] _costs = { 300, 300, 300, 600, 600, 600, 900,
                                     900, 900, 1200, 1200, 1200, 1500, 1500, 1500};
    
@@ -111,7 +113,8 @@ public class ShopUIService : MonoBehaviour
             _priceText.text = "";
             _buyButton.SetActive(false);
             _switchSkinButton.SetActive(true);
-            if (_avaivableSkins[index - 15])
+
+            if (_currentTier == index - 15)
             {
                 _switchSkinButton.GetComponent<Button>().interactable = true;
             }
@@ -130,8 +133,28 @@ public class ShopUIService : MonoBehaviour
     private void TryBuy()
     {
         _gameState.AddMoney(-_costs[_selectedButtonNumber]);
+        _avaivableUpgrades[_selectedButtonNumber] = false;
         UpdatePlayerMoneyCounter();
         // buy stuff
+
+        if (!_avaivableUpgrades[_currentTier * 3] && !_avaivableUpgrades[_currentTier * 3 + 1]
+            && !_avaivableUpgrades[_currentTier * 3 + 2])
+        {
+            //switch shop frame
+            _shopFrame[_currentTier].ResetAll();
+            _shopFrame[_currentTier].SetGold();
+            _blackTrays[_currentTier].SetActive(false);
+
+            if (_currentTier < 4)
+            {
+                _currentTier++;
+                _avaivableUpgrades[_currentTier * 3] = true;
+                _avaivableUpgrades[_currentTier * 3 + 1] = true;
+                _avaivableUpgrades[_currentTier * 3 + 2] = true;
+                _avaivableTier[_currentTier] = true;
+                _shopFrame[_currentTier].SetGray();
+            }
+        }
 
     }
 
