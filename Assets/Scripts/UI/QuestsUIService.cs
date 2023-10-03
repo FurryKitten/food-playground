@@ -18,12 +18,14 @@ public class QuestsUIService : MonoBehaviour
 
 
     private UIService _menuService;
+    private QuestsService _questService;
     private int _numberQuest1;
     private int _numberQuest2;
 
     private void Start()
     {
         _menuService = ServiceLocator.Current.Get<UIService>();
+        _questService = ServiceLocator.Current.Get<QuestsService>();
         _acceptQuestButton.onClick.AddListener(_menuService.OnQuestAccept);
         _acceptQuestButton.onClick.AddListener(() =>
         {
