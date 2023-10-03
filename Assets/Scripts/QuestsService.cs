@@ -4,15 +4,15 @@ using UnityEngine;
 public class QuestsService : MonoBehaviour, IService
 {
     [SerializeField] private QuestSO[] _questsSO;
+    [SerializeField] private GuestSO[] _guestsSO;
     [SerializeField, Range(1, 5)] private int _maxGuests = 3;
 
+    public GuestSO[] GuestsInfo => _guestsSO;
     public int CurrentGuest { get; private set; } = 0;
     public Quest ActiveQuest {  get; private set; }
     public List<Quest> DisplayQuests { get; private set; }
 
     private Dictionary<int, List<Quest>> _questByGuest;
-    //private Dictionary<int, List<Quest>> _activeQuests;
-    //private List<Quest> _activeQuests;
 
     private GiftsService _giftService;
 
@@ -45,7 +45,8 @@ public class QuestsService : MonoBehaviour, IService
     /// </summary>
     public void ChooseNewGuest()
     {
-        int newGuestId = Random.Range(0, _maxGuests - 2);
+        int newGuestId = Random.Range(0, _maxGuests - 1);
+        Debug.Log("newGuestId: "+ (newGuestId < CurrentGuest ? newGuestId : newGuestId + 1));
         CurrentGuest = newGuestId < CurrentGuest ? newGuestId : newGuestId + 1;
     }
 
@@ -68,8 +69,9 @@ public class QuestsService : MonoBehaviour, IService
         var questList = _questByGuest[CurrentGuest];
         Quest quest;
         do
-            quest = questList[Random.Range(0, questList.Count - 1)];
+            quest = questList[Random.Range(0, questList.Count)];
         while (DisplayQuests.Contains(quest));
+        Debug.Log($"Guest={CurrentGuest}; Desc={quest.Description}");
         return quest;
     }
 }

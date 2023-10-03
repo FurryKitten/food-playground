@@ -11,15 +11,4 @@ public class QuestSO : ScriptableObject
     public int GuestId => _guestId;
     public Sprite Icon => _icon;
     public string Description => _description;
-
-    public Sprite GetIcon()
-    {
-        return _icon;
-    }
-
-    public string GetString()
-    {
-        return _description;
-    }
-
 }

@@ -9,6 +9,7 @@ public class QuestsUIService : MonoBehaviour
     [SerializeField] private Button _acceptQuestButton;
     [SerializeField] private Image _iconQuest1;
     [SerializeField] private Image _iconQuest2;
+    [SerializeField] private Image _guestImage;
     [SerializeField] private TextMeshProUGUI _textQuest1;
     [SerializeField] private TextMeshProUGUI _textQuest2;
     [SerializeField] private ButtonWithTooltipScript _buttonQuest1;
@@ -66,15 +67,20 @@ public class QuestsUIService : MonoBehaviour
 
         _textQuest1.text = quest.Description;
         _iconQuest1.overrideSprite = quest.Icon;
-        _buttonQuest1.SetTooltip(_toolTips[quest.GuestId]);
-        _quest2.SetActive(false);*/
+        _buttonQuest1.SetTooltip(_toolTips[quest.GuestId]);*/
+
+        SetActiveQuest2(false);
     }
 
     public void FillQuests()
     {
+        SetActiveQuest2(false);
+
         bool isQuestGift = _giftsService.ActiveGift == MagicVars.GIFT_QUEST_CHOICE_ID;
 
         _questService.ChooseNewGuest();
+        _guestImage.overrideSprite = _questService.GuestsInfo[_questService.CurrentGuest].Icon;
+
         _questService.GenerateDisplayQuests();
 
         if (isQuestGift && _questService.DisplayQuests.Count != 2)
