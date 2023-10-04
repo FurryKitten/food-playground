@@ -37,6 +37,7 @@ public class Tetris : MonoBehaviour, IService
     private bool _lastMove = false;
 
     private GameState _gameState;
+    private QuestsService _questsService;
 
     private float _balaceValue = 0;
 
@@ -112,6 +113,7 @@ public class Tetris : MonoBehaviour, IService
         _dashTime = 0.1f * _movementTime;
 
         _gameState = ServiceLocator.Current.Get<GameState>();
+        _questsService = ServiceLocator.Current.Get<QuestsService>();
 
         _figureSpawnPercent = new int[25];
         _currentFigureNumber = 1;
@@ -307,13 +309,17 @@ public class Tetris : MonoBehaviour, IService
                     // Давим спойлеры
                     for (int i = 0; i < spoilersX.Count; i++)
                     {
-                        _figureList.Remove(_gameSpace.figureGrid[spoilersX[i], spoilersY[i]]);
-                        _gameSpace.figureGrid[spoilersX[i], spoilersY[i]].DestroySpoiler();
-                        _gameSpace.figureGrid[spoilersX[i], spoilersY[i]].FlyAway();
-                        _gameSpace.figureGrid[spoilersX[i], spoilersY[i]] = null;
+                        ref Figure spoiler = ref _gameSpace.figureGrid[spoilersX[i], spoilersY[i]];
+                        _questsService.QuestData.ProcessBlackKill();
+                        _questsService.QuestData.ProcessFigure(spoiler);
+                        _figureList.Remove(spoiler);
+                        spoiler.DestroySpoiler();
+                        spoiler.FlyAway();
+                        spoiler = null;
                     }
                 }
 
+                _questsService.QuestData.ProcessFigure(_flyingFigure);
                 _figureList.Add(_flyingFigure);
                 _handControls.AddFigures(_figureList);
                 _gameState.AddTrayMoney(_flyingFigure.GetProfit());
@@ -404,6 +410,7 @@ public class Tetris : MonoBehaviour, IService
                     }
                     _figureList[index].FlyAway(-1);
                     _onFigureFall?.Invoke();
+                    _questsService.QuestData.ProcessFigure(_figureList[index], true);
                     _figureList.RemoveAt(index);
                     placeCheck = false;
                 }
@@ -705,6 +712,7 @@ public class Tetris : MonoBehaviour, IService
             int offset = 0;
             foreach (int i in lostFigureIndexes)
             {
+                _questsService.QuestData.ProcessFigure(_figureList[i - offset], true);
                 _figureList.RemoveAt(i - offset);
                 offset++;
             }
@@ -1228,7 +1236,7 @@ public class Tetris : MonoBehaviour, IService
 
         if (deletedFigures.Count > 0)
         {
-            foreach (Figure figure in deletedFigures)
+            foreach (Figure figure in deletedFigures) /// Делаем триплет
             {
                 figure.CombineIntoTriplet();
                 _figureList.Remove(figure);

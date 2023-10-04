@@ -11,7 +11,7 @@ public class QuestsService : MonoBehaviour, IService
 
     public GuestSO[] GuestsInfo => _guestsSO;
     public int CurrentGuest { get; private set; } = 0;
-    public Quest ActiveQuest {  get; private set; }
+    public Quest ActiveQuest { get; private set; }
     public List<Quest> DisplayQuests { get; private set; }
 
     private Dictionary<int, List<Quest>> _questByGuest;
@@ -48,7 +48,6 @@ public class QuestsService : MonoBehaviour, IService
     public void ChooseNewGuest()
     {
         int newGuestId = Random.Range(0, _maxGuests - 1);
-        Debug.Log("newGuestId: "+ (newGuestId < CurrentGuest ? newGuestId : newGuestId + 1));
         CurrentGuest = newGuestId < CurrentGuest ? newGuestId : newGuestId + 1;
     }
 
@@ -58,12 +57,45 @@ public class QuestsService : MonoBehaviour, IService
     public void GenerateDisplayQuests()
     {
         int questCount = _giftService.ActiveGift == MagicVars.GIFT_QUEST_CHOICE_ID ? 2 : 1;
-        
+
         DisplayQuests.Clear();
         while (questCount --> 0)
         {
             DisplayQuests.Add(GetRandomQuestByGuest());
         }
+    }
+
+    // TODO: Вынести magic numbers в конфиг
+    public bool QuestDone()
+    {
+        bool result = false;
+        switch (ActiveQuest.Id)
+        {
+            case MagicVars.QUEST_TEA_PARTY_ID:
+                result = QuestData.CupCount >= 4 && QuestData.TeapotCount >= 1;
+                break;
+            case MagicVars.QUEST_SEAFOOD_ID:
+                result = QuestData.FishLCount >= 1
+                      && QuestData.ShrimpCount >= 1
+                      && QuestData.CrabCount >= 1
+                      && QuestData.SushiCount >= 1
+                      && QuestData.FishLongCount >= 1
+                      && QuestData.OctopusCount >= 1;
+                break;
+            case MagicVars.QUEST_SPOILERS_ID:
+                result = QuestData.BlackCount >= 5;
+                break;
+            case MagicVars.QUEST_SPOILED_FOOD_ID:
+                result = QuestData.SpoiledFoodCount >= 15 && QuestData.TeapotCount >= 1;
+                break;
+            case MagicVars.QUEST_KILL_SPOILERS_ID:
+                result = QuestData.BlackKillCount >= 10;
+                break;
+            case MagicVars.QUEST_EXPRESS_ID:
+                result = QuestData.Timer <= 0;
+                break;
+        }
+        return result;
     }
 
     private Quest GetRandomQuestByGuest()
@@ -73,7 +105,6 @@ public class QuestsService : MonoBehaviour, IService
         do
             quest = questList[Random.Range(0, questList.Count)];
         while (DisplayQuests.Contains(quest));
-        Debug.Log($"Guest={CurrentGuest}; Desc={quest.Description}");
         return quest;
     }
 }
