@@ -19,5 +19,11 @@ public class MainMenuUIService : MonoBehaviour
         _playButton.onClick.AddListener(_menuService.OnPressPlay);
         _shopButton.onClick.AddListener(_menuService.ShowShop);
         _playNewGameButton.onClick.AddListener(_menuService.OnPressNewPlay);
+
+        _playButton.interactable = false;
+        _playNewGameButton.onClick.AddListener(() =>
+        {
+            _playButton.interactable = true;
+        });
     }
 }
