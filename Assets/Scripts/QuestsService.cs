@@ -7,6 +7,8 @@ public class QuestsService : MonoBehaviour, IService
     [SerializeField] private GuestSO[] _guestsSO;
     [SerializeField, Range(1, 5)] private int _maxGuests = 3;
 
+    public QuestData QuestData { get; set; } = new QuestData();
+
     public GuestSO[] GuestsInfo => _guestsSO;
     public int CurrentGuest { get; private set; } = 0;
     public Quest ActiveQuest {  get; private set; }

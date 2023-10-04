@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,11 +21,14 @@ public class GiftsUIService : MonoBehaviour
     /// Quest info block
     [Space]
     [SerializeField] private GameObject _questResultsBlock;
+    [SerializeField] private TextMeshProUGUI _questDescription;
+    [SerializeField] private Image _questIcon;
     [SerializeField] private Image _indicatorImage;
     [SerializeField] private Sprite _successIndicator;
     [SerializeField] private Sprite _failIndicator;
 
-    private UIService _menuService;
+    private UIService _uiService;
+    private QuestsService _questsService;
     private bool _questDone = true; // TO DO: use Locator
     private Vector3Int _gifts = new Vector3Int(-1, -1, -1);
 
@@ -37,8 +41,10 @@ public class GiftsUIService : MonoBehaviour
 
     private void Start()
     {
+        _questsService = ServiceLocator.Current.Get<QuestsService>();
+
         ServiceLocator.Current.Get<GiftsService>().ResetGiftPool();
-        _menuService = ServiceLocator.Current.Get<UIService>();
+        _uiService = ServiceLocator.Current.Get<UIService>();
         _continueButton.onClick.AddListener(() => { 
             _questResultsBlock.SetActive(false);
             _giftsInfoBlock.SetActive(true);
@@ -51,7 +57,6 @@ public class GiftsUIService : MonoBehaviour
             }
 
             FillGiftsButtons();
-
         });
 
         _acceptGiftButton.onClick.AddListener(() =>
@@ -62,7 +67,7 @@ public class GiftsUIService : MonoBehaviour
             {
                 _questResultsBlock.SetActive(true);
                 _giftsInfoBlock.SetActive(false);
-                _menuService.OnGiftAccept();
+                _uiService.OnGiftAccept();
             }
         });
 
@@ -82,9 +87,12 @@ public class GiftsUIService : MonoBehaviour
         _acceptGiftButton.interactable = enabled;
     }
 
-    private void FillQuestResults()
+    public void FillQuestResults()
     {
-
+        Quest quest = _questsService.ActiveQuest;
+        _questDescription.text = quest.Description;
+        _questIcon.overrideSprite = quest.Icon;
+        _indicatorImage.overrideSprite = _questDone ? _successIndicator : _failIndicator;
     }
 
     private void FillGiftsButtons()
