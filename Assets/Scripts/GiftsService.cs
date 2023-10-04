@@ -37,7 +37,7 @@ public class GiftsService : MonoBehaviour, IService
     {
         _giftPool.Clear();
 
-        for (int i = 0; i < 14; ++i)
+        for (int i = 0; i < 4; ++i)
             _giftPool.Add(i);
     }
 }

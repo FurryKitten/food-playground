@@ -73,11 +73,11 @@ public class Tetris : MonoBehaviour, IService
                                     { 9, 11, 14, 17 },
                                     { 10, 12, 15, 18 }};
     private int _currentFigureNumber = 0;
-    private int[] _SpawnProbability = { 7, 6, 6, 6, 3, 
-                                        6, 7, 6, 6, 6, 
-                                        2, 2, 2, 5, 7, 
-                                        6, 7, 7, 7, 5, 
-                                        7, 3, 5, 5, 3 };
+    private int[] _SpawnProbability = { 1, 1, 1, 1, 1, //7, 6, 6, 6, 3, 
+                                        1, 1, 1, 1, 1, //6, 7, 6, 6, 6, 
+                                        1, 1, 1, 1, 1, //2, 2, 2, 5, 7, 
+                                        1, 1, 1, 1, 1, //6, 7, 7, 7, 5, 
+                                        1, 1, 1, 1, 1 }; //7, 3, 5, 5, 3 };
     private int[] _figureSpawnPercent;
 
     private void Awake()
