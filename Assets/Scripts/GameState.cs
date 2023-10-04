@@ -136,9 +136,11 @@ public class GameState : MonoBehaviour, IService
         Money = 0;
         CurrentStage = 0;
         MoneyOnTray = 0;
+        OrderNumber = 0;
         _tetrisService.ResetTetris();
         ResetHealth();
         _onTrayMoneyChange?.Invoke();
         _onMoneyChange?.Invoke();
+        _onOrderNumberChange?.Invoke(OrderNumber);
     }
 }
