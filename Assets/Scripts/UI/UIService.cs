@@ -47,6 +47,14 @@ public class UIService : MonoBehaviour, IService
         _audioService.PlayButtonPress();
         _audioService.PlayMusic();
     }
+
+    public void OnPressNewPlay()
+    {
+        _gameState.RestarForNewGame();
+        OnOpenQuests();
+        _audioService.PlayButtonPress();
+        _audioService.PlayMusic();
+    }
     #endregion
 
     /** PAUSE

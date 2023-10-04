@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
 using Random = UnityEngine.Random;
 
 public struct Grid
@@ -125,6 +123,7 @@ public class Tetris : MonoBehaviour, IService
             _gameState.ChangeFigureInOrder(nextFigureSOId);
         else
             _gameState.ChangeFigureInOrder(25);
+       
     }
     private void Update()
     {
@@ -1743,6 +1742,31 @@ public class Tetris : MonoBehaviour, IService
         }
         _movementTimer = 0;
         _figureListTimer = 0;
+        _stageNumber = 0;
+
+        _currentFigureNumber = 1;
+        /*
+        PrepareSmartGenerate();
+        _figureSOIdQueue.Enqueue(SmartGenerateQueue(18));
+
+        // Обновление UI очереди
+        if (_figureSOIdQueue.TryPeek(out int nextFigureSOId))
+            _gameState.ChangeFigureInOrder(nextFigureSOId);
+        else
+            _gameState.ChangeFigureInOrder(25);
+        */
+    }
+
+    public void ResetTetrisForSession()
+    {
+        ResetTetris();
+        SetGift(-1);
+    }
+
+    public void ResetTetrisForNewGame()
+    {
+        ResetTetrisForSession();
+        ResetGridWidth();
     }
 
     #region DEBUG

@@ -68,6 +68,7 @@ public class QuestsUIService : MonoBehaviour
 
         _questService.ChooseNewGuest();
         _guestImage.overrideSprite = _questService.GuestsInfo[_questService.CurrentGuest].Icon;
+        _guestImage.SetNativeSize();
 
         _questService.GenerateDisplayQuests();
 

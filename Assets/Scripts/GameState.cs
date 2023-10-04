@@ -18,6 +18,7 @@ public class GameState : MonoBehaviour, IService
     public int Money { get; private set; } = 0;
     public int MoneyOnTray { get; private set; } = 0;
     public int Health { get; private set; } = 20;
+    public int OrderNumber { get; private set; } = 1;
 
     public bool LastHealthGift { get; set; } = false;
 
@@ -28,6 +29,7 @@ public class GameState : MonoBehaviour, IService
     [SerializeField] public UnityEvent _onFinish;
     [SerializeField] public UnityEvent<int> _onFigureInOrderChange;
     [SerializeField] public UnityEvent<int> _onHealthChange;
+    [SerializeField] public UnityEvent<int> _onOrderNumberChange;
 
     [SerializeField] private Animator _animatorTrayMoneyCounter;
 
@@ -99,6 +101,7 @@ public class GameState : MonoBehaviour, IService
         CurrentStage = 0;
         MoneyOnTray = 0;
         _tetrisService.ResetTetris();
+        ResetHealth();
         _onTrayMoneyChange?.Invoke();
         _onMoneyChange?.Invoke();
     }
@@ -113,5 +116,29 @@ public class GameState : MonoBehaviour, IService
         }    
 
         _onHealthChange?.Invoke(Health);
+    }
+
+    public void ResetHealth()
+    {
+        Health = 20;
+        _onHealthChange?.Invoke(Health);
+    }
+
+    public void ChangeOrderNumber(int delta)
+    {
+        OrderNumber += delta;
+        _onOrderNumberChange?.Invoke(OrderNumber);
+    }
+
+    public void RestarForNewGame()
+    {
+        LastHealthGift = false;
+        Money = 0;
+        CurrentStage = 0;
+        MoneyOnTray = 0;
+        _tetrisService.ResetTetris();
+        ResetHealth();
+        _onTrayMoneyChange?.Invoke();
+        _onMoneyChange?.Invoke();
     }
 }

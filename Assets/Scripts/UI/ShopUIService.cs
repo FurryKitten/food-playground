@@ -148,7 +148,7 @@ public class ShopUIService : MonoBehaviour
         }
     }
 
-    private void UpdatePlayerMoneyCounter()
+    public void UpdatePlayerMoneyCounter()
     {
         _playerMoney.text = $"Мои сбережения: ¥{_gameState.Money}";
     }
@@ -219,7 +219,7 @@ public class ShopUIService : MonoBehaviour
         _tray.SetSkin(_selectedButtonNumber - 15);
     }
 
-    private void ResetShop()
+    public void ResetShop()
     {
         _currentTier = 0;
         _switchSkinButton.SetActive(false);
