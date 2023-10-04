@@ -20,6 +20,8 @@ public class GameState : MonoBehaviour, IService
     public int Health { get; private set; } = 20;
     public int OrderNumber { get; private set; } = 0;
 
+    public bool InRun { get; private set; } = false;
+
     public bool LastHealthGift { get; set; } = false;
 
     [SerializeField, Range(2, 5)] private int _stages = 5;
@@ -98,12 +100,21 @@ public class GameState : MonoBehaviour, IService
 
     public void RestartRun()
     {
+        if(!InRun)
+            InRun = true;
+
         CurrentStage = 0;
         MoneyOnTray = 0;
         _tetrisService.ResetTetris();
         ResetHealth();
         _onTrayMoneyChange?.Invoke();
         _onMoneyChange?.Invoke();
+    }
+
+    public void FinishRun()
+    {
+        InRun = false;
+        _tetrisService.ResetProgression();
     }
 
     public void ChangeHealth(int delta)
