@@ -92,7 +92,8 @@ public class UIService : MonoBehaviour, IService
         _gameMenuWaiterFrame.SetActive(true);
         _questsMenu.SetActive(true);
         _gameState.SetState(State.PAUSED);
-        
+
+        _gameState.ChangeOrderNumber(1);
         _questsUIService.FillQuests();
     }
 

@@ -1,18 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class OrderCounterUIService : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] private TextMeshProUGUI[] textMeshProUGUIs;
+
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        ServiceLocator.Current.Get<GameState>()._onOrderNumberChange.AddListener((int x) =>
+        {
+            foreach (var t in textMeshProUGUIs)
+                t.text = $"#{x}";
+        });
     }
 }
