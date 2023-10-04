@@ -13,4 +13,9 @@ public class TooltipScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         _tooltip.SetActive(false);
     }
+
+    public void SetToolTip(GameObject tooltip)
+    {
+        _tooltip = tooltip;
+    }
 }
