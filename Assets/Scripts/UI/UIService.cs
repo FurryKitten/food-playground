@@ -72,6 +72,12 @@ public class UIService : MonoBehaviour, IService
         _audioService.PlayButtonPress();
     }
 
+    public void OnPressReturnToMenu()
+    {
+        DisableAllMenu();
+        ShowMainMenu();
+    }
+
     public void OnPressSettings()
     {
 
