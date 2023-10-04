@@ -64,6 +64,7 @@ public class QuestsUIService : MonoBehaviour
         bool isQuestGift = _giftsService.ActiveGift == MagicVars.GIFT_QUEST_CHOICE_ID;
 
         _questService.ChooseNewGuest();
+        _questService.QuestData.ResetData();
         _guestImage.overrideSprite = _questService.GuestsInfo[_questService.CurrentGuest].Icon;
         _guestImage.SetNativeSize();
 
