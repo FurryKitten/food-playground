@@ -5,7 +5,6 @@ public class UpgradesUIService : MonoBehaviour
 {
     [SerializeField] private Sprite[] _icons;
     [SerializeField] private GameObject _upgradesMenu;
-    [SerializeField] private GameObject _questInfoBlock;
     [SerializeField] private GameObject _giftsInfoBlock;
     [SerializeField] private Button _continueButton;
     [SerializeField] private Button _acceptGiftButton;
@@ -17,6 +16,13 @@ public class UpgradesUIService : MonoBehaviour
     [SerializeField] private GameObject _failedQuestTooltip;
     [SerializeField] private GameObject _questReroll;
     [SerializeField] private GameObject _secondQuest;
+
+    /// Quest info block
+    [Space]
+    [SerializeField] private GameObject _questInfoBlock;
+    [SerializeField] private Image _indicatorImage;
+    [SerializeField] private Sprite _successIndicator;
+    [SerializeField] private Sprite _failIndicator;
 
     private UIService _menuService;
     private bool _questDone = true; // TO DO: use Locator
