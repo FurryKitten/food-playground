@@ -7569,15 +7569,15 @@ MonoBehaviour:
   _uiAudioSource: {fileID: 18376879}
   _tetrisAudioSource: {fileID: 557730378}
   _tetrisSpawnAudioSource: {fileID: 1991586389}
-  _music: {fileID: 8300000, guid: 6f1d950e7ae48684b85739f71b3c30db, type: 3}
-  _menuMusic: {fileID: 8300000, guid: 2e20854f7197f7345884f286d3cff795, type: 3}
-  _uiButtonPress: {fileID: 8300000, guid: 47398ecf7a4535645be2916ae7acfa80, type: 3}
-  _uiBuyPress: {fileID: 8300000, guid: 074c512daa63d1c48aaf9e09739198d2, type: 3}
-  _tetrisSpawn: {fileID: 8300000, guid: 2ff8e0e887b861b4ea0334b559faf870, type: 3}
-  _tetrisGoldSpawn: {fileID: 8300000, guid: 966c39647aa486f4cb50246d21a05876, type: 3}
-  _tetrisBadSpawn: {fileID: 8300000, guid: b7f77aa036350894ba7023fa781ea338, type: 3}
-  _tetrisLanding: {fileID: 8300000, guid: f57b5ba467bf908479ce0f17139f867e, type: 3}
-  _tetrisJingle: {fileID: 8300000, guid: 054c2be6a0b6a214ab539d4d339ce795, type: 3}
+  _music: {fileID: 8300000, guid: bf84a82d154357a46bd2783777a06f62, type: 3}
+  _menuMusic: {fileID: 8300000, guid: 12b3e0c0414f5984c8596d88fcc414e4, type: 3}
+  _uiButtonPress: {fileID: 8300000, guid: 600b2640d3e9cc04a80556bb2a3fb142, type: 3}
+  _uiBuyPress: {fileID: 8300000, guid: 67306041556ae384387aee483c326fca, type: 3}
+  _tetrisSpawn: {fileID: 8300000, guid: 99c93df0498396a4786be01239f0e205, type: 3}
+  _tetrisGoldSpawn: {fileID: 8300000, guid: a2fa599a929ee8548983b38f8ea7b2fd, type: 3}
+  _tetrisBadSpawn: {fileID: 8300000, guid: 01e79721011345f488f6610ae6b3f098, type: 3}
+  _tetrisLanding: {fileID: 8300000, guid: 469831e2d5d8cf04f8fdf7ae557a249b, type: 3}
+  _tetrisJingle: {fileID: 8300000, guid: 0c23bf2f1cc0b3145b346b05072abfd0, type: 3}
 --- !u!1 &654003198
 GameObject:
   m_ObjectHideFlags: 0
@@ -11792,7 +11792,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.015
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -24041,7 +24041,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.29
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
