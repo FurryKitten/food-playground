@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 18d29fee866580146848b5298f36a8d1, type: 3}
-  m_Name: J
+  m_Name: 11_Cookie
   m_EditorClassIdentifier: 
-  _width: 3
-  _height: 2
+  _widthTex: 0.2
+  _heightTex: 0.2
   _form:
   - {x: 0, y: 0}
-  - {x: 0, y: 1}
-  - {x: 1, y: 1}
-  - {x: 2, y: 1}
   _mass: 1
-  _sprite: {fileID: 21300000, guid: b0e0d71a3d02cc2469dd3391aef7dab0, type: 3}
+  _cost: 1
+  _indexTex: 11
+  _sprite: {fileID: 21300000, guid: 433c13724a9f28549a4fcfd4068f4ffa, type: 3}
+  _spriteO: {fileID: 21300000, guid: 8affa31595dd53445b542777b118e55b, type: 3}

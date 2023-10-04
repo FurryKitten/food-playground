@@ -10,17 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 18d29fee866580146848b5298f36a8d1, type: 3}
-  m_Name: MeatJ
+  m_Name: 04_Crab
   m_EditorClassIdentifier: 
-  _widthTex: 0.6
+  _widthTex: 0.8
   _heightTex: 0.4
   _form:
   - {x: 0, y: 0}
   - {x: 0, y: 1}
   - {x: 1, y: 1}
   - {x: 2, y: 1}
-  _mass: 2
-  _cost: 4
-  _indexTex: 7
-  _sprite: {fileID: 21300000, guid: 0ff20bf297d22004f944149523dfe832, type: 3}
-  _spriteO: {fileID: 21300000, guid: 4177bccaae727e941bbd95eb8caea306, type: 3}
+  - {x: 3, y: 1}
+  - {x: 3, y: 0}
+  _mass: 6
+  _cost: 6
+  _indexTex: 4
+  _sprite: {fileID: 21300000, guid: 22a7342f65e85a04da0e94557abab8d6, type: 3}
+  _spriteO: {fileID: 21300000, guid: 7219779fc22ebbb40a5c2afdd3b438aa, type: 3}

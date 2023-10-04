@@ -10,15 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 18d29fee866580146848b5298f36a8d1, type: 3}
-  m_Name: RiceCake
+  m_Name: 10_Onigiri
   m_EditorClassIdentifier: 
-  _widthTex: 0.4
+  _widthTex: 0.2
   _heightTex: 0.2
   _form:
   - {x: 0, y: 0}
-  - {x: 1, y: 0}
-  _mass: 2
-  _cost: 2
-  _indexTex: 13
-  _sprite: {fileID: 21300000, guid: 96aa8e66cb6b6f146aa07f69ad164182, type: 3}
-  _spriteO: {fileID: 21300000, guid: 674f03dd0d1da9f44b37ec3e73b7357b, type: 3}
+  _mass: 1
+  _cost: 1
+  _indexTex: 10
+  _sprite: {fileID: 21300000, guid: 3512b4a3b72ff3d458360f07383042ec, type: 3}
+  _spriteO: {fileID: 21300000, guid: 437608e5408ba224a83d486a1d340fe5, type: 3}

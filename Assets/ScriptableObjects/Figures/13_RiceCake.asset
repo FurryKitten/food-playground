@@ -10,16 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 18d29fee866580146848b5298f36a8d1, type: 3}
-  m_Name: Shrimp
+  m_Name: 13_RiceCake
   m_EditorClassIdentifier: 
   _widthTex: 0.4
-  _heightTex: 0.4
+  _heightTex: 0.2
   _form:
   - {x: 0, y: 0}
   - {x: 1, y: 0}
-  - {x: 1, y: 1}
-  _mass: 3
-  _cost: 3
-  _indexTex: 0
-  _sprite: {fileID: 21300000, guid: f521bc0a0f3c13944ba0dd50324c84d2, type: 3}
-  _spriteO: {fileID: 21300000, guid: ab7ca4a0e02efe94b88d4ad6cecd2026, type: 3}
+  _mass: 2
+  _cost: 2
+  _indexTex: 13
+  _sprite: {fileID: 21300000, guid: 96aa8e66cb6b6f146aa07f69ad164182, type: 3}
+  _spriteO: {fileID: 21300000, guid: 674f03dd0d1da9f44b37ec3e73b7357b, type: 3}

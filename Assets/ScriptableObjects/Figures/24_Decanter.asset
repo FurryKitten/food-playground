@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 18d29fee866580146848b5298f36a8d1, type: 3}
-  m_Name: Teapot
+  m_Name: 24_Decanter
   m_EditorClassIdentifier: 
-  _widthTex: 0.8
-  _heightTex: 0.4
+  _widthTex: 0.4
+  _heightTex: 0.6
   _form:
   - {x: 0, y: 0}
+  - {x: 0, y: 1}
+  - {x: 0, y: 2}
   - {x: 1, y: 0}
-  - {x: 2, y: 0}
-  - {x: 3, y: 0}
   - {x: 1, y: 1}
-  - {x: 2, y: 1}
+  - {x: 1, y: 2}
   _mass: 6
   _cost: 6
-  _indexTex: 21
-  _sprite: {fileID: 21300000, guid: cf7c6c8947a36a04b81cda7267f62a96, type: 3}
-  _spriteO: {fileID: 21300000, guid: 658c68d0924ba2a4da56beb7130ce812, type: 3}
+  _indexTex: 24
+  _sprite: {fileID: 21300000, guid: bd925f48c2a708f48a1fc7768cf3e56c, type: 3}
+  _spriteO: {fileID: 21300000, guid: a505bca6e5a901d4c8fdd17d01f768a8, type: 3}
