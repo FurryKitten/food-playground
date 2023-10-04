@@ -18,7 +18,7 @@ public class GameState : MonoBehaviour, IService
     public int Money { get; private set; } = 0;
     public int MoneyOnTray { get; private set; } = 0;
     public int Health { get; private set; } = 20;
-    public int OrderNumber { get; private set; } = 1;
+    public int OrderNumber { get; private set; } = 0;
 
     public bool LastHealthGift { get; set; } = false;
 
