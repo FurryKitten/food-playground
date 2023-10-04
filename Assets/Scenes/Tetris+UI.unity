@@ -13557,7 +13557,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1235881416}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1363479742}
+        m_TargetAssemblyTypeName: ShopUIService, Assembly-CSharp
+        m_MethodName: ResetShop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1235881416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15184,8 +15196,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1554cf9e2a8eae4bbe461ff9c6cae11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playButton: {fileID: 1235881415}
+  _playButton: {fileID: 584361837}
   _shopButton: {fileID: 628864372682205845}
+  _playNewGameButton: {fileID: 1235881415}
+  _exitButton: {fileID: 1547680858}
+  _settingsButton: {fileID: 2038134385}
 --- !u!114 &1363479742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23508,6 +23523,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1363479742}
+        m_TargetAssemblyTypeName: ShopUIService, Assembly-CSharp
+        m_MethodName: UpdatePlayerMoneyCounter
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _onTrayMoneyChange:
     m_PersistentCalls:
       m_Calls:
@@ -23592,6 +23619,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _onOrderNumberChange:
+    m_PersistentCalls:
+      m_Calls: []
   _animatorTrayMoneyCounter: {fileID: 567868908}
 --- !u!4 &2009731866
 Transform:
@@ -23989,7 +24019,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2037051296
 RectTransform:
   m_ObjectHideFlags: 0

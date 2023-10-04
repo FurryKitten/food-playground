@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Kitsune
   m_EditorClassIdentifier: 
   _id: 1
-  _icon: {fileID: 1323059183, guid: f77487098e85d06499ce5e258746bb64, type: 3}
+  _icon: {fileID: 260318552, guid: 17c4012e8d4ab0e4cb0d1a15df3ab445, type: 3}
   _phrases: []
   _phrasesEnd: []
   _phrasesBegin: []

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Negr
   m_EditorClassIdentifier: 
   _id: 2
-  _icon: {fileID: 21300000, guid: 22a7342f65e85a04da0e94557abab8d6, type: 3}
+  _icon: {fileID: 2133851061, guid: 17c4012e8d4ab0e4cb0d1a15df3ab445, type: 3}
   _phrases: []
   _phrasesEnd: []
   _phrasesBegin: []
