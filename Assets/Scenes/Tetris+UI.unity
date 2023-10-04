@@ -8769,7 +8769,7 @@ GameObject:
   - component: {fileID: 797571219}
   - component: {fileID: 797571218}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: QuestDescriptionText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15509,6 +15509,8 @@ MonoBehaviour:
   _questReroll: {fileID: 1492088307}
   _secondQuest: {fileID: 582140065}
   _questResultsBlock: {fileID: 478744762}
+  _questDescription: {fileID: 0}
+  _questIcon: {fileID: 0}
   _indicatorImage: {fileID: 797455816}
   _successIndicator: {fileID: 930757821, guid: 477f4635b98193347960f8413ce4f440, type: 3}
   _failIndicator: {fileID: -1857164095, guid: 477f4635b98193347960f8413ce4f440, type: 3}
@@ -15759,7 +15761,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0f976412ab1a3844a27627d9ef4848d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textMeshProUGUIs: []
+  textMeshProUGUIs:
+  - {fileID: 2059469941}
+  - {fileID: 1939595923}
+  - {fileID: 634353778}
+  - {fileID: 1287001227}
+  - {fileID: 316995993}
 --- !u!1 &1367473885
 GameObject:
   m_ObjectHideFlags: 0
@@ -17215,7 +17222,7 @@ GameObject:
   - component: {fileID: 1491498377}
   - component: {fileID: 1491498376}
   m_Layer: 5
-  m_Name: Image
+  m_Name: QuestIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23034,7 +23041,7 @@ GameObject:
   - component: {fileID: 1939595924}
   - component: {fileID: 1939595923}
   m_Layer: 5
-  m_Name: Order Counter Text (TMP) (1)
+  m_Name: OrderCounterText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24939,7 +24946,7 @@ GameObject:
   - component: {fileID: 2059469942}
   - component: {fileID: 2059469941}
   m_Layer: 5
-  m_Name: Order Counter Text (TMP) (1)
+  m_Name: OrderCounterText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
