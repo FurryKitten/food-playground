@@ -9,7 +9,7 @@ public class ButtonWithTooltipScript : MonoBehaviour, IPointerEnterHandler, IPoi
     [SerializeField] private Sprite _defaultSprite;
     [SerializeField] private Sprite _selectedSprite;
     [SerializeField] private Sprite _disableSprite;
-    [SerializeField] private UnityEvent<int> _onClick;
+    [SerializeField] public UnityEvent<int> _onClick;
     [SerializeField] private int _number = 0;
 
     private bool _enableStatus = true;
@@ -43,9 +43,9 @@ public class ButtonWithTooltipScript : MonoBehaviour, IPointerEnterHandler, IPoi
             gameObject.GetComponent<Image>().overrideSprite = _defaultSprite;
     }
 
-    public void SetEnable(bool eneableState)
+    public void SetEnable(bool enableState)
     {
-        _enableStatus = eneableState;
+        _enableStatus = enableState;
         if (_enableStatus)
             gameObject.GetComponent<Image>().overrideSprite = _defaultSprite;
         else

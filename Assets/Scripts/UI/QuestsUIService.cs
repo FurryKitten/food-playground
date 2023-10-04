@@ -12,6 +12,7 @@ public class QuestsUIService : MonoBehaviour
     [SerializeField] private Image _guestImage;
     [SerializeField] private TextMeshProUGUI _textQuest1;
     [SerializeField] private TextMeshProUGUI _textQuest2;
+    [SerializeField] private RadioButtonGroupBehaviour _radioButtons;
     [SerializeField] private ButtonWithTooltipScript _buttonQuest1;
     [SerializeField] private ButtonWithTooltipScript _buttonQuest2;
     [SerializeField] private GameObject _quest2;
@@ -21,8 +22,6 @@ public class QuestsUIService : MonoBehaviour
     private UIService _menuService;
     private QuestsService _questService;
     private GiftsService _giftsService;
-    private int _numberQuest1;
-    private int _numberQuest2;
 
     private void Start()
     {
@@ -30,27 +29,6 @@ public class QuestsUIService : MonoBehaviour
         _questService = ServiceLocator.Current.Get<QuestsService>();
         _giftsService = ServiceLocator.Current.Get<GiftsService>();
         _acceptQuestButton.onClick.AddListener(_menuService.OnQuestAccept);
-        /*_acceptQuestButton.onClick.AddListener(() =>
-        {
-            _acceptQuestButton.interactable = false;
-
-            Quest quest1 = _questService.AddActiveQuest();
-
-            _textQuest1.text = quest1.Description;
-            _iconQuest1.overrideSprite = quest1.Icon;
-            _buttonQuest1.SetTooltip(_toolTips[quest1.TooltipId]);
-
-            //_buttonQuest1.SetTooltip(_toolTips[quest1.TooltipId]);
-
-            Quest quest2 = _questService.AddActiveQuest();
-
-            _textQuest2.text = quest2.Description;
-            _iconQuest2.overrideSprite = quest2.Icon;
-            _buttonQuest2.SetTooltip(_toolTips[quest2.TooltipId]);
-
-            _rerollButton.SetActive(false);
-            _quest2.SetActive(false);
-        });*/
 
         _rerollButton.GetComponent<Button>().onClick.AddListener(() =>
         {
@@ -62,12 +40,19 @@ public class QuestsUIService : MonoBehaviour
             FillQuest(quest);
         });
 
-        /*_questService.GenerateDisplayQuests();
-        Quest quest = _questService.AddActiveQuest();
+        _buttonQuest1._onClick.AddListener(num =>
+        {
+            if (num >= 0 && num < _questService.DisplayQuests.Count)
+                _questService.SetActiveQuest(num);
+            Debug.Log(_questService.ActiveQuest.Description);
+        });
 
-        _textQuest1.text = quest.Description;
-        _iconQuest1.overrideSprite = quest.Icon;
-        _buttonQuest1.SetTooltip(_toolTips[quest.GuestId]);*/
+        _buttonQuest2._onClick.AddListener(num =>
+        {
+            if (num >= 0 && num < _questService.DisplayQuests.Count)
+                _questService.SetActiveQuest(num);
+            Debug.Log(_questService.ActiveQuest.Description);
+        });
 
         SetActiveQuest2(false);
     }
@@ -75,6 +60,9 @@ public class QuestsUIService : MonoBehaviour
     public void FillQuests()
     {
         SetActiveQuest2(false);
+        _radioButtons.ResetAllButtons();
+        _buttonQuest1.SetSelectState(true);
+        SetInteractableAcceptQuestButton(true);
 
         bool isQuestGift = _giftsService.ActiveGift == MagicVars.GIFT_QUEST_CHOICE_ID;
 
@@ -85,13 +73,11 @@ public class QuestsUIService : MonoBehaviour
 
         if (isQuestGift && _questService.DisplayQuests.Count != 2)
             Debug.LogError("2 quest gift is active, but DisplayQuests.Count != 2");
-        Debug.Log($"_questService.DisplayQuests[0]={_questService.DisplayQuests[0].Description}");
 
         FillQuest(_questService.DisplayQuests[0]);
 
         if (isQuestGift)
         {
-            Debug.Log($"_questService.DisplayQuests[1]={_questService.DisplayQuests[1].Description}");
             FillQuest(_questService.DisplayQuests[1], 1);
             SetActiveQuest2(true);
         }
