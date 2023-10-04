@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1507693bcb43f0245bd21e1833b4fb11, type: 3}
-  m_Name: TeaPartyQuest
+  m_Name: 5_ExpressQuest
   m_EditorClassIdentifier: 
-  _guestId: 0
-  _icon: {fileID: 1503220738, guid: 477f4635b98193347960f8413ce4f440, type: 3}
-  _description: "\u0427\u0430\u0439\u043D\u0438\u043A \u0438 4 \u0447\u0430\u0448\u043A\u0438"
-  TooltipId: 1
+  _id: 5
+  _guestId: 1
+  _icon: {fileID: 1534815535, guid: 477f4635b98193347960f8413ce4f440, type: 3}
+  _description: "\u041D\u0435\u0441\u0438 \u0437\u0430\u043A\u0430\u0437 \u043F\u043E\u0431\u044B\u0441\u0442\u0440\u0435\u0435!"

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 53fc0a1fff4e1a943a759ccca8853f56, type: 3}
-  m_Name: Kappa
+  m_Name: 1_Kitsune
   m_EditorClassIdentifier: 
-  _id: 0
-  _icon: {fileID: -59634585, guid: 17c4012e8d4ab0e4cb0d1a15df3ab445, type: 3}
+  _id: 1
+  _icon: {fileID: 260318552, guid: 17c4012e8d4ab0e4cb0d1a15df3ab445, type: 3}
   _phrases: []
   _phrasesEnd: []
   _phrasesBegin: []

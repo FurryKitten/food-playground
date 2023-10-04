@@ -18,7 +18,6 @@ public class QuestsUIService : MonoBehaviour
     [SerializeField] private GameObject _quest2;
     [SerializeField] private GameObject _rerollButton;
 
-
     private UIService _menuService;
     private QuestsService _questService;
     private GiftsService _giftsService;
@@ -44,14 +43,12 @@ public class QuestsUIService : MonoBehaviour
         {
             if (num >= 0 && num < _questService.DisplayQuests.Count)
                 _questService.SetActiveQuest(num);
-            Debug.Log(_questService.ActiveQuest.Description);
         });
 
         _buttonQuest2._onClick.AddListener(num =>
         {
             if (num >= 0 && num < _questService.DisplayQuests.Count)
                 _questService.SetActiveQuest(num);
-            Debug.Log(_questService.ActiveQuest.Description);
         });
 
         SetActiveQuest2(false);
@@ -101,13 +98,13 @@ public class QuestsUIService : MonoBehaviour
         {
             _textQuest1.text = quest.Description;
             _iconQuest1.overrideSprite = quest.Icon;
-            _buttonQuest1.SetTooltip(_toolTips[quest.GuestId]);
+            _buttonQuest1.SetTooltip(_toolTips[quest.Id]);
         }
         else if (num == 1)
         {
             _textQuest2.text = quest.Description;
             _iconQuest2.overrideSprite = quest.Icon;
-            _buttonQuest2.SetTooltip(_toolTips[quest.TooltipId]);
+            _buttonQuest2.SetTooltip(_toolTips[quest.Id]);
         }
     }
 }
