@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bbaccd5bd6d8eba4aa5bb497fd426047
+guid: eb42be235fa2d4f4f8940a1d8aa94d47
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -134,7 +134,133 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: TraysUI_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 433
+        width: 224
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3af9880007b064742b4492848a47f520
+      internalID: 1275608589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TraysUI_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 347
+        width: 224
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08e468cfcbbb733499758aa3cfc2eb9c
+      internalID: 1503274733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TraysUI_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 261
+        width: 224
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50ac23803d1dc934e909c248a0fafc6f
+      internalID: 1604138478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TraysUI_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 174
+        width: 224
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7deaf74b5e98caf40b249858686ec80a
+      internalID: 1237597512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TraysUI_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 89
+        width: 224
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c01e35fa520075a419e06802645ea1eb
+      internalID: 1491051426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TraysUI_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 224
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cdcef819e1e551244819fb52d8331871
+      internalID: 927699259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -145,7 +271,13 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      TraysUI_0: 1275608589
+      TraysUI_1: 1503274733
+      TraysUI_2: 1604138478
+      TraysUI_3: 1237597512
+      TraysUI_4: 1491051426
+      TraysUI_5: 927699259
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
