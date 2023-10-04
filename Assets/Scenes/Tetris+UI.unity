@@ -5712,7 +5712,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1080}
+  m_AnchoredPosition: {x: 0, y: 1079.5208}
   m_SizeDelta: {x: 1280, y: 2160}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &567984295
@@ -13990,7 +13990,7 @@ MonoBehaviour:
   _acceptQuestButton: {fileID: 1623828217}
   _iconQuest1: {fileID: 334440927}
   _iconQuest2: {fileID: 2027464451}
-  _guestImage: {fileID: 0}
+  _guestImage: {fileID: 1629243713}
   _textQuest1: {fileID: 265746427}
   _textQuest2: {fileID: 1629209202}
   _buttonQuest1: {fileID: 811707445}
@@ -19222,7 +19222,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 79754204}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.5
+  m_Size: 0.000000056514033
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
