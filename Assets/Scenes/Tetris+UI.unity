@@ -5119,7 +5119,7 @@ GameObject:
   - component: {fileID: 478744765}
   - component: {fileID: 478744764}
   m_Layer: 5
-  m_Name: QuestInfo
+  m_Name: QuestResults
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12717,12 +12717,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1115151619}
   m_Layer: 5
-  m_Name: Upgrades
+  m_Name: Gifts
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1115151619
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15508,7 +15508,7 @@ MonoBehaviour:
   _failedQuestTooltip: {fileID: 477430770}
   _questReroll: {fileID: 1492088307}
   _secondQuest: {fileID: 582140065}
-  _questInfoBlock: {fileID: 478744762}
+  _questResultsBlock: {fileID: 478744762}
   _indicatorImage: {fileID: 797455816}
   _successIndicator: {fileID: 930757821, guid: 477f4635b98193347960f8413ce4f440, type: 3}
   _failIndicator: {fileID: -1857164095, guid: 477f4635b98193347960f8413ce4f440, type: 3}
@@ -15759,12 +15759,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0f976412ab1a3844a27627d9ef4848d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textMeshProUGUIs:
-  - {fileID: 316995993}
-  - {fileID: 1287001227}
-  - {fileID: 1939595923}
-  - {fileID: 2059469941}
-  - {fileID: 634353778}
+  textMeshProUGUIs: []
 --- !u!1 &1367473885
 GameObject:
   m_ObjectHideFlags: 0

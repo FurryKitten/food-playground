@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UpgradesUIService : MonoBehaviour
+public class GiftsUIService : MonoBehaviour
 {
     [SerializeField] private Sprite[] _icons;
     [SerializeField] private GameObject _upgradesMenu;
@@ -19,7 +19,7 @@ public class UpgradesUIService : MonoBehaviour
 
     /// Quest info block
     [Space]
-    [SerializeField] private GameObject _questInfoBlock;
+    [SerializeField] private GameObject _questResultsBlock;
     [SerializeField] private Image _indicatorImage;
     [SerializeField] private Sprite _successIndicator;
     [SerializeField] private Sprite _failIndicator;
@@ -31,7 +31,7 @@ public class UpgradesUIService : MonoBehaviour
     private void Awake()
     {
         _upgradesMenu.SetActive(false);
-        _questInfoBlock.SetActive(false);
+        _questResultsBlock.SetActive(false);
         _giftsInfoBlock.SetActive(false);
     }
 
@@ -40,7 +40,7 @@ public class UpgradesUIService : MonoBehaviour
         ServiceLocator.Current.Get<GiftsService>().ResetGiftPool();
         _menuService = ServiceLocator.Current.Get<UIService>();
         _continueButton.onClick.AddListener(() => { 
-            _questInfoBlock.SetActive(false);
+            _questResultsBlock.SetActive(false);
             _giftsInfoBlock.SetActive(true);
             _giftsRadioGroup.ResetAllButtons();
 
@@ -60,7 +60,7 @@ public class UpgradesUIService : MonoBehaviour
 
             if (SetChosenGift())
             {
-                _questInfoBlock.SetActive(true);
+                _questResultsBlock.SetActive(true);
                 _giftsInfoBlock.SetActive(false);
                 _menuService.OnGiftAccept();
             }
@@ -74,12 +74,17 @@ public class UpgradesUIService : MonoBehaviour
     public void ShowUpgrades()
     {
         _upgradesMenu.SetActive(true);
-        _questInfoBlock.SetActive(true);
+        _questResultsBlock.SetActive(true);
     }
 
     public void SetEnableAcceptGiftButton(bool enabled)
     {
         _acceptGiftButton.interactable = enabled;
+    }
+
+    private void FillQuestResults()
+    {
+
     }
 
     private void FillGiftsButtons()
