@@ -96,6 +96,7 @@ public class GiftsUIService : MonoBehaviour
         _questIcon.overrideSprite = quest.Icon;
         _indicatorImage.overrideSprite = isQuestDone ? _successIndicator : _failIndicator;
         _guestIcon.overrideSprite = _questsService.GuestsInfo[quest.GuestId].Icon;
+        _guestIcon.SetNativeSize();
     }
 
     private void FillGiftsButtons()
