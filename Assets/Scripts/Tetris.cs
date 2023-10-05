@@ -1685,9 +1685,10 @@ public class Tetris : MonoBehaviour, IService
         if(orderNum % 1 == 0)
         {
             for (int i = 0; i < 3; ++i)
-                _queueSizes[i]++;
+                _queueSizes[i]+=2;
 
-            _queueSizes[3] += 2;
+            _queueSizes[3] += 3;
+
         } 
        // else
         //{

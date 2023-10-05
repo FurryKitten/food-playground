@@ -17,7 +17,7 @@ public class GameState : MonoBehaviour, IService
 
     public int Money { get; private set; } = 0;
     public int MoneyOnTray { get; private set; } = 0;
-    public int Health { get; private set; } = 20;
+    public int Health { get; private set; } = 15;
     public int OrderNumber { get; private set; } = 0;
 
     public bool InRun { get; set; } = false;
@@ -132,7 +132,7 @@ public class GameState : MonoBehaviour, IService
 
     public void ChangeHealth(int delta)
     {
-        Health = Mathf.Clamp(Health + delta, 0, 20);
+        Health = Mathf.Clamp(Health + delta, 0, 15);
 
 
         if (delta < 0)
@@ -150,7 +150,7 @@ public class GameState : MonoBehaviour, IService
 
     public void ResetHealth()
     {
-        Health = 20;
+        Health = 15;
         _onHealthChange?.Invoke(Health);
     }
 

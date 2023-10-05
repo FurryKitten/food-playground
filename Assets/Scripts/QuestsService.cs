@@ -86,7 +86,7 @@ public class QuestsService : MonoBehaviour, IService
                 result = QuestData.BlackCount >= 5;
                 break;
             case MagicVars.QUEST_SPOILED_FOOD_ID:
-                result = QuestData.SpoiledFoodCount >= 15 && QuestData.TeapotCount >= 1;
+                result = QuestData.SpoiledFoodCount >= 15;
                 break;
             case MagicVars.QUEST_KILL_SPOILERS_ID:
                 result = QuestData.BlackKillCount >= 10;

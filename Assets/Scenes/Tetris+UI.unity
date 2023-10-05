@@ -19684,7 +19684,7 @@ MonoBehaviour:
   - {fileID: 245437149}
   _healthBar: {fileID: 1500999606}
   _whiteHealthBar: {fileID: 1302187264}
-  _maxHealth: 20
+  _maxHealth: 15
 --- !u!114 &1363479738
 MonoBehaviour:
   m_ObjectHideFlags: 0
