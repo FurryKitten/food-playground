@@ -170,7 +170,9 @@ public class UIService : MonoBehaviour, IService
 
     public void OnShopBackButton()
     {
-        ShowMainMenu();
+        DisableAllMenu();
+        _mainMenu.SetActive(true);
+        _gameSpace.SetActive(false);
     }
     #endregion
 
