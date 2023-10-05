@@ -14,6 +14,8 @@ public class UIService : MonoBehaviour, IService
 
     [SerializeField] private GameObject _gameSpace;
 
+    [SerializeField] private PauseUIService _pauseUI; // TO DO: 
+
     private GameState _gameState;
     private AudioService _audioService;
     private QuestsUIService _questsUIService;
@@ -76,6 +78,7 @@ public class UIService : MonoBehaviour, IService
         _gameState.SetState(isPaused ? State.TETRIS : State.PAUSED);
         _audioService.PlayButtonPress();
         _audioService.SetMusicVolumeLower();
+        _pauseUI.SetActiveGiftAndQuest();
     }
 
     public void OnPressReturnToMenu()

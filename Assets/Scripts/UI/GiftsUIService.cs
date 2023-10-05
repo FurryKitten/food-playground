@@ -168,7 +168,8 @@ public class GiftsUIService : MonoBehaviour
         ServiceLocator.Current.Get<TrayControl>().SetGift(giftNum);
         ServiceLocator.Current.Get<Tetris>().SetGift(giftNum);
 
-        ServiceLocator.Current.Get<GiftsService>().ActiveGift = giftNum;
+        ServiceLocator.Current.Get<GiftsService>().ActiveGift.Id = giftNum;
+        ServiceLocator.Current.Get<GiftsService>().ActiveGift.Icon = _icons[giftNum];
 
         return true;
     }

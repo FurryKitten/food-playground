@@ -61,7 +61,7 @@ public class QuestsUIService : MonoBehaviour
         _buttonQuest1.SetSelectState(true);
         SetInteractableAcceptQuestButton(true);
 
-        bool isQuestGift = _giftsService.ActiveGift == MagicVars.GIFT_QUEST_CHOICE_ID;
+        bool isQuestGift = _giftsService.ActiveGift.Id == MagicVars.GIFT_QUEST_CHOICE_ID;
 
         _questService.ChooseNewGuest();
         _questService.QuestData.ResetData();

@@ -56,7 +56,7 @@ public class QuestsService : MonoBehaviour, IService
     /// </summary>
     public void GenerateDisplayQuests()
     {
-        int questCount = _giftService.ActiveGift == MagicVars.GIFT_QUEST_CHOICE_ID ? 2 : 1;
+        int questCount = _giftService.ActiveGift.Id == MagicVars.GIFT_QUEST_CHOICE_ID ? 2 : 1;
 
         DisplayQuests.Clear();
         while (questCount --> 0)

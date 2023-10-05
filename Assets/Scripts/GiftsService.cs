@@ -2,10 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public struct Gift
+{
+    public int Id;
+    public Sprite Icon;
+}
 public class GiftsService : MonoBehaviour, IService
 {
     private List<int> _giftPool = new List<int>();
-    public int ActiveGift { get; set; } = -1;
+    public Gift ActiveGift;
+
+    private void Start()
+    {
+        ActiveGift.Id = -1;
+    }
 
     public Vector3Int GenerateGifts()
     {
