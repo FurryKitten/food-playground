@@ -67,8 +67,8 @@ public class Tetris : MonoBehaviour, IService
     
 
     private int _stageNumber = 0;
-    private int[] _queueSizes = { 6, 8, 8, 13 };
-    private static int[] _queueSizesDefault = { 6, 8, 8, 13 };
+    private int[] _queueSizes = { 4, 6, 6, 9 };
+    private static int[] _queueSizesDefault = { 4, 6, 6, 9 };
     private int _currentFigureNumber = 0;
     private int[] _SpawnProbability = { 7, 6, 6, 6, 3, 
                                         6, 7, 6, 6, 6, 
@@ -1685,9 +1685,9 @@ public class Tetris : MonoBehaviour, IService
         if(orderNum % 1 == 0)
         {
             for (int i = 0; i < 3; ++i)
-                _queueSizes[i]+=2;
+                _queueSizes[i] += 1;
 
-            _queueSizes[3] += 3;
+            _queueSizes[3] += 2;
 
         } 
        // else

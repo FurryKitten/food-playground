@@ -24,6 +24,6 @@ public class DeathScreenMenu : MonoBehaviour
     {
         _ResultsText.text = $"Получено чаевых: {ServiceLocator.Current.Get<GameState>().MoneyInRun}¥" +
             $"\nПожеланий выполнено: {ServiceLocator.Current.Get<GameState>().QuestDone}" +
-            $"\nГостей обслужено: {ServiceLocator.Current.Get<GameState>().ClientsInRun - 1}";
+            $"\nГостей обслужено: {ServiceLocator.Current.Get<GameState>().ClientsInRun}";
     }
 }
