@@ -75,6 +75,8 @@ public class QuestsUIService : MonoBehaviour
 
         FillQuest(_questService.DisplayQuests[0]);
 
+        _questService.SetActiveQuest(0);
+
         if (isQuestGift)
         {
             FillQuest(_questService.DisplayQuests[1], 1);

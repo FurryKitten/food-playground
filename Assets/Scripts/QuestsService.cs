@@ -66,7 +66,7 @@ public class QuestsService : MonoBehaviour, IService
     }
 
     // TODO: Вынести magic numbers в конфиг
-    public bool QuestDone()
+    public bool IsQuestDone()
     {
         bool result = false;
         switch (ActiveQuest.Id)

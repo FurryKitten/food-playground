@@ -1777,6 +1777,10 @@ public class Tetris : MonoBehaviour, IService
         _stageNumber = 0;
 
         _currentFigureNumber = 1;
+
+        if (ServiceLocator.Current.Get<QuestsService>().ActiveQuest != null)
+            SetTetrisFlags();
+
         /*
         PrepareSmartGenerate();
         _figureSOIdQueue.Enqueue(SmartGenerateQueue(18));
@@ -1799,6 +1803,26 @@ public class Tetris : MonoBehaviour, IService
     {
         ResetTetrisForSession();
         ResetGridWidth();
+    }
+
+    private void SetTetrisFlags()
+    {
+        _expressQuest = false;
+        _seafoodQuest = false;
+        _teaPartyQuest = false;
+        _killSpoilersQuest = false;
+        _collectSpoilersQuest = false;
+        _collectSpoiledFoodsQuest = false;
+
+        switch(ServiceLocator.Current.Get<QuestsService>().ActiveQuest.Id)
+        {
+            case MagicVars.QUEST_TEA_PARTY_ID: _teaPartyQuest = true; break;
+            case MagicVars.QUEST_SEAFOOD_ID: _seafoodQuest = true; break;
+            case MagicVars.QUEST_SPOILERS_ID: _collectSpoilersQuest = true; break;
+            case MagicVars.QUEST_SPOILED_FOOD_ID: _collectSpoiledFoodsQuest = true; break;
+            case MagicVars.QUEST_KILL_SPOILERS_ID: _killSpoilersQuest = true; break;
+            case MagicVars.QUEST_EXPRESS_ID: _expressQuest = true; break;
+        }
     }
 
     #region DEBUG

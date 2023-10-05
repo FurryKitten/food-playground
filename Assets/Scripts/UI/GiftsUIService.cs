@@ -23,13 +23,13 @@ public class GiftsUIService : MonoBehaviour
     [SerializeField] private GameObject _questResultsBlock;
     [SerializeField] private TextMeshProUGUI _questDescription;
     [SerializeField] private Image _questIcon;
+    [SerializeField] private Image _guestIcon;
     [SerializeField] private Image _indicatorImage;
     [SerializeField] private Sprite _successIndicator;
     [SerializeField] private Sprite _failIndicator;
 
     private UIService _uiService;
     private QuestsService _questsService;
-    private bool _questDone = true; // TO DO: use Locator
     private Vector3Int _gifts = new Vector3Int(-1, -1, -1);
 
     private void Awake()
@@ -80,6 +80,7 @@ public class GiftsUIService : MonoBehaviour
     {
         _upgradesMenu.SetActive(true);
         _questResultsBlock.SetActive(true);
+        FillQuestResults();
     }
 
     public void SetEnableAcceptGiftButton(bool enabled)
@@ -89,17 +90,20 @@ public class GiftsUIService : MonoBehaviour
 
     public void FillQuestResults()
     {
+        bool isQuestDone = _questsService.IsQuestDone();
         Quest quest = _questsService.ActiveQuest;
         _questDescription.text = quest.Description;
         _questIcon.overrideSprite = quest.Icon;
-        _indicatorImage.overrideSprite = _questDone ? _successIndicator : _failIndicator;
+        _indicatorImage.overrideSprite = isQuestDone ? _successIndicator : _failIndicator;
+        _guestIcon.overrideSprite = _questsService.GuestsInfo[quest.GuestId].Icon;
     }
 
     private void FillGiftsButtons()
     {
+        bool isQuestDone = _questsService.IsQuestDone();
         _gifts = ServiceLocator.Current.Get<GiftsService>().GenerateGifts();
 
-        if (_questDone)
+        if (isQuestDone)
         {
             _giftsImages[0].overrideSprite = _icons[_gifts.x];
             _giftsImages[0].SetNativeSize();
