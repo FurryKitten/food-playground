@@ -108,6 +108,7 @@ public class ShopUIService : MonoBehaviour
 
     public void SetDescription(int index)
     {
+        ServiceLocator.Current.Get<AudioService>().PlaySelect();
         _descriptionText.text = _descriptions[index];
         _descriptionIcon.overrideSprite = _descriptionIcons[index];
         _descriptionIcon.SetNativeSize();
@@ -167,6 +168,7 @@ public class ShopUIService : MonoBehaviour
         _gameState.AddMoney(-_costs[_selectedButtonNumber]);
         _avaivableUpgrades[_selectedButtonNumber] = false;
         UpdatePlayerMoneyCounter();
+        ServiceLocator.Current.Get<AudioService>().PlayBuyPress();
 
         // buy stuff
         if (_giftNumbers[_selectedButtonNumber] > 3)
@@ -226,6 +228,7 @@ public class ShopUIService : MonoBehaviour
     private void TrySwitchSkin()
     {
         _tray.SetSkin(_selectedButtonNumber - 15);
+        ServiceLocator.Current.Get<AudioService>().PlayBuyPress();
     }
 
     public void ResetShop()

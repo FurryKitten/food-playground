@@ -38,6 +38,7 @@ public class Tetris : MonoBehaviour, IService
 
     private GameState _gameState;
     private QuestsService _questsService;
+    private AudioService _audioService;
 
     private float _balaceValue = 0;
 
@@ -66,13 +67,13 @@ public class Tetris : MonoBehaviour, IService
     
 
     private int _stageNumber = 0;
-    private int[] _queueSizes = { 4, 6, 6, 9 };
-    private static int[] _queueSizesDefault = { 4, 6, 6, 9 };
+    private int[] _queueSizes = { 6, 8, 8, 13 };
+    private static int[] _queueSizesDefault = { 6, 8, 8, 13 };
     private int _currentFigureNumber = 0;
     private int[] _SpawnProbability = { 7, 6, 6, 6, 3, 
                                         6, 7, 6, 6, 6, 
                                         2, 2, 2, 5, 7, 
-                                        6, 7, 7, 7, 5, 
+                                        6, 7, 7, 10, 5, 
                                         7, 3, 5, 5, 3 };
     private int[] _figureSpawnPercent;
 
@@ -125,7 +126,8 @@ public class Tetris : MonoBehaviour, IService
             _gameState.ChangeFigureInOrder(nextFigureSOId);
         else
             _gameState.ChangeFigureInOrder(25);
-       
+
+        _audioService = ServiceLocator.Current.Get<AudioService>();
     }
     private void Update()
     {
@@ -314,6 +316,7 @@ public class Tetris : MonoBehaviour, IService
                         _questsService.QuestData.ProcessFigure(spoiler);
                         _figureList.Remove(spoiler);
                         spoiler.DestroySpoiler();
+                        _audioService.PlaySpoilerDie();
                         spoiler.FlyAway();
                         spoiler = null;
                     }
@@ -325,11 +328,13 @@ public class Tetris : MonoBehaviour, IService
                 _gameState.AddTrayMoney(_flyingFigure.GetProfit());
 
                 _flyingFigure.SetMaterial();
+                if (_flyingFigure.Index != 18)
+                    _audioService.PlayTetrisLanding();
+                else
+                    _audioService.PlaySpawnSpoiler();
 
                 _flyingFigure = null;
                 _spawnTimer = 0;//_movementTime;
-
-                ServiceLocator.Current.Get<AudioService>().PlayTetrisLanding();
             }
             else
             {
@@ -358,35 +363,43 @@ public class Tetris : MonoBehaviour, IService
             _flyingFigure.SetPosition(_figureStartPos.x - spawnOffset, _figureStartPos.y);
             _flyingFigure.SetWorldPosition(_figureStartPos - posParent);
 
-            ServiceLocator.Current.Get<AudioService>().PlayTetrisSpawn();
+            
             if (_doubleCost && _flyingFigure.Index != 18)
             {
                 if ((Random.Range(0f, 1f) < 0.1f))
                 {
                     _flyingFigure.SetDoubleCost();
-                    ServiceLocator.Current.Get<AudioService>().PlayTetrisGoldSpawn();
+                    _audioService.PlayTetrisGoldSpawn();
                 }
             }
             else
             {
-                if (_goldenFish && (_flyingFigure.Index == 1 || _flyingFigure.Index == 5))
+                if (_flyingFigure.Index == 18)
                 {
-                    _flyingFigure.SetDoubleCost();
-                    ServiceLocator.Current.Get<AudioService>().PlayTetrisGoldSpawn();
+                    _audioService.PlaySpawnSpoiler();
                 }
                 else
                 {
-                    if(_goldenTea && (_flyingFigure.Index == 22 || _flyingFigure.Index == 21))
+                    _audioService.PlayTetrisSpawn();
+                    if (_goldenFish && (_flyingFigure.Index == 1 || _flyingFigure.Index == 5))
                     {
                         _flyingFigure.SetDoubleCost();
-                        ServiceLocator.Current.Get<AudioService>().PlayTetrisGoldSpawn();
+                        _audioService.PlayTetrisGoldSpawn();
                     }
                     else
                     {
-                        if(_goldenSmallFood && (_flyingFigure.Index >= 10 && _flyingFigure.Index <= 12))
+                        if (_goldenTea && (_flyingFigure.Index == 22 || _flyingFigure.Index == 21))
                         {
                             _flyingFigure.SetDoubleCost();
-                            ServiceLocator.Current.Get<AudioService>().PlayTetrisGoldSpawn();
+                            _audioService.PlayTetrisGoldSpawn();
+                        }
+                        else
+                        {
+                            if (_goldenSmallFood && (_flyingFigure.Index >= 10 && _flyingFigure.Index <= 12))
+                            {
+                                _flyingFigure.SetDoubleCost();
+                                _audioService.PlayTetrisGoldSpawn();
+                            }
                         }
                     }
                 }
@@ -423,7 +436,7 @@ public class Tetris : MonoBehaviour, IService
                 _flyingFigure = null;
                 _spawnTimer = 0;
                 _handControls.AddFigures(_figureList);
-                ServiceLocator.Current.Get<AudioService>().PlayTetrisBadSpawn();
+                _audioService.PlayTetrisBadSpawn();
             }
 
             // Отмена _dashModa при спавне
@@ -826,6 +839,7 @@ public class Tetris : MonoBehaviour, IService
     private void UseFiguresEffects()
     {
         List<Figure> deletedFigures = new List<Figure>();
+        bool checkSpoiling = false;
         for(int i = 0; i < _figureList.Count; ++i)
         {
             if(_figureList[i].Index == 18) // Проверка спойлеров
@@ -846,8 +860,13 @@ public class Tetris : MonoBehaviour, IService
                                     //вызов метода золочения продукт
                                     _gameSpace.figureGrid[gridX + 1, gridY].ChangeGoldenStatus(true);
                                 else
-                                    //вызов метода порченья продукта
-                                    _gameSpace.figureGrid[gridX + 1, gridY].ChangeSpoiledStatus(true);
+                                { //вызов метода порченья продукта
+                                    if (!_gameSpace.figureGrid[gridX + 1, gridY].IsSpoiled)
+                                    {
+                                        _gameSpace.figureGrid[gridX + 1, gridY].ChangeSpoiledStatus(true);
+                                        checkSpoiling = true;
+                                    }
+                                }
                             }
                             else
                             {
@@ -884,8 +903,13 @@ public class Tetris : MonoBehaviour, IService
                                     //вызов метода золочения продукт
                                     _gameSpace.figureGrid[gridX - 1, gridY].ChangeGoldenStatus(true);
                                 else
-                                    //вызов метода порченья продукта
-                                    _gameSpace.figureGrid[gridX - 1, gridY].ChangeSpoiledStatus(true);
+                                { //вызов метода порченья продукта
+                                    if (!_gameSpace.figureGrid[gridX - 1, gridY].IsSpoiled)
+                                    {
+                                        _gameSpace.figureGrid[gridX - 1, gridY].ChangeSpoiledStatus(true);
+                                        checkSpoiling = true;
+                                    }
+                                }
                             }
                             else
                             {
@@ -922,8 +946,13 @@ public class Tetris : MonoBehaviour, IService
                                 //вызов метода золочения продукт
                                 _gameSpace.figureGrid[gridX, gridY + 1].ChangeGoldenStatus(true);
                             else
-                                //вызов метода порченья продукта
-                                _gameSpace.figureGrid[gridX, gridY + 1].ChangeSpoiledStatus(true);
+                            {  //вызов метода порченья продукта
+                                if (!_gameSpace.figureGrid[gridX, gridY + 1].IsSpoiled)
+                                {
+                                    _gameSpace.figureGrid[gridX, gridY + 1].ChangeSpoiledStatus(true);
+                                    checkSpoiling = true;
+                                }
+                            }
                         }
                         else
                         {
@@ -960,8 +989,13 @@ public class Tetris : MonoBehaviour, IService
                                     //вызов метода золочения продукт
                                     _gameSpace.figureGrid[gridX, gridY - 1].ChangeGoldenStatus(true);
                                 else
-                                    //вызов метода порченья продукта
-                                    _gameSpace.figureGrid[gridX, gridY - 1].ChangeSpoiledStatus(true);
+                                { //вызов метода порченья продукта
+                                    if (!_gameSpace.figureGrid[gridX, gridY - 1].IsSpoiled)
+                                    {
+                                        _gameSpace.figureGrid[gridX, gridY - 1].ChangeSpoiledStatus(true);
+                                        checkSpoiling = true;
+                                    }
+                                }
                             }
                             else
                             {
@@ -990,6 +1024,8 @@ public class Tetris : MonoBehaviour, IService
                 if (tripletList.Count > 1 && _spoilerTriplets)
                 {
                     _figureList[i].CreateTriplet();
+
+                    _audioService.PlayTetrisGoldSpawn();
 
                     for (int j = 0; j < 2; ++j)
                     {
@@ -1225,6 +1261,7 @@ public class Tetris : MonoBehaviour, IService
                         else
                         {
                             _gameSpace.figureGrid[tripletList[j].x, tripletList[j].y].CreateTriplet();
+                            _audioService.PlayTetrisGoldSpawn();
                         }
                     }
 
@@ -1243,6 +1280,9 @@ public class Tetris : MonoBehaviour, IService
             }
             _handControls.AddFigures(_figureList);
         }
+
+        if(checkSpoiling)
+            _audioService.PlaySpoileFood();
     }
     private void GenerateQueue()
     {
@@ -1267,7 +1307,7 @@ public class Tetris : MonoBehaviour, IService
             _figureSpawnPercent[18] *= 10;
 
         if (_collectSpoiledFoodsQuest)
-            _figureSpawnPercent[18] *= 2;
+            _figureSpawnPercent[18] *= 5;
         else
         {
             if ((_collectSpoilersQuest || _killSpoilersQuest))
@@ -1751,7 +1791,7 @@ public class Tetris : MonoBehaviour, IService
         _figureList.Clear();
         _handControls.AddFigures(_figureList);
 
-        ServiceLocator.Current.Get<AudioService>().PlayTetrisJingle();
+        _audioService.PlayTetrisJingle();
     }
     public void ResetTetris()
     {

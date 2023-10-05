@@ -20,7 +20,9 @@ public class UIService : MonoBehaviour, IService
 
     private void Awake()
     {
-        ShowMainMenu();
+        DisableAllMenu();
+        _mainMenu.SetActive(true);
+        _gameSpace.SetActive(false);
     }
 
     private void Start()
@@ -29,6 +31,10 @@ public class UIService : MonoBehaviour, IService
         _audioService = ServiceLocator.Current.Get<AudioService>();
 
         _questsUIService = GetComponent<QuestsUIService>();
+
+        _gameState._onFinish.AddListener(() => { 
+            _audioService.PlayTetrisJingle();
+            _audioService.StopMusic(); });
     }
 
     /** MAIN MENU
@@ -39,13 +45,13 @@ public class UIService : MonoBehaviour, IService
         DisableAllMenu();
         _mainMenu.SetActive(true);
         _gameSpace.SetActive(false);
+        _audioService.PlayMenuMusic();
     }
 
     public void OnPressPlay()
     {
         OnOpenQuests();
         _audioService.PlayButtonPress();
-        _audioService.PlayMusic();
     }
 
     public void OnPressNewPlay()
@@ -53,7 +59,6 @@ public class UIService : MonoBehaviour, IService
         _gameState.RestarForNewGame();
         OnOpenQuests();
         _audioService.PlayButtonPress();
-        _audioService.PlayMusic();
     }
     #endregion
 
@@ -70,6 +75,7 @@ public class UIService : MonoBehaviour, IService
         _gameMenuWaiterFrame.SetActive(isPaused);
         _gameState.SetState(isPaused ? State.TETRIS : State.PAUSED);
         _audioService.PlayButtonPress();
+        _audioService.SetMusicVolumeLower();
     }
 
     public void OnPressReturnToMenu()
@@ -114,6 +120,7 @@ public class UIService : MonoBehaviour, IService
 
         _gameState.RestartRun();
         _gameState.SetState(State.TETRIS);
+        _audioService.PlayMusic();
     }
 
     public void OnGiftAccept()
@@ -133,6 +140,8 @@ public class UIService : MonoBehaviour, IService
             _deathMenu.SetActive(true);
             _gameState.SetState(State.PAUSED);
             _gameState.FinishRun();
+            _audioService.StopMusic();
+            _audioService.PlayFail();
         }
     }
 
@@ -145,6 +154,8 @@ public class UIService : MonoBehaviour, IService
     public void OnDeathReturnToShop()
     {
         ShowShop();
+        _audioService.ResetMusicVolume();
+        _audioService.PlayMenuMusic();
     }
     #endregion
 
