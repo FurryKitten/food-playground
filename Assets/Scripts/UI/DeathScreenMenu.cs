@@ -17,7 +17,6 @@ public class DeathScreenMenu : MonoBehaviour
         _shopButton.onClick.AddListener(() => { 
             _menuService.ShowMainMenu();
             _menuService.ShowShop();
-            ServiceLocator.Current.Get<GameState>().FinishRun();
         });
     }
 

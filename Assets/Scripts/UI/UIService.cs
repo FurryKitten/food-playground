@@ -55,6 +55,7 @@ public class UIService : MonoBehaviour, IService
     {
         OnOpenQuests();
         _audioService.PlayButtonPress();
+        _gameState.InRun = true;
     }
 
     public void OnPressNewPlay()

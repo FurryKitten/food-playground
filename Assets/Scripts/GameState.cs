@@ -20,7 +20,7 @@ public class GameState : MonoBehaviour, IService
     public int Health { get; private set; } = 20;
     public int OrderNumber { get; private set; } = 0;
 
-    public bool InRun { get; private set; } = false;
+    public bool InRun { get; set; } = false;
 
     public bool LastHealthGift { get; set; } = false;
 
@@ -112,7 +112,6 @@ public class GameState : MonoBehaviour, IService
     {
         if (!InRun)
         {
-            InRun = true;
             MoneyInRun = 0;
             ResetHealth();
         }
