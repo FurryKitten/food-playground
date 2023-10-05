@@ -25,5 +25,6 @@ public class MainMenuUIService : MonoBehaviour
         {
             _playButton.interactable = true;
         });
+        _exitButton.onClick.AddListener(() => { Application.Quit(); });
     }
 }
