@@ -233,6 +233,7 @@ public class Figure : MonoBehaviour
     public void DestroySpoiler()
     {
         // TO DO: Start animation of destroy spoiler
+        transform.parent = null;
         ChangeSpoiledStatus(true);
         Instantiate(_spoiledParticleSystem, _transform.position, Quaternion.identity);
     }
