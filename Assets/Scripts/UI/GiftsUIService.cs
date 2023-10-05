@@ -1,4 +1,4 @@
-using TMPro;
+п»їusing TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,6 +27,7 @@ public class GiftsUIService : MonoBehaviour
     [SerializeField] private Image _indicatorImage;
     [SerializeField] private Sprite _successIndicator;
     [SerializeField] private Sprite _failIndicator;
+    [SerializeField] private TextMeshProUGUI _ResultsText;
 
     private UIService _uiService;
     private QuestsService _questsService;
@@ -97,6 +98,15 @@ public class GiftsUIService : MonoBehaviour
         _indicatorImage.overrideSprite = isQuestDone ? _successIndicator : _failIndicator;
         _guestIcon.overrideSprite = _questsService.GuestsInfo[quest.GuestId].Icon;
         _guestIcon.SetNativeSize();
+
+        ServiceLocator.Current.Get<GameState>().QuestDone += 1;
+        FillResultText();
+    }
+
+    private void FillResultText()
+    {
+        _ResultsText.text = $"РџРѕР»СѓС‡РµРЅРѕ С‡Р°РµРІС‹С…: {ServiceLocator.Current.Get<GameState>().MoneyInOrder}ВҐ" +
+            $"\nРЈРїР°Р»Рѕ Р±Р»СЋРґ: {ServiceLocator.Current.Get<GameState>().LostFoodInOrder}\n";
     }
 
     private void FillGiftsButtons()
@@ -126,7 +136,7 @@ public class GiftsUIService : MonoBehaviour
         _giftsButtons[2].SetTooltip(_giftsTooltips[_gifts.z]);
     }
 
-    // TODO: Перенести эту логику в GiftService, Здесь только вычислять айди гифта
+    // TODO: РџРµСЂРµРЅРµСЃС‚Рё СЌС‚Сѓ Р»РѕРіРёРєСѓ РІ GiftService, Р—РґРµСЃСЊ С‚РѕР»СЊРєРѕ РІС‹С‡РёСЃР»СЏС‚СЊ Р°Р№РґРё РіРёС„С‚Р°
     private bool SetChosenGift()
     {
         int giftNum = _giftsRadioGroup.SelectedButton == 2 ? _gifts.z

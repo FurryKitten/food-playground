@@ -15,6 +15,7 @@ public class UIService : MonoBehaviour, IService
     [SerializeField] private GameObject _gameSpace;
 
     [SerializeField] private PauseUIService _pauseUI; // TO DO: 
+    [SerializeField] private DeathScreenMenu _deathScreenMenu;
 
     private GameState _gameState;
     private AudioService _audioService;
@@ -142,6 +143,9 @@ public class UIService : MonoBehaviour, IService
             DisableAllMenu();
             _deathMenu.SetActive(true);
             _gameState.SetState(State.PAUSED);
+
+            _deathScreenMenu.FillResultText();
+
             _gameState.FinishRun();
             _audioService.StopMusic();
             _audioService.PlayFail();

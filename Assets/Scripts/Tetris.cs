@@ -433,6 +433,8 @@ public class Tetris : MonoBehaviour, IService
             {
                 _flyingFigure.SetMaterial();
                 _flyingFigure.FlyAway();
+                if(_flyingFigure.Index != 18)
+                    _gameState.ChangeHealth(-1);
                 _flyingFigure = null;
                 _spawnTimer = 0;
                 _handControls.AddFigures(_figureList);
