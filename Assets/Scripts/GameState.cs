@@ -15,7 +15,7 @@ public class GameState : MonoBehaviour, IService
     public int CurrentStage { get; private set; } = 0;
     public int MaxStage => _stages;
 
-    public int Money { get; private set; } = 0;
+    public int Money { get; private set; } = 100000;
     public int MoneyOnTray { get; private set; } = 0;
     public int Health { get; private set; } = 15;
     public int OrderNumber { get; private set; } = 0;
@@ -112,10 +112,13 @@ public class GameState : MonoBehaviour, IService
     {
         if (!InRun)
         {
+            InRun = true;
             MoneyInRun = 0;
             ResetHealth();
+            ClientsInRun = 0;
+            QuestDone = 0;
         }
-
+        _foodCounter = 0;
         CurrentStage = 0;
         MoneyOnTray = 0; 
         MoneyInOrder = 0;
@@ -132,7 +135,7 @@ public class GameState : MonoBehaviour, IService
 
     public void ChangeHealth(int delta)
     {
-        Health = Mathf.Clamp(Health + delta, 0, 15);
+        Health = Mathf.Clamp(Health + delta, 0, 20);
 
 
         if (delta < 0)
@@ -150,7 +153,7 @@ public class GameState : MonoBehaviour, IService
 
     public void ResetHealth()
     {
-        Health = 15;
+        Health = 20;
         _onHealthChange?.Invoke(Health);
     }
 
