@@ -110,6 +110,7 @@ public class GameState : MonoBehaviour, IService
 
     public void RestartRun()
     {
+        Debug.Log($"RestartRun {InRun}");
         if (!InRun)
         {
             InRun = true;
@@ -122,6 +123,7 @@ public class GameState : MonoBehaviour, IService
         CurrentStage = 0;
         MoneyOnTray = 0; 
         MoneyInOrder = 0;
+        Debug.Log($"CurrentStage {CurrentStage}");
         _tetrisService.ResetTetris();
         _onTrayMoneyChange?.Invoke();
         _onMoneyChange?.Invoke();
@@ -131,6 +133,7 @@ public class GameState : MonoBehaviour, IService
     {
         InRun = false;
         _tetrisService.ResetProgression();
+        ChangeOrderNumber(-1);
     }
 
     public void ChangeHealth(int delta)
@@ -178,7 +181,7 @@ public class GameState : MonoBehaviour, IService
         ClientsInRun = 0;
         _foodCounter = 0;
         QuestDone = 0;
-        _tetrisService.ResetTetris();
+        _tetrisService.ResetTetrisForNewGame();
         ResetHealth();
         _onTrayMoneyChange?.Invoke();
         _onMoneyChange?.Invoke();

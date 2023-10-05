@@ -84,6 +84,7 @@ public class UIService : MonoBehaviour, IService
 
     public void OnPressReturnToMenu()
     {
+        _gameState.ChangeOrderNumber(-1);
         DisableAllMenu();
         ShowMainMenu();
     }

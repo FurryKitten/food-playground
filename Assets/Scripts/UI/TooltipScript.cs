@@ -24,4 +24,9 @@ public class TooltipScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         _tooltip = _tooltipDefault;
     }
+
+    public void HideTooltip()
+    {
+        _tooltip.SetActive(false);
+    }
 }
