@@ -31,6 +31,7 @@ public class GiftsUIService : MonoBehaviour
 
     private UIService _uiService;
     private QuestsService _questsService;
+    private TooltipCountersUI _tooltipCountersUI;
     private Vector3Int _gifts = new Vector3Int(-1, -1, -1);
 
     private void Awake()
@@ -43,6 +44,8 @@ public class GiftsUIService : MonoBehaviour
     private void Start()
     {
         _questsService = ServiceLocator.Current.Get<QuestsService>();
+        _tooltipCountersUI = FindObjectOfType<TooltipCountersUI>();
+        Debug.Log("_tooltipCountersUI="+_tooltipCountersUI);
 
         ServiceLocator.Current.Get<GiftsService>().ResetGiftPool();
         _uiService = ServiceLocator.Current.Get<UIService>();
@@ -98,6 +101,8 @@ public class GiftsUIService : MonoBehaviour
         _indicatorImage.overrideSprite = isQuestDone ? _successIndicator : _failIndicator;
         _guestIcon.overrideSprite = _questsService.GuestsInfo[quest.GuestId].Icon;
         _guestIcon.SetNativeSize();
+
+        _tooltipCountersUI.FillTooltips();
 
         ServiceLocator.Current.Get<GameState>().QuestDone += 1;
         FillResultText();
