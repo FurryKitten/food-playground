@@ -66,11 +66,8 @@ public class Tetris : MonoBehaviour, IService
     
 
     private int _stageNumber = 0;
-    private int _trayNumber = 0;
-    private int[,] _queueSizes = {  { 7, 9, 11, 14 }, 
-                                    { 8, 10, 12, 15 }, 
-                                    { 9, 11, 14, 17 },
-                                    { 10, 12, 15, 18 }};
+    private int[] _queueSizes = { 4, 6, 6, 9 };
+    private static int[] _queueSizesDefault = { 4, 6, 6, 9 };
     private int _currentFigureNumber = 0;
     private int[] _SpawnProbability = { 7, 6, 6, 6, 3, 
                                         6, 7, 6, 6, 6, 
@@ -114,6 +111,9 @@ public class Tetris : MonoBehaviour, IService
 
         _gameState = ServiceLocator.Current.Get<GameState>();
         _questsService = ServiceLocator.Current.Get<QuestsService>();
+        _gameState._onOrderNumberChange.AddListener((x) => { 
+            UpdateProgression(x);
+        });
 
         _figureSpawnPercent = new int[25];
         _currentFigureNumber = 1;
@@ -435,7 +435,7 @@ public class Tetris : MonoBehaviour, IService
 
             // Генерация следующей фигуры
             _currentFigureNumber++;
-            if(_currentFigureNumber <= _queueSizes[_trayNumber, _stageNumber])
+            if(_currentFigureNumber <= _queueSizes[_stageNumber])
             {
                 _figureSOIdQueue.Enqueue(SmartGenerateQueue(figureSOId));
             }
@@ -1633,10 +1633,34 @@ public class Tetris : MonoBehaviour, IService
 
         return index;
     }
-
     private int heuristic(Vector2Int a, Vector2Int b)
     {
         return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
+    }
+   
+    private void UpdateProgression(int orderNum)
+    {
+        if(orderNum % 1 == 0)
+        {
+            for (int i = 0; i < 3; ++i)
+                _queueSizes[i]++;
+
+            _queueSizes[3] += 2;
+        } 
+       // else
+        //{
+            if(orderNum == 1)
+            {
+                for (int i = 0; i < 4; ++i)
+                    _queueSizes[0] = _queueSizesDefault[i];
+            }
+        //}
+    }
+
+    public void ResetProgression()
+    {
+        for (int i = 0; i < 4; ++i)
+            _queueSizes[0] = _queueSizesDefault[i];
     }
     public void SetDoubleCost()
     {
@@ -1702,21 +1726,21 @@ public class Tetris : MonoBehaviour, IService
     {
         _leftGridConstrain -= 1;
         _rightGridConstrain += 1;
-        _trayNumber = Mathf.RoundToInt((trayWidth - 10) * 0.5f);
+        //_trayNumber = Mathf.RoundToInt((trayWidth - 10) * 0.5f);
     }
 
     public void IncreaseGridWidth() 
     {
         _leftGridConstrain -= 1;
         _rightGridConstrain += 1;
-        _trayNumber++; //= Mathf.RoundToInt((trayWidth - 10) * 0.5f);
+        //_trayNumber++; //= Mathf.RoundToInt((trayWidth - 10) * 0.5f);
     }
 
     public void ResetGridWidth()
     {
         _leftGridConstrain = 4;
         _rightGridConstrain = 14;
-        _trayNumber = 0; //= Mathf.RoundToInt((trayWidth - 10) * 0.5f);
+        //_trayNumber = 0; //= Mathf.RoundToInt((trayWidth - 10) * 0.5f);
     }
     public void DropAllFigures()
     {

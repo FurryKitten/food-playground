@@ -72,6 +72,12 @@ public class UIService : MonoBehaviour, IService
         _audioService.PlayButtonPress();
     }
 
+    public void OnPressReturnToMenu()
+    {
+        DisableAllMenu();
+        ShowMainMenu();
+    }
+
     public void OnPressSettings()
     {
 
@@ -126,6 +132,7 @@ public class UIService : MonoBehaviour, IService
             DisableAllMenu();
             _deathMenu.SetActive(true);
             _gameState.SetState(State.PAUSED);
+            _gameState.FinishRun();
         }
     }
 
@@ -137,8 +144,7 @@ public class UIService : MonoBehaviour, IService
 
     public void OnDeathReturnToShop()
     {
-        DisableAllMenu();
-        ShowMainMenu(); //заглущка
+        ShowShop();
     }
     #endregion
 

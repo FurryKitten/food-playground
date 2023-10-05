@@ -98,5 +98,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _kitchenSprite: {fileID: 21300000, guid: 99bfadc04be542648951ed0f4fb36c17, type: 3}
-  _restaurantSprite: {fileID: 21300000, guid: 9892b86770743fe4bab71947264a3ea0, type: 3}
-  _corridorSprite: {fileID: 21300000, guid: 9892b86770743fe4bab71947264a3ea0, type: 3}
+  _restaurantSprite: {fileID: 21300000, guid: 4ca5457e7dd04874d96cc6d1dc78d1b5, type: 3}
+  _corridorSprite: {fileID: 21300000, guid: 4ca5457e7dd04874d96cc6d1dc78d1b5, type: 3}

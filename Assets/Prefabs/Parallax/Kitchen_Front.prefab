@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 67417282f8478f54292141469f2f6687, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 88a114b68bb496c46b2bef706a06ab0f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -97,6 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7ba708e85ac7aa4db31b815ec9e94af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _kitchenSprite: {fileID: 21300000, guid: 67417282f8478f54292141469f2f6687, type: 3}
-  _restaurantSprite: {fileID: 21300000, guid: bbaccd5bd6d8eba4aa5bb497fd426047, type: 3}
+  _kitchenSprite: {fileID: 21300000, guid: 88a114b68bb496c46b2bef706a06ab0f, type: 3}
+  _restaurantSprite: {fileID: 21300000, guid: 4c50b79baea626443b695dfadb1f5025, type: 3}
   _corridorSprite: {fileID: 21300000, guid: 587454bd9ee54794d880c08626b7a76e, type: 3}

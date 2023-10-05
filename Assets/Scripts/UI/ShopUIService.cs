@@ -150,7 +150,16 @@ public class ShopUIService : MonoBehaviour
 
     public void UpdatePlayerMoneyCounter()
     {
-        _playerMoney.text = $"Мои сбережения: ¥{_gameState.Money}";
+        if (_gameState.InRun)
+        {
+            _playerMoney.text = $"Смена не окончена!";
+            _buyButton.GetComponent<Button>().interactable = false;
+        }
+        else
+        {
+            _playerMoney.text = $"Мои сбережения: ¥{_gameState.Money}";
+            _buyButton.GetComponent<Button>().interactable = true;
+        }
     }
 
     private void TryBuy()
