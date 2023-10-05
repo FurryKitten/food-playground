@@ -37,10 +37,13 @@ public class ButtonWithTooltipScript : MonoBehaviour, IPointerEnterHandler, IPoi
     public void SetSelectState(bool selectState)
     {
         _selectStatus = selectState;
-        if (_selectStatus)
-            gameObject.GetComponent<Image>().overrideSprite = _selectedSprite;
-        else
-            gameObject.GetComponent<Image>().overrideSprite = _defaultSprite;
+        if (_enableStatus)
+        {
+            if (_selectStatus)
+                gameObject.GetComponent<Image>().overrideSprite = _selectedSprite;
+            else
+                gameObject.GetComponent<Image>().overrideSprite = _defaultSprite;
+        }
     }
 
     public void SetEnable(bool enableState)
