@@ -82,6 +82,7 @@ public class UIService : MonoBehaviour, IService
         // _gameState.SetState(isPaused ? State.TETRIS : State.PAUSED); // UNCOMMENT FOR FAST TESTING - PAUSE-UNPAUSE IN WALK TO GO TETRIS MODE
         _audioService.PlayButtonPress();
         _pauseUI.SetActiveGiftAndQuest();
+        _pauseUI.HideWarningAndTooltips();
     }
 
     public void OnPressReturnToMenu()
