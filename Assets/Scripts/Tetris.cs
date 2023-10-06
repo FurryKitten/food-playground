@@ -1748,6 +1748,8 @@ public class Tetris : MonoBehaviour, IService
             _trayAngle *= 2.0f;
         }
 
+        ServiceLocator.Current.Get<TrayControl>().SetGift(giftNumber);
+
         switch(giftNumber)
         {
             case 1: _goldenFish = true; break;
