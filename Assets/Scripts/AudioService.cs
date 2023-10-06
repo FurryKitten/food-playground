@@ -27,14 +27,14 @@ public class AudioService : MonoBehaviour, IService
 
     private void Start()
     {
-        _musicAudioSource.volume = 0.1f;
+        _musicAudioSource.volume = 0.3f;
         _musicAudioSource.clip = _menuMusic;
         _musicAudioSource.Play();
     }
 
     public void PlayMusic()
     {
-        _musicAudioSource.volume = 0.1f;
+        _musicAudioSource.volume = 0.3f;
         _musicAudioSource.clip = _music;
         _musicAudioSource.Play();
     }
@@ -42,16 +42,6 @@ public class AudioService : MonoBehaviour, IService
     public void StopMusic()
     {
         _musicAudioSource.Stop();
-    }
-
-    public void SetMusicVolumeLower()
-    {
-        _musicAudioSource.volume *= 0.75f;
-    }
-
-    public void ResetMusicVolume()
-    {
-        _musicAudioSource.volume *= 1.33f;
     }
 
     public void PlayMenuMusic()
@@ -98,10 +88,8 @@ public class AudioService : MonoBehaviour, IService
 
     public void PlayTetrisJingle()
     {
-        //_tetrisAudioSource.volume = 0.2f;
         _tetrisAudioSource.clip = _tetrisJingle;
         _tetrisAudioSource.Play();
-        //_tetrisAudioSource.volume = 0.9f;
     }
 
     public void PlayFail()

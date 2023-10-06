@@ -80,7 +80,6 @@ public class UIService : MonoBehaviour, IService
         _gameMenuWaiterFrame.SetActive(isPaused);
         _gameState.SetState(isPaused ? State.TETRIS : State.PAUSED);
         _audioService.PlayButtonPress();
-        _audioService.SetMusicVolumeLower();
         _pauseUI.SetActiveGiftAndQuest();
     }
 
@@ -126,7 +125,7 @@ public class UIService : MonoBehaviour, IService
         _audioService.PlayButtonPress();
 
         _gameState.RestartRun();
-        _gameState.SetState(State.TETRIS);
+        _gameState.SetState(State.WALK);
         _audioService.PlayMusic();
     }
 
@@ -164,7 +163,6 @@ public class UIService : MonoBehaviour, IService
     public void OnDeathReturnToShop()
     {
         ShowShop();
-        _audioService.ResetMusicVolume();
         _audioService.PlayMenuMusic();
     }
     #endregion

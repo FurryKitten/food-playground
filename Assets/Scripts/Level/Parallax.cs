@@ -1,30 +1,31 @@
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class Parallax : MonoBehaviour
 {
-    [SerializeField] private GameObject _backgroundObject;
+    [SerializeField] private BackgroundPart _backgroundObject;
     [SerializeField] private float _speed;
     [SerializeField] private int _count;
     [SerializeField] private float _offsetBetween = 0f;
 
-    private List<GameObject> _backgrounds;
+    private List<BackgroundPart> _backgrounds;
     private float _backgroundSize;
     private int _leftBgIndex;
+
+    private bool InKitchen = false;
+    private bool InRestaurant = true;
 
     public float DefaultPos { get; private set; }
     public float RightObjPos { get; private set; }
 
     private void Start()
     {
-        _backgrounds = new List<GameObject>();
-        _backgroundSize = _backgroundObject.GetComponent<Renderer>().bounds.size.x;
+        _backgrounds = new List<BackgroundPart>();
+        _backgroundSize = _backgroundObject.gameObject.GetComponent<Renderer>().bounds.size.x;
         for (int i = 0; i < _count; i++)
         {
             Vector3 bgPos = transform.position;
-            float backgroundSize = _backgroundObject.GetComponent<Renderer>().bounds.size.x;
+            float backgroundSize = _backgroundObject.gameObject.GetComponent<Renderer>().bounds.size.x;
             bgPos.x += (backgroundSize + _offsetBetween) * i;
 
             var newBg = Instantiate(_backgroundObject, bgPos, Quaternion.identity, transform);
@@ -34,6 +35,11 @@ public class Parallax : MonoBehaviour
         _leftBgIndex = _count - 1;
         DefaultPos = _backgrounds[0].transform.position.x;
         RightObjPos = _backgrounds[_leftBgIndex].transform.position.x;
+
+        ServiceLocator.Current.Get<GameState>()._onRestart.AddListener(() =>
+        {
+            ResetParallax();
+        });
     }
 
     private void Update()
@@ -69,6 +75,37 @@ public class Parallax : MonoBehaviour
                 newPos = _backgrounds[(i + _count - 1) % _count].transform.position;
                 newPos.x += _backgroundSize + _offsetBetween;
                 _backgrounds[i].transform.position = newPos;
+
+                if(_backgrounds[i].IsDoor())
+                {
+                    _backgrounds[i].ResetCorridor();
+                    InKitchen = !InKitchen;
+                    InRestaurant = !InRestaurant;
+                }
+                continue;
+            }
+
+            if(pos.x - _backgroundSize > cameraBottomLeftPos.x)
+            {
+                if (ServiceLocator.Current.Get<GameState>().CurrentStage == 0)
+                {
+                    _backgrounds[i].SetKitchen();
+
+                    if (!InKitchen)
+                    {
+                        _backgrounds[i].SetCorridor1();
+                        InKitchen = true;
+                    }
+                }
+                else if (ServiceLocator.Current.Get<GameState>().CurrentStage == ServiceLocator.Current.Get<GameState>().MaxStage - 1)
+                {
+                    _backgrounds[i].SetRestaurant();
+                    if (!InRestaurant)
+                    {
+                        _backgrounds[i].SetCorridor2();
+                        InRestaurant = true;
+                    }
+                }
             }
         }
     }
@@ -90,5 +127,20 @@ public class Parallax : MonoBehaviour
         }
         Debug.Log($"left index {_leftBgIndex} {rightPosX} {_backgrounds[_leftBgIndex].transform.position.x}");
         RightObjPos = rightPosX;
+    }
+
+    private void ResetParallax()
+    {
+        for (int i = 0; i < _count; i++)
+        {
+            Vector3 bgPos = transform.position;
+            float backgroundSize = _backgroundObject.gameObject.GetComponent<Renderer>().bounds.size.x;
+            bgPos.x += (backgroundSize + _offsetBetween) * i;
+            _backgrounds[i].transform.position = bgPos;
+        }
+        _backgrounds[0].SetRestaurant();
+        _leftBgIndex = _count - 1;
+        DefaultPos = _backgrounds[0].transform.position.x;
+        RightObjPos = _backgrounds[_leftBgIndex].transform.position.x;
     }
 }
