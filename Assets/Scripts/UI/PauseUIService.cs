@@ -14,6 +14,7 @@ public class PauseUIService : MonoBehaviour
     [SerializeField] private TooltipScript _currentQuestTooltip;
     [SerializeField] private GameObject[] _giftTooltips;
     [SerializeField] private GameObject[] _questTooltips;
+    [SerializeField] private TooltipCountersUI _tooltipCountersUI;
 
     private UIService _menuService;
 
@@ -47,5 +48,7 @@ public class PauseUIService : MonoBehaviour
 
         _currentQuestIcon.overrideSprite = ServiceLocator.Current.Get<QuestsService>().ActiveQuest.Icon;
         _currentQuestTooltip.SetToolTip(_questTooltips[ServiceLocator.Current.Get<QuestsService>().ActiveQuest.Id]);
+
+        _tooltipCountersUI.FillTooltips();
     }
 }

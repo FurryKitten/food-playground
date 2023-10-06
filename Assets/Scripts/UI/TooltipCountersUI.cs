@@ -33,13 +33,11 @@ public class TooltipCountersUI : MonoBehaviour
         switch (_questsService.ActiveQuest.Id)
         {
             case QUEST_TEA_PARTY_ID:
-                _teaPartyBlock.SetActive(true);
                 _tooltip.SetToolTip(_teaPartyBlock);
                 _textCupCount.text = $"{_questsService.QuestData.CupCount}"; 
                 _textTeapotCount.text = $"{_questsService.QuestData.TeapotCount}";
                 break;
             case QUEST_SEAFOOD_ID:
-                _seafoodBlock.SetActive(true);
                 _tooltip.SetToolTip(_seafoodBlock);
                 _textFishLCount.text = $"{_questsService.QuestData.FishLCount}";
                 _textFishLongCount.text = $"{_questsService.QuestData.FishLongCount}";
@@ -49,24 +47,20 @@ public class TooltipCountersUI : MonoBehaviour
                 _textCrabCount.text = $"{_questsService.QuestData.CrabCount}";
                 break;
             case QUEST_SPOILERS_ID:
-                _spoilersBlock.SetActive(true);
                 _tooltip.SetToolTip(_spoilersBlock);
                 _textSpoilerCount.text = $"{_questsService.QuestData.BlackCount}";
                 break;
             case QUEST_SPOILED_FOOD_ID:
-                _spoiledFoodBlock.SetActive(true);
                 _tooltip.SetToolTip(_spoiledFoodBlock);
                 _textSpoiledFoodCount.text = $"{_questsService.QuestData.SpoiledFoodCount}";
                 break;
             case QUEST_KILL_SPOILERS_ID:
-                _killedSpoilersBlock.SetActive(true);
                 _tooltip.SetToolTip(_killedSpoilersBlock);
                 _textBlackKillCount.text = $"{_questsService.QuestData.BlackKillCount}";
                 break;
             case QUEST_EXPRESS_ID:
-                _expressBlock.SetActive(true);
                 _tooltip.SetToolTip(_expressBlock);
-                _textTimer.text = $"12:00"; // TODO: добавить время
+                _textTimer.text = $"12:00"; // TODO: пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
                 break;
         }
     }
