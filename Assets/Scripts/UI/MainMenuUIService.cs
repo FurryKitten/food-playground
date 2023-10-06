@@ -10,6 +10,7 @@ public class MainMenuUIService : MonoBehaviour
     [SerializeField] private Button _playNewGameButton;
     [SerializeField] private Button _exitButton;
     [SerializeField] private Button _settingsButton;
+    [SerializeField] private GameObject _settingsWindow;
 
     private UIService _menuService;
 
@@ -26,5 +27,9 @@ public class MainMenuUIService : MonoBehaviour
             _playButton.interactable = true;
         });
         _exitButton.onClick.AddListener(() => { Application.Quit(); });
+        _settingsButton.onClick.AddListener(() =>
+        {
+            _settingsWindow.SetActive(true);
+        });
     }
 }
