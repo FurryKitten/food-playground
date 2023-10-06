@@ -14,8 +14,8 @@ public class UIService : MonoBehaviour, IService
 
     [SerializeField] private GameObject _gameSpace;
 
-    [SerializeField] private PauseUIService _pauseUI; // TO DO: 
-    [SerializeField] private DeathScreenMenu _deathScreenMenu;
+    private PauseUIService _pauseUI; // TO DO: 
+    private DeathScreenMenu _deathScreenMenu;
 
     private GameState _gameState;
     private AudioService _audioService;
@@ -34,6 +34,8 @@ public class UIService : MonoBehaviour, IService
         _audioService = ServiceLocator.Current.Get<AudioService>();
 
         _questsUIService = GetComponent<QuestsUIService>();
+        _pauseUI = GetComponent<PauseUIService>();
+        _deathScreenMenu = GetComponent<DeathScreenMenu>();
 
         _gameState._onFinish.AddListener(() => { 
             _audioService.PlayTetrisJingle();

@@ -28,6 +28,7 @@ public class GiftsUIService : MonoBehaviour
     [SerializeField] private Sprite _successIndicator;
     [SerializeField] private Sprite _failIndicator;
     [SerializeField] private TextMeshProUGUI _ResultsText;
+    [SerializeField] private TooltipCountersUI _tooltipCountersUI;
 
     private UIService _uiService;
     private QuestsService _questsService;
@@ -98,6 +99,8 @@ public class GiftsUIService : MonoBehaviour
         _indicatorImage.overrideSprite = isQuestDone ? _successIndicator : _failIndicator;
         _guestIcon.overrideSprite = _questsService.GuestsInfo[quest.GuestId].Icon;
         _guestIcon.SetNativeSize();
+
+        _tooltipCountersUI.FillTooltips();
 
         ServiceLocator.Current.Get<GameState>().QuestDone += 1;
         FillResultText();
