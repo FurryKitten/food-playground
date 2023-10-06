@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using static MagicVars;
+using static GameConfig;
 
 public class TooltipCountersUI : MonoBehaviour
 {
@@ -34,30 +35,30 @@ public class TooltipCountersUI : MonoBehaviour
         {
             case QUEST_TEA_PARTY_ID:
                 _tooltip.SetToolTip(_teaPartyBlock);
-                _textCupCount.text = $"{_questsService.QuestData.CupCount}"; 
-                _textTeapotCount.text = $"{_questsService.QuestData.TeapotCount}";
+                _textCupCount.text = $"x{_questsService.QuestData.CupCount}/{COND_CUP_COUNT}"; 
+                _textTeapotCount.text = $"x{_questsService.QuestData.TeapotCount}/{COND_TEAPOT_COUNT}";
                 break;
             case QUEST_SEAFOOD_ID:
                 _tooltip.SetToolTip(_seafoodBlock);
-                _textFishLCount.text = $"{_questsService.QuestData.FishLCount}";
-                _textFishLongCount.text = $"{_questsService.QuestData.FishLongCount}";
-                _textOctopusCount.text = $"{_questsService.QuestData.OctopusCount}";
-                _textSushiCount.text = $"{_questsService.QuestData.SushiCount}";
-                _textShrimpCount.text = $"{_questsService.QuestData.ShrimpCount}";
-                _textCrabCount.text = $"{_questsService.QuestData.CrabCount}";
+                _textFishLCount.text = $"x{_questsService.QuestData.FishLCount}/{COND_FISH_L_COUNT}"; 
+                _textFishLongCount.text = $"x{_questsService.QuestData.FishLongCount}/{COND_FISH_LONG_COUNT}"; 
+                _textOctopusCount.text = $"x{_questsService.QuestData.OctopusCount}/{COND_OCTOPUS_COUNT}"; 
+                _textSushiCount.text = $"x{_questsService.QuestData.SushiCount}/{COND_SUSHI_COUNT}"; 
+                _textShrimpCount.text = $"x{_questsService.QuestData.ShrimpCount}/{COND_SHRIMP_COUNT}"; 
+                _textCrabCount.text = $"x{_questsService.QuestData.CrabCount}/{COND_CRAB_COUNT}";
                 break;
             case QUEST_SPOILERS_ID:
                 _tooltip.SetToolTip(_spoilersBlock);
-                _textSpoilerCount.text = $"{_questsService.QuestData.BlackCount}";
+                _textSpoilerCount.text = $"x{_questsService.QuestData.SpoilerCount}/{COND_SPOILERS_COUNT}";
                 break;
             case QUEST_SPOILED_FOOD_ID:
                 _tooltip.SetToolTip(_spoiledFoodBlock);
                 _questsService.QuestData.CountSpoiledFood();
-                _textSpoiledFoodCount.text = $"{_questsService.QuestData.SpoiledFoodCount}";
+                _textSpoiledFoodCount.text = $"x{_questsService.QuestData.SpoiledFoodCount}/{COND_SPOILED_FOOD_COUNT}";
                 break;
             case QUEST_KILL_SPOILERS_ID:
                 _tooltip.SetToolTip(_killedSpoilersBlock);
-                _textBlackKillCount.text = $"{_questsService.QuestData.BlackKillCount}";
+                _textBlackKillCount.text = $"x{_questsService.QuestData.SpoilerKillCount}/{COND_SPOILER_KILL_COUNT}";
                 break;
             case QUEST_EXPRESS_ID:
                 _tooltip.SetToolTip(_expressBlock);

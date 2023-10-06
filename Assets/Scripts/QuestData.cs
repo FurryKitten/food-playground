@@ -16,13 +16,13 @@ public class QuestData
     public int CrabCount { get; private set; }
 
     /// ����������
-    public int BlackCount { get; private set; }
+    public int SpoilerCount { get; private set; }
 
     /// ���������� ����
     public int SpoiledFoodCount { get; private set; }
 
     /// ������ ����
-    public int BlackKillCount { get; private set; }
+    public int SpoilerKillCount { get; private set; }
 
     /// �������
     public float Timer { get; private set; }
@@ -42,9 +42,9 @@ public class QuestData
         SushiCount = 0;
         ShrimpCount = 0;
         CrabCount = 0;
-        BlackCount = 0;
+        SpoilerCount = 0;
         SpoiledFoodCount = 0;
-        BlackKillCount = 0;
+        SpoilerKillCount = 0;
         Timer = 0;
     }
 
@@ -61,7 +61,7 @@ public class QuestData
             case FIGURE_FISH_LONG_ID: FishLongCount += delta; break;
             case FIGURE_CUP_ID: CupCount += delta; break;
             case FIGURE_TEAPOT_ID: TeapotCount += delta; break;
-            case FIGURE_CHERNUSHKA_ID: BlackCount += delta; break;
+            case FIGURE_CHERNUSHKA_ID: SpoilerCount += delta; break;
         }
         if (remove && figure.IsSpoiled)
         {
@@ -71,7 +71,7 @@ public class QuestData
 
     public void ProcessBlackKill(bool remove = false)
     {
-        BlackKillCount += remove ? -1 : 1;
+        SpoilerKillCount += remove ? -1 : 1;
     }
 
 // todo: убрать

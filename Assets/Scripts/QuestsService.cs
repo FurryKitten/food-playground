@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static GameConfig;
 
 public class QuestsService : MonoBehaviour, IService
 {
@@ -72,24 +73,25 @@ public class QuestsService : MonoBehaviour, IService
         switch (ActiveQuest.Id)
         {
             case MagicVars.QUEST_TEA_PARTY_ID:
-                result = QuestData.CupCount >= 4 && QuestData.TeapotCount >= 1;
+                result = QuestData.CupCount >= COND_CUP_COUNT 
+                      && QuestData.TeapotCount >= COND_TEAPOT_COUNT;
                 break;
             case MagicVars.QUEST_SEAFOOD_ID:
-                result = QuestData.FishLCount >= 1
-                      && QuestData.ShrimpCount >= 1
-                      && QuestData.CrabCount >= 1
-                      && QuestData.SushiCount >= 1
-                      && QuestData.FishLongCount >= 1
-                      && QuestData.OctopusCount >= 1;
+                result = QuestData.FishLCount >= COND_FISH_L_COUNT
+                      && QuestData.ShrimpCount >= COND_SHRIMP_COUNT
+                      && QuestData.CrabCount >= COND_CRAB_COUNT
+                      && QuestData.SushiCount >= COND_SUSHI_COUNT
+                      && QuestData.FishLongCount >= COND_FISH_LONG_COUNT
+                      && QuestData.OctopusCount >= COND_OCTOPUS_COUNT;
                 break;
             case MagicVars.QUEST_SPOILERS_ID:
-                result = QuestData.BlackCount >= 5;
+                result = QuestData.SpoilerCount >= COND_SPOILERS_COUNT;
                 break;
             case MagicVars.QUEST_SPOILED_FOOD_ID:
-                result = QuestData.SpoiledFoodCount >= 15;
+                result = QuestData.SpoiledFoodCount >= COND_SPOILED_FOOD_COUNT;
                 break;
             case MagicVars.QUEST_KILL_SPOILERS_ID:
-                result = QuestData.BlackKillCount >= 10;
+                result = QuestData.SpoilerKillCount >= COND_SPOILER_KILL_COUNT;
                 break;
             case MagicVars.QUEST_EXPRESS_ID:
                 result = QuestData.Timer <= 0;
