@@ -23,18 +23,11 @@ public class PauseUIService : MonoBehaviour
         _menuService = ServiceLocator.Current.Get<UIService>();
         _continueGameButton.onClick.AddListener(_menuService.OnPressPause);
         _giveUpButton.onClick.AddListener(() => { _warningFrame.SetActive(true); });
-        _backButton.onClick.AddListener(() => { 
-            _warningFrame.SetActive(false);
-            _currentGiftTooltip.HideTooltip();
-            _currentQuestTooltip.HideTooltip();
-        });
+        _backButton.onClick.AddListener(HideWarningAndTooltips);
         _absolutelyGiveUpButton.onClick.AddListener(_menuService.OnPressReturnToMenu);
-        _absolutelyGiveUpButton.onClick.AddListener(() =>
-        {
-            _warningFrame.SetActive(false);
-            _currentGiftTooltip.HideTooltip();
-            _currentQuestTooltip.HideTooltip();
-        });
+        _absolutelyGiveUpButton.onClick.AddListener(HideWarningAndTooltips);
+
+        ServiceLocator.Current.Get<GameState>()._onRestart.AddListener(SetActiveGiftAndQuest);
     }
 
     public void SetActiveGiftAndQuest()
@@ -50,9 +43,18 @@ public class PauseUIService : MonoBehaviour
             _currentGiftTooltip.ResetToolTip();
         }
 
-        _currentQuestIcon.overrideSprite = ServiceLocator.Current.Get<QuestsService>().ActiveQuest.Icon;
-        _currentQuestTooltip.SetToolTip(_questTooltips[ServiceLocator.Current.Get<QuestsService>().ActiveQuest.Id]);
+        if (ServiceLocator.Current.Get<QuestsService>().ActiveQuest != null)
+        {
+            _currentQuestIcon.overrideSprite = ServiceLocator.Current.Get<QuestsService>().ActiveQuest.Icon;
+            _currentQuestTooltip.SetToolTip(_questTooltips[ServiceLocator.Current.Get<QuestsService>().ActiveQuest.Id]);
+            _tooltipCountersUI.FillTooltips();
+        }
+    }
 
-        _tooltipCountersUI.FillTooltips();
+    public void HideWarningAndTooltips()
+    {
+        _warningFrame.SetActive(false);
+        _currentGiftTooltip.HideTooltip();
+        _currentQuestTooltip.HideTooltip();
     }
 }

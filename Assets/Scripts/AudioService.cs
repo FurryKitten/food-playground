@@ -35,7 +35,6 @@ public class AudioService : MonoBehaviour, IService
 
     public void PlayMusic()
     {
-        _musicAudioSource.volume = 0.3f;
         _musicAudioSource.clip = _music;
         _musicAudioSource.Play();
     }
@@ -130,5 +129,18 @@ public class AudioService : MonoBehaviour, IService
     {
         _uiAudioSource.clip = _tetrisBadSpawn;
         _uiAudioSource.Play();
+    }
+
+    public void SetSoundVolume(float val)
+    {
+        _musicAudioSource.volume = val;
+    }
+
+    public void SetMusicVolume(float val)
+    {
+        _uiAudioSource.volume = val;
+        _spoilerAudioSource.volume = val;
+        _tetrisAudioSource.volume = val;
+        _tetrisAudioSource.volume = val;
     }
 }
