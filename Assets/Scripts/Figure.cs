@@ -168,6 +168,7 @@ public class Figure : MonoBehaviour
         if (_spoiled != status)
         {
             _spoiled = status;
+            ServiceLocator.Current.Get<QuestsService>().QuestData.ProcessSpoiledFood(status);
 
             if (_doubleCost && !_shaderStateGold2Spoiled)
             {

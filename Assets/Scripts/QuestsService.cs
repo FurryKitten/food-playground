@@ -43,7 +43,7 @@ public class QuestsService : MonoBehaviour, IService
     }
 
     /// <summary>
-    /// Сменить гостя
+    /// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
     /// </summary>
     public void ChooseNewGuest()
     {
@@ -52,7 +52,7 @@ public class QuestsService : MonoBehaviour, IService
     }
 
     /// <summary>
-    /// Генерируем для отображения в UI
+    /// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ UI
     /// </summary>
     public void GenerateDisplayQuests()
     {
@@ -65,7 +65,7 @@ public class QuestsService : MonoBehaviour, IService
         }
     }
 
-    // TODO: Вынести magic numbers в конфиг
+    // TODO: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ magic numbers пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     public bool IsQuestDone()
     {
         bool result = false;
