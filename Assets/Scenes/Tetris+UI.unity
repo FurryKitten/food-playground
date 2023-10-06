@@ -19844,7 +19844,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _backgroundObject: {fileID: 9174344791421877844, guid: a9db0565c04023f4990b00fc67ec43c1, type: 3}
   _speed: 5
-  _count: 4
+  _count: 3
   _offsetBetween: -0.06125
 --- !u!1 &1358363906
 GameObject:

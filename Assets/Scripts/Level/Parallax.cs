@@ -137,8 +137,11 @@ public class Parallax : MonoBehaviour
             float backgroundSize = _backgroundObject.gameObject.GetComponent<Renderer>().bounds.size.x;
             bgPos.x += (backgroundSize + _offsetBetween) * i;
             _backgrounds[i].transform.position = bgPos;
+            _backgrounds[i].ResetCorridor();
         }
         _backgrounds[0].SetRestaurant();
+        InKitchen = false;
+        InRestaurant = true;
         _leftBgIndex = _count - 1;
         DefaultPos = _backgrounds[0].transform.position.x;
         RightObjPos = _backgrounds[_leftBgIndex].transform.position.x;
