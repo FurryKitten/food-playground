@@ -131,7 +131,6 @@ public class Parallax : MonoBehaviour
 
     private void ResetParallax()
     {
-        Debug.Log("ResetP");
         for (int i = 0; i < _count; i++)
         {
             Vector3 bgPos = transform.position;
