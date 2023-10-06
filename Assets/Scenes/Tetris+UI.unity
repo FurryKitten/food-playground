@@ -21198,6 +21198,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   _tooltipCountersUI: {fileID: 972861473}
+  _soundSlider: {fileID: 121201418}
+  _musicSlider: {fileID: 1836378027}
 --- !u!114 &1363479740
 MonoBehaviour:
   m_ObjectHideFlags: 0

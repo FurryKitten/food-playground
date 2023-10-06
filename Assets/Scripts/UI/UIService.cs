@@ -117,6 +117,7 @@ public class UIService : MonoBehaviour, IService
         _questsUIService.FillQuests();
         ServiceLocator.Current.Get<ReplicUIService>().SetNewQuestReplic();
         ServiceLocator.Current.Get<ReplicUIService>().SetNewGiftReplic();
+        _audioService.PlayMenuMusic();
     }
 
     public void OnQuestAccept()

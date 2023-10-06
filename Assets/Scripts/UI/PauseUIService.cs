@@ -15,6 +15,8 @@ public class PauseUIService : MonoBehaviour
     [SerializeField] private GameObject[] _giftTooltips;
     [SerializeField] private GameObject[] _questTooltips;
     [SerializeField] private TooltipCountersUI _tooltipCountersUI;
+    [SerializeField] private Slider _soundSlider;
+    [SerializeField] private Slider _musicSlider;
 
     private UIService _menuService;
 
@@ -28,6 +30,8 @@ public class PauseUIService : MonoBehaviour
         _absolutelyGiveUpButton.onClick.AddListener(HideWarningAndTooltips);
 
         ServiceLocator.Current.Get<GameState>()._onRestart.AddListener(SetActiveGiftAndQuest);
+        _musicSlider.onValueChanged.AddListener(ServiceLocator.Current.Get<AudioService>().SetMusicVolume);
+        _soundSlider.onValueChanged.AddListener(ServiceLocator.Current.Get<AudioService>().SetSoundVolume);
     }
 
     public void SetActiveGiftAndQuest()
