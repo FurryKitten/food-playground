@@ -23,7 +23,11 @@ public class PauseUIService : MonoBehaviour
         _menuService = ServiceLocator.Current.Get<UIService>();
         _continueGameButton.onClick.AddListener(_menuService.OnPressPause);
         _giveUpButton.onClick.AddListener(() => { _warningFrame.SetActive(true); });
-        _backButton.onClick.AddListener(() => { _warningFrame.SetActive(false); });
+        _backButton.onClick.AddListener(() => { 
+            _warningFrame.SetActive(false);
+            _currentGiftTooltip.HideTooltip();
+            _currentQuestTooltip.HideTooltip();
+        });
         _absolutelyGiveUpButton.onClick.AddListener(_menuService.OnPressReturnToMenu);
         _absolutelyGiveUpButton.onClick.AddListener(() =>
         {
