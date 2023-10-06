@@ -56,7 +56,6 @@ public class GameState : MonoBehaviour, IService
     {
         CurrentStage++;
         _onStageChange?.Invoke();
-        Debug.Log($"[AddStage] CurrentStage={CurrentStage}", this.gameObject);
         /// последний этап, начисляем деньги, показываем апгрейды
         if (CurrentStage == _stages - 1) 
         {
@@ -83,7 +82,6 @@ public class GameState : MonoBehaviour, IService
             _animatorTrayMoneyCounter.SetTrigger("GetMoney");
         Money += money;
         Money = Money < 0 ? 0 : Money;
-        Debug.Log($"Money: {Money}");
         MoneyInRun += MoneyOnTray;
         MoneyInOrder = MoneyOnTray;
         MoneyOnTray = 0;
@@ -100,7 +98,6 @@ public class GameState : MonoBehaviour, IService
             _animatorTrayMoneyCounter.SetTrigger("GetMoney");
         MoneyOnTray += money;
         MoneyOnTray = MoneyOnTray < 0 ? 0 : MoneyOnTray;
-        Debug.Log($"MoneyOnTray: {MoneyOnTray}");
         _onTrayMoneyChange?.Invoke();
     }
 

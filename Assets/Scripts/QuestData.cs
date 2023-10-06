@@ -1,12 +1,13 @@
+using System.Collections.Generic;
 using static MagicVars;
 
 public class QuestData
 {
-    /// Чайная церемония
+    /// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     public int CupCount { get; private set; }
     public int TeapotCount { get; private set; }
 
-    /// Рыбная вечеринка
+    /// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     public int FishLCount { get; private set; }
     public int FishLongCount { get; private set; }
     public int OctopusCount { get; private set; }
@@ -14,16 +15,16 @@ public class QuestData
     public int ShrimpCount { get; private set; }
     public int CrabCount { get; private set; }
 
-    /// Сусуватари
+    /// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     public int BlackCount { get; private set; }
 
-    /// Пожиратель сажи
+    /// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
     public int SpoiledFoodCount { get; private set; }
 
-    /// Подсос лисы
+    /// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
     public int BlackKillCount { get; private set; }
 
-    /// Спидран
+    /// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     public float Timer { get; private set; }
 
     public QuestData()
@@ -50,7 +51,7 @@ public class QuestData
     public void ProcessFigure(Figure figure, bool remove = false)
     {
         int delta = remove ? -1 : 1;
-        switch(figure.Index)
+        switch (figure.Index)
         {
             case FIGURE_SHRIMP_ID: ShrimpCount += delta; break;
             case FIGURE_FISH_L_ID: FishLCount += delta; break;
@@ -73,8 +74,20 @@ public class QuestData
         BlackKillCount += remove ? -1 : 1;
     }
 
-    public void ProcessSpoiledFood(bool remove = false)
+// todo: СѓР±СЂР°С‚СЊ
+    public void ProcessSpoiledFood(bool spoiled)
     {
-        SpoiledFoodCount += remove ? -1 : 1;
+        SpoiledFoodCount += spoiled ? 0 : 0;
+    }
+
+    public void CountSpoiledFood()
+    {
+        int spoiledCount = 0;
+        List<Figure> figureList = ServiceLocator.Current.Get<Tetris>().FigureList;
+        figureList.ForEach(figure =>
+        {
+            spoiledCount += figure.IsSpoiled ? 1 : 0;
+        });
+        SpoiledFoodCount = spoiledCount;
     }
 }

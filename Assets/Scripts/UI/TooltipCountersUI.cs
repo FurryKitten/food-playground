@@ -52,6 +52,7 @@ public class TooltipCountersUI : MonoBehaviour
                 break;
             case QUEST_SPOILED_FOOD_ID:
                 _tooltip.SetToolTip(_spoiledFoodBlock);
+                _questsService.QuestData.CountSpoiledFood();
                 _textSpoiledFoodCount.text = $"{_questsService.QuestData.SpoiledFoodCount}";
                 break;
             case QUEST_KILL_SPOILERS_ID:
