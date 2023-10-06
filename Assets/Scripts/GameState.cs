@@ -12,6 +12,7 @@ public class GameState : MonoBehaviour, IService
 {
 
     public State State { get; private set; }
+    public State PreviousState { get; private set; }
     public int CurrentStage { get; private set; } = 0;
     public int MaxStage => _stages;
 
@@ -69,6 +70,7 @@ public class GameState : MonoBehaviour, IService
 
     public void SetState(State state)
     {
+        PreviousState = State;
         State = state;
     }
 

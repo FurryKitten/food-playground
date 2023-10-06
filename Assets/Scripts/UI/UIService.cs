@@ -78,7 +78,7 @@ public class UIService : MonoBehaviour, IService
         _pauseMenu.SetActive(!isPaused);
         _gameMenuOrderFrame.SetActive(isPaused);
         _gameMenuWaiterFrame.SetActive(isPaused);
-        _gameState.SetState(isPaused ? State.TETRIS : State.PAUSED);
+        _gameState.SetState(isPaused ? _gameState.PreviousState : State.PAUSED);
         _audioService.PlayButtonPress();
         _pauseUI.SetActiveGiftAndQuest();
     }
