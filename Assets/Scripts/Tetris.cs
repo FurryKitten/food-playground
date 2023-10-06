@@ -23,7 +23,8 @@ public class Tetris : MonoBehaviour, IService
     [SerializeField] private UnityEvent _onFigureFall;
 
     public List<Figure> FigureList => _figureList;
-    
+    public PlayerController PlayerController => _playerController;
+
     private Queue<int> _figureSOIdQueue = new Queue<int>();
     private Figure _flyingFigure = null;
     private Grid _gameSpace;

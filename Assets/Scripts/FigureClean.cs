@@ -4,12 +4,16 @@ public class FigureClean : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        AudioService audioService = ServiceLocator.Current.Get<AudioService>();
+        GameState gameState = ServiceLocator.Current.Get<GameState>();
         Destroy(collision.gameObject);
-        if (ServiceLocator.Current.Get<GameState>().State == State.TETRIS 
-            || ServiceLocator.Current.Get<GameState>().State == State.WALK)
+        if (gameState.State == State.TETRIS 
+            || gameState.State == State.WALK)
         {
             if(collision.GetComponent<Figure>().Index != 18)
-                ServiceLocator.Current.Get<AudioService>().PlayBreakDish();
+                audioService.PlayBreakDish();
+            else
+                audioService.PlaySpoilerFall();
         }
     }
 }
