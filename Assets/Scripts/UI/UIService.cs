@@ -124,7 +124,7 @@ public class UIService : MonoBehaviour, IService
         _audioService.PlayButtonPress();
 
         _gameState.RestartRun();
-        _gameState.SetState(State.TETRIS);
+        _gameState.SetState(State.WALK);
         _audioService.PlayMusic();
     }
 
