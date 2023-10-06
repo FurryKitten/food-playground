@@ -104,6 +104,7 @@ public class GiftsUIService : MonoBehaviour
 
         ServiceLocator.Current.Get<GameState>().QuestDone += 1;
         FillResultText();
+        ServiceLocator.Current.Get<ReplicUIService>().SetQuestResult();
     }
 
     private void FillResultText()

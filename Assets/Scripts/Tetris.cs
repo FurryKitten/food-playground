@@ -1823,15 +1823,6 @@ public class Tetris : MonoBehaviour, IService
        // _figureSOIdQueue.Clear();
         _currentFigureNumber = 1;
 
-        if (ServiceLocator.Current.Get<QuestsService>().ActiveQuest != null)
-            SetTetrisFlags();
-
-        if (ServiceLocator.Current.Get<GiftsService>().ActiveGift.Id != -1)
-        {
-            ServiceLocator.Current.Get<GiftsService>().ResetGift();
-            SetGift(-1);
-        }
-
         /*
         PrepareSmartGenerate();
         _figureSOIdQueue.Enqueue(SmartGenerateQueue(18));
@@ -1848,6 +1839,8 @@ public class Tetris : MonoBehaviour, IService
     {
         ResetTetris();
         SetGift(-1);
+        if (ServiceLocator.Current.Get<QuestsService>().ActiveQuest != null)
+            SetTetrisFlags();
     }
 
     public void ResetTetrisForNewGame()
