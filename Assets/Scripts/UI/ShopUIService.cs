@@ -34,8 +34,8 @@ public class ShopUIService : MonoBehaviour
                                                 false, false, false, false, false, false, false };
     private bool[] _avaivableTier = { true, false, false, false, false };
     private int _currentTier = 0;
-    private static int[] _costs = { 300, 300, 300, 600, 600, 600, 900,
-                                    900, 900, 1200, 1200, 1200, 1500, 1500, 1500};
+    private static int[] _costs = { 50, 50, 50, 80, 80, 80, 100,
+                                    100, 100, 120, 120, 120, 150, 150, 150};
     private static int[] _giftNumbers = { 0, 4, 5, 1, 6, 7, 0, 8, 
                                           9, 2, 10, 11, 0, 12,
                                           13, -1, -1, -1, -1, -1 };
@@ -181,10 +181,10 @@ public class ShopUIService : MonoBehaviour
 
     private void TryBuy()
     {
+        ServiceLocator.Current.Get<AudioService>().PlayBuyPress();
         _gameState.AddMoney(-_costs[_selectedButtonNumber]);
         _avaivableUpgrades[_selectedButtonNumber] = false;
         UpdatePlayerMoneyCounter();
-        ServiceLocator.Current.Get<AudioService>().PlayBuyPress();
 
         // buy stuff
         if (_giftNumbers[_selectedButtonNumber] > 3)
@@ -244,7 +244,6 @@ public class ShopUIService : MonoBehaviour
     private void TrySwitchSkin()
     {
         _tray.SetSkin(_selectedButtonNumber - 15);
-        ServiceLocator.Current.Get<AudioService>().PlayBuyPress();
     }
 
     public void ResetShop()
