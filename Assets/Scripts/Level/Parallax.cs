@@ -73,7 +73,6 @@ public class Parallax : MonoBehaviour
 
                 if(_backgrounds[i].IsDoor())
                 {
-                    Debug.Log("Reset door");
                     _backgrounds[i].ResetCorridor();
                     InKitchen = !InKitchen;
                     InRestaurant = !InRestaurant;
@@ -89,7 +88,6 @@ public class Parallax : MonoBehaviour
 
                     if (!InKitchen)
                     {
-                        Debug.Log("InKitchen");
                         _backgrounds[i].SetCorridor1();
                         InKitchen = true;
                     }
@@ -99,7 +97,6 @@ public class Parallax : MonoBehaviour
                     _backgrounds[i].SetRestaurant();
                     if (!InRestaurant)
                     {
-                        Debug.Log("InRest");
                         _backgrounds[i].SetCorridor2();
                         InRestaurant = true;
                     }
