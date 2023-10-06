@@ -35,6 +35,7 @@ public class GameState : MonoBehaviour, IService
     [SerializeField] private UnityEvent _onMoneyChange;
     [SerializeField] private UnityEvent _onTrayMoneyChange;
     [SerializeField] public UnityEvent _onFinish;
+    [SerializeField] public UnityEvent _onRestart;
     [SerializeField] public UnityEvent<int> _onFigureInOrderChange;
     [SerializeField] public UnityEvent<int> _onHealthChange;
     [SerializeField] public UnityEvent<int> _onOrderNumberChange;
@@ -127,6 +128,7 @@ public class GameState : MonoBehaviour, IService
         _tetrisService.ResetTetris();
         _onTrayMoneyChange?.Invoke();
         _onMoneyChange?.Invoke();
+        _onRestart?.Invoke();
     }
 
     public void FinishRun()
@@ -186,5 +188,6 @@ public class GameState : MonoBehaviour, IService
         _onTrayMoneyChange?.Invoke();
         _onMoneyChange?.Invoke();
         _onOrderNumberChange?.Invoke(OrderNumber);
+        _onRestart?.Invoke();
     }
 }
