@@ -119,13 +119,16 @@ public class GameState : MonoBehaviour, IService
             ResetHealth();
             ClientsInRun = 0;
             QuestDone = 0;
+            _tetrisService.ResetTetrisForSession();
         }
+        else
+            _tetrisService.ResetTetris();
         _foodCounter = 0;
         CurrentStage = 0;
         MoneyOnTray = 0; 
         MoneyInOrder = 0;
         Debug.Log($"CurrentStage {CurrentStage}");
-        _tetrisService.ResetTetris();
+        
         _onTrayMoneyChange?.Invoke();
         _onMoneyChange?.Invoke();
         _onRestart?.Invoke();
