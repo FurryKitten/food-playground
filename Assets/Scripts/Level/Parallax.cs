@@ -35,6 +35,11 @@ public class Parallax : MonoBehaviour
         _leftBgIndex = _count - 1;
         DefaultPos = _backgrounds[0].transform.position.x;
         RightObjPos = _backgrounds[_leftBgIndex].transform.position.x;
+
+        ServiceLocator.Current.Get<GameState>()._onRestart.AddListener(() =>
+        {
+            ResetParallax();
+        });
     }
 
     private void Update()
@@ -122,5 +127,20 @@ public class Parallax : MonoBehaviour
         }
         Debug.Log($"left index {_leftBgIndex} {rightPosX} {_backgrounds[_leftBgIndex].transform.position.x}");
         RightObjPos = rightPosX;
+    }
+
+    private void ResetParallax()
+    {
+        for (int i = 0; i < _count; i++)
+        {
+            Vector3 bgPos = transform.position;
+            float backgroundSize = _backgroundObject.gameObject.GetComponent<Renderer>().bounds.size.x;
+            bgPos.x += (backgroundSize + _offsetBetween) * i;
+            _backgrounds[i].transform.position = bgPos;
+        }
+        _backgrounds[0].SetRestaurant();
+        _leftBgIndex = _count - 1;
+        DefaultPos = _backgrounds[0].transform.position.x;
+        RightObjPos = _backgrounds[_leftBgIndex].transform.position.x;
     }
 }
