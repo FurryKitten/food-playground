@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class ReplicUIService : MonoBehaviour
+public class ReplicUIService : MonoBehaviour, IService
 {
     [SerializeField] private GuestSO[] _guestsSO;
     [SerializeField] private TextMeshProUGUI _newQuestPhrase;
@@ -16,23 +16,26 @@ public class ReplicUIService : MonoBehaviour
     private void Start()
     {
         _questsService = ServiceLocator.Current.Get<QuestsService>();
+       // ServiceLocator.Current.Get<GameState>()._onFinish
     }
 
-     private void SetNewQuestReplic()
+     public void SetNewQuestReplic()
      {
         _newQuestPhrase.text = _guestsSO[_questsService.CurrentGuest].NewQuestPhrase;
      }
 
-    private void SetNewGiftReplic()
+    public void SetNewGiftReplic()
     {
         _newGiftPhrase.text = _guestsSO[_questsService.CurrentGuest].NewGiftPhrase;
     }
 
-    private void SetQuestResult()
+    public void SetQuestResult()
     {
         if (_questsService.IsQuestDone())
             _resultQuestPhrase.text = _guestsSO[_questsService.CurrentGuest].DoneQuestPhrase;
         else
             _resultQuestPhrase.text = _guestsSO[_questsService.CurrentGuest].FailedQuestPhrase;
     }
+
+
 }

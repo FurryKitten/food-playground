@@ -113,6 +113,8 @@ public class UIService : MonoBehaviour, IService
 
         _gameState.ChangeOrderNumber(1);
         _questsUIService.FillQuests();
+        ServiceLocator.Current.Get<ReplicUIService>().SetNewQuestReplic();
+        ServiceLocator.Current.Get<ReplicUIService>().SetNewGiftReplic();
     }
 
     public void OnQuestAccept()

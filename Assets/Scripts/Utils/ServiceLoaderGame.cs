@@ -11,6 +11,7 @@ public class ServiceLoaderGame : MonoBehaviour
     [SerializeField] private UIService _menuService;
     [SerializeField] private GiftsService _giftsService;
     [SerializeField] private QuestsService _questService;
+    [SerializeField] private ReplicUIService _replicUIService;
 
     private void Awake()
     {
@@ -25,5 +26,6 @@ public class ServiceLoaderGame : MonoBehaviour
         ServiceLocator.Current.Register<UIService>(_menuService);
         ServiceLocator.Current.Register<GiftsService>(_giftsService);
         ServiceLocator.Current.Register<QuestsService>(_questService);
+        ServiceLocator.Current.Register<ReplicUIService>(_replicUIService);
     }
 }

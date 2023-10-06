@@ -30,7 +30,7 @@ public class Walk : MonoBehaviour
             _gameState.SetState(State.TETRIS);
             
             /// последний этап пройден, начисляем деньги, показываем апгрейды
-            if (_gameState.CurrentStage == _gameState.MaxStage - 1)
+            if (_gameState.CurrentStage >= _gameState.MaxStage - 1)
             {
                 _gameState.SetState(State.PAUSED);
                 _gameState.AddMoney(_gameState.MoneyOnTray);

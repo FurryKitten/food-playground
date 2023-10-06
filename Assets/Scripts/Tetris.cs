@@ -76,7 +76,7 @@ public class Tetris : MonoBehaviour, IService
                                         2, 2, 2, 5, 7, 
                                         6, 7, 7, 10, 5, 
                                         7, 3, 5, 5, 3 };
-    private int[] _figureSpawnPercent;
+    private int[] _figureSpawnPercent = new int[25];
 
     private void Awake()
     {
@@ -116,8 +116,7 @@ public class Tetris : MonoBehaviour, IService
         _gameState._onOrderNumberChange.AddListener((x) => { 
             UpdateProgression(x);
         });
-
-        _figureSpawnPercent = new int[25];
+ 
         _currentFigureNumber = 1;
         PrepareSmartGenerate();
         _figureSOIdQueue.Enqueue(SmartGenerateQueue(18));
@@ -187,16 +186,14 @@ public class Tetris : MonoBehaviour, IService
         //stop tetris, walk, reset queue
         _gameState.SetState(State.WALK);
         _gameState.AddStage();
+        _stageNumber = _gameState.CurrentStage;
 
         _figureSOIdQueue.Clear();
 
-        if (_stageNumber != 3)
-            _stageNumber++;
-        else
-        {
-            _stageNumber = 0;
-            PrepareSmartGenerate();
-        }
+        //if (_stageNumber == _gameState.MaxStage - 1)
+       // {
+            
+        //}
         
         // Обновление UI очереди
         if (_figureSOIdQueue.TryPeek(out int nextFigureSOId))
@@ -1765,6 +1762,7 @@ public class Tetris : MonoBehaviour, IService
             case 10: _stickyTray = true; break;
             case 13: _spoilerTriplets = true; break;
         }
+        PrepareSmartGenerate();
     }
 
     public void SetGridWidth(int trayWidth) // TO DO: use Unity Event
@@ -1824,15 +1822,6 @@ public class Tetris : MonoBehaviour, IService
        // _figureSOIdQueue.Clear();
         _currentFigureNumber = 1;
 
-        if (ServiceLocator.Current.Get<QuestsService>().ActiveQuest != null)
-            SetTetrisFlags();
-
-        if (ServiceLocator.Current.Get<GiftsService>().ActiveGift.Id != -1)
-        {
-            ServiceLocator.Current.Get<GiftsService>().ResetGift();
-            SetGift(-1);
-        }
-
         /*
         PrepareSmartGenerate();
         _figureSOIdQueue.Enqueue(SmartGenerateQueue(18));
@@ -1843,12 +1832,16 @@ public class Tetris : MonoBehaviour, IService
         else
             _gameState.ChangeFigureInOrder(25);
         */
+
+        if (ServiceLocator.Current.Get<QuestsService>().ActiveQuest != null)
+            SetTetrisFlags();
     }
 
     public void ResetTetrisForSession()
     {
         ResetTetris();
         SetGift(-1);
+        
     }
 
     public void ResetTetrisForNewGame()
@@ -1875,6 +1868,7 @@ public class Tetris : MonoBehaviour, IService
             case MagicVars.QUEST_KILL_SPOILERS_ID: _killSpoilersQuest = true; break;
             case MagicVars.QUEST_EXPRESS_ID: _expressQuest = true; break;
         }
+        PrepareSmartGenerate();
     }
 
     #region DEBUG
