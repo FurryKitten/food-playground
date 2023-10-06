@@ -56,7 +56,7 @@ public class MagicVars
     public const int FIGURE_ICE_CREAM_ID = 15;
     public const int FIGURE_REDIS_ID = 16;
     public const int FIGURE_RICE_ID = 17;
-    public const int FIGURE_CHERNUSHKA_ID = 18;
+    public const int FIGURE_SPOILER_ID = 18;
     public const int FIGURE_COLA_ID = 19;
     public const int FIGURE_SAKE_ID = 20;
     public const int FIGURE_TEAPOT_ID = 21;

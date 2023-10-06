@@ -41,6 +41,7 @@ public class QuestsService : MonoBehaviour, IService
     public void SetActiveQuest(int id)
     {
         ActiveQuest = DisplayQuests[id];
+        //ActiveQuest = _questByGuest[MagicVars.GUEST_YETI_ID][0]; // Uncomment for testing
     }
 
     /// <summary>

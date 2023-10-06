@@ -310,7 +310,7 @@ public class Tetris : MonoBehaviour, IService
                     for (int i = 0; i < spoilersX.Count; i++)
                     {
                         ref Figure spoiler = ref _gameSpace.figureGrid[spoilersX[i], spoilersY[i]];
-                        _questsService.QuestData.ProcessBlackKill();
+                        _questsService.QuestData.ProcessSpoilerKill();
                         _questsService.QuestData.ProcessFigure(spoiler);
                         _figureList.Remove(spoiler);
                         spoiler.DestroySpoiler();

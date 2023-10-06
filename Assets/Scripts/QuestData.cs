@@ -61,23 +61,12 @@ public class QuestData
             case FIGURE_FISH_LONG_ID: FishLongCount += delta; break;
             case FIGURE_CUP_ID: CupCount += delta; break;
             case FIGURE_TEAPOT_ID: TeapotCount += delta; break;
-            case FIGURE_CHERNUSHKA_ID: SpoilerCount += delta; break;
-        }
-        if (remove && figure.IsSpoiled)
-        {
-            SpoiledFoodCount--;
         }
     }
 
-    public void ProcessBlackKill(bool remove = false)
+    public void ProcessSpoilerKill()
     {
-        SpoilerKillCount += remove ? -1 : 1;
-    }
-
-// todo: убрать
-    public void ProcessSpoiledFood(bool spoiled)
-    {
-        SpoiledFoodCount += spoiled ? 0 : 0;
+        SpoilerKillCount++;
     }
 
     public void CountSpoiledFood()
@@ -89,5 +78,16 @@ public class QuestData
             spoiledCount += figure.IsSpoiled ? 1 : 0;
         });
         SpoiledFoodCount = spoiledCount;
+    }
+
+    public void CountSpoilers()
+    {
+        int spoilers = 0;
+        List<Figure> figureList = ServiceLocator.Current.Get<Tetris>().FigureList;
+        figureList.ForEach(figure =>
+        {
+            spoilers += figure.Index == MagicVars.FIGURE_SPOILER_ID ? 1 : 0;
+        });
+        SpoilerCount = spoilers;
     }
 }
