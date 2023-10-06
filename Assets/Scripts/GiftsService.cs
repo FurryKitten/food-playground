@@ -43,6 +43,11 @@ public class GiftsService : MonoBehaviour, IService
         _giftPool.Add(giftNumber);
     }
 
+    public void ResetGift()
+    {
+        ActiveGift.Id = -1;
+    }
+
     public void ResetGiftPool()
     {
         _giftPool.Clear();

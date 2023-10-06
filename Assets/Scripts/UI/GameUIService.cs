@@ -20,6 +20,7 @@ public class GameUIService : MonoBehaviour
         _darkPanel.SetActive(false);
         _stageSlider.value = 0;
         SetManSpritePosition();
+        ServiceLocator.Current.Get<GameState>()._onRestart.AddListener(SetManSpritePosition);
     }
 
     public void SetManSpritePosition()

@@ -27,14 +27,14 @@ public class AudioService : MonoBehaviour, IService
 
     private void Start()
     {
-        _musicAudioSource.volume = 0.5f;
+        _musicAudioSource.volume = 0.1f;
         _musicAudioSource.clip = _menuMusic;
         _musicAudioSource.Play();
     }
 
     public void PlayMusic()
     {
-        _musicAudioSource.volume = 0.5f;
+        _musicAudioSource.volume = 0.1f;
         _musicAudioSource.clip = _music;
         _musicAudioSource.Play();
     }

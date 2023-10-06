@@ -23,7 +23,7 @@ public class Tetris : MonoBehaviour, IService
     [SerializeField] private UnityEvent _onFigureFall;
 
 
-    private Queue<int> _figureSOIdQueue;
+    private Queue<int> _figureSOIdQueue = new Queue<int>();
     private Figure _flyingFigure = null;
     private Grid _gameSpace;
     private float _movementTimer = 0;
@@ -67,8 +67,8 @@ public class Tetris : MonoBehaviour, IService
     
 
     private int _stageNumber = 0;
-    private int[] _queueSizes = { 4, 6, 6, 9 };
-    private static int[] _queueSizesDefault = { 4, 6, 6, 9 };
+    private int[] _queueSizes = { 1, 1, 1, 1 };
+    private static int[] _queueSizesDefault = { 1, 1, 1, 1 };
     private int _currentFigureNumber = 0;
     private int[] _SpawnProbability = { 7, 6, 6, 6, 3, 
                                         6, 7, 6, 6, 6, 
@@ -87,10 +87,10 @@ public class Tetris : MonoBehaviour, IService
         _playerController.Tetris.Dash.canceled += DashMode;
 
         _playerController.Tetris.Pause.performed += (_) => ServiceLocator.Current.Get<UIService>().OnPressPause();
+ 
     }
     private void Start()
     {
-        _figureSOIdQueue = new Queue<int>();
         //_figureSOIdQueue.Enqueue(0); // TODO: generate or premade queue SO
         //_figureSOIdQueue.Enqueue(1); // TODO: generate or premade queue SO
         //_figureSOIdQueue.Enqueue(0);
@@ -1695,7 +1695,7 @@ public class Tetris : MonoBehaviour, IService
             if(orderNum == 1)
             {
                 for (int i = 0; i < 4; ++i)
-                    _queueSizes[0] = _queueSizesDefault[i];
+                    _queueSizes[i] = _queueSizesDefault[i];
             }
         //}
     }
@@ -1703,8 +1703,9 @@ public class Tetris : MonoBehaviour, IService
     public void ResetProgression()
     {
         for (int i = 0; i < 4; ++i)
-            _queueSizes[0] = _queueSizesDefault[i];
+            _queueSizes[i] = _queueSizesDefault[i];
     }
+
     public void SetDoubleCost()
     {
         _doubleCost = true;
@@ -1819,10 +1820,17 @@ public class Tetris : MonoBehaviour, IService
         _figureListTimer = 0;
         _stageNumber = 0;
 
+       // _figureSOIdQueue.Clear();
         _currentFigureNumber = 1;
 
         if (ServiceLocator.Current.Get<QuestsService>().ActiveQuest != null)
             SetTetrisFlags();
+
+        if (ServiceLocator.Current.Get<GiftsService>().ActiveGift.Id != -1)
+        {
+            ServiceLocator.Current.Get<GiftsService>().ResetGift();
+            SetGift(-1);
+        }
 
         /*
         PrepareSmartGenerate();

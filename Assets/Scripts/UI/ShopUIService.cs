@@ -109,15 +109,13 @@ public class ShopUIService : MonoBehaviour
     public void SetDescription(int index)
     {
         ServiceLocator.Current.Get<AudioService>().PlaySelect();
+
         _descriptionText.text = _descriptions[index];
-        _descriptionIcon.overrideSprite = _descriptionIcons[index];
-        _descriptionIcon.SetNativeSize();
 
         _selectedButtonNumber = index;
 
         if (index < 15)
         {
-            _priceText.text = $"¥{_costs[index]}";
             _buyButton.SetActive(true);
             _switchSkinButton.SetActive(false);
 
@@ -126,14 +124,30 @@ public class ShopUIService : MonoBehaviour
                 && _gameState.Money >= _costs[_selectedButtonNumber])
             {
                 _buyButton.GetComponent<Button>().interactable = true;
+                _descriptionIcon.overrideSprite = _descriptionIcons[index];
+                _priceText.text = $"¥{_costs[index]}";
             }
             else
             {
                 _buyButton.GetComponent<Button>().interactable = false;
+                if(!_avaivableTier[index / 3])
+                {
+                    _descriptionIcon.overrideSprite = _disabledIcons[index];
+                    _priceText.text = $"¥{_costs[index]}";
+                }
+                else 
+                {
+                    if(_avaivableTier[index / 3] && !_avaivableUpgrades[index])
+                    {
+                        _descriptionIcon.overrideSprite = _boughtIcons[index];
+                        _priceText.text = $"";
+                    }
+                }
             }
         }
         else
         {
+            _descriptionIcon.overrideSprite = _descriptionIcons[index];
             _priceText.text = $"";
             _buyButton.SetActive(false);
             _switchSkinButton.SetActive(true);
@@ -147,6 +161,8 @@ public class ShopUIService : MonoBehaviour
                 _switchSkinButton.GetComponent<Button>().interactable = false;
             }
         }
+
+        _descriptionIcon.SetNativeSize();
     }
 
     public void UpdatePlayerMoneyCounter()
@@ -238,6 +254,9 @@ public class ShopUIService : MonoBehaviour
         _buyButton.SetActive(true);
         _buyButton.GetComponent<Button>().interactable = false;
 
+        _tray.ResetTrayWidth();
+        _handControls.ResetHand();
+        _giftsService.ResetGiftPool();
 
         for (int i = 0; i < _shopButtons.Length; i++)
         {
