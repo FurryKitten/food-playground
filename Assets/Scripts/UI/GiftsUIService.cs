@@ -28,10 +28,10 @@ public class GiftsUIService : MonoBehaviour
     [SerializeField] private Sprite _successIndicator;
     [SerializeField] private Sprite _failIndicator;
     [SerializeField] private TextMeshProUGUI _ResultsText;
+    [SerializeField] private TooltipCountersUI _tooltipCountersUI;
 
     private UIService _uiService;
     private QuestsService _questsService;
-    private TooltipCountersUI _tooltipCountersUI;
     private Vector3Int _gifts = new Vector3Int(-1, -1, -1);
 
     private void Awake()
@@ -44,8 +44,6 @@ public class GiftsUIService : MonoBehaviour
     private void Start()
     {
         _questsService = ServiceLocator.Current.Get<QuestsService>();
-        _tooltipCountersUI = FindObjectOfType<TooltipCountersUI>();
-        Debug.Log("_tooltipCountersUI="+_tooltipCountersUI);
 
         ServiceLocator.Current.Get<GiftsService>().ResetGiftPool();
         _uiService = ServiceLocator.Current.Get<UIService>();

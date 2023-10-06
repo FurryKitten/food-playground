@@ -55,7 +55,7 @@ public class GameState : MonoBehaviour, IService
     {
         CurrentStage++;
         _onStageChange?.Invoke();
-
+        Debug.Log($"[AddStage] CurrentStage={CurrentStage}", this.gameObject);
         /// последний этап, начисляем деньги, показываем апгрейды
         if (CurrentStage == _stages - 1) 
         {
