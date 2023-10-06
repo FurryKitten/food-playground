@@ -24,6 +24,7 @@ public class AudioService : MonoBehaviour, IService
     [SerializeField] private AudioClip[] _spoilerSpawn;
     [SerializeField] private AudioClip[] _foodSpoile;
     [SerializeField] private AudioClip[] _spoilerDie;
+    [SerializeField] private AudioClip[] _spoilerFall;
 
     private void Start()
     {
@@ -118,6 +119,11 @@ public class AudioService : MonoBehaviour, IService
     public void PlaySpoilerDie()
     {
         _spoilerAudioSource.PlayOneShot(_spoilerDie[Random.Range(0, _spoilerDie.Length)]);
+    }
+
+    public void PlaySpoilerFall()
+    {
+        _spoilerAudioSource.PlayOneShot(_spoilerFall[Random.Range(0, _spoilerFall.Length)]);
     }
 
     public void PlaySelect()
