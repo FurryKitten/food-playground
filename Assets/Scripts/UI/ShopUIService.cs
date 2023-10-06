@@ -34,8 +34,8 @@ public class ShopUIService : MonoBehaviour
                                                 false, false, false, false, false, false, false };
     private bool[] _avaivableTier = { true, false, false, false, false };
     private int _currentTier = 0;
-    private static int[] _costs = { 50, 50, 50, 80, 80, 80, 100,
-                                    100, 100, 120, 120, 120, 150, 150, 150};
+    private static int[] _costs = { 50, 50, 50, 50, 50, 50, 50,
+                                    50, 50, 50, 50, 50, 50, 50, 50};
     private static int[] _giftNumbers = { 0, 4, 5, 1, 6, 7, 0, 8, 
                                           9, 2, 10, 11, 0, 12,
                                           13, -1, -1, -1, -1, -1 };
@@ -152,7 +152,7 @@ public class ShopUIService : MonoBehaviour
             _buyButton.SetActive(false);
             _switchSkinButton.SetActive(true);
 
-            if (_currentTier == index - 15)
+            if (_currentTier >= index - 15)
             {
                 _switchSkinButton.GetComponent<Button>().interactable = true;
             }
