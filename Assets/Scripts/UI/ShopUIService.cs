@@ -254,6 +254,9 @@ public class ShopUIService : MonoBehaviour
         _buyButton.SetActive(true);
         _buyButton.GetComponent<Button>().interactable = false;
 
+        _tray.ResetTrayWidth();
+        _handControls.ResetHand();
+        _giftsService.ResetGiftPool();
 
         for (int i = 0; i < _shopButtons.Length; i++)
         {
