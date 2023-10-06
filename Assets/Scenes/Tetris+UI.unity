@@ -20495,7 +20495,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _toMenuButton: {fileID: 229790723}
   _shopButton: {fileID: 242452685}
-  _ResultsText: {fileID: 984072823}
+  _ResultsText: {fileID: 1786679828}
 --- !u!114 &1363479741
 MonoBehaviour:
   m_ObjectHideFlags: 0
