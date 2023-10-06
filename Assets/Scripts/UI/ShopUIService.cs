@@ -152,7 +152,7 @@ public class ShopUIService : MonoBehaviour
             _buyButton.SetActive(false);
             _switchSkinButton.SetActive(true);
 
-            if (_currentTier == index - 15)
+            if (_currentTier >= index - 15)
             {
                 _switchSkinButton.GetComponent<Button>().interactable = true;
             }
