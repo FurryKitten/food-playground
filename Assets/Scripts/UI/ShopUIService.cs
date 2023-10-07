@@ -236,6 +236,10 @@ public class ShopUIService : MonoBehaviour
                 _avaivableTier[_currentTier] = true;
                 _shopFrame[_currentTier].SetGray();
             }
+            else
+            {
+                _currentTier++;
+            }
         }
 
         SetDescription(_selectedButtonNumber);

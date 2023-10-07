@@ -1844,7 +1844,9 @@ public class Tetris : MonoBehaviour, IService
     {
         ResetTetris();
         SetGift(-1);
-        
+        PrepareSmartGenerate();
+        _figureSOIdQueue.Enqueue(SmartGenerateQueue(18));
+
     }
 
     public void ResetTetrisForNewGame()

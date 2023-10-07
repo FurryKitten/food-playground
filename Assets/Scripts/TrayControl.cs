@@ -152,6 +152,7 @@ public class TrayControl : MonoBehaviour, IService
 
         _trayWidth += 2;
         ServiceLocator.Current.Get<HandPlacer>().SetGridWidth(_trayWidth);
+        SetSkin(_traySkin);
     }
 
     public void ResetTrayWidth()
