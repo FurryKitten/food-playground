@@ -37,6 +37,7 @@ public class QuestsUIService : MonoBehaviour
             Quest quest = _questService.DisplayQuests[0];
             ServiceLocator.Current.Get<AudioService>().PlayButtonPress();
             FillQuest(quest);
+            _questService.SetActiveQuest(quest.Id);
         });
 
         _buttonQuest1._onClick.AddListener(num =>
